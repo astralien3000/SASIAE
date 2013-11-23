@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+
+% Options possibles : 10pt, 11pt, 12pt (taille de la fonte)
+%                     oneside, twoside (recto simple, recto-verso)
+%                     draft, final (stade de dÃ©veloppement)
+
+\usepackage[utf8]{inputenc}   % pour les accents
+\usepackage[T1]{fontenc}      % Police contenant les caractères français
+\usepackage[francais]{babel}  % Placez ici une liste de langues, la
+                              % dernière étant la langue principale
+
+\usepackage[a4paper]{geometry}% Réduire les marges
+% \pagestyle{headings}        % Pour mettre des entêtes avec les titres
+                              % des sections en haut de page
+
+\title{Rapport de réunion}           % Les paramÃ¨tres du titreÂ : titre, auteur, date
+\author{SASIAE}
+\date{6 novembre 2013}
+
+\sloppy                      % pour que les lignes ne débordent pas dans les marges
+
+\begin{document}
+
+\maketitle                    % Faire un titre utilisant les données
+                              % passées à  \title, \author et \date
+
+\begin{abstract}
+Compte rendu de la réunion du mercredi 23 octobre 2013 avec le client Aymeric Vincent.
+\end{abstract}
+
+\paragraph{Le rôle du client, défini par lui-même :}
+Nous aider à élaborer et recadrer le cahier des charges. Il peut nous aider à faire des choix mais ce n'est pas l'encadrant pédagogique, donc il ne nous donnera pas de détails techniques. Il nous donnera aussi des conseils avec son recul et son expérience. Après discussion avec l'encadrant pédagogique, il apparaît que le client sera aussi celui qui répondra aux questions de détails techniques en fait, mais celles-ci devront être d'une grande importance, i.e. qu'elles bloquent le projet dans une branche )  et elles devront être posées à priori uniquement lors des réunions avec le client.
+
+\paragraph{Concernant le moteur physique :}
+ M. Vincent a déjà utilisé Bullet pour faire une petite démonstration l'année passée, ce n'est pas trivial mais ce n'est pas insurmontable non plus. Le problème principal viens de la granularité de la simulation. Le moteur calcule point à point sans forcément s’arrêter lorsqu’il traverse un obstacle au cours d'un pas. Donc ,beaucoup de calcul lors de la collision. (peut-être à optimiser...). Même si le problème de granularité ne sera réellement attaqué qu'une fois le cahier des charges rédigé. Bien voir les formats quitte à créer un langage de configuration et de création des objets, forme, position, etc... Les formats mentionnés, .obj, .vrml, ( .svg aussi non ? ) sortie de blender, sorties possible des logiciels de CAO, .lwob ....
+
+\paragraph{Un point sur l'API :}
+La justification du C++ est à rédiger correctement. En effet selon Loïc 
+la manière dont est codé l'API aversive utilise des concepts bien intégrés 
+dans le C++ : pseudo templates à l'aide de \#define et programmation orientée objet.
+
+\paragraph{Pour la prochaine fois :}
+Il faut rédiger un premier cahier des charge avec besoins fonctionnels et non fonctionnels, et un diagramme UML.
+Et rédiger un document interne résumant les choix qui ont été fait avec à chaque fois une justification détaillée.
+On a déjà un dépôt Github, que nous devons partager avec Aymeric Vincent et Antoine Rollet.
+\subsection*{conclusion}
+Penser à la DOCUMENTATION, point crucial à eirbot.
+\end{document}
