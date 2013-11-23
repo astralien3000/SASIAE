@@ -1,0 +1,97 @@
+\documentclass[a4paper,10pt]{article}
+
+% Options possibles : 10pt, 11pt, 12pt (taille de la fonte)
+%                     oneside, twoside (recto simple, recto-verso)
+%                     draft, final (stade de dÃ©veloppement)
+
+\usepackage[utf8]{inputenc}   % pour les accents
+\usepackage[T1]{fontenc}      % Police contenant les caractères français
+\usepackage[francais]{babel}  % Placez ici une liste de langues, la
+                              % dernière étant la langue principale
+
+\usepackage[a4paper]{geometry}% Réduire les marges
+% \pagestyle{headings}        % Pour mettre des entêtes avec les titres
+                              % des sections en haut de page
+
+\title{Rapport de réunion}           % Les paramÃ¨tres du titreÂ : titre, auteur, date
+\author{SASIAE}
+\date{17 novembre 2013}
+
+\sloppy                      % pour que les lignes ne débordent pas dans les marges
+
+\begin{document}
+
+\maketitle                    % Faire un titre utilisant les données
+                              % passées à  \title, \author et \date
+
+\begin{abstract}
+Compte rendu de la réunion du mercredi 13 novembre 2013 avec le client Aymeric Vincent.
+\end{abstract}
+Problème représentation: lecture difficile
+Que veut dire gérer les com & fils
+
+Prendre des exemples:
+Sur un robot, que veut dire flux
+
+Le découpage doit permettre d'éclaircir son idée
+
+Au final les fonctions devront être plus puissant
+
+Utilisation de org-mode sour Emacs --> suite d'item en html ou latex
+
+Problème de la gestion des opérations... Instrumentation de code, >> surcharge des opérateurs << (le c++ peut pas le faire a priori)
+
+Le bloc sûreté de fonctionnement, intéressant, recherche là-dessus, est-ce vraiment nécessaire? Si oui, solution
+
+En fait c'est quoi ce document?
+>> Description des besoins fonctionnels
+
+Service de planification des tâches ... Bien mais l'offset est-il nécessaire 
+
+Piste: prendre le meilleur robot jamais réalisé et voir ce dont il a besoin.
+
+~"module de placement" -> banque?
+bas niveau
+haut niveau
+?
+os
+haut niveau-> code métier
+
+plus haut niveau: Stratégie
+
+Quelle est la frontière entre Simulateur et code dépendant de l'année. Les séparer conceptuellement. PID -> physique, Scheduler -> informatique
+
+Diagramme Simulateur:
+  blablabla Ok
+  
+Et le moteur physique? (ndlr: ahah j'vous l'avait dit)
+
+Ok, Héritage, codeur utilisateur (pas top mais il comprend)
+
+Il préfère les listes.
+
+point obscur: Opérations listées obscur.
+
+Chronogramme sur les broches? Changer la valeur des GPIO?
+
+En fait y a une API entre Aversive++ et le simulateur:
+
+ndlr: Je vous l'avais presque dit!
+
+Idéologiquement l'API est + mieu, mais si elle est pas belle, on la jette! Mais intéressant que si elle oblige à la clarté.
+
+Elle doit répondre au questions "qui parle avec qui?" et "sous quelles contraintes?". Une aide: prototype papier, un putain de schéma trop classe au tableau! et faire vivre le code.
+
+Rôle de l'ancienne API: éviter la régression!
+
+Prendre un peu de temps. Se payer le luxe de prendre du recul. Laisser le temps au bonnes idées d'arriver pour ne pas avoir à tout recommencer.
+
+Loïc a du mal à partir de l'étape 1.
+
+Diagrammes de séquence... de toute beauté, s'appliquer sur les mots.
+
+Prochain rendez-vous: Lundi 17h30
+\paragraph{Pour la prochaine fois :}
+\subsection*{conclusion}
+
+\end{document}
