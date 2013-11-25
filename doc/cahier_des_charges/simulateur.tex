@@ -1,0 +1,46 @@
+
+\subsection{Besoins fonctionnels}
+
+Le but premier du simulateur est de simuler le comportement de un ou plusieurs robots sur une table type coupe de France de robotique avec un retour sur l'exécution afin d'adapter, plus tard, le code robot aux erreurs de capteurs.
+
+On veut pouvoir :
+\subsubsection{Lire une simulation}
+Le simulateur doit bien entendu pouvoir lancer une simulation et la mettre en pause en effet l'utilisateur peut vouloir analyser pas à pas une simulation. De plus l'utilisateur doit pouvoir Sauvegarder et Charger une simulation afin de pouvoir la rejouer à un autre moment.
+
+\subsubsection{Simuler le scénario}
+Le simulateur doit pouvoir exécuter un scénario de manière déterministe, en laissant la posibilité à l'utilisateur de faire intervenir des erreurs artificielles sur les données renvoyées par les capteurs.
+
+\subsubsection{Simuler un Environnement 3D}
+Le déplacement des robots sur table est entièrement dépendant de la physique et de l'état de son environnement en temps réel. Il faut donc que le simulateur puisse gérer cet environnement et les contraintes physiques qu'il engendre. Pour la détection des adversaires, la détection des objets ou les situations aléatoires de blockages dues à la position d'un objet mobile non prévue. 
+
+\subsubsection{Représenter un environnement 2D}
+L'affichage se fera en deux dimensions. Nous souhaitons pouvoir représenter les robots en vue de dessus, donc le simulateur devra afficher une projection du retour du moteur physique procédant à la simulation proprement dite. 
+
+\subsubsection{Charger une table}
+La table de jeu est l'élément le plus important de l'environnement. Elle contient toutes les contraintes immobiles mais aussi la position des éléments mobiles (élément de jeu). De plus, son prototype change chaque année. Il faut donc pouvoir la changer facilement.
+
+\subsubsection{Le choix des robots}
+Les robots sont biensûr le coeur de la simulation. On doit pouvoir en charger entre 1 et 4 afin de simuler l'environnement (en plus de la table). Les robots peuvent évoluer assez rapidement. Ainsi, d'une semaine sur l'autre l'archtecture d'un robot peut être complétement refaite. C'est donc l'élément qui sera changé le plus souvent. De plus on veut pouvoir charger des exemples de robots adverse type. L'utilisateur doit pouvoir choisir la forme du robot, son mode de déplacement. Pour cela il chargera la forme du robot depuis les menus du simulateur. L'interface graphique devra permettre à l'utilisateur de charger l'exécutable du code robot, choisir l'équipe à laquelle celui-ci appartiendra ( équipe 1 ou équipe 2 ) et sa position initiale. 
+ 
+\subsubsection{Gérer les objets}
+De même que les robots, on veut insérer des éléments externes à l'environnement (et non-prévus par celui-ci). Tels que des balles de ping pong perdues par un robot au cours d'un action balistique. On doit donc pouvoir insérer, déplacer et supprimer des objets dans l'environnement de jeu.
+
+\subsubsection{Tracer l'exécution, journaliser les événements et afficher l'état des capteurs}
+Le simulateur est un outil de dévelloppement de programme pour robot. Ainsi, on veut pouvoir avoir accès à la trace d'exécution du code ou au moins à une journalisation de l'exécution. De plus, on veut pouvoir obtenir les informations détectées par le robot et non-visibles sur l'affichage 2D tel que le patinage, les erreurs d'overflow ... cette liste est non-exhaustive et pourra être complétée plus tard. De même, on veut pouvoir observer les valeurs renvoyées par les capteurs en temps réel.
+   
+\subsection{Besoins non fonctionnels}
+
+\begin{itemize}
+    \item L'interface doit être agréable à utiliser et intuitive dans son fonctionnement.
+    \item Le moteur physique doit pouvoir gérer les collisions sommairement (sans calcul détaillé de l'approche d'un objet) et efficacement (Il ne doit pas être obligatoire de diminuer le pas de calcul de la simulation pour limiter la pénétration dans un objet).
+    \item Pouvoir saisir
+\end{itemize}
+
+\subsubsection{Simuler la physique de l'environnement}
+Simuler à l'aide d'un moteur physique les intéractions entre objets notament les collisions en 3 dimensions. Cepandant la récupération d'un objet par le robot ne sera pas simulé.
+
+\subsubsection{Le choix du moteur physique}
+Nous avons testé le moteur Bullet sur un exemple : une sphère solide qui tombe sur un sol solide, celle-ci s'enfonce d'au pire le sixième de son diamètre. 
+%%% ON N'ECRIT PAS UN RAPPORT \begin{insulte} connard \end{insulte}
+
+

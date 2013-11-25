@@ -5,18 +5,18 @@
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
 \hypersetup{
-    bookmarks=false,    % show bookmarks bar?
-    pdftitle={Projet SASIAE},    % title
-    pdfauthor={Raynal Jean-Raymond, Dauphin Loïc, Clément Lansmarie, Hugo Brunie, Nicolas Belin, Benoit Gilbert, Théotime Méralli-Ballou},                     % author
-    pdfsubject={TeX and LaTeX},                        % subject of the document
+    bookmarks=false, % show bookmarks bar?
+    pdftitle={Projet SASIAE}, % title
+    pdfauthor={Raynal Jean-Raymond, Dauphin Loïc, Clément Lansmarie, Hugo Brunie, Nicolas Belin, Benoit Gilbert, Théotime Méralli-Ballou}, % author
+    pdfsubject={TeX and LaTeX}, % subject of the document
     pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=blue,       % color of internal links
-    citecolor=black,       % color of links to bibliography
-    filecolor=black,        % color of file links
-    urlcolor=purple,        % color of external links
-    linktoc=page            % only page is linked
-}%
+    colorlinks=true, % false: boxed links; true: colored links
+    linkcolor=blue, % color of internal links
+    citecolor=black, % color of links to bibliography
+    filecolor=black, % color of file links
+    urlcolor=purple, % color of external links
+    linktoc=page % only page is linked
+}%1 
 \def\myversion{}
 \title{%
 \flushright
@@ -38,38 +38,46 @@
 
 \chapter{Introduction}
 
-\section{But}
+%% TODO : Préciser qu'EIBROT utilise des AVR
+
+\section{Objectifs}
+
+    Eirbot est une association qui conçoit des robots pour participer à la coupe de France de robotique. Celle-ci consiste à opposer de deux à quatre robots autonomes qui interagissent avec les différents objets sur une table dans le but de marquer un maximum de points. L'association a besoin de fiabiliser les robots, via plus de tests et une meilleure compréhension du comportement du robot. Un simulateur permettra de mieux comprendre l'enchainement du code et ainsi cibler les erreurs d'exécution plus rapidement qu'une mise en scéne réelle.
+    Le simulateur développé ici doit pouvoir reproduire une situation de jeu et interagir avec le code pour repérer le comportement des robots.
+    
+    
 \section{Etendue du Projet et Spécification du produit}
 
 
-\chapter{Description générale}
+%% dire que le projet est séparé en API, GUI et simulateur mais quelle ne prend pas en compte le code robot. déscription du livrable : combien d'exécutable ? la manière de l'utiliser ? et sinon je sais pas trop ce qu'il faut dire ici. des idées ?
 
-\section{Besoins fonctionnels}
 
-\subsection{API}
-\input{apispec.tex}
 
-\subsection{Simulateur}
-\input{simspec.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \chapter{Description générale}        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Besoins de l'API}
+\input{api.tex}
 
-\subsection{Interface Graphique}
-\input{guispec.tex}
+\newpage
+\section{Besoins du Simulateur}
+\input{simulateur.tex}
 
-\subsection{Editeur de Robots}
-\input{editspec.tex}
-
-\section{Besoins non fonctionnels}
-%\input{nfspec.tex}
-
+\newpage
 \section{Architecture}
+\input{architecture.tex}
 
-
+\newpage
 \chapter{Conclusion}
 
+\newpage
 \section{Évolution envisagées}
 
+\newpage
 \section{Validation de l'application}
 
+\newpage
 \section{Planning}
 
 

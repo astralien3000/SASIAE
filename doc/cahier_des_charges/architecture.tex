@@ -1,0 +1,17 @@
+Le développement de l'application sera découpé en plusieurs modules :
+\begin{itemize}
+    \item le GUI se chargera de l'interaction avec l'utilisateur ;
+    \item le moteur physique s'occupera de simuler l'environnement physique ;
+    \item le simulateur se chargera de simuler le comportement des différents capteurs et actionneurs selon les ordres donnés par le robot et leurs contraintes dans l'environement physique ;
+    % Nom du module suivant encore à débat. TODO  service d'interfacage ?
+    \item le \og serveur \fg\ se chargera de la communication entre le simulateur et le ou les codes robots.
+\end{itemize}
+
+L'API sera, quant à elle, linkée lors de la compilation avec le code robot et elle s'occupera de la communication avec le \og serveur \fg.
+
+Au sein de l'application :
+\begin{itemize}
+    \item le GUI communiquera avec le simulateur et le moteur physique pour récupérer et afficher une vue de l'environnement physique, la ou les valeurs des capteurs et journaliser certains événements de la simulation ;
+    \item le simulateur et le moteur physique intéragirront ensemble afin que le simulateur puisse calculer la valeur des capteurs et pour que le simulateur modifie les vitesses et accélérations des actionneurs du ou des robots ;
+    \item le \og serveur \fg\ communiquera avec le simulateur afin de récupérer les valeurs des capteurs pour les passer au code robot et faire passer les ordres du code robot au simulateur.
+\end{itemize}

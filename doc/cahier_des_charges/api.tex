@@ -1,0 +1,50 @@
+\subsection{Besoins foncionnels}
+
+Le but de l'API est de faciliter la programmation d'un robot.
+
+\subsubsection{Gestion des entrées sorties du robot}
+
+Le robot est composé de différents capteurs et actionneurs, le but de l'API est de proposer des interfaces pour intérargir avec ces éléments, en permettant de ne pas avoir à se soucier de l'architecture matérielle.
+
+\subsubsection{Gestion des modules du microprocesseur}
+
+Tous les microprocesseurs proposent plus ou moins les mêmes services. Il faut pouvoir les configurer sans avoir à connaitres les registres à modifier.
+
+\subsubsection{Détecter les erreurs d'opération}
+
+Le manque de mémoire et de puissance de calcul sur les AVR utilisés à Eirbot nous poussent à contrôler et réduire la taille des entiers utilisés. Cela augmente donc les chances de produire des overflows lors des opérations, qui sont difficilement détectables sur une architecture PC de 32 ou 64 bits. En effet, les registres du processeur étant plus grand, si la suite d'opération ammenant l'overflow aboutit à un résultat compris dans les limites du type de départ, l'overflow n'aura pas lieu sur un PC.
+
+Ces overflows ont de graves conséquences dans le comportement du robot. De ce fait, il est important d'avoir un mécanisme de détection de ces erreurs d'opérations arithmétiques lors de la simultation.
+
+La solution retenue est de passer par des classes qui ré-implémentent les types utilisés afin d'en surcharger les opérations. De cette manière toutes les étapes du calcul sont maitrisées par l'API.
+
+Dans le cas d'une erreur, un message sera envoyé au simulateur pour en avertir l'utilisateur.
+
+\subsubsection{Planification des tâches}
+
+Sur les robots, nous avons besoin de pouvoir exécuter des routines à intervalle régulier (une routine pour détecter la présence d'un obstacle afin d'arrêter les moteurs par exemple). C'est pourquoi nous avons besoin d'un planificateur de tâches. Celui ci devra nous permettre :
+\begin{itemize}
+    \item d'ajouter une nouvelle routine avec l'intervalle de temps entre chaque appel ainsi que sa priorité ;
+    \item de supprimer une routine du planificateur ;
+\end{itemize}
+
+\subsection{Besoins non fonctionnels}
+
+\subsubsection{Langage de programmation}
+
+Le langage de programmation choisi est le C++. C'est celui qui répond le mieux à nos attentes. En effet l'API est pensée à l'aide des mécanismes objet. Le C++ est un langage orienté objet qui s'adapte donc plus que le C au développement de l'API, notemment pour la surcharge des opérateurs pour détecter les overflows. De plus nous avons besoin d'un code qui puisse s'adapter aux différentes architectures de micro-contrôleur, afin de posséder cette généricité nous pouvons avec le langage C++ utiliser le mécanisme des \og templates \fg qui est adapté. Enfin nous écartons le JAVA, car même s'il est orienté objet il est souhaitable de garder la compatibilité avec le code Robot qui en en langage C.
+
+\subsubsection{Compatibilité AVR - x86}
+
+La même API est utilisée pour la simulation sur PC et pour le robot. Il est proposé de la séparer en 3 parties principales :
+\begin{itemize}
+    \item{La partie indépendante de l'architecture.}
+    \item{La partie dépendante de l'architecture, côté simulation.}
+    \item{La partie dépendante de l'architecture, côté AVR.}
+\end{itemize}
+
+\subsubsection{Taille des executables}
+
+L'architecture actuellement utilisée n'offre dans le meilleur des cas que 128 Ko de mémoire flash destinée à stocker l'exécutable, et 4 Ko de RAM. Il faut donc être capable de générer un code le plus léger possible.
+
+
