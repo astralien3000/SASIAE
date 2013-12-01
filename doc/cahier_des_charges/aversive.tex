@@ -1,0 +1,55 @@
+\section{L'existant : API Aversive}
+
+Nous devons écrire une API proposant au moins les fonctionnalités de l'ancien framework d'Eirbot, c'est à dire Aversive. Il fonctionne sur tout les microcontrôleurs de la gamme ATMEGA de la companie Atmel.
+
+\subsection{Description générale}
+
+Aversive propose un code source pouvant être compilé pour la plupart des ATMEGA supportés par l'avr-libc (portage de la bibliothèque standard du C pour l'architecture AVR). Pour cela, la compilation conditionelle est utilisée abondament, permettant d'utiliser les fonctionnalités disponibles sur un microcontrôleur, et de les désactiver quand elles ne le sont pas.
+
+\subsection{Utilisation des modules d'un ATMEGA}
+
+Aversive permet d'utiliser les fonctionnalités des ATMEGA, c'est à dire :
+\begin{itemize}
+    \item{les modules UART, I2C, SPI, qui permettent la transmission de messages avec d'autres systèmes (ordinateur, autre carte, autre robot, AX12, ...)}
+    \item{les timers, qui permettent de gérer le temps de façon précise, et d'appeler des interruptions à interval régulier}
+    \item{les ADC (Analog / Digital Converter), qui permettent de mesurer la tension aux bornes d'une pin d'entrée/sortie du microcontrôleur}
+\end{itemize}
+
+Ces modules sont assez bas niveau, et demandent une compréhention importante du fonctionnement de l'ATMEGA. Cependant, ils permettent la factorisation du code, car même si les registres à modifier pour activer un module sont différents, les opération à réaliser dessus sont équivalentes.
+
+Afin de suivre la même dynamique de conception, la nouvelle API devra proposer ces modules. Par contre ceux-ci seront réalisés en interne, et l'utilisateur final devra éviter de les utiliser dans le code robot, à moins qu'il ne code un nouveau capteur ou actionneur à ajouter à l'API.
+
+\subsection{Utilisation de capteurs et actionneurs particuliers}
+
+Les capteurs et actionneurs sont réutilisés d'année en année sur les robots. Certains sont donc gérés directement dans Aversive, ce qui permet de ne pas réinventer la roue. Le code gérant ces capteurs et actionneurs initialise tous les registres et interruptions nécessaires à leur fonctionnement, ce qui permet à l'utilisateur de directement communiquer avec eux, et donc les utiliser.
+
+Les capteurs / actionneurs suivants sont implémentés dans l'ancienne API :
+\begin{itemize}
+    \item{GP2, un capteur de distance laser}
+    \item{Servomoteur dirigé par PWM, un type de moteur auto-asservis standard dans le modélisme ou la robotique}
+    \item{AX12, un servomoteur avancé permettant de contrôler sa vitesse en plus de son angle.}
+\end{itemize}
+
+C'est très peu, et dans une approche orientée objet, nous pouvons généraliser ce principe, en créant une classe pour chaque système utilisé dans le robot. Nous pouvons par exemple compléter cette liste par : 
+
+\begin{itemize}
+    \item{Encodeur, qui est un capteur incrémental mesurant le nombre de tours parcourrus}
+    \item{Un moteur courrant continu, qui est dirigé par PWM}
+    \item{Lidar, un système permettant de scanner son environnement pour connaître sa distance aux objets.}
+\end{itemize}
+
+
+\subsection{Aide à l'asservissement d'un système}
+
+L'asservissement d'un système, c'est à dire s'assurer qu'il répond bien à une commande qu'on lui a envoyé, est très important en robotique. En effet, le déplacement du robot est soumis à un asservissement. Les techniques permettant de contrôler les systèmes peuvent être réutilisées dans la plupart des domaines.
+
+Donc l'ancienne API contient les principaux algorithmes permettant d'asservir un système quelconque. Cette partie n'est pas dépendante du matériel utilisé et il n'est pas utile de la simuler. 
+Cependant la nouvelle API_AVR, Aversive++,  doit proposer ces algorithmes pour pouvoir développer rapidement un robot se déplaçant correctement. La réalisation de celle-ci fait partie des projets d'Eirbot.
+
+
+\subsection{Gestion d'évènements temporels}
+
+Même si Aversive propose d'utiliser les modules de timers, leur utilisation reste complexe. Un système plus haut niveau permettant la gestion des évènements est nécessaire, notamment pour gérer plus d'évènements que ce qu'un timer bas niveau est capable de faire.
+
+Le scheduler (le terme anglais est communément utilisé) permet d'enregister des fonctions à exécuter à interval régulier, avec leur fréquence, ainsi que leur priorité en cas de conflit. Il permet aussi le changement de fréquence / priorité, ainsi que de retirer un évènement de la liste.
+\clearpage

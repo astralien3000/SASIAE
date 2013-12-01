@@ -1,0 +1,109 @@
+\subsection{Format XML}
+\subsubsection{Descritpion d'un robot}
+\begin{changemargin}{-1cm}{-1cm}
+\begin{lstlisting}[caption=Description du Robot, label=descbot]
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Robot">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="maillage">
+                <xs:attribute name="src" type="xs:string">
+            </xs:element>
+            <xs:element name="microcontroleur">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="modules">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="module">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="position">
+                                    <xs:complexType>
+                                        <xs:attribute name="X" type="xs:Integer">
+                                        <xs:attribute name="Y" type="xs:Integer">
+                                        <xs:attribute name="Z" type="xs:Integer">
+                                        <xs:attribute name="alpha">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            </xs:restriction> 
+                                        <xs:attribute name="beta">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            </xs:restriction>
+                                        <xs:attribute name="gamma">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            <xs:restriction>
+                                        </xs:attribute>
+                                    </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="params" type="xs:string">
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  \end{lstlisting}
+\end{changemargin}
+  
+\clearpage
+\subsubsection{Description de la Table}
+ \begin{lstlisting}[caption=Description de la Table, label=desctable]
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Table">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="maillage">
+                <xs:attribute name="src" type="xs:string">
+            </xs:element>
+            <xs:element name="Jouets">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Jouet">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="position">
+                            <xs:complexType>
+                                <xs:attribute name="X" type="xs:Integer">
+                                <xs:attribute name="Y" type="xs:Integer">
+                                <!-- Rotation autour de la verticale -->
+                                <xs:attribute name="alpha">
+                                    <xs:restriction base="xs:integer">
+                                        <xs:minInclusive value="0"/>
+                                        <xs:maxInclusive value="360"/>
+                                    </xs:restriction> 
+                            </xs:complexType>
+                            </xs:element>
+                            <xs:element name="poid" type="xs:integer">
+                            </xs:element>
+                            <xs:element name="maillage">
+                            <xs:complexType>
+                                <xs:attribute name="src" type="xs:string">
+                            </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  \end{lstlisting}
