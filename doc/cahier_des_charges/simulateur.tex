@@ -1,4 +1,3 @@
-
 \subsection{Besoins fonctionnels}
 
 Le but premier du simulateur est de vérifier le comportement de un ou plusieurs robots sur une table type coupe de France de robotique avec un retour sur l'exécution afin d'adapter, plus tard, le code robot aux erreurs de capteurs. Notre simulateur SASIAE n'a donc pas pour but de tester l'efficacité
@@ -65,7 +64,7 @@ Prenons l'exemple d'un robot qui rencontre un obstable et patine car il est bloq
 
 \subsubsection{Communiquer avec l'API}
 %N ET T
-Comme il a été évoqué dans les paragraphes précédents, le coordinateur doit pouvoir communiquer avec l'API et l'interface graphique. La communication avec l'API se fait par le biais d'un socket, avec un socket par exécutable de code robot. À chaque pas de simulation, le moteur physique envoie un signal de fin du pas, puis l'interface graphique récupère le nouvel état de simulation pour rafraichir l'affichage ainsi que les messages à l'utilisateur.
+Comme il a été évoqué dans les paragraphes précédents, le coordinateur doit pouvoir communiquer avec l'API et l'interface graphique. La communication avec l'API se fait par le biais d'un socket, avec un socket par exécutable de code robot (ces sockets sont décrits dans la partie architecture). À chaque pas de simulation, le moteur physique envoie un signal de fin du pas, puis l'interface graphique récupère le nouvel état de simulation pour rafraichir l'affichage ainsi que les messages à l'utilisateur.
    
 \subsection{Besoins non fonctionnels}
 
