@@ -1,11 +1,9 @@
 \subsection{Besoins fonctionnels}
 
-L'API \texttt{Aversive++} sera la version 2.0 de l'API Aversive. Ce projet est mené par l'association cliente, Eirbot. Néanmoins cette API possèdera au moins deux implémentations différentes que nous noterons API_AVR et API_simulation. Une qui sera réalisée par Eirbot et qui doit être compilée avec le code robot afin de faire fonctionner celui-ci dans des conditions réelles. 
+L'API \texttt{Aversive++} sera la version 2.0 de l'API Aversive. Ce projet est mené par l'association cliente, Eirbot. Néanmoins cette API possèdera au moins deux implémentations différentes que nous noterons implémentation\_AVR et implémentation\_simulation. Une qui sera réalisée par Eirbot et qui doit être compilée avec le code robot afin de faire fonctionner celui-ci dans des conditions réelles. 
 
-L'autre implémentation est un des livrables de SASIAE. Le diagramme de la figure
-%\ref{diagramme_classe_non_detaille_aversive} 
-représente cette réalisation. Il faut noter que certains éléments de l'API_AVR ne seront pas simulés par l'API_simulation, mais cette dernière reprendra l'implémentation de l'API_AVR. Nous aurons donc une partie commune aux deux : API_Commune. 
-Concrètement dans un premier temps seuls les devices seront simulés. Donc seulement cette partie de l'API sera implémentée de manière "complète" dans API_simulation. Nous pouvons cependant noter que l'interface d'\texttt{Aversive++} sera %presque (Clément) %
+L'autre implémentation est un des livrables de SASIAE. Il faut noter que certains éléments de implémentation\_AVR ne seront pas simulés par implémentation\_simulation, mais cette dernière reprendra l'implémentation de l'implémentation\_AVR. Nous aurons donc une partie commune aux deux : implémentation\_Commune. 
+Concrètement dans un premier temps seuls les devices seront simulés. Donc seulement cette partie de l'API sera implémentée de manière "complète" dans implémentation\_simulation. Nous pouvons cependant noter que l'interface d'\texttt{Aversive++} sera %presque (Clément) %
 identique quelque soit l'implémentation utilisée.
 
 \subsubsection{Gestion des entrées sorties du robot}
@@ -15,7 +13,11 @@ Soit 5 classes.
 
 \subsubsection{Gestion des modules du microprocesseur}
 
+<<<<<<< HEAD
+Tous les microprocesseurs proposent plus ou moins les mêmes services. Il faut pouvoir les configurer sans avoir à connaître les registres à modifier. Cependant cette partie ne sera utilisable que sur un robot, et pas avec le simulateur. En effet, le simulateur n'a pas besoin de fournir une interface de si bas niveau pour tester l'asservissement et la stratégie. Les interfaces seront présentes dans Aversive++ mais ne feront pas grand chose dans le cas où le code est compilé pour la simulation.
+=======
 Tous les microprocesseurs proposent plus ou moins les mêmes services. Il faut pouvoir les configurer sans avoir à connaitres les registres à modifier. Cependant cette partie ne sera utilisable que sur un robot, et pas avec le simulateur. En effet, le simulateur n'a pas besoin de fournir une interface de si bas niveau pour tester l'asservissement et la stratégie sans implémenter ces fonctionnalités. Les interfaces seront présentes dans Aversive++ mais ne feront pas grand chose dans le cas où le code est compilé pour la simulation.
+>>>>>>> 6268749bb5efa7395d70a2774f4dfe600283b9f4
 
 %% TODO
 %% Hum !!! Il faut tout de même les simuler (ou tout du moins une partie) sinon, aurevoir le scheduler (Clément)
@@ -68,6 +70,6 @@ Il faut donc proposer une interface qui permette d'utiliser des techniques visan
     \item{Utilisation des fonctions inline pour les "petites fonction" (3 ou 4 instructions maximum).}
 \end{itemize}
 
-La simulation se faisant sur un ordinateur, l'implémentation API_Simulation ne sera pas contrainte par les considérations de taille. Cependant les déclarations de classes devront suivre ces rêgles.
+La simulation se faisant sur un ordinateur, l'implémentation implémentation\_Simulation ne sera pas contrainte par les considérations de taille. Cependant les déclarations de classes devront suivre ces rêgles.
 
 

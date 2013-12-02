@@ -4,7 +4,7 @@ Nous devons écrire une API proposant au moins les fonctionnalités de l'ancien 
 
 \subsection{Description générale}
 
-Aversive propose un code source pouvant être compilé pour la plupart des ATMEGA supportés par l'avr-libc (portage de la bibliothèque standard du C pour l'architecture AVR). Pour cela, la compilation conditionelle est utilisée abondament, permettant d'utiliser les fonctionnalités disponibles sur un microcontrôleur, et de les désactiver quand elles ne le sont pas.
+Aversive propose un code source pouvant être compilé pour la plupart des ATMEGA supportés par l'avr-libc (portage de la bibliothèque standard du C pour l'architecture AVR). Pour cela, la compilation conditionnelle est utilisée abondament, permettant d'utiliser les fonctionnalités disponibles sur un microcontrôleur, et de les désactiver quand elles ne le sont pas.
 
 \subsection{Utilisation des modules d'un ATMEGA}
 
@@ -15,7 +15,7 @@ Aversive permet d'utiliser les fonctionnalités des ATMEGA, c'est à dire :
     \item{les ADC (Analog / Digital Converter), qui permettent de mesurer la tension aux bornes d'une pin d'entrée/sortie du microcontrôleur}
 \end{itemize}
 
-Ces modules sont assez bas niveau, et demandent une compréhention importante du fonctionnement de l'ATMEGA. Cependant, ils permettent la factorisation du code, car même si les registres à modifier pour activer un module sont différents, les opération à réaliser dessus sont équivalentes.
+Ces modules sont assez bas niveau, et demandent une compréhension importante du fonctionnement de l'ATMEGA. Cependant, ils permettent la factorisation du code, car même si les registres à modifier pour activer un module sont différents, les opération à réaliser dessus sont équivalentes.
 
 Afin de suivre la même dynamique de conception, la nouvelle API devra proposer ces modules. Par contre ceux-ci seront réalisés en interne, et l'utilisateur final devra éviter de les utiliser dans le code robot, à moins qu'il ne code un nouveau capteur ou actionneur à ajouter à l'API.
 
@@ -47,9 +47,13 @@ Donc l'ancienne API contient les principaux algorithmes permettant d'asservir un
 Cependant la nouvelle API_AVR, Aversive++,  doit proposer ces algorithmes pour pouvoir développer rapidement un robot se déplaçant correctement. La réalisation de celle-ci fait partie des projets d'Eirbot, et ne sera donc pas développée dans le cadre de ce projet.
 
 
-\subsection{Gestion d'évènements temporels}
+\subsection{Gestion d'événements temporels}
 
-Même si Aversive propose d'utiliser les modules de timers, leur utilisation reste complexe. Un système plus haut niveau permettant la gestion des évènements est nécessaire, notamment pour gérer plus d'évènements que ce qu'un timer bas niveau est capable de faire.
+Même si Aversive propose d'utiliser les modules de timers, leur utilisation reste complexe. Un système plus haut niveau permettant la gestion des événements est nécessaire, notamment pour gérer plus d'événements que ce qu'un timer bas niveau est capable de faire.
 
+<<<<<<< HEAD
+Le scheduler (le terme anglais est communément utilisé) permet d'enregister des fonctions à exécuter à interval régulier, avec leur fréquence, ainsi que leur priorité en cas de conflit. Il permet aussi le changement de fréquence / priorité, ainsi que de retirer un événement de la liste.
+=======
 Le scheduler (le terme anglais est communément utilisé) permet d'enregister des fonctions à exécuter à intervals régulier, avec leur fréquence, ainsi que leur priorité en cas de conflit. Il permet aussi le changement de fréquence / priorité, ainsi que de retirer un évènement de la liste.
+>>>>>>> 6268749bb5efa7395d70a2774f4dfe600283b9f4
 \clearpage
