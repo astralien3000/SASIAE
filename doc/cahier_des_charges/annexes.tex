@@ -63,20 +63,20 @@
 \end{changemargin}
 
 \subsubsection{Exemple de Robot}
-\begin{lstlisting}[caption=Description de la Table, label=desctable]
-	<robot>
-		<maillage src="~/mesh/robots/robot1A1314.stl"/>
-		<microcontroller name="UNIOC">
-			<modules>
-				<module nom="GP2">
-					<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
-					<parameters>
-						cloche=20;
-					</parameters>
-				</module>
-			</modules>
-		</microcontroller>
-	</robot>
+\begin{lstlisting}[caption=Exemple de Robot, label=exrobot]
+<robot>
+	<maillage src="~/mesh/robots/robot1A1314.stl"/>
+	<microcontroller name="UNIOC">
+		<modules>
+			<module nom="GP2">
+				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
+				<parameters>
+					cloche=20;
+				</parameters>
+			</module>
+		</modules>
+	</microcontroller>
+</robot>
 \end{lstlisting}
   
 \clearpage
@@ -99,56 +99,56 @@
                         <xs:attribute name="weight" type="xs:integer"/>
                         <xs:attribute name="name" type="xs:string"/>
                         <xs:sequence>
-                            <xs:element name="location">
+                            <xs:element name="location" minOccurs="1" maxOccurs="xs:unbound">
                             <xs:complexType>
-								<xs:attribute name="X" type="xs:Integer"/>
-								<xs:attribute name="Y" type="xs:Integer"/>
-								<xs:attribute name="Z" type="xs:Integer"/>
-								<xs:attribute name="alpha">
-									<xs:restriction base="xs:integer">
-										<xs:minInclusive value="0"/>
-										<xs:maxInclusive value="360"/>
-									</xs:restriction> 
-								<xs:attribute name="beta">
-									<xs:restriction base="xs:integer">
-										<xs:minInclusive value="0"/>
-										<xs:maxInclusive value="360"/>
-									</xs:restriction>
+				<xs:attribute name="X" type="xs:Integer"/>
+				<xs:attribute name="Y" type="xs:Integer"/>
+				<xs:attribute name="Z" type="xs:Integer"/>
+				<xs:attribute name="alpha">
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    </xs:restriction> 
+				</xs:attribute>
+				<xs:attribute name="beta">
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    </xs:restriction>
+				</xs:attribute>
                                 <xs:attribute name="gamma">
-									<xs:restriction base="xs:integer">
-										<xs:minInclusive value="0"/>
-										<xs:maxInclusive value="360"/>
-									<xs:restriction>
-										</xs:attribute>
-								</xs:complexType>
-								</xs:element>
-                            </xs:complexType>
-                            </xs:element>
-                            <xs:element name="mesh">
-								<xs:complexType>
-									<xs:attribute name="src" type="xs:string">
-								</xs:complexType>
-                            </xs:element>
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    <xs:restriction>
+				</xs:attribute>
+			    </xs:complexType>
+			    </xs:element>
+			    <xs:element name="mesh">
+			    <xs:complexType>
+				<xs:attribute name="src" type="xs:string">
+			    </xs:complexType>
+			    </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                     </xs:element>
                 </xs:sequence>
             </xs:complexType>
             </xs:element>
-        </xs:sequence>
+	</xs:sequence>
     </xs:complexType>
-  </xs:element>
-  \end{lstlisting}
+</xs:element>
+\end{lstlisting}
   
-\subsubsection{Exemple de Talbe}
-  \begin{lstlisting}[caption=Description de la Table, label=desctable]
-  <Table>
-	<maillage src="~/mesh/table/t1314.stl"/>
-	<Jouets>
-		<Jouet name="triangle1" weight="170">
-			<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
-			<maillage src="~/mesh/jouets/triangle1314.stl"/>
-		</Jouet>
-	</Jouets>
-  </Talbe>
-  \end{lstlisting}
+\subsubsection{Exemple de Table}
+\begin{lstlisting}[caption=Exemple de table, label=desctable]
+<table>
+    <mesh src="~/mesh/table/t1314.stl"/>
+	<toys>
+	    <toy name="triangle1" weight="170">
+		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
+		<maillage src="~/mesh/jouets/triangle1314.stl"/>
+	    </toy>
+	</toys>
+</table>
+\end{lstlisting}
