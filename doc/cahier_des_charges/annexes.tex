@@ -9,20 +9,20 @@
     <xs:complexType>
         <xs:sequence>
             <xs:element name="mesh">
+            <xs:complexType>
                 <xs:attribute name="src" type="xs:string"/>
+            </xs:complexType>
             </xs:element>
             <xs:element name="microcontroller">
             <xs:complexType>
-		<xs:attribute name="name" type="xs:string"/>
                 <xs:sequence>
                     <xs:element name="modules">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="module">
                             <xs:complexType>
-				<xs:attribute name="name" type="xs:string"/>
                                 <xs:sequence>
-                                    <xs:element name="location" minOccurs="0" maxOccurs="xs:unbound">
+                                    <xs:element name="location" minOccurs="0" maxOccurs="xs:unbounded">
                                     <xs:complexType>
                                         <xs:attribute name="X" type="xs:Integer"/>
                                         <xs:attribute name="Y" type="xs:Integer"/>
@@ -32,23 +32,25 @@
                                                 <xs:minInclusive value="0"/>
                                                 <xs:maxInclusive value="360"/>
                                             </xs:restriction> 
+                                        </xs:attribute>
                                         <xs:attribute name="beta">
                                             <xs:restriction base="xs:integer">
                                                 <xs:minInclusive value="0"/>
                                                 <xs:maxInclusive value="360"/>
                                             </xs:restriction>
+                                        </xs:attribute>
                                         <xs:attribute name="gamma">
                                             <xs:restriction base="xs:integer">
                                                 <xs:minInclusive value="0"/>
                                                 <xs:maxInclusive value="360"/>
-                                            <xs:restriction>
+                                            </xs:restriction>
                                         </xs:attribute>
                                     </xs:complexType>
                                     </xs:element>
                                     <xs:element name="parameters">
                                     <xs:complexType>
                                         <xs:sequence>
-                                            <xs:element name="parameter" minOccurs="0" maxOccurs="xs:unbound">
+                                            <xs:element name="parameter" minOccurs="0" maxOccurs="xs:unbounded">
                                                 <xs:complexType>
                                                     <xs:attribute name="name" type="xs:String" use="required"/>
                                                     <xs:attribute name="type" type="xs:String" use="required"/>
@@ -59,17 +61,20 @@
                                     </xs:complexType>
                                     </xs:element>
                                 </xs:sequence>
+				<xs:attribute name="name" type="xs:string"/>
                             </xs:complexType>
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                     </xs:element>
                 </xs:sequence>
+	        <xs:attribute name="name" type="xs:string"/>
             </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
   </xs:element>
+</xs:schema>
   \end{lstlisting}
 \end{changemargin}
 
@@ -110,7 +115,7 @@
                         <xs:attribute name="weight" type="xs:integer"/>
                         <xs:attribute name="name" type="xs:string"/>
                         <xs:sequence>
-                            <xs:element name="location" minOccurs="1" maxOccurs="xs:unbound">
+                            <xs:element name="location" minOccurs="1" maxOccurs="xs:unbounded">
                             <xs:complexType>
 				<xs:attribute name="X" type="xs:Integer"/>
 				<xs:attribute name="Y" type="xs:Integer"/>
