@@ -69,7 +69,13 @@ Comme il a été évoqué dans les paragraphes précédents, le coordinateur doi
 \subsection{Besoins non fonctionnels}
 
 \subsubsection{Simuler la physique de l'environnement}
+
 Simuler à l'aide d'un moteur physique les interactions entre objets notament les collisions en 3 dimensions. La récupération d'un objet par le robot ne sera pas simulé. Le moteur physique devra par ailleur gérer les collisions le plus simplement possibles (sans avoir à diminuer le pas simulation à l'approche d'un objet).
+
+\subsubsection{Utilisation de la bibliothèque Qt}
+
+%% TODO : j'ai écrit une phrase bidon.... (Loïc)
+Le simulateur utilisera le framework Qt, qui permet d'implémenter facilement une interface graphique, ainsi que de créer un système de transmission de messages entre objets modulaire et pratique. 
 
 \paragraph{Le choix du moteur physique}
 Nous avons testé le moteur Bullet sur un exemple : une sphère solide qui tombe sur un sol solide, celle-ci s'enfonce d'au pire le sixième de son diamètre.
