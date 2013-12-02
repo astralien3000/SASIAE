@@ -45,7 +45,18 @@
                                         </xs:attribute>
                                     </xs:complexType>
                                     </xs:element>
-                                    <xs:element name="parameters" type="xs:string">
+                                    <xs:element name="parameters">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="parameter" minOccurs="0" maxOccurs="xs:unbound">
+                                                <xs:complexType>
+                                                    <xs:attribute name="name" type="xs:String" use="required"/>
+                                                    <xs:attribute name="type" type="xs:String" use="required"/>
+                                                    <xs:attribute name="value" type="xs:String" use="required"/>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
                                     </xs:element>
                                 </xs:sequence>
                             </xs:complexType>
@@ -71,7 +82,7 @@
 			<module name="GP2">
 				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
 				<parameters>
-					cloche=20;
+                                	<parameter name="bell" type="int" value="20"/>
 				</parameters>
 			</module>
 		</modules>
