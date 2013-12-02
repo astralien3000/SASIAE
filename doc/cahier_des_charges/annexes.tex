@@ -59,6 +59,23 @@
   </xs:element>
   \end{lstlisting}
 \end{changemargin}
+
+\subsubsection{Exemple de Robot}
+\begin{lstlisting}[caption=Description de la Table, label=desctable]
+	<Robot>
+		<maillage src="~/mesh/robots/robot1A1314.stl"/>
+		<microcontroleur nom="UNIOC">
+			<modules>
+				<module nom="GP2">
+					<position X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
+					<params>
+						cloche=20;
+					</params>
+				</module>
+			</modules>
+		</microcontroleur>
+	</Robot>
+\end{lstlisting}
   
 \clearpage
 \subsubsection{Description de la Table}
@@ -106,4 +123,17 @@
         </xs:sequence>
     </xs:complexType>
   </xs:element>
+  \end{lstlisting}
+  
+\subsubsection{Exemple de Talbe}
+  \begin{lstlisting}[caption=Description de la Table, label=desctable]
+  <Table>
+	<maillage src="~/mesh/table/t1314.stl"/>
+	<Jouets>
+		<Jouet X="10" Y="20" Z="0" alpha="0">
+			<poid>170</poid>
+			<maillage src="~/mesh/jouets/triangle1314.stl"/>
+		</Jouet>
+	</Jouets>
+  </Talbe>
   \end{lstlisting}
