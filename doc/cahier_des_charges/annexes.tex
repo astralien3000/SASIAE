@@ -13,14 +13,14 @@
             </xs:element>
             <xs:element name="microcontroller">
             <xs:complexType>
-				<xs:attribute name="name" type="xs:String"/>
+		<xs:attribute name="name" type="xs:string"/>
                 <xs:sequence>
                     <xs:element name="modules">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="module">
                             <xs:complexType>
-								<xs:attribute name="name"/>
+				<xs:attribute name="name" type="xs:string"/>
                                 <xs:sequence>
                                     <xs:element name="location" minOccurs="0" maxOccurs="xs:unbound">
                                     <xs:complexType>
@@ -65,10 +65,10 @@
 \subsubsection{Exemple de Robot}
 \begin{lstlisting}[caption=Exemple de Robot, label=exrobot]
 <robot>
-	<maillage src="~/mesh/robots/robot1A1314.stl"/>
+	<mesh src="~/mesh/robots/robot1A1314.stl"/>
 	<microcontroller name="UNIOC">
 		<modules>
-			<module nom="GP2">
+			<module name="GP2">
 				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
 				<parameters>
 					cloche=20;
@@ -147,7 +147,7 @@
 	<toys>
 	    <toy name="triangle1" weight="170">
 		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
-		<maillage src="~/mesh/jouets/triangle1314.stl"/>
+		<mesh src="~/mesh/jouets/triangle1314.stl"/>
 	    </toy>
 	</toys>
 </table>
