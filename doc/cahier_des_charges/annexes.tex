@@ -5,26 +5,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="Robot">
+    <xs:element name="robot">
     <xs:complexType>
         <xs:sequence>
-            <xs:element name="maillage">
-                <xs:attribute name="src" type="xs:string">
+            <xs:element name="mesh">
+                <xs:attribute name="src" type="xs:string"/>
             </xs:element>
-            <xs:element name="microcontroleur">
+            <xs:element name="microcontroller">
             <xs:complexType>
+				<xs:attribute name="name" type="xs:String"/>
                 <xs:sequence>
                     <xs:element name="modules">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="module">
                             <xs:complexType>
+								<xs:attribute name="name"/>
                                 <xs:sequence>
-                                    <xs:element name="position">
+                                    <xs:element name="location" minOccurs="0" maxOccurs="xs:unbound">
                                     <xs:complexType>
-                                        <xs:attribute name="X" type="xs:Integer">
-                                        <xs:attribute name="Y" type="xs:Integer">
-                                        <xs:attribute name="Z" type="xs:Integer">
+                                        <xs:attribute name="X" type="xs:Integer"/>
+                                        <xs:attribute name="Y" type="xs:Integer"/>
+                                        <xs:attribute name="Z" type="xs:Integer"/>
                                         <xs:attribute name="alpha">
                                             <xs:restriction base="xs:integer">
                                                 <xs:minInclusive value="0"/>
@@ -43,7 +45,7 @@
                                         </xs:attribute>
                                     </xs:complexType>
                                     </xs:element>
-                                    <xs:element name="params" type="xs:string">
+                                    <xs:element name="parameters" type="xs:string">
                                     </xs:element>
                                 </xs:sequence>
                             </xs:complexType>
@@ -62,19 +64,19 @@
 
 \subsubsection{Exemple de Robot}
 \begin{lstlisting}[caption=Description de la Table, label=desctable]
-	<Robot>
+	<robot>
 		<maillage src="~/mesh/robots/robot1A1314.stl"/>
-		<microcontroleur nom="UNIOC">
+		<microcontroller name="UNIOC">
 			<modules>
 				<module nom="GP2">
-					<position X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
-					<params>
+					<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
+					<parameters>
 						cloche=20;
-					</params>
+					</parameters>
 				</module>
 			</modules>
-		</microcontroleur>
-	</Robot>
+		</microcontroller>
+	</robot>
 \end{lstlisting}
   
 \clearpage
@@ -83,37 +85,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="Table">
+    <xs:element name="table">
     <xs:complexType>
         <xs:sequence>
-            <xs:element name="maillage">
+            <xs:element name="mesh">
                 <xs:attribute name="src" type="xs:string">
             </xs:element>
-            <xs:element name="Jouets">
+            <xs:element name="toys">
             <xs:complexType>
                 <xs:sequence>
-                    <xs:element name="Jouet">
+                    <xs:element name="toy">
                     <xs:complexType>
+                        <xs:attribute name="weight" type="xs:integer"/>
+                        <xs:attribute name="name" type="xs:string"/>
                         <xs:sequence>
-                            <xs:element name="position">
+                            <xs:element name="location">
                             <xs:complexType>
-                                <xs:attribute name="X" type="xs:Integer">
-                                <xs:attribute name="Y" type="xs:Integer">
-                                <xs:attribute name="Z" type="xs:Integer"> 
-                                <!-- Rotation autour de la verticale -->
-                                <xs:attribute name="alpha">
-                                    <xs:restriction base="xs:integer">
-                                        <xs:minInclusive value="0"/>
-                                        <xs:maxInclusive value="360"/>
-                                    </xs:restriction> 
+								<xs:attribute name="X" type="xs:Integer"/>
+								<xs:attribute name="Y" type="xs:Integer"/>
+								<xs:attribute name="Z" type="xs:Integer"/>
+								<xs:attribute name="alpha">
+									<xs:restriction base="xs:integer">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="360"/>
+									</xs:restriction> 
+								<xs:attribute name="beta">
+									<xs:restriction base="xs:integer">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="360"/>
+									</xs:restriction>
+                                <xs:attribute name="gamma">
+									<xs:restriction base="xs:integer">
+										<xs:minInclusive value="0"/>
+										<xs:maxInclusive value="360"/>
+									<xs:restriction>
+										</xs:attribute>
+								</xs:complexType>
+								</xs:element>
                             </xs:complexType>
                             </xs:element>
-                            <xs:element name="poids" type="xs:integer">
-                            </xs:element>
-                            <xs:element name="maillage">
-                            <xs:complexType>
-                                <xs:attribute name="src" type="xs:string">
-                            </xs:complexType>
+                            <xs:element name="mesh">
+								<xs:complexType>
+									<xs:attribute name="src" type="xs:string">
+								</xs:complexType>
                             </xs:element>
                         </xs:sequence>
                     </xs:complexType>
@@ -131,8 +145,8 @@
   <Table>
 	<maillage src="~/mesh/table/t1314.stl"/>
 	<Jouets>
-		<Jouet X="10" Y="20" Z="0" alpha="0">
-			<poid>170</poid>
+		<Jouet name="triangle1" weight="170">
+			<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
 			<maillage src="~/mesh/jouets/triangle1314.stl"/>
 		</Jouet>
 	</Jouets>
