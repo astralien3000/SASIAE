@@ -14,9 +14,9 @@ Le développement de l'application sera découpé en plusieurs parties :
     \end{itemize}
 \end{itemize}
 
-L'API sera, quant à elle, linkée lors de la compilation avec le code robot et elle s'occupera de la communication avec le coordinateur.
+Aversive++, implémentation\_simulation sera, quant à elle, linkée lors de la compilation avec le code robot et elle s'occupera de la communication avec le coordinateur.
 
-Elle comportera un "client de coordination" qui s'occupera de récupérer les messages du coordinateur de manière asynchrone par rapport au code robot, mettre à jour les données de capteurs, ainsi que gérer l'execution des tâches enregistrées dans les scheduler.
+Elle comportera un \texttt{Client} "de coordination" qui s'occupera de récupérer les messages du coordinateur de manière asynchrone par rapport au code robot, mettre à jour les données de capteurs, ainsi que gérer l'execution des tâches enregistrées dans les schedulers (voir partie\ref{planif_taches} Planification des tâches) .
 
 Au sein de l'application :
 \begin{itemize}
