@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>860</width>
+    <height>513</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>860</width>
+    <height>513</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>860</width>
+    <height>513</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Simulateur</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>381</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="button_table">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>81</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Table : 2014</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_robot1">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Robot 1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_robot2">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Robot 2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_robot3">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Robot 3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Robot 4</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>430</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Rec</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Play</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Pause</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>10</y>
+       <width>61</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_3" native="true">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>430</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QTimeEdit" name="timeEdit">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>10</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="maximumTime">
+      <time>
+       <hour>0</hour>
+       <minute>1</minute>
+       <second>30</second>
+      </time>
+     </property>
+     <property name="currentSection">
+      <enum>QDateTimeEdit::MinuteSection</enum>
+     </property>
+     <property name="displayFormat">
+      <string>mm:ss</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Timer :</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>220</y>
+      <width>251</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>[LOG] Démarrage du robot n°1
+[LOG] Démarrage du robot n°2
+[WARNING] Capteur 1 non initialisé</string>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="treeWidget">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>10</y>
+      <width>251</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="itemsExpandable">
+     <bool>true</bool>
+    </property>
+    <property name="columnCount">
+     <number>2</number>
+    </property>
+    <attribute name="headerDefaultSectionSize">
+     <number>125</number>
+    </attribute>
+    <attribute name="headerHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="headerMinimumSectionSize">
+     <number>70</number>
+    </attribute>
+    <attribute name="headerDefaultSectionSize">
+     <number>125</number>
+    </attribute>
+    <attribute name="headerMinimumSectionSize">
+     <number>70</number>
+    </attribute>
+    <attribute name="headerHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Robots</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Valeurs</string>
+     </property>
+    </column>
+    <item>
+     <property name="text">
+      <string>Robot 1</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Capteurs</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Capteur 1</string>
+       </property>
+       <property name="text">
+        <string>12</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Capteur 2</string>
+       </property>
+       <property name="text">
+        <string>true</string>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>Actionneurs</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Actionneur 1</string>
+       </property>
+       <property name="text">
+        <string>1235</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Actionneur 2</string>
+       </property>
+       <property name="text">
+        <string>1852</string>
+       </property>
+      </item>
+     </item>
+    </item>
+    <item>
+     <property name="text">
+      <string>Robot 2</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Capteurs</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Capteur 1</string>
+       </property>
+       <property name="text">
+        <string>42</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Capteur 2</string>
+       </property>
+       <property name="text">
+        <string>36</string>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>Actionneurs</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Actionneur 1</string>
+       </property>
+       <property name="text">
+        <string>2135</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Actionneur 2</string>
+       </property>
+       <property name="text">
+        <string>2012</string>
+       </property>
+      </item>
+     </item>
+    </item>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>581</width>
+      <height>411</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>860</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSimulateur">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionNouveau"/>
+    <addaction name="actionOuvrir"/>
+    <addaction name="actionEnregistrer_sous"/>
+    <addaction name="actionEnregistrer"/>
+   </widget>
+   <widget class="QMenu" name="menuEditer">
+    <property name="title">
+     <string>Edition</string>
+    </property>
+    <widget class="QMenu" name="menuInsertion">
+     <property name="title">
+      <string>Insertion</string>
+     </property>
+     <addaction name="actionObjet"/>
+     <addaction name="actionErreur"/>
+    </widget>
+    <widget class="QMenu" name="menuTable">
+     <property name="title">
+      <string>Table</string>
+     </property>
+     <addaction name="actionChoisir"/>
+     <addaction name="actionSupprimer"/>
+    </widget>
+    <widget class="QMenu" name="menuRobot">
+     <property name="title">
+      <string>Robot</string>
+     </property>
+     <widget class="QMenu" name="menuChoisir">
+      <property name="title">
+       <string>Choisir</string>
+      </property>
+      <addaction name="actionRobot_n_1"/>
+      <addaction name="actionRobot_n_2"/>
+      <addaction name="actionRobot_n_3"/>
+      <addaction name="actionRobot_n_4"/>
+     </widget>
+     <widget class="QMenu" name="menuSupprimer_2">
+      <property name="title">
+       <string>Supprimer</string>
+      </property>
+      <addaction name="actionRobot_n_9"/>
+      <addaction name="actionRobot_n_10"/>
+      <addaction name="actionRobot_n_11"/>
+      <addaction name="actionRobot_n_12"/>
+     </widget>
+     <addaction name="menuChoisir"/>
+     <addaction name="menuSupprimer_2"/>
+    </widget>
+    <addaction name="menuInsertion"/>
+    <addaction name="separator"/>
+    <addaction name="menuTable"/>
+    <addaction name="menuRobot"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help !</string>
+    </property>
+    <addaction name="actionGuide_d_utilisation"/>
+    <addaction name="actionGuide_d_ajout_de_cr_ation_de_module"/>
+    <addaction name="separator"/>
+    <addaction name="actionGuide_du_d_veloppeur"/>
+    <addaction name="separator"/>
+    <addaction name="actionQui_sommes_nous"/>
+   </widget>
+   <addaction name="menuSimulateur"/>
+   <addaction name="menuEditer"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNouveau">
+   <property name="text">
+    <string>Nouveau</string>
+   </property>
+  </action>
+  <action name="actionOuvrir">
+   <property name="text">
+    <string>Ouvrir</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_sous">
+   <property name="text">
+    <string>Enregistrer sous</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer">
+   <property name="text">
+    <string>Enregistrer</string>
+   </property>
+  </action>
+  <action name="actionObjet">
+   <property name="text">
+    <string>Objet</string>
+   </property>
+  </action>
+  <action name="actionErreur">
+   <property name="text">
+    <string>Erreur</string>
+   </property>
+  </action>
+  <action name="actionChoisir">
+   <property name="text">
+    <string>Choisir</string>
+   </property>
+  </action>
+  <action name="actionSupprimer">
+   <property name="text">
+    <string>Supprimer</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_1">
+   <property name="text">
+    <string>Robot n°1</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_2">
+   <property name="text">
+    <string>Robot n°2</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_3">
+   <property name="text">
+    <string>Robot n°3</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_4">
+   <property name="text">
+    <string>Robot n°4</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_5">
+   <property name="text">
+    <string>Robot n°1</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_6">
+   <property name="text">
+    <string>Robot n°2</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_7">
+   <property name="text">
+    <string>Robot n°3</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_8">
+   <property name="text">
+    <string>Robot n°4</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_9">
+   <property name="text">
+    <string>Robot n°1</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_10">
+   <property name="text">
+    <string>Robot n°2</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_11">
+   <property name="text">
+    <string>Robot n°3</string>
+   </property>
+  </action>
+  <action name="actionRobot_n_12">
+   <property name="text">
+    <string>Robot n°4</string>
+   </property>
+  </action>
+  <action name="actionGuide_d_utilisation">
+   <property name="text">
+    <string>Guide d'utilisation</string>
+   </property>
+   <property name="toolTip">
+    <string>Aide à l'utilisation de l'interface graphique</string>
+   </property>
+  </action>
+  <action name="actionGuide_d_ajout_de_cr_ation_de_module">
+   <property name="text">
+    <string>Guide de création de module</string>
+   </property>
+   <property name="toolTip">
+    <string>Aide à la création de module</string>
+   </property>
+  </action>
+  <action name="actionGuide_du_d_veloppeur">
+   <property name="text">
+    <string>Guide du développeur</string>
+   </property>
+   <property name="toolTip">
+    <string>Documentation de l'implémentation</string>
+   </property>
+  </action>
+  <action name="actionQui_sommes_nous">
+   <property name="text">
+    <string>Qui sommes-nous ?</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
