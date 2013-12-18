@@ -1,0 +1,17 @@
+Le calculateur physique hérite d'un QObject (et implémente les trucs de bullet)
+
+il doit avoir les methodes suivante :
+*Constructeur
+  - avec une scene vide
+  - avec une scene simple (pas de mur)
+  - avec une scene simple un ou plusieurs mur
+  - avec une scene de table (dans le prochain run)
+*void init() (initialisaiton de bullet, appelé par les constructeurs)
+
+*btDynamicWorld getScene()
+
+slots:
+*void nextStep()
+
+signal:
+*void stepDone(const btCollisionWorld* scene)
