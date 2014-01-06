@@ -11,7 +11,9 @@ il doit avoir les methodes suivante :
 *btDynamicWorld getScene()
 
 slots:
-*void nextStep()
+void nextStep()
+btBoxShape* creeRobot(double x, double y);
+
 
 signal:
 *void stepDone(const btCollisionWorld* scene)
