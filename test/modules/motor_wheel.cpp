@@ -1,3 +1,8 @@
+#include "motor_wheel.hpp"
+#include <QObject>
+#include <QString>
+
+
 MotorWheel::MotorWheel(Wheel* wheel, QString params, QObject* parent)
  : Modules(parent), _wheel = wheel {
   //TODO read from param

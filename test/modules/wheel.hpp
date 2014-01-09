@@ -1,9 +1,12 @@
+#ifndef WHEEL_HPP
+#define WHEEL_HPP
 
-class Wheel {
+#include <btBulletDynamicsCommon.h>
 
-public 
-  Wheel(btDynamicWorld* world, btRigidBody* robot);
-
+class Wheel{
+public: 
+  //Wheel(btDynamicWorld* world, btRigidBody* robot);
+  Wheel(btDiscreteDynamicsWorld * world, btRigidBody * robot);
 protected:
   void init();
   void init(double x, double y, double z, double d, double l);
@@ -13,4 +16,6 @@ protected:
   double getTorque();
   void setTorque(double f);
   btRigidBody* _wheel;
-}
+};
+
+#endif

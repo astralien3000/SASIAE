@@ -18,4 +18,4 @@ signals:
 private:
   Wheel* _wheel;  
   int _accuracy;
-}
+};

@@ -1,5 +1,5 @@
-#include "wheel.h"
-#include "modules.h"
+#include "wheel.hpp"
+#include "modules.hpp"
 #include <QObject>
 #include <QString>
 
@@ -19,4 +19,4 @@ private:
   double _motorMaxTorque;
   double _gearRatio;
   double _inputRatio;
-}
+};
