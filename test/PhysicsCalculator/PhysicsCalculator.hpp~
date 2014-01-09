@@ -1,0 +1,19 @@
+#ifndef PHYSICS_CALCULATOR_HPP
+#define PHYSICS_CALCULATOR_HPP
+#include <btBulletDynamicsCommon.h>
+
+
+class PhysicsCalculator{
+private:
+
+
+public:
+  btDiscreteDynamicsWorld* empty_scene(float);
+  btDiscreteDynamicsWorld* simple_scene();
+  btDiscreteDynamicsWorld* init(int frame_per_second);
+  void cleanWorld();
+}
+
+
+
+#endif

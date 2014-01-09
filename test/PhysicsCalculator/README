@@ -1,0 +1,1 @@
+g++ -I /usr/local/include/bullet -L ../bullet-2.81-rev2613/src -o test main.cpp -lBulletDynamics -lBulletCollision -lLinearMath
