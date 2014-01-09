@@ -4,12 +4,7 @@
 
 
 class PhysicsCalculator{
-private:
-  btDiscreteDynamicsWorld* _scene;
-  btBroadphaseInterface* _broadphase;
-  btDefaultCollisionConfiguration* _collisionConfiguration;
-  btCollisionDispatcher* _dispatcher;
-  btSequentialImpulseConstraintSolver* _solver;
+
 public:
   void empty_scene();
   void simple_scene();
@@ -17,6 +12,14 @@ public:
   
   btDiscreteDynamicsWorld* getScene();
   void cleanWorld();
+
+
+private:
+  btDiscreteDynamicsWorld* _scene;
+  btBroadphaseInterface* _broadphase;
+  btDefaultCollisionConfiguration* _collisionConfiguration;
+  btCollisionDispatcher* _dispatcher;
+  btSequentialImpulseConstraintSolver* _solver;
 };
 
 
