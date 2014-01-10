@@ -26,11 +26,13 @@
 #include <QtGui/QTimeEdit>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QWidget>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
+
 public:
     QAction *actionNouveau;
     QAction *actionOuvrir;
@@ -152,6 +154,9 @@ public:
         button_robot1 = new QPushButton(widget);
         button_robot1->setObjectName(QString::fromUtf8("button_robot1"));
         button_robot1->setGeometry(QRect(100, 10, 61, 23));
+
+
+
         button_robot2 = new QPushButton(widget);
         button_robot2->setObjectName(QString::fromUtf8("button_robot2"));
         button_robot2->setGeometry(QRect(170, 10, 61, 23));
@@ -321,6 +326,8 @@ public:
         actionQui_sommes_nous->setText(QApplication::translate("MainWindow", "Qui sommes-nous ?", 0, QApplication::UnicodeUTF8));
         button_table->setText(QApplication::translate("MainWindow", "Table : 2014", 0, QApplication::UnicodeUTF8));
         button_robot1->setText(QApplication::translate("MainWindow", "Robot 1", 0, QApplication::UnicodeUTF8));
+
+
         button_robot2->setText(QApplication::translate("MainWindow", "Robot 2", 0, QApplication::UnicodeUTF8));
         button_robot3->setText(QApplication::translate("MainWindow", "Robot 3", 0, QApplication::UnicodeUTF8));
         pushButton_5->setText(QApplication::translate("MainWindow", "Robot 4", 0, QApplication::UnicodeUTF8));
@@ -385,6 +392,7 @@ public:
         menuChoisir->setTitle(QApplication::translate("MainWindow", "Choisir", 0, QApplication::UnicodeUTF8));
         menuSupprimer_2->setTitle(QApplication::translate("MainWindow", "Supprimer", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help !", 0, QApplication::UnicodeUTF8));
+
     } // retranslateUi
 
 };

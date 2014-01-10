@@ -4,11 +4,17 @@
 #include "ui_mainwindow.h"
 
 
-class MainWindow: public Ui_MainWindow, public QMainWindow {
- public:
-  MainWindow(){
-    Ui_MainWindow::setupUi(this);
-  }
+
+class MainWindow:  public QMainWindow,public Ui_MainWindow {
+
+Q_OBJECT
+
+public:
+    MainWindow();
+
+public slots:
+    void do_sth();
+
 };
 
 
