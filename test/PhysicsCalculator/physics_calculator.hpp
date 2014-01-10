@@ -8,10 +8,9 @@ class PhysicsCalculator{
 public:
   void empty_scene();
   void simple_scene();
-  void init();
-  
   btDiscreteDynamicsWorld* getScene();
-  void cleanWorld();
+  PhysicsCalculator();
+  ~PhysicsCalculator();  
 
 
 private:
