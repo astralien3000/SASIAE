@@ -1,19 +1,16 @@
 #ifndef ROBOT_HPP
 #define ROBOT_HPP
 
-#include <btDynamicsWorld.h>
+#include <btBulletDynamicsCommon.h>
 
-class Robot: btRaycastVehicle {
-
-	btVehicleTuning _tuning;
-
+class Robot : public btRaycastVehicle {
 	public:
-		Robot(btRigidBody* chassis, btDynamicWorld *world);
+		Robot(btRigidBody* chassis, btDynamicsWorld *world);
 		~Robot();
-		addWheel (const btVector3 &connectionPointCS0,
-			 				const btVector3 &wheelDirectionCS0,
-						 	const btVector3 &wheelAxleCS,
-						 	btScalar wheelRadius,
-						 	bool isFrontWheel);
+		btWheelInfo& addWheel (const btVector3 &connectionPointCS0,
+					const btVector3 &wheelDirectionCS0,
+					const btVector3 &wheelAxleCS,
+					btScalar wheelRadius,
+					bool isFrontWheel);
 };
 #endif //ROBOT_HPP

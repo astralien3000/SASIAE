@@ -11,9 +11,10 @@ public:
   btDiscreteDynamicsWorld* getScene();
   PhysicsCalculator();
   ~PhysicsCalculator();  
-
+  void cleanWorld(); //TODO
 
 private:
+  void init(); //TODO
   btDiscreteDynamicsWorld* _scene;
   btBroadphaseInterface* _broadphase;
   btDefaultCollisionConfiguration* _collisionConfiguration;
