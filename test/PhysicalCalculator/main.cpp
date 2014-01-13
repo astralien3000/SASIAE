@@ -75,7 +75,6 @@ for(int i=0;i<500;i++) {
     btScalar z,y,x;
 	      trans.getBasis().getEulerZYX(z,y,x);
     std::cout << i 
-	   //   << " "<< w1->getAngle() 
 	      << " "<< trans.getOrigin().getX() 
 	      << " "<< trans.getOrigin().getY() 
 	      << " "<< trans.getOrigin().getZ() 
