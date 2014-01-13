@@ -4,7 +4,7 @@ INCLUDES=-I/usr/local/include/bullet
 LDFLAGS= -lBulletDynamics -lBulletCollision -lLinearMath
 LIBRAIRIES= -L/usr/local/lib
 
-SRC= main.cpp physics_calculator.cpp
+SRC= main.cpp physics_calculator.cpp robot.cpp wheel.cpp
 OBJ=$(SRC:.cpp=.o) 
 EXEC=moteur
 
