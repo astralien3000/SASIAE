@@ -1,16 +1,16 @@
-#ifndef PHYSICS_CALCULATOR_HPP
-#define PHYSICS_CALCULATOR_HPP
+#ifndef PHYSICAL_CALCULATOR_HPP
+#define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
 
 
-class PhysicsCalculator{
+class PhysicalCalculator{
 
 public:
   void empty_scene();
   void simple_scene();
   btDiscreteDynamicsWorld* getScene();
-  PhysicsCalculator();
-  ~PhysicsCalculator();  
+  PhysicalCalculator();
+  ~PhysicalCalculator();  
   void cleanWorld(); //TODO
 
 private:

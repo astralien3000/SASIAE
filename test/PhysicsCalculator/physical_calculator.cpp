@@ -1,6 +1,6 @@
-#include "physics_calculator.hpp"
+#include "physical_calculator.hpp"
 
-PhysicsCalculator::PhysicsCalculator(){
+PhysicalCalculator::PhysicalCalculator(){
   _broadphase = new btDbvtBroadphase();
   _collisionConfiguration = new btDefaultCollisionConfiguration();
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
@@ -9,7 +9,7 @@ PhysicsCalculator::PhysicsCalculator(){
   _scene->setGravity(btVector3(0,-10,0));
 }
 
-PhysicsCalculator::~PhysicsCalculator(){
+PhysicalCalculator::~PhysicalCalculator(){
   delete _scene;
   delete _solver;
   delete _dispatcher;
@@ -17,15 +17,15 @@ PhysicsCalculator::~PhysicsCalculator(){
   delete _broadphase;
 }
 
-void PhysicsCalculator::empty_scene(){
+void PhysicalCalculator::empty_scene(){
   this->init();
 }
 
-btDiscreteDynamicsWorld* PhysicsCalculator::getScene(){
+btDiscreteDynamicsWorld* PhysicalCalculator::getScene(){
   return _scene ;
 }
 
-void PhysicsCalculator::simple_scene(){
+void PhysicalCalculator::simple_scene(){
   this->init();
   btCollisionShape *planeShape;//, *sphereShape;
   // TODO try with 0 in y coordonate of shape and rigid body 
@@ -41,9 +41,9 @@ void PhysicsCalculator::simple_scene(){
   _scene->addRigidBody(groundBody);
 }
 
-void PhysicsCalculator::cleanWorld() {
+void PhysicalCalculator::cleanWorld() {
   //TODO
 }
-void PhysicsCalculator::init() {
+void PhysicalCalculator::init() {
   // TODO
 }
