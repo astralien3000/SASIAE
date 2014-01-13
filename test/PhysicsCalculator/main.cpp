@@ -1,7 +1,7 @@
 
 #include "robot.hpp"
 #include "wheel.hpp"
-#include "physics_calculator.hpp"
+#include "physical_calculator.hpp"
 #include <iostream>
 #include <btBulletDynamicsCommon.h>
 
@@ -31,7 +31,7 @@ void a_sphere_goes_down(btDiscreteDynamicsWorld * myscene,btRigidBody * sphereBo
 
 int test1 () {
     std::cout << "Hello World!" << std::endl;
-    PhysicsCalculator * ph_cal=new PhysicsCalculator();
+    PhysicalCalculator * ph_cal=new PhysicalCalculator();
     ph_cal->simple_scene();
     btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
 
@@ -41,7 +41,7 @@ int test1 () {
 }
 
 int test2 () {
-  PhysicsCalculator * ph_cal=new PhysicsCalculator();
+  PhysicalCalculator * ph_cal=new PhysicalCalculator();
   ph_cal->simple_scene();
   btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
   //chassis du robot
