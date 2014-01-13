@@ -9,8 +9,7 @@ public:
   Wheel(Robot *robot);
   Wheel(Robot* robot, const btVector3 &pos,const btVector3 &direction, btScalar radius, bool motorized);
   void init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized);
-  //double getAngularSpeed();
-  double getAngle();
+  double getRotation();
   double getTorque();
   void setTorque(double f);
 private:

@@ -45,47 +45,50 @@ int test2 () {
   ph_cal->simple_scene();
   btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
   //chassis du robot
-  btCollisionShape* boxShape = new btBoxShape(btVector3(10,10,10));
-
-  btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,5,0)));
-  btScalar mass = 1.5;
+      //les coordonnées sont pour un quart de la boite 
+  btCollisionShape* boxShape = new btBoxShape(btVector3(2,0.5,2));
+  btDefaultMotionState* boxMotionState = new
+btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.7,0)));
+  btScalar mass = 80;
   btVector3 boxInertial(0,0,0);
-  boxShape->calculateLocaleInertial(mass, boxInertial);
+  boxShape->calculateLocalInertia(mass, boxInertial);
   btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
   btRigidBody* chassis = new btRigidBody(boxBodyCI);
-  //myscene->addRigidBody(chassis);
-
+  myscene->addRigidBody(chassis);
   //fin chassis
-  Robot* robot = new Robot(chassis, myscene);
-  robot->setCoordinateSystem(0,1,2);
-  Wheel* w1 = new Wheel(robot, btVector3(0,5,2),btVector3(0,-1,0),10,true);
-  Wheel* w2 = new Wheel(robot, btVector3(0,-5,2),btVector3(0,-1,0),10,true);
-  Wheel* w3 = new Wheel(robot, btVector3(12,5,2),btVector3(0,-1,0),10,true);
-  Wheel* w4 = new Wheel(robot, btVector3(12,-5,2),btVector3(0,-1,0),10,true);
-  
-  myscene->addVehicle(robot);
 
-  for(int i=0;i<500;i++) {
+  Robot* robot = new Robot(chassis, myscene);
+  myscene->addVehicle(robot);
+  Wheel* moteurD = new Wheel(robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel* moteurG = new Wheel(robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel* encodeurD = new Wheel(robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+  Wheel* encodeurG = new Wheel(robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+//robot->addWheel(btVector3(1.9,-0.1,0),btVector3(0,-1,0),btVector3(-1,0,0),0.5,true); 
+ //robot->addWheel(btVector3(-1.9,-0.1,0),btVector3(0,-1,0),btVector3(-1,0,0),0.5,true); 
+  
+for(int i=0;i<500;i++) {
     myscene->stepSimulation(1/80.f,20);
-    w1->setTorque(10);
-    w2->setTorque(10);
+    moteurD->setTorque(3000);
+    moteurG->setTorque(3000);
     btTransform trans;
     trans = robot->getChassisWorldTransform();
+    btScalar z,y,x;
+	      trans.getBasis().getEulerZYX(z,y,x);
     std::cout << i 
-	      << " "<< w1->getAngle() 
-
+	   //   << " "<< w1->getAngle() 
+	      << " "<< trans.getOrigin().getX() 
 	      << " "<< trans.getOrigin().getY() 
-	      << " "<< robot->getWheelInfo(0).m_worldTransform.getOrigin().getY() 
-	      << " "<< robot->getWheelInfo(1).m_worldTransform.getOrigin().getY() 
-	      << " "<< robot->getWheelInfo(2).m_worldTransform.getOrigin().getY() 
-	      << " "<< robot->getWheelInfo(3).m_worldTransform.getOrigin().getY() 
-	      << " "<< robot->getCurrentSpeedKmHour()
+	      << " "<< trans.getOrigin().getZ() 
+	      << " "<< moteurD->getTorque() /100
+
+	      << " "<< encodeurD->getRotation()
+	      //<< " "<< robot->getCurrentSpeedKmHour()
 	      << std::endl;
 
   } 
 
 
-
+  return EXIT_SUCCESS;
 }
 
 int main () {

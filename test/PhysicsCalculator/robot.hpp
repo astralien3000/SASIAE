@@ -4,6 +4,8 @@
 #include <btBulletDynamicsCommon.h>
 
 class Robot : public btRaycastVehicle {
+	private:
+	  btRaycastVehicle::btVehicleTuning _tuning;
 	public:
 		Robot(btRigidBody* chassis, btDynamicsWorld *world);
 		~Robot();

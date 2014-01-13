@@ -37,7 +37,8 @@ void PhysicsCalculator::simple_scene(){
   btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1), btVector3(0,-1,0)));
   btRigidBody::btRigidBodyConstructionInfo groundBodyCI(0, groundMotionState, planeShape, btVector3(0,0,0));
   btRigidBody* groundBody = new btRigidBody(groundBodyCI);
-
+  //groundBody->setFriction(1);
+  //groundBody->setRollingFriction(1);
   _scene->addRigidBody(groundBody);
 }
 

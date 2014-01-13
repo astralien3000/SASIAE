@@ -1,9 +1,11 @@
 #include "robot.hpp"
 
 Robot::Robot(btRigidBody* chassis, btDynamicsWorld *world) 
-	    : btRaycastVehicle(	btVehicleTuning(),
+	    : btRaycastVehicle(	_tuning,
 							chassis, 
 	      new btDefaultVehicleRaycaster(world)) {
+  setCoordinateSystem(0,1,2);
+  
 }
 
 Robot::~Robot() {
@@ -19,7 +21,7 @@ btWheelInfo& Robot::addWheel (const btVector3 &connectionPointCS0,
 											    wheelAxleCS,
 											    btScalar(0), //valeur complètement arbitraire de la longueur de la suspension au repos
 											    wheelRadius,
-											    btVehicleTuning(),
+											    _tuning,
 											    isFrontWheel);
 }
 
