@@ -5,6 +5,7 @@
 
 int main(int argc, char* argv[])
 {
+
   std::cout << "Creation de l'application..." << std::endl;
   QApplication app(argc, argv);
   std::cout << "Creation de la fenetre principale..." << std::endl;
@@ -16,3 +17,5 @@ int main(int argc, char* argv[])
   return 0;
 
 }
+
+

@@ -14,4 +14,4 @@ signals:
   virtual void send(QString message) = 0;
   
 
-}
+};
