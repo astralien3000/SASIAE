@@ -50,6 +50,7 @@ int test2 () {
   btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,5,0)));
   btScalar mass = 1.5;
   btVector3 boxInertial(0,0,0);
+  boxShape->calculateLocaleInertial(mass, boxInertial);
   btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
   btRigidBody* chassis = new btRigidBody(boxBodyCI);
   //myscene->addRigidBody(chassis);
