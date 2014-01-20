@@ -9,12 +9,13 @@ public:
   void empty_scene();
   void simple_scene();
   btDiscreteDynamicsWorld* getScene();
+  void simple_scene_walls();
   PhysicalCalculator();
   ~PhysicalCalculator();  
-  void cleanWorld(); //TODO
+  //void cleanWorld(); 
 
 private:
-  void init(); //TODO
+  void init(); 
   btDiscreteDynamicsWorld* _scene;
   btBroadphaseInterface* _broadphase;
   btDefaultCollisionConfiguration* _collisionConfiguration;

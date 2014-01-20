@@ -5,18 +5,16 @@
 #include <iostream>
 #include <btBulletDynamicsCommon.h>
 
-btRigidBody * create_sphere(btDiscreteDynamicsWorld * myscene){
+btRigidBody * create_sphere(btDiscreteDynamicsWorld * myscene,  btCollisionShape  **sphereShape,btDefaultMotionState** sphereMotionState, btRigidBody** sphereBody ){
  /* Shapes for collision */
-  btCollisionShape  *sphereShape;
-  sphereShape = new btSphereShape(1);
-
-  btDefaultMotionState* sphereMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,10,0)));
+  *sphereShape = new btSphereShape(1);
+  *sphereMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,10,0)));
   btScalar mass = 1.5;
   btVector3 sphereInertial(0,0,0);
-  btRigidBody::btRigidBodyConstructionInfo sphereBodyCI(mass, sphereMotionState, sphereShape, sphereInertial);
-  btRigidBody* sphereBody = new btRigidBody(sphereBodyCI);
-  myscene->addRigidBody(sphereBody);
-  return sphereBody;
+  btRigidBody::btRigidBodyConstructionInfo sphereBodyCI(mass, *sphereMotionState, *sphereShape, sphereInertial);
+  *sphereBody = new btRigidBody(sphereBodyCI);
+  myscene->addRigidBody(*sphereBody);
+  return *sphereBody;
 }
 
 void a_sphere_goes_down(btDiscreteDynamicsWorld * myscene,btRigidBody * sphereBody){
@@ -29,16 +27,31 @@ void a_sphere_goes_down(btDiscreteDynamicsWorld * myscene,btRigidBody * sphereBo
 
 }
 
-int test1 () {
-    std::cout << "Hello World!" << std::endl;
-    PhysicalCalculator * ph_cal=new PhysicalCalculator();
-    ph_cal->simple_scene();
-    btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
 
-    a_sphere_goes_down(myscene,create_sphere(myscene));
-    ph_cal->cleanWorld();
-  return EXIT_SUCCESS;
+//valgrind shows some leaks
+int test1 () {
+    std::cout << "physical calculator initialisation" << std::endl;
+    PhysicalCalculator * ph_cal=new PhysicalCalculator();
+    std::cout << "Simple scene creation ..." << std::endl;
+    ph_cal->simple_scene();
+    std::cout << "test getScene() ..." << std::endl;
+    btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
+    std::cout << "Test sphere going down to the ground ..." << std::endl;
+    btCollisionShape  *sphereShape;
+    btDefaultMotionState* sphereMotionState;
+    btRigidBody* sphereBody;
+    a_sphere_goes_down(myscene,create_sphere(myscene,&sphereShape,&sphereMotionState,&sphereBody));
+    std::cout << "Test destructor of physical calculator ..." << std::endl;
+    
+    delete sphereBody;
+    delete sphereMotionState;
+    delete sphereShape;
+    delete ph_cal;
+    
+    return EXIT_SUCCESS;
 }
+
+
 
 int test2 () {
   PhysicalCalculator * ph_cal=new PhysicalCalculator();
@@ -91,7 +104,7 @@ for(int i=0;i<500;i++) {
 }
 
 int main () {
-  //return test1();
-  return test2();
+  return test1();
+  //return test2();
 }
 
