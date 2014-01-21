@@ -16,6 +16,19 @@ PhysicalCalculator::~PhysicalCalculator(){
   delete _broadphase;
 }
 
+void PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mass){
+  btDiscreteDynamicsWorld * myscene=getScene();
+  // everything's divided by two : the vector goes from the center.
+  btCollisionShape* boxShape = new btBoxShape(size);
+  btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),position));
+  btVector3 boxInertial(0,0,0);
+  boxShape->calculateLocalInertia(mass, boxInertial);
+  btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
+  btRigidBody* newbox = new btRigidBody(boxBodyCI);
+  myscene->addRigidBody(newbox);
+
+}
+
 void PhysicalCalculator::empty_scene(){
   this->init();
 }
@@ -24,14 +37,12 @@ btDiscreteDynamicsWorld* PhysicalCalculator::getScene(){
   return _scene ;
 }
 
-void PhysicalCalculator::simple_scene(){
+void PhysicalCalculator::simple_scene(btScalar size){
   this->init();
   btCollisionShape *planeShape;
-  // try with 0 in y coordonate of shape and rigid body
-  // --> error, there's no plan and the sphere falls indefinitely
   
-  planeShape = new btStaticPlaneShape(btVector3(0,1,0), 1);
-  // equivalent : new btBoxShape(btVector3(100,1,100));
+  //new btStaticPlaneShape(btVector3(0,1,0), 1);
+  planeShape = new btBoxShape(btVector3(size,1,size));
   
 
   //No movement for the ground
@@ -46,8 +57,13 @@ void PhysicalCalculator::simple_scene(){
 }
 
 
-void PhysicalCalculator::simple_scene_walls(){
-  //TODO
+void PhysicalCalculator::simple_scene_walls(btScalar size){
+  simple_scene(size);
+  addBox(btVector3(size,1,2),btVector3(size-4,1,0),80);
+  addBox(btVector3(size,1,2),btVector3(0,1,size-4),80);
+  addBox(btVector3(size,1,2),btVector3(-(size-4),1,0),80);
+  addBox(btVector3(size,1,2),btVector3(0,1,-(size-4)),80);
+  
 }
 
 // void PhysicalCalculator::cleanWorld() {

@@ -7,9 +7,10 @@ class PhysicalCalculator{
 
 public:
   void empty_scene();
-  void simple_scene();
+  void simple_scene(btScalar size);
   btDiscreteDynamicsWorld* getScene();
-  void simple_scene_walls();
+  void simple_scene_walls(btScalar size);
+  void addBox( btVector3 size, btVector3 position, btScalar mass);
   PhysicalCalculator();
   ~PhysicalCalculator();  
   //void cleanWorld(); 

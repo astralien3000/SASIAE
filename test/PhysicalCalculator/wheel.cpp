@@ -11,6 +11,8 @@ Wheel::Wheel(Robot* robot, const btVector3 &pos, const btVector3 &direction, btS
   _robot = robot;
   init(pos, direction, radius, motorized);
 }
+
+
 //direction de la suspension donc = btVector3(0,-1,0);
 //pos ne doit pas etre en dehors de l'objet
 void Wheel::init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized) {
