@@ -6,7 +6,7 @@
 
 class Wheel {
 public: 
-  Wheel(Robot *robot);
+  Wheel(Robot *robot = NULL);
   Wheel(Robot* robot, const btVector3 &pos,const btVector3 &direction, btScalar radius, bool motorized);
   void init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized);
   double getRotation();

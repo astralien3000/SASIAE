@@ -2,20 +2,25 @@
 #include "modules.hpp"
 #include <QObject>
 #include <QString>
+#include <QRegExp>
 
 class MotorWheel : public Modules {
+Q_OBJECT
 
 public:
   MotorWheel(Wheel* wheel, QString params, QObject* parent = 0);
+  static const QString xmlGearName;
+  static const QString xmlTorqueName;
 
 public slots:
-  virtual void received(QString message) = 0;  
-  virtual void simulStep() = 0;
+  virtual void received(QString message);  
+  virtual void simulStep();
 
 signals:
-  virtual void send(QString message) = 0;
+  virtual void send(QString message);
  
 private:
+  Wheel* _wheel;
   double _motorMaxTorque;
   double _gearRatio;
   double _inputRatio;

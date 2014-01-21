@@ -1,6 +1,9 @@
+#ifndef __MODULES_HPP_
+#define __MODULES_HPP_
+
 #include <QObject>
 
-class Modules : QObject {
+class Modules : public QObject {
 Q_OBJECT
 
 public:
@@ -15,3 +18,5 @@ signals:
   
 
 };
+
+#endif
