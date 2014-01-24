@@ -1,0 +1,10 @@
+class Coordinator{
+signals:
+  calcNextStep(); log(QString); timer(float);
+  public:
+  slots:
+  CTReceived(QString msg);
+  openTable
+
+
+};
