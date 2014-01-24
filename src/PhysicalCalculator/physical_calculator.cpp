@@ -1,5 +1,6 @@
 #include "physical_calculator.hpp"
 
+
 PhysicalCalculator::PhysicalCalculator(){
   _broadphase = new btDbvtBroadphase();
   _collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -16,9 +17,15 @@ PhysicalCalculator::~PhysicalCalculator(){
   delete _broadphase;
 }
 
+
+/*
+  The position vector points to the center of
+  the box. The size vector goes from the position 
+  to a vertex of the box.
+ */
 void PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mass){
   btDiscreteDynamicsWorld * myscene=getScene();
-  // everything's divided by two : the vector goes from the center.
+  //everything's divided by two : the vector goes from the center.
   btCollisionShape* boxShape = new btBoxShape(size);
   btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),position));
   btVector3 boxInertial(0,0,0);
@@ -26,7 +33,6 @@ void PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mas
   btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
   btRigidBody* newbox = new btRigidBody(boxBodyCI);
   myscene->addRigidBody(newbox);
-
 }
 
 void PhysicalCalculator::empty_scene(){
@@ -66,12 +72,10 @@ void PhysicalCalculator::simple_scene_walls(btScalar size){
   
 }
 
-// void PhysicalCalculator::cleanWorld() {
-//   
-// }
+void PhysicalCalculator::nextStep(float time=1/80.f, int addedoperations=20){
+  _scene->stepSimulation(time,addedoperations);
+}
 
-
-//! \brief The init method set the gravity
 void PhysicalCalculator::init() {
   _scene->setGravity(btVector3(0,-10,0));
 

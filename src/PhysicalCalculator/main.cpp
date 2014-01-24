@@ -75,7 +75,7 @@ btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.7,0)));
   //fin chassis
 
   //Ajout d'une boite devant le robot
-  ph_cal->addBox(btVector3(5,5,5),btVector3(0,5,10),2000);
+  ph_cal->addBox(btVector3(5,5,5),btVector3(0,5,10),0);
 
   /*
     C'est pas encore totalement concluant. La pièce est très 
