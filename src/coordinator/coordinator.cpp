@@ -14,3 +14,13 @@ void Coordinator::pause(){
 void Coordinator::openRobot(QString XMLPath, Slot slot){
 
 }
+
+Coordinator::Coordinator() {
+
+}
+Coordinator& Coordinator::getInstance() {
+  if(_instance)
+    return *_instance;
+  else
+    return *(_instance = new Coordinator()); 
+}
