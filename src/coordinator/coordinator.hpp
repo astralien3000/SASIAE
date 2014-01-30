@@ -51,6 +51,6 @@ class Coordinator: public QObject{
     Coordinator();
     
     static Coordinator* _instance;
-    bool running;
+    bool _running;
 };
 
