@@ -1,6 +1,7 @@
 #include "../physical_calculator/physical_calculator.hpp"
+#include "../modules/modules.hpp"
 #include <QObject>
-#include <QMap>
+#include <QHash>
 #include <QString>
 #include <QProcess>
 
@@ -22,9 +23,12 @@ class Coordinator: public QObject{
     //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
     static Coordinator& getInstance();
 
-    //! \brief
+    //! \brief start the simulation
     void play();
+    //! \brief pause the simulation
     void pause();
+
+    //! \brief Trigger by Calculator, when a step is finished
     void stepDone();
     void openTable(QString XMLPath);
     void openRobot(QString XMLPath, Slot slot);
@@ -37,20 +41,27 @@ class Coordinator: public QObject{
 
 
   private:
-    QMap<QString/*robot_name*/, 
-          QMap<QString/*module_name*/, 
-                Modules* /*modules*/>> _modules;
-    QMap<QString/*robot_code*/,
-          QProcess* /*robot_process*/> _codes;
+    QHash<QString/*robot_name*/,
+          QHash<QString /*robot_code*/, 
+                QHash<QString/*module_name*/, 
+                      Modules* /*modules*/>> _roboInfo;
+    QHash<QString/*robot_code*/,
+          QProcess* /*robot_process*/> _codesInfo;
+    QHash<QObject* /* modules*/, 
+          QPair<QString/*robot_code*/, QString /*module_name*/> _modulesInfo;
 
     PysicalCalculator _physic;
-    
+    void gotoNextStep(); 
     void sendDeviceMessage(QString name, QString msg, QProcess* p);
+    void sendDeviceMessage(QString name, QString msg, QString code);
     void sendMessage(QString msg, QProcess* p);
     void sendSyncMessage();
     Coordinator();
-    
+
     static Coordinator* _instance;
+
     bool _running;
+    unsigned int _sync; 
+
 };
 
