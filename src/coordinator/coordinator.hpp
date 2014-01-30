@@ -41,7 +41,7 @@ class Coordinator: public QObject{
 
 
   private:
-    QHash<QString/*robot_name*/,
+    QHash<enum Slot/*robot_name*/,
           QHash<QString /*robot_code*/, 
                 QHash<QString/*module_name*/, 
                       Modules* /*modules*/>> _roboInfo;
