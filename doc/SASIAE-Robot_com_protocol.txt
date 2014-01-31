@@ -1,5 +1,5 @@
 From SASIAE to Robot:
-     "T xxx\n" : synchronization command, xxx must be microseconds since the simulation started
+     "T xxx yyy\n" : synchronization command, xxx must be microseconds since the simulation started, yyy is the amount of iteration of robotLoop to execute
      "B\n" : begin the match
      "D xxx yyy\n" : send yyy message to xxx named device
      "S\n" : stop the simulation
