@@ -56,6 +56,7 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
 Coordinator::Coordinator() {
   _running = false;
+  _codeFactor = 1;
 }
 
 Coordinator& Coordinator::getInstance() {
@@ -69,7 +70,7 @@ void Coordinator::gotoNextStep() {
   if(_running) 
   {
     _sync = 0;
-    emit(calcNextStep());
+    sendSyncMessages();
   }
 }
 
@@ -84,4 +85,13 @@ void Coordinator::sendDeviceMessage(QString name, QString msg, QProcess* p) {
 
 void Coordinator::sendMessage(QString msg, QProcess* p) {
   p->write(msg);
+}
+
+void sendSyncMessages() {
+  foreach(QProcess* code, _codesInfo) {
+    sendMessage("T " + _physic.getTime() + " " + _codeFactor);
+  }
+  //sync UI time
+  emit(time(_physic.getTime());
+  emit(calcNextStep());
 }

@@ -38,7 +38,7 @@ class Coordinator: public QObject{
     void CTReceived(QString);
     //! \brief read the message received from the Modules
     void MReceived(QString);
-
+    void nextStepProcess();
 
   private:
     QHash<enum Slot/*robot_name*/,
@@ -50,18 +50,22 @@ class Coordinator: public QObject{
     QHash<QObject* /* modules*/, 
           QPair<QString/*robot_code*/, QString /*module_name*/> _modulesInfo;
 
-    PysicalCalculator _physic;
     void gotoNextStep(); 
     void sendDeviceMessage(QString name, QString msg, QProcess* p);
     void sendDeviceMessage(QString name, QString msg, QString code);
-    void sendMessage(QString msg, QProcess* p);
+    void sendMessages(QString msg, QProcess* p);
+    //! \brief send sync message to all Robot Code Process
     void sendSyncMessage();
+
+
     Coordinator();
 
     static Coordinator* _instance;
+    PysicalCalculator _physic;
 
     bool _running;
     unsigned int _sync; 
+    int _codeFactor;
 
 };
 
