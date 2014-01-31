@@ -11,102 +11,113 @@ class TestModules : public QObject
   private slots:
     //void modules();
     void encoder_param();
+    void encoder_param_data();
+    void encoder_rotation_data();
     void encoder_rotation();
+    void motor_wheel_param_data();
     void motor_wheel_param();
+    void motor_wheel_step_data();
     void motor_wheel_step();
 
 };
 
+void TestModules::encoder_param_data() {
+  QTest::addColumn<QString>("param");
+  QTest::addColumn<double>("rotation");
+  QTest::addColumn<QString>("result");
+
+  QTest::newRow("same as default") << "<accuracy>1024</accuracy>" << 1.<< "value 1024";
+  QTest::newRow("more than default") << "<accuracy>10000</accuracy>"<< 1.  << "value 10000";
+  QTest::newRow("less than default") << "<accuracy>666</accuracy>"<< 1. << "value 666";
+}
+
+
 void TestModules::encoder_param() {
+  QFETCH(QString, param);
+  QFETCH(double, rotation);
+  QFETCH(QString, result);
   Wheel w;
-  w._rotation = 1;
-  Encoder e(&w, "<accuracy>1024</accuracy>", this);
+  w._rotation = rotation;
+  Encoder e(&w, param, this);
   //testing send emission
   QSignalSpy spy(&e, SIGNAL(send(QString)));
   //testing accuracy
   e.simulStep();
   QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
   QList<QVariant> arguments = spy.takeFirst(); // take the first signal
-  QVERIFY2(arguments.at(0).toString() == "value 1024", qPrintable(arguments.at(0).toString()));
- 
-  Encoder e2(&w, "<accuracy>10000</accuracy>", this);
-  //testing send emission
-  QSignalSpy spy2(&e2, SIGNAL(send(QString)));
-  //testing accuracy
-  e2.simulStep();
-  QCOMPARE(spy2.count(), 1); //signal was emitted exactly one time
-  QList<QVariant> arguments2 = spy2.takeFirst(); // take the first signal
-  QVERIFY2(arguments2.at(0).toString() == "value 10000", qPrintable(arguments2.at(0).toString()));
- 
+  QVERIFY2(arguments.at(0).toString() == result, qPrintable(arguments.at(0).toString()));
+}
 
+void TestModules::encoder_rotation_data() {
+  QTest::addColumn<QString>("param");
+  QTest::addColumn<double>("rotation");
+  QTest::addColumn<QString>("result");
+
+  QTest::newRow("default") << "<accuracy>1024</accuracy>" << 0. << "value 0";
+  QTest::newRow("1 turn") << "<accuracy>1024</accuracy>" << 1. << "value 1024";
+  QTest::newRow("fraction") << "<accuracy>1024</accuracy>" << 0.5  << "value 512";
+  QTest::newRow("more than 1") << "<accuracy>1024</accuracy>" << 2. << "value 2048";
+  QTest::newRow("truncated") << "<accuracy>1024</accuracy>" << 2.2 << "value 2252";
+  QTest::newRow("negative") << "<accuracy>1024</accuracy>" << -2. << "value -2048";
 }
 
 void TestModules::encoder_rotation() {
+  QFETCH(QString, param);
+  QFETCH(double, rotation);
+  QFETCH(QString, result);
   Wheel w;
-  Encoder e(&w, "<accuracy>1024</accuracy>", this);
-  //it have to be my son
-  QVERIFY(e.parent() == this);
+  w._rotation = rotation;
+  Encoder e(&w, param, this);
   //testing send emission
   QSignalSpy spy(&e, SIGNAL(send(QString)));
-  //fixing ghost wheel & test signal emission
-  w._rotation = 0;
+  //testing accuracy
   e.simulStep();
   QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
   QList<QVariant> arguments = spy.takeFirst(); // take the first signal
-  QVERIFY2(arguments.at(0).toString() == "value 0", qPrintable(arguments.at(0).toString()));
-  //fixing ghost wheel & test signal emission
-  w._rotation = 0.5;
-  e.simulStep();
-  QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
-  arguments = spy.takeFirst(); // take the first signal
-  QVERIFY2(arguments.at(0).toString() == "value 512", qPrintable(arguments.at(0).toString()));
-  //QVERIFY(arguments.at(0).toString() == "value 512");
-  //fixing ghost wheel & test signal emission
-  w._rotation = 2.2;
-  e.simulStep();
-  QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
-  arguments = spy.takeFirst(); // take the first signal
-  QVERIFY(arguments.at(0).toString() == "value 2252"); //2048+0.2*1024 round down
-  //fixing ghost wheel & test signal emission
-  w._rotation = -2;
-  e.simulStep();
-  QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
-  arguments = spy.takeFirst(); // take the first signal
-  QVERIFY(arguments.at(0).toString() == "value -2048");
-}
- 
-void TestModules::motor_wheel_step() {
-  Wheel w;
-  MotorWheel m(&w, "<params><gear>1</gear><torque>1000</torque></params>", this);
-  QVERIFY(m.parent() == this);
-  //testing received
-  m.received("value 0.1");
-  m.simulStep();
-  QVERIFY2(w._torque == 1000*0.1, qPrintable(QString("%1").arg(w._torque)));
-  
-  m.received("value 0.2");
-  m.simulStep();
-  QVERIFY2(w._torque == 1000*0.2, qPrintable(QString("%1").arg(w._torque)));
-  m.received("value 0.5");
-  m.simulStep();
-  QVERIFY2(w._torque == 1000*0.5, qPrintable(QString("%1").arg(w._torque)));
-  
+  QVERIFY2(arguments.at(0).toString() == result, qPrintable(arguments.at(0).toString()));
 }
 
-void TestModules::motor_wheel_param() {
-  Wheel w;
-  MotorWheel m(&w, "<params><gear>1</gear><torque>2000</torque></params>", this);
-  m.received("value 1");
+void TestModules::motor_wheel_step_data() {
+  QTest::addColumn<QString>("param");
+  QTest::addColumn<QString>("command");
+  QTest::addColumn<double>("result");
+  QTest::newRow("default") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 1.0" << 1000*1.;
+  QTest::newRow("diviseur") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 0.1" << 1000*0.1;
+  QTest::newRow("not diviseur, need truncate") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 0.3" << 1000*0.3;
+  QTest::newRow("zero") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 0" << 0.;
+  //QTest::newRow("more than 1") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 1.1" << 1000*1;
+}
+
+void TestModules::motor_wheel_step() {
+  QFETCH(QString, param);
+  QFETCH(QString, command);
+  QFETCH(double, result);
+Wheel w;
+  MotorWheel m(&w, param, this);
+  QVERIFY(m.parent() == this);
+  //testing received
+  m.received(command);
   m.simulStep();
-  QVERIFY2(w._torque == 2000*1, qPrintable(QString("%1").arg(w._torque)));
-  MotorWheel m2(&w, "<params><gear>1</gear><torque>3000</torque></params>", this);
-  m2.received("value 1");
-  m2.simulStep();
-  QVERIFY2(w._torque == 3000*1, qPrintable(QString("%1").arg(w._torque)));
-  MotorWheel m3(&w, "<params><gear>0.2</gear><torque>3000</torque></params>", this);
-  m3.received("value 1");
-  m3.simulStep();
-  QVERIFY2(w._torque == 3000*1*0.2, qPrintable(QString("%1").arg(w._torque)));
+  QVERIFY2(w._torque == result, qPrintable(QString("%1").arg(w._torque)));
+}
+void TestModules::motor_wheel_param_data() {
+  QTest::addColumn<QString>("param");
+  QTest::addColumn<QString>("command");
+  QTest::addColumn<double>("result");
+  QTest::newRow("default") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 1.0" << 1000*1.;
+  QTest::newRow("more torque") << "<params><gear>1</gear><torque>2000</torque></params>" << "value 1.0" << 2000*1.;
+  QTest::newRow("gear ratio") << "<params><gear>0.1</gear><torque>1000</torque></params>" << "value 1.0" << 1000*0.1;
+  //QTest::newRow("more than 1") << "<params><gear>1</gear><torque>1000</torque></params>" << "value 1.1" << 1000*1;
+}
+void TestModules::motor_wheel_param() {
+  QFETCH(QString, param);
+  QFETCH(QString, command);
+  QFETCH(double, result);
+  Wheel w;
+  MotorWheel m(&w, param, this);
+  m.received(command);
+  m.simulStep();
+  QVERIFY2(w._torque == result, qPrintable(QString("%1").arg(w._torque)));
 }
 QTEST_MAIN(TestModules)
 #include "test_modules.moc"
