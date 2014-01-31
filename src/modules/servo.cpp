@@ -3,7 +3,6 @@
 #include <QStringList>
 #include <QDebug>
 #include "servo.hpp"
-#include "motor_wheel.hpp"
 
 
 
