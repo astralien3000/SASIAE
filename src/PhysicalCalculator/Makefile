@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS= -W -Wall -Wextra
-INCLUDES=-I/usr/local/include/bullet
+INCLUDES=-I/usr/local/include/bullet -I/usr/include/bullet
 LDFLAGS= -lBulletDynamics -lBulletCollision -lLinearMath
 LIBRAIRIES= -L/usr/local/lib
 
