@@ -3,10 +3,12 @@
 #include <QStringList>
 #include <QDebug>
 #include "servo.hpp"
+#include "motor_wheel.hpp"
 
 
 
-Servo::Servo(int position) {
+
+Servo::Servo(Wheel* wheel, int position, QObject* parent) : Modules(parent), _wheel(wheel) {
   this->position = position;
 }
 

@@ -1,4 +1,5 @@
 #include "modules.hpp"
+#include "wheel.hpp"
 #include <QObject>
 #include <QString>
 
@@ -6,7 +7,7 @@ class Servo : public Modules {
 Q_OBJECT
 
 public:
-  Servo(int position);
+  Servo(Wheel* wheel, int position, QObject* parent);
 
 public slots:
   virtual void received(QString message);  
