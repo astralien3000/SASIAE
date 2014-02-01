@@ -1,6 +1,8 @@
 #include "wheel.hpp"
 #include "../../src/modules/encoder.hpp"
 #include "../../src/modules/motor_wheel.hpp"
+#include "../../src/modules/servo.hpp"
+
 
 #include <QtTest/QtTest>
 #include <QObject>
@@ -18,6 +20,7 @@ class TestModules : public QObject
     void motor_wheel_param();
     void motor_wheel_step_data();
     void motor_wheel_step();
+    void servo();
 
 };
 
@@ -45,6 +48,7 @@ void TestModules::encoder_param() {
   e.simulStep();
   QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
   QList<QVariant> arguments = spy.takeFirst(); // take the first signal
+<<<<<<< HEAD
   QVERIFY2(arguments.at(0).toString() == result, qPrintable(arguments.at(0).toString()));
 }
 
@@ -119,5 +123,13 @@ void TestModules::motor_wheel_param() {
   m.simulStep();
   QVERIFY2(w._torque == result, qPrintable(QString("%1").arg(w._torque)));
 }
+
+void TestModules::servo() {
+  Servo *test = new Servo(5,this);
+  QStandardItem *info = test->sendInfo();
+  QVERIFY2(info!=NULL, qPrintable(QString("faux...")));
+}
+
+
 QTEST_MAIN(TestModules)
 #include "test_modules.moc"

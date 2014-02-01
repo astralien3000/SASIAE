@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET =
 DEPENDPATH += .
 INCLUDEPATH += .
 
@@ -13,9 +13,7 @@ HEADERS += wheel.hpp \
            ../../src/modules/modules.hpp \
            ../../src/modules/motor_wheel.hpp \
            ../../src/modules/servo.hpp
-SOURCES += main.cpp \
-           test_modules.cpp \
-           test_servo.cpp \
+SOURCES += test_modules.cpp \
            wheel.cpp \
            ../../src/modules/encoder.cpp \
            ../../src/modules/modules.cpp \
