@@ -13,7 +13,7 @@ public:
 public slots:
   virtual void received(QString message);
   virtual void simulStep();
-  virtual QStandardItem* sendInfo();
+  virtual QStandardItem* getData();
 
 signals:
   virtual void send(QString message);

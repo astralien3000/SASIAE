@@ -48,7 +48,7 @@ void TestModules::encoder_param() {
   e.simulStep();
   QCOMPARE(spy.count(), 1); //signal was emitted exactly one time
   QList<QVariant> arguments = spy.takeFirst(); // take the first signal
-<<<<<<< HEAD
+//<<<<<<< HEAD
   QVERIFY2(arguments.at(0).toString() == result, qPrintable(arguments.at(0).toString()));
 }
 
@@ -126,7 +126,7 @@ void TestModules::motor_wheel_param() {
 
 void TestModules::servo() {
   Servo *test = new Servo(5,this);
-  QStandardItem *info = test->sendInfo();
+  QStandardItem *info = test->getData();
   QVERIFY2(info!=NULL, qPrintable(QString("faux...")));
 }
 

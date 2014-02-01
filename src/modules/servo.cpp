@@ -18,7 +18,7 @@ void Servo::received(QString message) {
 }
 
 
-QStandardItem* Servo::sendInfo() {
+QStandardItem* Servo::getData() {
 	QStandardItem *info = new QStandardItem("position");
 	info->appendRow(new QStandardItem(this->position));
 	return info;
