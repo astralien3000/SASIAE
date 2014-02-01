@@ -6,6 +6,7 @@
 class Robot : public btRaycastVehicle {
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
+  //rajouter la balise
 public:
   Robot(btRigidBody* chassis, btDynamicsWorld *world);
   ~Robot();
