@@ -4,7 +4,7 @@
 
 //! \brief Physic Calculator
 /*!
-  The goal of this object is 
+  The goal of this object is
   to instanciate a scene with a
   Physic Engine ( here we use Bullet )
   and to permit to the Coordinator
@@ -18,7 +18,7 @@ public:
   void empty_scene();
   //! \brief it creates an empty scene
   void simple_scene(btScalar size);
-  //! \brief it returns a DiscreteDynamicsWorld 
+  //! \brief it returns a DiscreteDynamicsWorld
   //! which is the scene
   btDiscreteDynamicsWorld* getScene();
 
@@ -30,16 +30,16 @@ public:
   void nextStep(float, int);
   //! \brief Constructor
   /*!
-   * It initialises a physic calculator, with 
-   * the broadphase, the collision configuration, the dispatcher, 
+   * It initialises a physic calculator, with
+   * the broadphase, the collision configuration, the dispatcher,
    * the solver and the scene ( world ).
    */
    PhysicalCalculator();
-  ~PhysicalCalculator();  
+  ~PhysicalCalculator();
 
 private:
   //! \brief The init method set the gravity
-  void init(); 
+  void init();
   btDiscreteDynamicsWorld* _scene;
   btBroadphaseInterface* _broadphase;
   btDefaultCollisionConfiguration* _collisionConfiguration;

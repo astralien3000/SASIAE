@@ -1,7 +1,7 @@
-#include "wheel.hpp"
-#include "../../src/modules/encoder.hpp"
-#include "../../src/modules/motor_wheel.hpp"
-#include "../../src/modules/servo.hpp"
+#include "../wheel.hpp"
+#include "../../../src/modules/encoder.hpp"
+#include "../../../src/modules/motor_wheel.hpp"
+#include "../../../src/modules/servo.hpp"
 
 
 #include <QtTest/QtTest>

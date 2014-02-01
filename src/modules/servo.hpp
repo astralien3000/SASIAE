@@ -1,21 +1,23 @@
 #include "modules.hpp"
-#include "wheel.hpp"
 #include <QObject>
 #include <QString>
+#include <QStandardItem>
+
 
 class Servo : public Modules {
 Q_OBJECT
 
 public:
-  Servo(Wheel* wheel, int position, QObject* parent);
+  Servo(int position, QObject* parent);
 
 public slots:
-  virtual void received(QString message);  
+  virtual void received(QString message);
   virtual void simulStep();
+  virtual QStandardItem* sendInfo();
 
 signals:
   virtual void send(QString message);
- 
+
 private:
   int position;
 
