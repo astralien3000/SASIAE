@@ -88,10 +88,10 @@ void Coordinator::sendMessage(QString msg, QProcess* p) {
 }
 
 void sendSyncMessages() {
+  emit(time(_physic.getTime());
   foreach(QProcess* code, _codesInfo) {
     sendMessage("T " + _physic.getTime() + " " + _codeFactor);
   }
   //sync UI time
-  emit(time(_physic.getTime());
   emit(calcNextStep());
 }

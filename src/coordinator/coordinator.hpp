@@ -38,7 +38,6 @@ class Coordinator: public QObject{
     void CTReceived(QString);
     //! \brief read the message received from the Modules
     void MReceived(QString);
-    void nextStepProcess();
 
   private:
     QHash<enum Slot/*robot_name*/,
