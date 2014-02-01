@@ -20,5 +20,5 @@ signals:
 
 private:
   int position;
-
+  QStandardItem* _dataRoot;
 };
