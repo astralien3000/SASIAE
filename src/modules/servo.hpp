@@ -5,20 +5,20 @@
 
 
 class Servo : public Modules {
-Q_OBJECT
+	Q_OBJECT
 
 public:
-  Servo(int position, QObject* parent);
+	Servo(int position, QObject* parent);
 
-public slots:
-  virtual void received(QString message);
-  virtual void simulStep();
-  virtual QStandardItem* getData();
+	public slots:
+	virtual void received(QString message);
+	virtual void simulStep();
+	virtual QStandardItem* getData();
 
-signals:
-  virtual void send(QString message);
+	signals:
+	virtual void send(QString message);
 
 private:
-  int position;
-  QStandardItem* _dataRoot;
+	int position;
+	QStandardItem* _dataRoot;
 };

@@ -5,8 +5,8 @@
 
 //cylindre de masse 0.1
 
-Balise::Balise(Robot *robot, QObject* parent): Modules(parent) {
-	btDiscreteDynamicsWorld * myscene=getScene();
+Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): Modules(parent) {
+	btDiscreteDynamicsWorld * myscene= calculator->getScene();
 
 
 	btTransform trans;
@@ -36,5 +36,18 @@ Balise::Balise(Robot *robot, QObject* parent): Modules(parent) {
 	myscene->addRigidBody(boxBody);
 }
 
+btVector3 Balise::get_position() {
+	return this->position;
+}
 
 
+
+
+QStandardItem* Balise::getData() {
+	return NULL;
+}
+
+
+void Balise::send(QString message) {}
+void Balise::simulStep() {}
+void Balise::received(QString message) {}
