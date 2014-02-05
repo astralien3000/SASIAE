@@ -1,21 +1,23 @@
 #include "modules.hpp"
-#include <QObject>
-#include <QString>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QDebug>
 
 class Servo : public Modules {
-Q_OBJECT
 
 public:
   Servo(int position);
-
+  ~Servo();		     
+		   
 public slots:
-  virtual void received(QString message);  
-  virtual void simulStep();
+  void received(QString message);  
+  void simulStep();
 
 signals:
-  virtual void send(QString message);
+  //virtual void send(QString message); 
  
 private:
-  int position;
+  int _position;
 
 };
