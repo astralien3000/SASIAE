@@ -102,9 +102,9 @@ for(int i=0;i<ITERATION_NUMBER;i++) {
     btScalar z,y,x;
 	      trans.getBasis().getEulerZYX(z,y,x);
     std::cout << i 
-	      << "| X :"<< trans.getOrigin().getX() 
-	      << "|  Y:"<< trans.getOrigin().getY() 
-	      << "|  Z:"<< trans.getOrigin().getZ() 
+	      << "|X: "<< trans.getOrigin().getX() 
+	      << "|Y: "<< trans.getOrigin().getY() 
+	      << "|Z: "<< trans.getOrigin().getZ() 
 	      << "| "<< moteurD->getTorque() /SIZE
 
 	      << " "<< encodeurD->getRotation()

@@ -75,6 +75,7 @@ void Coordinator::openRobot(QProcess* proc, const QString& XMLPath, Coordinator:
    qDebug() << "signal connected" << '\n' ;
 }
 
+<<<<<<< HEAD
 void Coordinator::CTReceived() {
   QProcess * client=_codeInfo.value("client");
   QString message=readMessage(client);
@@ -97,6 +98,11 @@ void Coordinator::CTReceived() {
     mod=NULL;
     qDebug()<<"This device's name does not correspond to a module."  << '\n';
   }
+=======
+Coordinator::Coordinator() {
+  _running = false;
+  _codeFactor = 1;
+>>>>>>> 72f857d705b5633bec4ddf333239e0bee8692b16
 }
 
 void Coordinator::MReceived(QString message) {
@@ -116,10 +122,17 @@ void Coordinator::MReceived(QString message) {
 
 void Coordinator::gotoNextStep() {
   if(_running) 
+<<<<<<< HEAD
     {
       _sync = 0;
       emit(calcNextStep());
     }
+=======
+  {
+    _sync = 0;
+    sendSyncMessages();
+  }
+>>>>>>> 72f857d705b5633bec4ddf333239e0bee8692b16
 }
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
@@ -188,4 +201,13 @@ bool Coordinator::addToRobotModule(QString name, Modules * mod){
   _moduleInfo.insert(name,mod);
 
   return (_moduleInfo.value(name)==mod);
+}
+
+void sendSyncMessages() {
+  emit(time(_physic.getTime());
+  foreach(QProcess* code, _codesInfo) {
+    sendMessage("T " + _physic.getTime() + " " + _codeFactor);
+  }
+  //sync UI time
+  emit(calcNextStep());
 }
