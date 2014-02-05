@@ -122,17 +122,10 @@ void Coordinator::MReceived(QString message) {
 
 void Coordinator::gotoNextStep() {
   if(_running) 
-<<<<<<< HEAD
-    {
-      _sync = 0;
-      emit(calcNextStep());
-    }
-=======
   {
     _sync = 0;
     sendSyncMessages();
   }
->>>>>>> 72f857d705b5633bec4ddf333239e0bee8692b16
 }
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
