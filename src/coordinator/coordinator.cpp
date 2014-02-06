@@ -56,13 +56,13 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
  
   Modules *mod =new Servo(0);
   QString name(XMLPath);
-    if(!addToRobotModule(name,mod)){
+    if(!addToRobotModule("TESTER",mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
   }
 
-  QProcess* proc=new QProcess();
-
+  QProcess* proc=new QProcess(this);
+  
   if(!addToRobotCode(name,proc)){
     qDebug() << "error addToRobotCode" << '\n' ;
     return;
@@ -84,11 +84,16 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 void Coordinator::CTReceived() {
   QProcess * client=_codeInfo.value("client");
   QString message=readMessage(client);
-  QStringList args=message.split(message);
+  if(client !=NULL) qDebug() << "message Client : " << message << '\n' ;
+  QStringList args=message.split(" ");
   QString name;
   name=args[1];
+  int i;
+  for(i=0;i<args.length();i++){
+    qDebug() << "args["<<i<<"] : "<< args[i] << '\n' ;
+  }
   Modules * mod;
-
+  qDebug() << "name : " << name ;
   if(_moduleInfo.contains(name)){
     mod=_moduleInfo.value(name);
     qDebug()<< "module name : " << mod << '\n';
@@ -161,20 +166,19 @@ void Coordinator::closeRobot(QProcess *robot){
 QString Coordinator::readMessage(QProcess * proc)const{
   unsigned int i = 0;
   char c;
-
   QString buffer(BUFFER_SIZE);
   
   if(!proc->getChar(&c)) {
     proc->waitForReadyRead();
   }
   else {
-    buffer += c;
+    buffer = c;
   }
   while(proc->getChar(&c) && c != '\n') {
     buffer += c;
   }
-  buffer[i] = '\0';
   if(c == '\n') {
+    qDebug() << buffer << "just before sending\n";
     return buffer;
   }
   else {
@@ -192,8 +196,8 @@ bool Coordinator::addToRobotCode(QString name, QProcess * proc){
 
 bool Coordinator::addToRobotModule(QString name, Modules * mod){
   _moduleInfo.insert(name,mod);
-
-  return (_moduleInfo.value(name)==mod);
+  
+  return (_moduleInfo.contains(name));
 }
 /*
 TODO : debuguer
