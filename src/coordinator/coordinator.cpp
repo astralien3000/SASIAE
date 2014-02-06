@@ -12,6 +12,7 @@ Coordinator& Coordinator::getInstance() {
 
 Coordinator::Coordinator() {
   _running = false;
+  _codeFactor = 1;
 }
 
 Coordinator::~Coordinator(){
@@ -19,6 +20,7 @@ Coordinator::~Coordinator(){
    _codeInfo.squeeze();
    for (j = _codeInfo.begin(); j != _codeInfo.end(); ++j){
      closeRobot(j.value());
+     j.value()=NULL;
    }
 }
 
@@ -47,25 +49,29 @@ void Coordinator::openTable(const QString& XMLPath) {
   (void) XMLPath;
 }
 
-void Coordinator::openRobot(QProcess* proc, const QString& XMLPath, Coordinator::Slot slot) {
+void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   //TODO really read the file
-(void) XMLPath;
  (void) slot;
   /* For the tests*/
  
   Modules *mod =new Servo(0);
   QString name(XMLPath);
-  if(!addToRobotCode(name,proc)){
-    qDebug() << "error addToRobotCode" << '\n' ;
-    return;
-  }
     if(!addToRobotModule(name,mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
   }
-  
+
+  QProcess* proc=new QProcess();
+
+  if(!addToRobotCode(name,proc)){
+    qDebug() << "error addToRobotCode" << '\n' ;
+    return;
+  }
+
+  /*The coordinator launches the processus robot which launches the ClientThread.*/
   proc->start("./client",QStringList());
-   if(!proc->waitForStarted()) {
+
+  if(!proc->waitForStarted()) {
      qDebug() << "error starting client process" << '\n' ;
      return ;
   }
@@ -75,7 +81,6 @@ void Coordinator::openRobot(QProcess* proc, const QString& XMLPath, Coordinator:
    qDebug() << "signal connected" << '\n' ;
 }
 
-<<<<<<< HEAD
 void Coordinator::CTReceived() {
   QProcess * client=_codeInfo.value("client");
   QString message=readMessage(client);
@@ -98,11 +103,6 @@ void Coordinator::CTReceived() {
     mod=NULL;
     qDebug()<<"This device's name does not correspond to a module."  << '\n';
   }
-=======
-Coordinator::Coordinator() {
-  _running = false;
-  _codeFactor = 1;
->>>>>>> 72f857d705b5633bec4ddf333239e0bee8692b16
 }
 
 void Coordinator::MReceived(QString message) {
@@ -124,7 +124,7 @@ void Coordinator::gotoNextStep() {
   if(_running) 
   {
     _sync = 0;
-    sendSyncMessages();
+    //sendSyncMessages(); a decommenter une fois la fonction debuguée
   }
 }
 
@@ -154,7 +154,7 @@ void Coordinator::closeRobot(QProcess *robot){
       qDebug() << "error waitForFinished closeRobot" << '\n';
       return ;
   }
-  
+    delete robot;  
 }
 
 
@@ -195,8 +195,9 @@ bool Coordinator::addToRobotModule(QString name, Modules * mod){
 
   return (_moduleInfo.value(name)==mod);
 }
-
-void sendSyncMessages() {
+/*
+TODO : debuguer
+void Coordinator::sendSyncMessages(){
   emit(time(_physic.getTime());
   foreach(QProcess* code, _codesInfo) {
     sendMessage("T " + _physic.getTime() + " " + _codeFactor);
@@ -204,3 +205,4 @@ void sendSyncMessages() {
   //sync UI time
   emit(calcNextStep());
 }
+*/

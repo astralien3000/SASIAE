@@ -19,7 +19,7 @@ class Coordinator: public QObject{
   Q_OBJECT
   
   signals:
-<<<<<<< HEAD
+
   void calcNextStep(); 
   void log(QString); 
   //! \brief time for UI sync in ms
@@ -41,7 +41,7 @@ public slots:
   //! \brief Trigger by Calculator, when a step is finished
   void stepDone();
   void openTable(const QString& XMLPath);
-  void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
+  void openRobot(const QString& XMLPath, Slot slot);
 
 private slots:
   //! \brief read the message received from the Client Thread
@@ -65,7 +65,7 @@ private:
   void sendDeviceMessage(QString name, QString msg, QString code);
   void sendMessage(QString msg, QProcess* p);
   //! \brief send sync message to all Robot Code Process
-  void sendSyncMessage();
+  //void sendSyncMessages();
  
   void closeRobot(Slot robot);
   void closeRobot(QProcess *robot);
