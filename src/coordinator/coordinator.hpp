@@ -1,13 +1,25 @@
 #include "physical_calculator.hpp"
 #include "modules.hpp"
-#include <QObject>
-#include <QHash>
-#include <QString>
-#include <QProcess>
+//#include "../physical_calculator/physical_calculator.hpp"
+//#include "../modules/modules.hpp"
+#include <QtCore/QThread>
+#include <QtCore/QProcess>
+#include <QtCore/QHash>
+#include <QtCore/QMap>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+
+#include <QtCore/QDebug>
+
+//#include <cstring>
+//#include <iostream>
+
+#define COORD_BUFFER_SIZE 1024
+
 
 class Coordinator: public QObject{
   Q_OBJECT
-
+  
   signals:
     void calcNextStep(double, int); 
     void log(QString); 
@@ -31,7 +43,8 @@ class Coordinator: public QObject{
     //! \brief Trigger by Calculator, when a step is finished
     void stepDone();
     void openTable(const QString& XMLPath);
-    void openRobot(const QString& XMLPath, Slot slot);
+    //void openRobot(const QString& XMLPath, Slot slot);
+    void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
 
   private slots:
     //! \brief read the message received from the Client Thread
@@ -40,12 +53,14 @@ class Coordinator: public QObject{
     void MReceived(QString);
 
   private:
-    QHash<enum Slot/*robot_name*/, 
-          QHash<QString /*robot_code*/, 
-                QHash<QString/*module_name*/, 
-                      Modules* /*modules*/> > > _roboInfo;
-    QHash<QString/*robot_code*/,
-          QProcess* /*robot_process*/> _codesInfo;
+    /*
+      if a QHash -> need to provide a qHash function, and the operator==().
+      if QMap, only default and copy constructor, and an assignator.
+        enum Slot = int ? qHash funtion & cie should exist
+    */
+    QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
+    QHash<QString/*module_name*/, Modules* /*modules*/> _moduleInfo;
+    QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
     QHash<QObject* /* modules*/, 
           QPair<QString/*robot_code*/, QString /*module_name*/> > _modulesInfo;
 
@@ -55,7 +70,13 @@ class Coordinator: public QObject{
     void sendMessages(QString msg, QProcess* p);
     //! \brief send sync message to all Robot Code Process
     void sendSyncMessages();
-
+    void closeRobot(Slot robot);
+    void closeRobot(QProcess *robot);
+    //! \brief read one line of proc output
+    QString readMessage(QProcess * proc)const;
+    bool addToRobotCode(QString name, QProcess * proc);
+    bool addToRobotModule(QString name, Modules * mod);  
+   
 
     Coordinator();
 

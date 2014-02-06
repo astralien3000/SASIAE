@@ -9,8 +9,10 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -L/usr/local/lib
 # Input
 HEADERS += modules.hpp \
 	   physical_calculator.hpp \
-     ../../src/coordinator/coordinator.hpp
+     ../../src/coordinator/coordinator.hpp \
+     ../../src/modules/servo.hpp
 SOURCES += test_coordinator.cpp \
            modules.cpp \
 	   physical_calculator.cpp \
-     ../../src/coordinator/coordinator.cpp
+     ../../src/coordinator/coordinator.cpp \
+     ../../src/modules/servo.cpp

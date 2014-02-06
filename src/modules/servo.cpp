@@ -1,14 +1,26 @@
-#include <QObject>
-#include <QString>
-#include <QStringList>
-#include <QDebug>
 #include "servo.hpp"
 
 
+Servo::~Servo(){
+}
+/*
+TODO : chose the right one
+ */
+
+// Servo::Servo(int position){
+//   this->_position = position;
+// }
+
+
+// void Servo::received(QString message) {
+//   QStringList list = message.split(" ");
+//   if(list.at(0) == "value") // le message est du type : "value [_position]"
+//     _position = list.at(1).toInt();
+//}
 
 
 Servo::Servo(int position, QObject* parent) : Modules(parent) {
-	this->position = position;
+	this->_position = position;
 	_dataRoot = new QStandardItem("Servo");
 	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ position));
 }
@@ -17,9 +29,9 @@ void Servo::received(QString message) {
 	QStringList list = message.split(" ");
 	if(list.at(0) == "value") {
   // le message est du type : "value [position]"
-		position = list.at(1).toInt();
+		_position = list.at(1).toInt();
 		_dataRoot->removeRow(1);
-		_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ position));
+		_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ _position));
 	}
 }
 
