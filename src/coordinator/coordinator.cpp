@@ -1,18 +1,15 @@
 #include "coordinator.hpp"
 #include "../modules/servo.hpp"
 
-Coordinator *Coordinator::_instance=NULL;
+
+Coordinator* Coordinator::_instance=NULL;
+
 
 Coordinator& Coordinator::getInstance() {
   if(Coordinator::_instance)
     return *Coordinator::_instance;
   else
     return *(Coordinator::_instance = new Coordinator()); 
-}
-
-Coordinator::Coordinator() {
-  _running = false;
-  _codeFactor = 1;
 }
 
 Coordinator::~Coordinator(){
@@ -29,7 +26,7 @@ Coordinator::~Coordinator(){
 
 void Coordinator::play() {
   _running = true;
-  if(_sync >(unsigned int) _codeInfo.size())
+  if(_sync > _codeInfo.size())
     gotoNextStep();
 }
 
@@ -38,7 +35,7 @@ void Coordinator::pause() {
 }
 
 void Coordinator::stepDone() {
-  if(++_sync > (unsigned int)_codeInfo.size()) // all codes are sync, calculator was the last one
+   if(++_sync > _codeInfo.size()) // all codeInfo.are sync, calculator was the last one
     {
       gotoNextStep();
     }
@@ -47,6 +44,16 @@ void Coordinator::stepDone() {
 void Coordinator::openTable(const QString& XMLPath) {
   //TODO really read the file
   (void) XMLPath;
+}
+
+Coordinator::Coordinator() : _physic(this){
+  _running = false;
+  _codeFactor = 1;
+  _sync = 1;
+  _codeFactor = 1;
+  _timeStep = 1./120.;
+  _maxSubStep = 20;
+  connect(this, SIGNAL(calcNextStep(double,int)), &_physic, SLOT(nextStep(double,int)));
 }
 
 void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
@@ -109,7 +116,6 @@ void Coordinator::CTReceived() {
     qDebug()<<"This device's name does not correspond to a module."  << '\n';
   }
 }
-
 void Coordinator::MReceived(QString message) {
   (void) message;
   // if(sender() != 0) // shouldn't be directly called
@@ -129,7 +135,7 @@ void Coordinator::gotoNextStep() {
   if(_running) 
   {
     _sync = 0;
-    //sendSyncMessages(); a decommenter une fois la fonction debuguée
+    sendSyncMessages(); //a decommenter une fois la fonction debuguée ELLE A JAMAIS ETE BUGGE CONTRAIREMNT A DES OBGJET DANS DES COMMITS !
   }
 }
 
@@ -139,11 +145,11 @@ void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
 }
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QProcess* p) {
-  sendMessage(QString("D ") + name + " " + msg + "\n", p);
+  sendMessages(QString("D ") + name + " " + msg + "\n", p);
 }
 
-void Coordinator::sendMessage(QString msg, QProcess* p) {
-  p->write(msg.toStdString().c_str());
+void Coordinator::sendMessages(QString msg, QProcess* p) {
+  p->write(msg.toUtf8());
 }
 
  
@@ -151,8 +157,8 @@ void Coordinator::closeRobot(Slot robot){
   QString robotName=_robotInfo.value(robot);
   QProcess * robotProcess=_codeInfo.value(robotName);
   closeRobot(robotProcess);
-
 }
+
 void Coordinator::closeRobot(QProcess *robot){
   robot->closeWriteChannel();
     if(!robot->waitForFinished()) {
@@ -166,7 +172,10 @@ void Coordinator::closeRobot(QProcess *robot){
 QString Coordinator::readMessage(QProcess * proc)const{
   unsigned int i = 0;
   char c;
-  QString buffer(BUFFER_SIZE);
+
+  //TODO utiliser QBuffer au lieu de QString !
+  QString buffer(COORD_BUFFER_SIZE);
+
   
   if(!proc->getChar(&c)) {
     proc->waitForReadyRead();
@@ -199,14 +208,12 @@ bool Coordinator::addToRobotModule(QString name, Modules * mod){
   
   return (_moduleInfo.contains(name));
 }
-/*
-TODO : debuguer
-void Coordinator::sendSyncMessages(){
-  emit(time(_physic.getTime());
-  foreach(QProcess* code, _codesInfo) {
-    sendMessage("T " + _physic.getTime() + " " + _codeFactor);
-  }
+
+void Coordinator::sendSyncMessages() {
   //sync UI time
-  emit(calcNextStep());
+  emit(timer(_physic.getTime()));
+  foreach(QProcess* code, _codeInfo) {
+    sendMessages(QString("T ") + _physic.getTime() + " " + _codeFactor, code);
+  }
+  emit(calcNextStep(_timeStep,_maxSubStep));
 }
-*/

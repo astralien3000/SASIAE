@@ -10,7 +10,7 @@
 class Servo : public Modules {
 
 public:
-  Servo(int _position, QObject * parent=0);
+  Servo(int _position, QObject * parent = 0);
   ~Servo();		     
 		   
 public slots:
