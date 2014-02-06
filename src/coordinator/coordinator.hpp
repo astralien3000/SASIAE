@@ -43,8 +43,8 @@ class Coordinator: public QObject{
     //! \brief Trigger by Calculator, when a step is finished
     void stepDone();
     void openTable(const QString& XMLPath);
-    //void openRobot(const QString& XMLPath, Slot slot);
-    void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
+    void openRobot(const QString& XMLPath, Slot slot);
+    //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
 
   private slots:
     //! \brief read the message received from the Client Thread

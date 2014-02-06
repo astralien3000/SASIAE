@@ -22,7 +22,7 @@ TODO : chose the right one
 Servo::Servo(int position, QObject* parent) : Modules(parent) {
 	this->_position = position;
 	_dataRoot = new QStandardItem("Servo");
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ position));
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ _position));
 }
 
 void Servo::received(QString message) {

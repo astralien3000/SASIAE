@@ -17,6 +17,7 @@ Coordinator::~Coordinator(){
    _codeInfo.squeeze();
    for (j = _codeInfo.begin(); j != _codeInfo.end(); ++j){
      closeRobot(j.value());
+     j.value()=NULL;
    }
 }
 
@@ -55,25 +56,29 @@ Coordinator::Coordinator() : _physic(this){
   connect(this, SIGNAL(calcNextStep(double,int)), &_physic, SLOT(nextStep(double,int)));
 }
 
-void Coordinator::openRobot(QProcess* proc, const QString& XMLPath, Coordinator::Slot slot) {
+void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   //TODO really read the file
-(void) XMLPath;
  (void) slot;
   /* For the tests*/
  
   Modules *mod =new Servo(0);
   QString name(XMLPath);
-  if(!addToRobotCode(name,proc)){
-    qDebug() << "error addToRobotCode" << '\n' ;
-    return;
-  }
     if(!addToRobotModule(name,mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
   }
-  
+
+  QProcess* proc=new QProcess();
+
+  if(!addToRobotCode(name,proc)){
+    qDebug() << "error addToRobotCode" << '\n' ;
+    return;
+  }
+
+  /*The coordinator launches the processus robot which launches the ClientThread.*/
   proc->start("./client",QStringList());
-   if(!proc->waitForStarted()) {
+
+  if(!proc->waitForStarted()) {
      qDebug() << "error starting client process" << '\n' ;
      return ;
   }
@@ -125,7 +130,7 @@ void Coordinator::gotoNextStep() {
   if(_running) 
   {
     _sync = 0;
-    sendSyncMessages();
+    sendSyncMessages(); //a decommenter une fois la fonction debuguée ELLE A JAMAIS ETE BUGGE CONTRAIREMNT A DES OBGJET DANS DES COMMITS !
   }
 }
 
@@ -155,7 +160,7 @@ void Coordinator::closeRobot(QProcess *robot){
       qDebug() << "error waitForFinished closeRobot" << '\n';
       return ;
   }
-  
+    delete robot;  
 }
 
 
