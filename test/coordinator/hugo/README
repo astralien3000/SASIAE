@@ -1,0 +1,16 @@
+Le testcoordinator.pro est le fichier de configuration pour que qmake génère automatiquement le Makefile.
+
+Ensuite make créera l'exécutable ./testcoordinator qui permet de lancer le main.cpp ( QCoreApplication ) qui construit un coordinator afin de le tester.
+
+Pour bien faire il faut auparavant avoir compilé aversive--/tests/sasiae/client_test/client ( fait par Clément ) et le copier dans le dossier courant SASIAE/src. En effet le coordinator devrait lancer l'exécutable client.
+
+Je dis devrait, car cela ne fonctionne pas. Nous obtenons donc le message d'erreur suivant :
+
+QProcess: Destroyed while process ("./client") is still running.
+
+
+Allez savoir pourquoi ...
+
+
+Remarque :
+il est nécessaire d'ajouter à la main -std=c++11 ou -std=c++0x dans le Makefile généré par qmake.
