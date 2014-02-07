@@ -1,20 +1,22 @@
-HEADERS+= coordinator/modules/servo.hpp
-HEADERS+= modules/modules.hpp
-HEADERS+= coordinator/coordinator.hpp
-HEADERS+= physical_calculator/physical_calculator.hpp
-HEADERS+= ../../aversive--/include/sasiae/client_thread.hpp
+HEADERS+= ../../../src/modules/servo.hpp
+HEADERS+= ../../../src/modules/modules.hpp
+HEADERS+= ../../../src/coordinator/coordinator.hpp
+HEADERS+= ../../../src/physical_calculator/physical_calculator.hpp
+
+
+CONFIG += debug
 
 
 LIBS +=  -L/usr/local/lib -lBulletDynamics -lBulletCollision -lLinearMath
 
-SOURCES+= modules/modules.cpp
-SOURCES+= modules/servo.cpp
-SOURCES+= physical_calculator/physical_calculator.cpp
-SOURCES+= coordinator/coordinator.cpp
+SOURCES+= ../../../src/modules/modules.cpp
+SOURCES+= ../../../src/physical_calculator/physical_calculator.cpp
+SOURCES+= ../../../src/modules/servo.cpp
+SOURCES+= ../../../src/coordinator/coordinator.cpp
 SOURCES += main.cpp
 
 INCLUDEPATH += /usr/local/include/bullet
-INCLUDEPATH +=  ../../aversive--/include/sasiae
+INCLUDEPATH +=  ../../../../aversive--/include/sasiae
 INCLUDEPATH += /usr/local/include/bullet
  
 
