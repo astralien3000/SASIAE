@@ -31,3 +31,6 @@ QStandardItem* Servo::getData() {
 
 void Servo::simulStep() {
 } // nothing to do
+
+void send(QString message) {}
+

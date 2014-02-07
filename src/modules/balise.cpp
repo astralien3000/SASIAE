@@ -6,6 +6,9 @@
 //cylindre de masse 0.1
 
 Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): Modules(parent) {
+	_dataRoot = new QStandardItem("Balise");
+
+
 	btDiscreteDynamicsWorld * myscene= calculator->getScene();
 
 
@@ -17,6 +20,9 @@ Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): M
 	btVector3(trans.getOrigin().getX()
 		, trans.getOrigin().getY()
 		, trans.getOrigin().getZ()); //la position de la balise.
+
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Balise")
+		<< new QStandardItem(QString()+ trans.getOrigin().getX() + trans.getOrigin().getY() + trans.getOrigin().getZ()));
 
 	//masse très faible pour ne pas empecher les mouvements du robot.
 	btScalar mass(0.1);
@@ -44,7 +50,7 @@ btVector3 Balise::get_position() {
 
 
 QStandardItem* Balise::getData() {
-	return NULL;
+	return _dataRoot;
 }
 
 

@@ -9,25 +9,26 @@
 
 
 class Balise : public Modules {
-Q_OBJECT
+	Q_OBJECT
 
 public:
-  Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator);
-  btVector3 get_position();
+	Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator);
+	btVector3 get_position();
 
 
-public slots:
+	public slots:
 	virtual QStandardItem* getData();
 	virtual void received(QString message);
 	virtual void simulStep();
 
 
-signals:
+	signals:
 	virtual void send(QString message);
 
 
 private:
-  btVector3 position;
+	btVector3 position;
+	QStandardItem* _dataRoot;
 };
 
 
