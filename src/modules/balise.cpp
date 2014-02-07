@@ -46,14 +46,9 @@ btVector3 Balise::get_position() {
 	return this->position;
 }
 
-
-
-
 QStandardItem* Balise::getData() {
 	return _dataRoot;
 }
 
-
-void Balise::send(QString message) {}
 void Balise::simulStep() {}
 void Balise::received(QString message) {}

@@ -1,6 +1,6 @@
 #include "modules.hpp"
-#include "../PhysicalCalculator/robot.hpp"
-#include "../PhysicalCalculator/physical_calculator.hpp"
+#include "../physical_calculator/robot.hpp"
+#include "../physical_calculator/physical_calculator.hpp"
 
 #include <QObject>
 #include <QString>
