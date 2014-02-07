@@ -13,7 +13,12 @@ DigitalServo::DigitalServo() :
   max_pos(DEFAULT_MAX_POS), 
   max_spe(DEFAULT_MAX_SPE), 
   max_acc(DEFAULT_MAX_ACC)
-{}
+{
+  _dataRoot = new QStandardItem("DigitalServo");
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ position));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Speed") << new QStandardItem(QString()+ speed));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Torque") << new QStandardItem(QString()+ accel));
+}
 
 void DigitalServo::received(QString message) {
   QStringList list = message.split(" ");
@@ -74,9 +79,35 @@ void DigitalServo::received(QString message) {
 }
 
 void DigitalServo::simulStep() {
+  // Physics
+  if(true_mode == POSITION) {
+    position = cmd_pos;
+    speed = 0;
+    accel = 0;
+  }
+  else if(true_mode == SPEED) {
+    speed = cmd_spe;
+    position += speed;
+    accel = 0;
+  }
 
+  // Comm
+  if(com_mode == POSITION) {
+    emit(send(QString("value ") + position));
+  }
+  else if(com_mode == SPEED) {
+    emit(send(QString("value speed ") + speed));
+  }
+  else if(com_mode == TORQUE) {
+    emit(send(QString("value torque ") + torque));
+  }
+
+  // GUI
+  _dataRoot->child(1,1)->setText(QString() + position);
+  _dataRoot->child(2,1)->setText(QString() + speed);
+  _dataRoot->child(3,1)->setText(QString() + accel);
 }
 
-void DigitalServo::send(QString message) {
-
+virtual QStandardItem* getData() {
+  return _dataRoot;
 }
