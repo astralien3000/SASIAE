@@ -37,7 +37,7 @@ Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): M
 
 
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
-	btRigidBody* boxBody=new btRigidBody(rbInfo);
+	boxBody=new btRigidBody(rbInfo);
 
 	myscene->addRigidBody(boxBody);
 }
@@ -50,5 +50,10 @@ QStandardItem* Balise::getData() {
 	return _dataRoot;
 }
 
-void Balise::simulStep() {}
+void Balise::simulStep() {
+	btVector3 new_position = boxBody->getCenterOfMassPosition();
+	this->position.setX(new_position.getX());
+	this->position.setY(new_position.getY());
+	this->position.setZ(new_position.getZ());
+}//TODO remet à jour le vecteur de position.
 void Balise::received(QString message) {}

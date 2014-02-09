@@ -28,6 +28,7 @@ public:
 
 private:
 	btVector3 position;
+	btRigidBody* boxBody;
 	QStandardItem* _dataRoot;
 };
 
