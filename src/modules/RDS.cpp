@@ -20,9 +20,10 @@ QStandardItem* RDS::getData() {
 
 list<btVector3>* RDS::get_other_position(Balise *robot_balise){
 	list<btVector3> *result = new list<btVector3>;
-	for (list<Balise*>::const_iterator it = balises->begin(); it != balises->end(); ++it) {
+	//for (list<Balise*>::const_iterator it = balises->begin(); it != balises->end(); ++it) {
+	for (auto it = balises->begin(); it != balises->end(); ++it) {
 		if(*it!=robot_balise)
-			result->push_front(*it->get_position());
+			result->push_front((*it)->get_position());
 	}
 	return result;
 
@@ -30,6 +31,5 @@ list<btVector3>* RDS::get_other_position(Balise *robot_balise){
 
 
 
-void RDS::send(QString message) {}
 void RDS::simulStep() {}
 void RDS::received(QString message) {}

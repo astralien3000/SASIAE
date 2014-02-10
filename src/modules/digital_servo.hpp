@@ -11,6 +11,7 @@ public:
   DigitalServo();
 
 public slots:
+  virtual QStandardItem* getData(); 
   virtual void received(QString message);  
   virtual void simulStep();
 
@@ -38,6 +39,8 @@ private:
 
   Mode com_mode;
   Mode true_mode;
+
+  QStandardItem* _dataRoot;
 };
 
 
