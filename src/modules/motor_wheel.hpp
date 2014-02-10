@@ -12,7 +12,7 @@ public:
   MotorWheel(Wheel* wheel, QString params, QObject* parent = 0);
   static const QString xmlGearName;
   static const QString xmlTorqueName;
-  virtual QStandardItem& getData(); 
+  virtual QStandardItem* getData(); 
 
 public slots:
   virtual void received(QString message);  

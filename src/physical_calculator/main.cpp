@@ -3,7 +3,7 @@
 #include "physical_calculator.hpp"
 #include <iostream>
 #include <btBulletDynamicsCommon.h>
-
+#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 
 #define SIZE 100
 #define ITERATION_NUMBER 400
@@ -75,7 +75,7 @@ btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.7,0)));
   //fin chassis
 
   //Ajout d'une boite devant le robot
-  ph_cal->addBox(btVector3(5,5,5),btVector3(0,5,10),0);
+  //ph_cal->addBox(btVector3(5,5,5),btVector3(0,5,10),0);
 
   /*
     C'est pas encore totalement concluant. La pièce est très 
@@ -92,9 +92,27 @@ btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.7,0)));
   Wheel* encodeurG = new Wheel(robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
 //robot->addWheel(btVector3(1.9,-0.1,0),btVector3(0,-1,0),btVector3(-1,0,0),0.5,true); 
  //robot->addWheel(btVector3(-1.9,-0.1,0),btVector3(0,-1,0),btVector3(-1,0,0),0.5,true); 
-  
+ 
 for(int i=0;i<ITERATION_NUMBER;i++) {
+    myscene->updateAabbs();
+    myscene->computeOverlappingPairs();
     myscene->stepSimulation(1/80.f,20);
+    //raytest
+    // Start and End are vectors
+    btVector3 Start(0,0.4,-50);
+    btVector3 End(0,0.4,110);
+    btVector3 Normal;
+    btCollisionWorld::ClosestRayResultCallback RayCallback(Start, End);
+    RayCallback.m_flags |= btTriangleRaycastCallback::kF_FilterBackfaces;
+
+    //Perform raycast
+    myscene->rayTest(Start, End, RayCallback);
+    if(RayCallback.hasHit()) {
+        End = RayCallback.m_hitPointWorld;
+        Normal = RayCallback.m_hitNormalWorld;
+        btVector3 p = Start.lerp(End, RayCallback.m_closestHitFraction);
+        //std::cerr << i << " " << p.getX() << " " << p.getY() << " " << p.getZ() << std::endl;
+    }
     moteurD->setTorque(3000);
     moteurG->setTorque(3000);
     btTransform trans;

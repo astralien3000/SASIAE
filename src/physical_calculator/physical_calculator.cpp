@@ -65,10 +65,10 @@ void PhysicalCalculator::simple_scene(btScalar size){
 
 void PhysicalCalculator::simple_scene_walls(btScalar size){
   simple_scene(size);
-  addBox(btVector3(size,1,2),btVector3(size-4,1,0),80);
-  addBox(btVector3(size,1,2),btVector3(0,1,size-4),80);
-  addBox(btVector3(size,1,2),btVector3(-(size-4),1,0),80);
-  addBox(btVector3(size,1,2),btVector3(0,1,-(size-4)),80);
+  addBox(btVector3(size,10,2),btVector3(0,10,size+2),0);
+  addBox(btVector3(2,10,size),btVector3(size+2,10,0),0);
+  addBox(btVector3(size,10,2),btVector3(0,10,-size-2),0);
+  addBox(btVector3(2,10,size),btVector3(-size-2,10,0),0);
   
 }
 
