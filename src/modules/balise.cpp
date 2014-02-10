@@ -6,7 +6,6 @@
 //cylindre de masse 0.1
 
 Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): Modules(parent) {
-	_dataRoot = new QStandardItem("Balise");
 
 
 	btDiscreteDynamicsWorld * myscene= calculator->getScene();
@@ -21,8 +20,18 @@ Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): M
 		, trans.getOrigin().getY()
 		, trans.getOrigin().getZ()); //la position de la balise.
 
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Balise")
-		<< new QStandardItem(QString()+ trans.getOrigin().getX() + trans.getOrigin().getY() + trans.getOrigin().getZ()));
+
+
+	_dataRoot = new QStandardItem("Balise");
+
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("X")
+		<< new QStandardItem(QString()+ trans.getOrigin().getX()));
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Y")
+		<< new QStandardItem(QString()+ trans.getOrigin().getY()));
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Z")
+		<< new QStandardItem(QString()+ trans.getOrigin().getZ()));
+
+
 
 	//masse très faible pour ne pas empecher les mouvements du robot.
 	btScalar mass(0.1);
@@ -51,9 +60,14 @@ QStandardItem* Balise::getData() {
 }
 
 void Balise::simulStep() {
-	btVector3 new_position = boxBody->getCenterOfMassPosition();
-	this->position.setX(new_position.getX());
-	this->position.setY(new_position.getY());
-	this->position.setZ(new_position.getZ());
+    btTransform transformation;
+	boxBody->getMotionState()->getWorldTransform(transformation);
+	this->position.setX(transformation.getOrigin().getX());
+	this->position.setY(transformation.getOrigin().getY());
+	this->position.setZ(transformation.getOrigin().getZ());
+  _dataRoot->child(1,1)->setText(QString() + transformation.getOrigin().getX()); // pas sûr pour les valeurs mises dan child, les tests permettront d'être sur.
+  _dataRoot->child(2,1)->setText(QString() + transformation.getOrigin().getY());
+  _dataRoot->child(3,1)->setText(QString() + transformation.getOrigin().getZ());
+
 }//TODO remet à jour le vecteur de position.
 void Balise::received(QString message) {}
