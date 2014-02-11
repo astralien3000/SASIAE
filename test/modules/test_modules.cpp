@@ -2,6 +2,12 @@
 #include "../../src/modules/encoder.hpp"
 #include "../../src/modules/motor_wheel.hpp"
 #include "../../src/modules/servo.hpp"
+#include "../../src/modules/RDS.hpp"
+#include "../../src/modules/balise.hpp"
+#include "../../src/physical_calculator/physical_calculator.hpp"
+#include <iostream>
+
+
 
 
 #include <QtTest/QtTest>
@@ -21,6 +27,7 @@ class TestModules : public QObject
     void motor_wheel_step_data();
     void motor_wheel_step();
     void servo();
+    void balise();
 
 };
 
@@ -128,6 +135,45 @@ void TestModules::servo() {
   Servo *test = new Servo(5,this);
   QStandardItem *info = test->getData();
   QVERIFY2(info!=NULL, qPrintable(QString("faux...")));
+}
+
+void TestModules::balise() {
+  PhysicalCalculator * ph_cal=new PhysicalCalculator();
+  btDiscreteDynamicsWorld * myscene=ph_cal->getScene();
+
+
+//crée un robot :
+  //chassis du  1er robot
+      //les coordonnées sont pour un quart de la boite
+  btCollisionShape* boxShape = new btBoxShape(btVector3(2,0.5,2));
+  btDefaultMotionState* boxMotionState =
+  new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.7,0)));
+  btScalar mass = 8;
+  btVector3 boxInertial(0,0,0);
+  boxShape->calculateLocalInertia(mass, boxInertial);
+  btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
+  btRigidBody* chassis = new btRigidBody(boxBodyCI);
+  myscene->addRigidBody(chassis);
+  //fin chassis
+  Robot* robot = new Robot(chassis, myscene);
+  myscene->addVehicle(robot);
+
+// Création d'une balise.
+  Balise *balise_robot = new Balise(robot, this, ph_cal);
+
+
+  //Création de la RDS :
+  RDS *detection = new RDS();
+  detection->balise_add(balise_robot);
+
+//test de le balise
+  list<btVector3>* positions_detected = detection->get_other_position(NULL);
+  for(auto it=positions_detected->begin(); it!=positions_detected->end(); ++it ) {
+    std::cout << (*it).getX()
+              << (*it).getY()
+              << (*it).getZ()
+              << std::endl;
+  }
 }
 
 

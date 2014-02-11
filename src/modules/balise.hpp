@@ -1,3 +1,6 @@
+#ifndef __BALISE_H__
+#define __BALISE_H__
+
 #include "modules.hpp"
 #include "../physical_calculator/robot.hpp"
 #include "../physical_calculator/physical_calculator.hpp"
@@ -33,3 +36,4 @@ private:
 };
 
 
+#endif

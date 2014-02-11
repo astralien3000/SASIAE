@@ -3,6 +3,8 @@ TARGET = test_modules
 INCLUDEPATH += .
 QT += testlib
 CONFIG += debug
+QMAKE_CXXFLAGS = -std=c++11
+
 
 # Input
 HEADERS += wheel.hpp \

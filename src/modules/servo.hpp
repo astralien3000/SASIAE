@@ -1,3 +1,7 @@
+#ifndef __SERVO_H_
+#define __SERVO_H_
+
+
 #include "modules.hpp"
 
 #include <QtCore/QObject>
@@ -11,17 +15,21 @@ class Servo : public Modules {
 
 public:
   Servo(int _position, QObject * parent = 0);
-  ~Servo();		     
-		   
+  ~Servo();
+
 public slots:
-  void received(QString message);  
+  void received(QString message);
   void simulStep();
   virtual QStandardItem* getData();
 
 signals:
-  //virtual void send(QString message); 
+  //virtual void send(QString message);
 
 private:
 	int _position;
 	QStandardItem* _dataRoot;
 };
+
+
+
+#endif
