@@ -11,7 +11,8 @@
   to create the robots it needs.
   Finally it simulates the robots' behaviour.
  */
-class PhysicalCalculator{
+class PhysicalCalculator : public QObject {
+Q_OBJECT
 
 public:
   //! \brief it creates an empty scene
@@ -28,13 +29,16 @@ public:
   void addBox( btVector3 size, btVector3 position, btScalar mass);
   //! it calculates the next step
   void nextStep(float, int);
+
+  unsigned long int getTime() const;
+
   //! \brief Constructor
   /*!
    * It initialises a physic calculator, with
    * the broadphase, the collision configuration, the dispatcher,
    * the solver and the scene ( world ).
    */
-   PhysicalCalculator();
+   PhysicalCalculator(QObject* parent = 0);
   ~PhysicalCalculator();
 
 private:
@@ -45,6 +49,7 @@ private:
   btDefaultCollisionConfiguration* _collisionConfiguration;
   btCollisionDispatcher* _dispatcher;
   btSequentialImpulseConstraintSolver* _solver;
+  btClock * _clock;
 };
 
 

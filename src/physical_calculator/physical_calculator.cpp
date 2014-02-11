@@ -1,16 +1,18 @@
 #include "physical_calculator.hpp"
 
 
-PhysicalCalculator::PhysicalCalculator(){
+PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   _broadphase = new btDbvtBroadphase();
   _collisionConfiguration = new btDefaultCollisionConfiguration();
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
   _solver = new btSequentialImpulseConstraintSolver;
   _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
+  _time= new btClock();
 }
 
 PhysicalCalculator::~PhysicalCalculator(){
   delete _scene;
+  delete _time;
   delete _solver;
   delete _dispatcher;
   delete _collisionConfiguration;
@@ -74,6 +76,10 @@ void PhysicalCalculator::simple_scene_walls(btScalar size){
 
 void PhysicalCalculator::nextStep(float time=1/80.f, int addedoperations=20){
   _scene->stepSimulation(time,addedoperations);
+}
+
+unsigned long int PhysicalCalculator::getTime()const{
+  return _clock->getTimeMilliseconds();
 }
 
 void PhysicalCalculator::init() {
