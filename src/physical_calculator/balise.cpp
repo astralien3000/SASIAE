@@ -5,7 +5,8 @@
 
 //cylindre de masse 0.1
 
-Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): Modules(parent) {
+Balise:Balise(btRigidBody* chassis, QObject* parent, PhysicalCalculator* calculator);
+	 Modules(parent), _chassis(chassis)  {
 
 
 	btDiscreteDynamicsWorld * myscene= calculator->getScene();
@@ -44,11 +45,20 @@ Balise::Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator): M
 	boxShape->calculateLocalInertia(mass, localInertia);
 
 
-
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
 	boxBody=new btRigidBody(rbInfo);
 
 	myscene->addRigidBody(boxBody);
+  // ajout des contraintes de points
+  btVector3 normal = this->position;
+  normal.normalize();
+  btVector3 pivotInChassis(0, 0, 43/2); //todo : add this as a constant
+  btVector3 pivotInBox(boxSize.getX()*btScalar(4/3),0,boxSize.getZ());
+  btTypedConstraint* p2pL = new btPoint2PointConstraint(*_chassis,*boxBody, pivotInChassis,pivotInBox);
+
+  // add constraint to world
+  _world->addConstraint(p2pL);
+
 }
 
 btVector3 Balise::get_position() {

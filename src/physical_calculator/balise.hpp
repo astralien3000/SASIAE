@@ -15,7 +15,7 @@ class Balise : public Modules {
 	Q_OBJECT
 
 public:
-	Balise(Robot* robot, QObject* parent, PhysicalCalculator* calculator);
+	Balise(btRigidBody* chassis, QObject* parent, PhysicalCalculator* calculator);
 	btVector3 get_position();
 
 
@@ -30,9 +30,11 @@ public:
 
 
 private:
-	btVector3 position;
-	btRigidBody* boxBody;
+	btVector3 _position;
+  btRigidBody* _chassis
+	btRigidBody* _sensor_box;
 	QStandardItem* _dataRoot;
+  btDynamicsWorld* _world;
 };
 
 
