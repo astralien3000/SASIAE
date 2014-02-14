@@ -17,4 +17,5 @@ private:
   double _cache;
   btDynamicsWorld* _world;
 
-}
+};
+#endif

@@ -1,7 +1,7 @@
 #ifndef PHYSICAL_CALCULATOR_HPP
 #define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
-
+#include <QObject>
 //! \brief Physic Calculator
 /*!
   The goal of this object is
@@ -26,9 +26,9 @@ public:
   //! it creates a scene with a ground, and 4 walls.
   void simple_scene_walls(btScalar size);
   //! \brief it adds a box in the world
-  void addBox( btVector3 size, btVector3 position, btScalar mass);
+  btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
   //! it calculates the next step
-  void nextStep(float, int);
+  void nextStep(float time=1/80.f, int addedoperations=20);
 
   unsigned long int getTime() const;
 
