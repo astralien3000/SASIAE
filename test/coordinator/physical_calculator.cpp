@@ -1,5 +1,5 @@
 #include "physical_calculator.hpp"
-double PhysicalCalculator::getTime(){return time;}
+double PhysicalCalculator::getTime() const {return time;}
 void PhysicalCalculator::empty_scene(){ sceneType = EMPTY_WORLD;}
   //! \brief it creates an empty scene
   void PhysicalCalculator::simple_scene(btScalar size){sceneType = SIMPLE_WORLD;}

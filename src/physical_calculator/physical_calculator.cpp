@@ -80,7 +80,7 @@ void PhysicalCalculator::nextStep(float time, int addedoperations){
   _scene->stepSimulation(time,addedoperations);
 }
 
-unsigned long int PhysicalCalculator::getTime()const{
+unsigned long int PhysicalCalculator::getTime() const{
   return _clock->getTimeMilliseconds();
 }
 

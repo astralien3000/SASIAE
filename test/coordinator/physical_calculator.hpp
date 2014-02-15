@@ -19,7 +19,7 @@ public slots:
   void nextStep(double, int);
 public:
   //! \brief return the current time of simulation in sec
-  double getTime();
+  double getTime() const;
   //! \brief it returns a DiscreteDynamicsWorld
   //! which is the scene
   btDiscreteDynamicsWorld* getScene();
