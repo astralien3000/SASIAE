@@ -2,6 +2,11 @@
 #define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
 #include <QObject>
+#include <aversive.hpp>
+#include "wheel.hpp"
+#include "robot.hpp"
+
+
 //! \brief Physic Calculator
 /*!
   The goal of this object is
@@ -11,7 +16,9 @@
   to create the robots it needs.
   Finally it simulates the robots' behaviour.
  */
+
 class PhysicalCalculator : public QObject {
+
 Q_OBJECT
 
 public:
@@ -31,16 +38,18 @@ public:
   void nextStep(float time=1/80.f, int addedoperations=20);
 
   unsigned long int getTime() const;
+  void addRobotToScene( btVector3 boxSize, btVector3 position, btScalar mass, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
 
   //! \brief Constructor
   /*!
    * It initialises a physic calculator, with
    * the broadphase, the collision configuration, the dispatcher,
-   * the solver and the scene ( world ).
+   * the solver and the scene ( world ). 
    */
-   PhysicalCalculator(QObject* parent = 0);
+  PhysicalCalculator(QObject* parent = 0);
   ~PhysicalCalculator();
-
+  
+  
 private:
   //! \brief The init method set the gravity
   void init();

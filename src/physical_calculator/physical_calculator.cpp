@@ -99,7 +99,7 @@ void PhysicalCalculator::addRobotToScene( btVector3 boxSize, btVector3 position,
 
   _scene->addVehicle(robot);
   
-  btCylinderShapeX* m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+  //btCylinderShapeX* m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
 
     if(md)
       md->setTorque(20);

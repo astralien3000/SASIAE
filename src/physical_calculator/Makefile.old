@@ -1,0 +1,27 @@
+CC=g++ 
+CFLAGS= --std=c++0x -W -Wall -Wextra -fPIC
+INCLUDES=-I/usr/local/include/bullet -I/usr/include/bullet -I /home/hugo/Qt/5.2.0/gcc_64/include -I../../../aversive--/include/sasiae
+LDFLAGS= -lBulletDynamics -lBulletCollision -lLinearMath -lQt5Core
+LIBRAIRIES= -L/usr/local/lib -L/home/hugo/Qt/5.2.0/gcc_64/lib
+
+SRC= main.cpp physical_calculator.cpp robot.cpp wheel.cpp
+OBJ=$(SRC:.cpp=.o) 
+EXEC=moteur
+
+all: $(EXEC)
+
+$(EXEC): $(OBJ) 
+	@echo "================================================================================"
+	@echo ":> Linking $^ to $@"
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIBRAIRIES) $(LDFLAGS)
+
+%.o: %.cpp
+	@echo "................................................................................"
+	@echo ":> Compiling: \t $@"
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+.PHONY: all
+
+clean:
+	@echo ":> Cleanning ..."
+	@rm -rf *.o $(EXEC)
