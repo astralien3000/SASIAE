@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Dec 18 15:50:57 2013
-**      by: Qt User Interface Compiler version 4.6.3
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,28 +10,44 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPlainTextEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QTimeEdit>
-#include <QtGui/QTreeWidget>
-#include <QtGui/QWidget>
-#include <iostream>
+// #include <QtGui/QAction>
+// #include <QtGui/QApplication>
+// #include <QtGui/QButtonGroup>
+// #include <QtGui/QGraphicsView>
+// #include <QtGui/QHeaderView>
+// #include <QtGui/QLabel>
+// #include <QtGui/QMainWindow>
+// #include <QtGui/QMenu>
+// #include <QtGui/QMenuBar>
+// #include <QtGui/QPlainTextEdit>
+// #include <QtGui/QPushButton>
+// #include <QtGui/QStatusBar>
+// #include <QtGui/QTimeEdit>
+// #include <QtGui/QTreeWidget>
+// #include <QtGui/QWidget>
+
+
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QGraphicsView>
+#include <QHeaderView>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QStatusBar>
+#include <QTimeEdit>
+#include <QTreeWidget>
+#include <QWidget>
+
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
-
 public:
     QAction *actionNouveau;
     QAction *actionOuvrir;
@@ -154,9 +169,6 @@ public:
         button_robot1 = new QPushButton(widget);
         button_robot1->setObjectName(QString::fromUtf8("button_robot1"));
         button_robot1->setGeometry(QRect(100, 10, 61, 23));
-
-
-
         button_robot2 = new QPushButton(widget);
         button_robot2->setObjectName(QString::fromUtf8("button_robot2"));
         button_robot2->setGeometry(QRect(170, 10, 61, 23));
@@ -290,109 +302,106 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Simulateur", 0, QApplication::UnicodeUTF8));
-        actionNouveau->setText(QApplication::translate("MainWindow", "Nouveau", 0, QApplication::UnicodeUTF8));
-        actionOuvrir->setText(QApplication::translate("MainWindow", "Ouvrir", 0, QApplication::UnicodeUTF8));
-        actionEnregistrer_sous->setText(QApplication::translate("MainWindow", "Enregistrer sous", 0, QApplication::UnicodeUTF8));
-        actionEnregistrer->setText(QApplication::translate("MainWindow", "Enregistrer", 0, QApplication::UnicodeUTF8));
-        actionObjet->setText(QApplication::translate("MainWindow", "Objet", 0, QApplication::UnicodeUTF8));
-        actionErreur->setText(QApplication::translate("MainWindow", "Erreur", 0, QApplication::UnicodeUTF8));
-        actionChoisir->setText(QApplication::translate("MainWindow", "Choisir", 0, QApplication::UnicodeUTF8));
-        actionSupprimer->setText(QApplication::translate("MainWindow", "Supprimer", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_1->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_2->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_3->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_4->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_5->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_6->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_7->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_8->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_9->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_10->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_11->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0, QApplication::UnicodeUTF8));
-        actionRobot_n_12->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0, QApplication::UnicodeUTF8));
-        actionGuide_d_utilisation->setText(QApplication::translate("MainWindow", "Guide d'utilisation", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Simulateur", 0 ));
+        actionNouveau->setText(QApplication::translate("MainWindow", "Nouveau", 0 ));
+        actionOuvrir->setText(QApplication::translate("MainWindow", "Ouvrir", 0 ));
+        actionEnregistrer_sous->setText(QApplication::translate("MainWindow", "Enregistrer sous", 0 ));
+        actionEnregistrer->setText(QApplication::translate("MainWindow", "Enregistrer", 0 ));
+        actionObjet->setText(QApplication::translate("MainWindow", "Objet", 0 ));
+        actionErreur->setText(QApplication::translate("MainWindow", "Erreur", 0 ));
+        actionChoisir->setText(QApplication::translate("MainWindow", "Choisir", 0 ));
+        actionSupprimer->setText(QApplication::translate("MainWindow", "Supprimer", 0 ));
+        actionRobot_n_1->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0 ));
+        actionRobot_n_2->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0 ));
+        actionRobot_n_3->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0 ));
+        actionRobot_n_4->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0 ));
+        actionRobot_n_5->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0 ));
+        actionRobot_n_6->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0 ));
+        actionRobot_n_7->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0 ));
+        actionRobot_n_8->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0 ));
+        actionRobot_n_9->setText(QApplication::translate("MainWindow", "Robot n\302\2601", 0 ));
+        actionRobot_n_10->setText(QApplication::translate("MainWindow", "Robot n\302\2602", 0 ));
+        actionRobot_n_11->setText(QApplication::translate("MainWindow", "Robot n\302\2603", 0 ));
+        actionRobot_n_12->setText(QApplication::translate("MainWindow", "Robot n\302\2604", 0 ));
+        actionGuide_d_utilisation->setText(QApplication::translate("MainWindow", "Guide d'utilisation", 0 ));
 #ifndef QT_NO_TOOLTIP
-        actionGuide_d_utilisation->setToolTip(QApplication::translate("MainWindow", "Aide \303\240 l'utilisation de l'interface graphique", 0, QApplication::UnicodeUTF8));
+        actionGuide_d_utilisation->setToolTip(QApplication::translate("MainWindow", "Aide \303\240 l'utilisation de l'interface graphique", 0 ));
 #endif // QT_NO_TOOLTIP
-        actionGuide_d_ajout_de_cr_ation_de_module->setText(QApplication::translate("MainWindow", "Guide de cr\303\251ation de module", 0, QApplication::UnicodeUTF8));
+        actionGuide_d_ajout_de_cr_ation_de_module->setText(QApplication::translate("MainWindow", "Guide de cr\303\251ation de module", 0 ));
 #ifndef QT_NO_TOOLTIP
-        actionGuide_d_ajout_de_cr_ation_de_module->setToolTip(QApplication::translate("MainWindow", "Aide \303\240 la cr\303\251ation de module", 0, QApplication::UnicodeUTF8));
+        actionGuide_d_ajout_de_cr_ation_de_module->setToolTip(QApplication::translate("MainWindow", "Aide \303\240 la cr\303\251ation de module", 0 ));
 #endif // QT_NO_TOOLTIP
-        actionGuide_du_d_veloppeur->setText(QApplication::translate("MainWindow", "Guide du d\303\251veloppeur", 0, QApplication::UnicodeUTF8));
+        actionGuide_du_d_veloppeur->setText(QApplication::translate("MainWindow", "Guide du d\303\251veloppeur", 0 ));
 #ifndef QT_NO_TOOLTIP
-        actionGuide_du_d_veloppeur->setToolTip(QApplication::translate("MainWindow", "Documentation de l'impl\303\251mentation", 0, QApplication::UnicodeUTF8));
+        actionGuide_du_d_veloppeur->setToolTip(QApplication::translate("MainWindow", "Documentation de l'impl\303\251mentation", 0 ));
 #endif // QT_NO_TOOLTIP
-        actionQui_sommes_nous->setText(QApplication::translate("MainWindow", "Qui sommes-nous ?", 0, QApplication::UnicodeUTF8));
-        button_table->setText(QApplication::translate("MainWindow", "Table : 2014", 0, QApplication::UnicodeUTF8));
-        button_robot1->setText(QApplication::translate("MainWindow", "Robot 1", 0, QApplication::UnicodeUTF8));
-
-
-        button_robot2->setText(QApplication::translate("MainWindow", "Robot 2", 0, QApplication::UnicodeUTF8));
-        button_robot3->setText(QApplication::translate("MainWindow", "Robot 3", 0, QApplication::UnicodeUTF8));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Robot 4", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "Rec", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Play", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Pause", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Stop", 0, QApplication::UnicodeUTF8));
-        timeEdit->setDisplayFormat(QApplication::translate("MainWindow", "mm:ss", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "Timer :", 0, QApplication::UnicodeUTF8));
+        actionQui_sommes_nous->setText(QApplication::translate("MainWindow", "Qui sommes-nous ?", 0 ));
+        button_table->setText(QApplication::translate("MainWindow", "Table : 2014", 0 ));
+        button_robot1->setText(QApplication::translate("MainWindow", "Robot 1", 0 ));
+        button_robot2->setText(QApplication::translate("MainWindow", "Robot 2", 0 ));
+        button_robot3->setText(QApplication::translate("MainWindow", "Robot 3", 0 ));
+        pushButton_5->setText(QApplication::translate("MainWindow", "Robot 4", 0 ));
+        pushButton->setText(QApplication::translate("MainWindow", "Rec", 0 ));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Play", 0 ));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Pause", 0 ));
+        pushButton_4->setText(QApplication::translate("MainWindow", "Stop", 0 ));
+        timeEdit->setDisplayFormat(QApplication::translate("MainWindow", "mm:ss", 0 ));
+        label->setText(QApplication::translate("MainWindow", "Timer :", 0 ));
         plainTextEdit->setPlainText(QApplication::translate("MainWindow", "[LOG] D\303\251marrage du robot n\302\2601\n"
 "[LOG] D\303\251marrage du robot n\302\2602\n"
-"[WARNING] Capteur 1 non initialis\303\251", 0, QApplication::UnicodeUTF8));
+"[WARNING] Capteur 1 non initialis\303\251", 0 ));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
-        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "Valeurs", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Robots", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "Valeurs", 0 ));
+        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Robots", 0 ));
 
         const bool __sortingEnabled = treeWidget->isSortingEnabled();
         treeWidget->setSortingEnabled(false);
         QTreeWidgetItem *___qtreewidgetitem1 = treeWidget->topLevelItem(0);
-        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Robot 1", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Robot 1", 0 ));
         QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Capteurs", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Capteurs", 0 ));
         QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem2->child(0);
-        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "12", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Capteur 1", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "12", 0 ));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Capteur 1", 0 ));
         QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem2->child(1);
-        ___qtreewidgetitem4->setText(1, QApplication::translate("MainWindow", "true", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Capteur 2", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem4->setText(1, QApplication::translate("MainWindow", "true", 0 ));
+        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Capteur 2", 0 ));
         QTreeWidgetItem *___qtreewidgetitem5 = ___qtreewidgetitem1->child(1);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "Actionneurs", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "Actionneurs", 0 ));
         QTreeWidgetItem *___qtreewidgetitem6 = ___qtreewidgetitem5->child(0);
-        ___qtreewidgetitem6->setText(1, QApplication::translate("MainWindow", "1235", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Actionneur 1", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem6->setText(1, QApplication::translate("MainWindow", "1235", 0 ));
+        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Actionneur 1", 0 ));
         QTreeWidgetItem *___qtreewidgetitem7 = ___qtreewidgetitem5->child(1);
-        ___qtreewidgetitem7->setText(1, QApplication::translate("MainWindow", "1852", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Actionneur 2", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem7->setText(1, QApplication::translate("MainWindow", "1852", 0 ));
+        ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Actionneur 2", 0 ));
         QTreeWidgetItem *___qtreewidgetitem8 = treeWidget->topLevelItem(1);
-        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Robot 2", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Robot 2", 0 ));
         QTreeWidgetItem *___qtreewidgetitem9 = ___qtreewidgetitem8->child(0);
-        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "Capteurs", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "Capteurs", 0 ));
         QTreeWidgetItem *___qtreewidgetitem10 = ___qtreewidgetitem9->child(0);
-        ___qtreewidgetitem10->setText(1, QApplication::translate("MainWindow", "42", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Capteur 1", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem10->setText(1, QApplication::translate("MainWindow", "42", 0 ));
+        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Capteur 1", 0 ));
         QTreeWidgetItem *___qtreewidgetitem11 = ___qtreewidgetitem9->child(1);
-        ___qtreewidgetitem11->setText(1, QApplication::translate("MainWindow", "36", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem11->setText(0, QApplication::translate("MainWindow", "Capteur 2", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem11->setText(1, QApplication::translate("MainWindow", "36", 0 ));
+        ___qtreewidgetitem11->setText(0, QApplication::translate("MainWindow", "Capteur 2", 0 ));
         QTreeWidgetItem *___qtreewidgetitem12 = ___qtreewidgetitem8->child(1);
-        ___qtreewidgetitem12->setText(0, QApplication::translate("MainWindow", "Actionneurs", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem12->setText(0, QApplication::translate("MainWindow", "Actionneurs", 0 ));
         QTreeWidgetItem *___qtreewidgetitem13 = ___qtreewidgetitem12->child(0);
-        ___qtreewidgetitem13->setText(1, QApplication::translate("MainWindow", "2135", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem13->setText(0, QApplication::translate("MainWindow", "Actionneur 1", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem13->setText(1, QApplication::translate("MainWindow", "2135", 0 ));
+        ___qtreewidgetitem13->setText(0, QApplication::translate("MainWindow", "Actionneur 1", 0 ));
         QTreeWidgetItem *___qtreewidgetitem14 = ___qtreewidgetitem12->child(1);
-        ___qtreewidgetitem14->setText(1, QApplication::translate("MainWindow", "2012", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem14->setText(0, QApplication::translate("MainWindow", "Actionneur 2", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem14->setText(1, QApplication::translate("MainWindow", "2012", 0 ));
+        ___qtreewidgetitem14->setText(0, QApplication::translate("MainWindow", "Actionneur 2", 0 ));
         treeWidget->setSortingEnabled(__sortingEnabled);
 
-        menuSimulateur->setTitle(QApplication::translate("MainWindow", "Fichier", 0, QApplication::UnicodeUTF8));
-        menuEditer->setTitle(QApplication::translate("MainWindow", "Edition", 0, QApplication::UnicodeUTF8));
-        menuInsertion->setTitle(QApplication::translate("MainWindow", "Insertion", 0, QApplication::UnicodeUTF8));
-        menuTable->setTitle(QApplication::translate("MainWindow", "Table", 0, QApplication::UnicodeUTF8));
-        menuRobot->setTitle(QApplication::translate("MainWindow", "Robot", 0, QApplication::UnicodeUTF8));
-        menuChoisir->setTitle(QApplication::translate("MainWindow", "Choisir", 0, QApplication::UnicodeUTF8));
-        menuSupprimer_2->setTitle(QApplication::translate("MainWindow", "Supprimer", 0, QApplication::UnicodeUTF8));
-        menuHelp->setTitle(QApplication::translate("MainWindow", "Help !", 0, QApplication::UnicodeUTF8));
-
+        menuSimulateur->setTitle(QApplication::translate("MainWindow", "Fichier", 0 ));
+        menuEditer->setTitle(QApplication::translate("MainWindow", "Edition", 0 ));
+        menuInsertion->setTitle(QApplication::translate("MainWindow", "Insertion", 0 ));
+        menuTable->setTitle(QApplication::translate("MainWindow", "Table", 0 ));
+        menuRobot->setTitle(QApplication::translate("MainWindow", "Robot", 0 ));
+        menuChoisir->setTitle(QApplication::translate("MainWindow", "Choisir", 0 ));
+        menuSupprimer_2->setTitle(QApplication::translate("MainWindow", "Supprimer", 0 ));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help !", 0 ));
     } // retranslateUi
 
 };
