@@ -1,5 +1,8 @@
 #include "physical_calculator.hpp"
 
+#define WALL_HEIGHT 3
+
+
 
 PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   _broadphase = new btDbvtBroadphase();
@@ -69,10 +72,10 @@ void PhysicalCalculator::simple_scene(btScalar size){
 
 void PhysicalCalculator::simple_scene_walls(btScalar size){
   simple_scene(size);
-  addBox(btVector3(size,10,2),btVector3(0,10,size+2),0);
-  addBox(btVector3(2,10,size),btVector3(size+2,10,0),0);
-  addBox(btVector3(size,10,2),btVector3(0,10,-size-2),0);
-  addBox(btVector3(2,10,size),btVector3(-size-2,10,0),0);
+  addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,size+2),0);
+  addBox(btVector3(2,WALL_HEIGHT,size),btVector3(size+2,WALL_HEIGHT,0),0);
+  addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,-size-2),0);
+  addBox(btVector3(2,WALL_HEIGHT,size),btVector3(-size-2,WALL_HEIGHT,0),0);
   
 }
 
@@ -86,5 +89,25 @@ unsigned long int PhysicalCalculator::getTime()const{
 
 void PhysicalCalculator::init() {
   _scene->setGravity(btVector3(0,-10,0));
+
+}
+
+void PhysicalCalculator::addRobotToScene( btVector3 boxSize, btVector3 position, btScalar mass, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
+  (void) eg;
+  (void) ed;
+  Robot* robot = new Robot(this->addBox(boxSize, position, mass), _scene);
+
+  _scene->addVehicle(robot);
+  
+  btCylinderShapeX* m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+
+    if(md)
+      md->setTorque(20);
+    else
+      printf("Pas de roue droite\n");
+    if(mg)
+      mg->setTorque(20);
+    else
+      printf("Pas de roue gauche\n");
 
 }

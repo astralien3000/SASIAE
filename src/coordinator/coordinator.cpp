@@ -1,4 +1,5 @@
 #include "coordinator.hpp"
+#include "mainwindow.h"
 #include "../modules/servo.hpp"
 
 
@@ -12,23 +13,24 @@ Coordinator& Coordinator::getInstance() {
     return *(Coordinator::_instance = new Coordinator()); 
 }
 
-Coordinator::Coordinator() : _physic(this){
+Coordinator::Coordinator() : _physic(this), _gui(this){
   _running = false;
   _codeFactor = 1;
   _sync = 1;
   _codeFactor = 1;
   _timeStep = 1./120.;
   _maxSubStep = 20;
+  connect(this, SIGNAL(GUISend(QString)), ,)
   connect(this, SIGNAL(calcNextStep(double,int)), &_physic, SLOT(nextStep(double,int)));
 }
 
 Coordinator::~Coordinator(){
-   QHash<QString, QProcess*>::iterator j;
-   _codeInfo.squeeze();
-   for (j = _codeInfo.begin(); j != _codeInfo.end(); ++j){
-     closeRobot(j.value());
-     j.value()=NULL;
-   }
+  QHash<QString, QProcess*>::iterator j;
+  _codeInfo.squeeze();
+  for (j = _codeInfo.begin(); j != _codeInfo.end(); ++j){
+    closeRobot(j.value());
+    j.value()=NULL;
+  }
 }
 
 
@@ -43,7 +45,7 @@ void Coordinator::pause() {
 }
 
 void Coordinator::stepDone() {
-   if(++_sync > _codeInfo.size()) // all codeInfo.are sync, calculator was the last one
+  if(++_sync > _codeInfo.size()) // all codeInfo.are sync, calculator was the last one
     {
       gotoNextStep();
     }
@@ -55,7 +57,7 @@ void Coordinator::openTable(const QString& XMLPath) {
 }
 void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
- (void) slot;
+  (void) slot;
   /* For the tests*/
  
   Modules *mod =new Servo(0);
@@ -67,7 +69,7 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
   qDebug() << "code +name"<< code + name << '\n' ;
 
-    if(!addModule(code+name,mod)){
+  if(!addModule(code+name,mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
   }
@@ -88,20 +90,28 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   proc->start("./client",QStringList());
 
   if(!proc->waitForStarted()) {
-     qDebug() << "error starting client process" << '\n' ;
-     return ;
+    qDebug() << "error starting client process" << '\n' ;
+    return ;
   }
    
-   qDebug() << "connecting signal..." << '\n' ;
-   QObject::connect(proc,SIGNAL(readyRead()),this,SLOT(CTReceived()));
-   qDebug() << "signal connected" << '\n' ;
+  qDebug() << "connecting signal..." << '\n' ;
+  QObject::connect(proc,SIGNAL(readyRead()),this,SLOT(CTReceived()));
+  qDebug() << "signal connected" << '\n' ;
 }
 
 
 void Coordinator::CTReceived() {
-  QString code("client");
-  QProcess * client=_codeInfo.value(code);
+  /* A terme le nom du code robot qui envoie le message
+     est récupéré */
+
   
+  /**/
+  if(NULL==sender()) {
+    qDebug() << "sender null in CTReceived";
+    return ;
+  } 
+  QProcess * client=sender();//=_codeInfo.value(code);
+  QString code=_codeInfo.key(client);
   
   QString message=readMessage(client);
   QStringList args=message.split(" ");
@@ -116,29 +126,30 @@ void Coordinator::CTReceived() {
 
     if(_moduleFromName.contains(name)){
       mod=_moduleFromName.value(name);
-    args.removeFirst(); // remove destination
-    args.removeFirst(); // remove name
-    qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
+      args.removeFirst(); // remove destination
+      args.removeFirst(); // remove name
+      qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
     }
     else{
       mod=NULL;
       qDebug()<<"This device's name does not correspond to a module."  << '\n';
     }
     break;
-    case('T'):
-      if(++_sync>_codeInfo.size()) // all modules are synchronised
-	gotoNextStep();
+  case('T'):
+    if(++_sync>_codeInfo.size()) // all modules are synchronised
+      gotoNextStep();
 
-      break;
-    case('M'):
-      args.removeFirst();
-      qDebug() << "message to GUI : " << args.join(" ") << '\n';
-      break;
+    break;
+  case('M'):
+    args.removeFirst();
+    qDebug() << "message to GUI : " << args.join(" ") << '\n';
+    emit(GUISend(args.join(" ")));
+    break;
     // verif du bon etat du message ?
-    default:
-      ;
-    }
+  default:
+    ;
   }
+}
 
 
 void Coordinator::MReceived(QString message) {
@@ -159,10 +170,10 @@ void Coordinator::MReceived(QString message) {
 
 void Coordinator::gotoNextStep() {
   if(_running) 
-  {
-    _sync = 0;
-    sendSyncMessages(); 
-  }
+    {
+      _sync = 0;
+      sendSyncMessages(); 
+    }
 }
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
@@ -189,11 +200,11 @@ void Coordinator::closeRobot(Slot robot){
 
 void Coordinator::closeRobot(QProcess *robot){
   robot->closeWriteChannel();
-    if(!robot->waitForFinished()) {
-      qDebug() << "error waitForFinished closeRobot" << '\n';
-      return ;
+  if(!robot->waitForFinished()) {
+    qDebug() << "error waitForFinished closeRobot" << '\n';
+    return ;
   }
-    delete robot;  
+  delete robot;  
 }
 
 
@@ -202,7 +213,13 @@ QString Coordinator::readMessage(QProcess * proc)const{
 
   //TODO utiliser QBuffer au lieu de QString !
   QString buffer(COORD_BUFFER_SIZE);
-
+  /*
+    Attention source de bug : 
+    Si le message ne contient pas de saut de ligne 
+    le message n'est pas transmis et le processus est tué.
+    Cela peut arriver si un message est lu avant d'être 
+    entièrement écrit.
+  */
   
   if(!proc->getChar(&c)) {
     proc->waitForReadyRead();
@@ -245,7 +262,7 @@ bool Coordinator::addModule(QString name, Modules * mod){
 }
 
 void Coordinator::sendSyncMessages() {
-    //sync UI time
+  //sync UI time
   emit(timer(_physic.getTime()));
   foreach(QProcess* code, _codeInfo) {
     sendMessages(QString("T ") + _physic.getTime() + " " + _codeFactor, code);

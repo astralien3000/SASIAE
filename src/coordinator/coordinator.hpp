@@ -21,10 +21,11 @@ class Coordinator: public QObject{
   Q_OBJECT
   
   signals:
+  void GUISend(QString message);
   void calcNextStep(double, int); 
   void log(QString); 
   //! \brief time for UI sync in ms
-  void timer(double);
+  void timer(unsigned long int);
 
 public:
   enum Slot{MAIN_ROBOT1,SECOND_ROBOT1,MAIN_ROBOT2,SECOND_ROBOT2};
@@ -102,6 +103,7 @@ private:
 
   static Coordinator* _instance;
   PhysicalCalculator _physic;
+  MainWindow _gui;
 
   bool _running;
   int _sync; 
