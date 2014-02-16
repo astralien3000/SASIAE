@@ -1,29 +1,31 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "ui_mainwindow.h"
+#include <QtWidgets/QMainWindow>
+#include <QtCore/QDebug>
 
+//#include "ui_mainwindow.h"
+namespace Ui {
+class MainWindow;
+}
 
-
-class MainWindow:  public QMainWindow,public Ui_MainWindow {
-
-Q_OBJECT
-
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+    
 public:
-  /* 
-     Est-ce que cela ne pose pas un problème au lancement du programme,
-     puisque c'est gui qui contiendra le main, or il faut que le coordinator
-     soir lancé pour construire _gui ..?
-   */
-    MainWindow(QObject* parent = 0);
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+    
+private:
+    Ui::MainWindow *ui;
 
 public slots:
-    void do_sth();
-    void CReceived(QString message);
+  void do_sth();
+  void CReceived(QString message);
+
 
 };
 
-
-QT_END_NAMESPACE
-
 #endif // MAINWINDOW_H
+  
