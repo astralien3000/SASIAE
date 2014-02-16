@@ -1,7 +1,7 @@
 #ifndef PHYSICAL_CALCULATOR_HPP
 #define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
-#include <QObject>
+#include <QtCore/QObject>
 #include <aversive.hpp>
 #include "wheel.hpp"
 #include "robot.hpp"
