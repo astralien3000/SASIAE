@@ -8,6 +8,9 @@ class Wheel {
 public: 
   Wheel(Robot *robot = NULL);
   Wheel(Robot* robot, const btVector3 &pos,const btVector3 &direction, btScalar radius, bool motorized);
+  /* init is called in the constructor right above. 
+   * But not in the first one. 
+   */
   void init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized);
   double getRotation();
   double getTorque();
