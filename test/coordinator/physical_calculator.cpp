@@ -31,3 +31,5 @@ void PhysicalCalculator::empty_scene(){ sceneType = EMPTY_WORLD;}
   PhysicalCalculator::~PhysicalCalculator(){
     }
   
+void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){}
+Robot * PhysicalCalculator::getRobot(btVector3 boxSize, btVector3 position, btScalar mass){return NULL;}

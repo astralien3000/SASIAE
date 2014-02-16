@@ -2,6 +2,10 @@
 #define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
 #include <QObject>
+#include "../../src/physical_calculator/wheel.hpp"
+#include "../../src/physical_calculator/robot.hpp"
+
+
 //! \brief Physic Calculator
 /*!
   The goal of this object is
@@ -18,6 +22,8 @@ public slots:
   //! it calculates the next step
   void nextStep(double, int);
 public:
+  void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
+  Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);
   //! \brief return the current time of simulation in sec
   double getTime() const;
   //! \brief it returns a DiscreteDynamicsWorld
