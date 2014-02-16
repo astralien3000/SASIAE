@@ -5,56 +5,31 @@
 
 //cylindre de masse 0.1
 
-Balise:Balise(btRigidBody* chassis, QObject* parent, PhysicalCalculator* calculator);
-	 Modules(parent), _chassis(chassis)  {
-
-
-	btDiscreteDynamicsWorld * myscene= calculator->getScene();
-
-
-	btTransform trans;
-	trans = robot->getChassisWorldTransform();
-	btScalar z,y,x;
-	trans.getBasis().getEulerZYX(z,y,x);
-	this->position =
-	btVector3(trans.getOrigin().getX()
-		, trans.getOrigin().getY()
-		, trans.getOrigin().getZ()); //la position de la balise.
-
-
-
-	_dataRoot = new QStandardItem("Balise");
-
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("X")
-		<< new QStandardItem(QString()+ trans.getOrigin().getX()));
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Y")
-		<< new QStandardItem(QString()+ trans.getOrigin().getY()));
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Z")
-		<< new QStandardItem(QString()+ trans.getOrigin().getZ()));
-
-
+Balise::Balise(btDynamicsWorld* world, btRigidBody* chassis)
+	: _chassis(chassis), _world(world)  {
 
 	//masse très faible pour ne pas empecher les mouvements du robot.
-	btScalar mass(0.1);
-
-	btDefaultMotionState* myMotionState = new btDefaultMotionState(trans);
+		btScalar mass(0.1);
 	// Collision avec rien
-	btCollisionShape* boxShape = new btCylinderShape(btVector3(3,0,0));
+		 btVector3 normal = btVector3(3,0,0);
+		btCollisionShape* boxShape = new btCylinderShape(normal);
+		btVector3 boxInertial(0,0,0);
 
-	btVector3 localInertia(0,0,0);
-	boxShape->calculateLocalInertia(mass, localInertia);
+		boxShape->calculateLocalInertia(mass, boxInertial);
 
 
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
-	boxBody=new btRigidBody(rbInfo);
+		btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform());
+		boxShape->calculateLocalInertia(mass, boxInertial);
+		btRigidBody::btRigidBodyConstructionInfo boxBodyCi(mass, boxMotionState, boxShape, boxInertial);
+		_sensor_box = new btRigidBody(boxBodyCi);
+		_world->addRigidBody(_sensor_box);
+		//ok
 
-	myscene->addRigidBody(boxBody);
-  // ajout des contraintes de points
-  btVector3 normal = this->position;
+  // ajout des contraintes de points not complete ()
   normal.normalize();
-  btVector3 pivotInChassis(0, 0, 43/2); //todo : add this as a constant
-  btVector3 pivotInBox(boxSize.getX()*btScalar(4/3),0,boxSize.getZ());
-  btTypedConstraint* p2pL = new btPoint2PointConstraint(*_chassis,*boxBody, pivotInChassis,pivotInBox);
+  btVector3 pivotInChassis(0, 0, 43/2); //todo : add this as a constant when verified
+  btVector3 pivotInBox(normal.getX()*btScalar(-1),0,normal.getZ());
+  btTypedConstraint* p2pL = new btPoint2PointConstraint(*_chassis,*_sensor_box, pivotInChassis,pivotInBox);
 
   // add constraint to world
   _world->addConstraint(p2pL);
@@ -62,22 +37,7 @@ Balise:Balise(btRigidBody* chassis, QObject* parent, PhysicalCalculator* calcula
 }
 
 btVector3 Balise::get_position() {
-	return this->position;
+ btVector3 position = _sensor_box->getCenterOfMassPosition();
+ return position;
 }
 
-QStandardItem* Balise::getData() {
-	return _dataRoot;
-}
-
-void Balise::simulStep() {
-    btTransform transformation;
-	boxBody->getMotionState()->getWorldTransform(transformation);
-	this->position.setX(transformation.getOrigin().getX());
-	this->position.setY(transformation.getOrigin().getY());
-	this->position.setZ(transformation.getOrigin().getZ());
-  _dataRoot->child(1,1)->setText(QString() + transformation.getOrigin().getX()); // pas sûr pour les valeurs mises dan child, les tests permettront d'être sur.
-  _dataRoot->child(2,1)->setText(QString() + transformation.getOrigin().getY());
-  _dataRoot->child(3,1)->setText(QString() + transformation.getOrigin().getZ());
-
-}//TODO remet à jour le vecteur de position.
-void Balise::received(QString message) {}
