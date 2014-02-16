@@ -2,6 +2,8 @@
 //#include "modules.hpp"
 #include "../physical_calculator/physical_calculator.hpp"
 #include "../modules/modules.hpp"
+//#include "../gui/mainwindow.h"
+
 #include <QtCore/QThread>
 #include <QtCore/QProcess>
 #include <QtCore/QHash>
@@ -30,6 +32,9 @@ class Coordinator: public QObject{
 public:
   enum Slot{MAIN_ROBOT1,SECOND_ROBOT1,MAIN_ROBOT2,SECOND_ROBOT2};
   ~Coordinator();
+  /* Hugo : I don't know if this function must be static or not */
+  PhysicalCalculator& getPhysicalCalculatorInstance();
+
 
 public slots:
 
@@ -46,6 +51,11 @@ public slots:
   void openTable(const QString& XMLPath);
   void openRobot(const QString& XMLPath, Slot slot);
   //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
+  
+  // used in test3dCoordinator
+  /*PhysicalCalculator getPhysicalCalculatorScene()const;*/
+						  
+						   
 
 private slots:
   //! \brief read the message received from the Client Thread
@@ -77,7 +87,11 @@ private:
   void sendSyncMessages();
   void closeRobot(Slot robot);
   void closeRobot(QProcess *robot);
-  //! \brief read one line of proc output
+  //! \brief read one line of process output
+  /*
+    The line must be a message : 
+    for example : "D TESTER I'm new \n"
+   */
   QString readMessage(QProcess * proc)const;
 
   /*
@@ -103,7 +117,7 @@ private:
 
   static Coordinator* _instance;
   PhysicalCalculator _physic;
-  MainWindow _gui;
+  //MainWindow _gui;
 
   bool _running;
   int _sync; 

@@ -1,5 +1,4 @@
 #include "coordinator.hpp"
-#include "mainwindow.h"
 #include "../modules/servo.hpp"
 
 
@@ -13,14 +12,19 @@ Coordinator& Coordinator::getInstance() {
     return *(Coordinator::_instance = new Coordinator()); 
 }
 
-Coordinator::Coordinator() : _physic(this), _gui(this){
+PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
+  return _physic;
+}
+
+
+Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
   _running = false;
   _codeFactor = 1;
   _sync = 1;
   _codeFactor = 1;
   _timeStep = 1./120.;
   _maxSubStep = 20;
-  connect(this, SIGNAL(GUISend(QString)), ,)
+  //connect(this, SIGNAL(GUISend(QString)), &_gui,SLOT(CReceived(QString)));
   connect(this, SIGNAL(calcNextStep(double,int)), &_physic, SLOT(nextStep(double,int)));
 }
 
@@ -59,7 +63,17 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
   (void) slot;
   /* For the tests*/
- 
+  
+  /*needed for test3dCoordinator*/
+  /*Wheel _MD = new Wheel(_robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel _MG = new Wheel(_robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel _ED = new Wheel(_robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+  Wheel _EG = new Wheel(_robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+
+  addRobotToScene(btVector3(2,0.5,2),btVector3(0,0,0),8,_MD, _MG, _ED, _EG) ;
+  */
+
+  /*needed for communication tests*/
   Modules *mod =new Servo(0);
   QString code=XMLPath;
   QString name("TESTER");
@@ -110,7 +124,7 @@ void Coordinator::CTReceived() {
     qDebug() << "sender null in CTReceived";
     return ;
   } 
-  QProcess * client=sender();//=_codeInfo.value(code);
+  QProcess * client=(QProcess*)sender();//=_codeInfo.value(code);
   QString code=_codeInfo.key(client);
   
   QString message=readMessage(client);
@@ -143,7 +157,7 @@ void Coordinator::CTReceived() {
   case('M'):
     args.removeFirst();
     qDebug() << "message to GUI : " << args.join(" ") << '\n';
-    emit(GUISend(args.join(" ")));
+    //emit(GUISend(args.join(" ")));
     break;
     // verif du bon etat du message ?
   default:
@@ -213,6 +227,7 @@ QString Coordinator::readMessage(QProcess * proc)const{
 
   //TODO utiliser QBuffer au lieu de QString !
   QString buffer(COORD_BUFFER_SIZE);
+
   /*
     Attention source de bug : 
     Si le message ne contient pas de saut de ligne 
@@ -270,3 +285,9 @@ void Coordinator::sendSyncMessages() {
   emit(calcNextStep(_timeStep,_maxSubStep));
   
 }
+
+
+/*btDiscreteDynamicWorlds* Coordinator::getPhysicalCalculatorScene()const {
+  return _physic.getScene();
+}
+*/
