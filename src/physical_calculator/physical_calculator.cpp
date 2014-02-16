@@ -92,10 +92,9 @@ void PhysicalCalculator::init() {
 
 }
 
-void PhysicalCalculator::addRobotToScene( btVector3 boxSize, btVector3 position, btScalar mass, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
+void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
   (void) eg;
   (void) ed;
-  Robot* robot = new Robot(this->addBox(boxSize, position, mass), _scene);
 
   _scene->addVehicle(robot);
   
@@ -110,4 +109,10 @@ void PhysicalCalculator::addRobotToScene( btVector3 boxSize, btVector3 position,
     else
       printf("Pas de roue gauche\n");
 
+}
+
+Robot * PhysicalCalculator::getRobot(btVector3 boxSize, btVector3 position, btScalar mass){
+  Robot* robot =new Robot(addBox(boxSize, position, mass), _scene);
+
+return robot;
 }

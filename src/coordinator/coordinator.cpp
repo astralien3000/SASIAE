@@ -16,6 +16,10 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
+Robot *Coordinator::getRobot(Slot theRobot){
+  Robot * robot=_robotObject.value(theRobot);
+  return robot;
+}
 
 Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
   _running = false;
@@ -65,13 +69,19 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   /* For the tests*/
   
   /*needed for test3dCoordinator*/
-  /*Wheel _MD = new Wheel(_robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-  Wheel _MG = new Wheel(_robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-  Wheel _ED = new Wheel(_robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
-  Wheel _EG = new Wheel(_robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+  btVector3 boxSize=btVector3(2,0.5,2);
+  btVector3 position=btVector3(0,0,0);
+  btScalar mass=8;
+  Robot* robot = _physic.getRobot(boxSize, position, mass);
 
-  addRobotToScene(btVector3(2,0.5,2),btVector3(0,0,0),8,_MD, _MG, _ED, _EG) ;
-  */
+  _robotObject.insert(MAIN_ROBOT1,robot);
+  Wheel* _MD = new Wheel(robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel* _MG = new Wheel(robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
+  Wheel* _ED = new Wheel(robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+  Wheel* _EG = new Wheel(robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+
+  _physic.addRobotToScene(robot,_MD, _MG, _ED, _EG) ;
+  
 
   /*needed for communication tests*/
   Modules *mod =new Servo(0);

@@ -41,6 +41,8 @@ public slots:
   //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
   static Coordinator& getInstance();
 
+  Robot * getRobot(Slot theRobot);
+
   //! \brief start the simulation
   void play();
   //! \brief pause the simulation
@@ -70,6 +72,8 @@ private slots:
   void MReceived(QString);
 
 private:
+  QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
+
   QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
     
   // The _moduleInfo's key must be ROBOTCODENAMEmodulename

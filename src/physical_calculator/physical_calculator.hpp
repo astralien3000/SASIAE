@@ -38,8 +38,9 @@ public:
   void nextStep(float time=1/80.f, int addedoperations=20);
 
   unsigned long int getTime() const;
-  void addRobotToScene( btVector3 boxSize, btVector3 position, btScalar mass, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
-
+  void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
+  Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);
+  
   //! \brief Constructor
   /*!
    * It initialises a physic calculator, with
