@@ -11,5 +11,5 @@ QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -L/usr/local/lib
 
 # Input
-HEADERS += modules.hpp  servo.hpp RDS.hpp ../physical_calculator/balise.hpp
-SOURCES += modules.cpp  servo.cpp RDS.cpp ../physical_calculator/balise.cpp
+HEADERS += balise.hpp
+SOURCES += balise.cpp
