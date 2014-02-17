@@ -5,13 +5,16 @@
     setCameraDistance(btScalar(50.));
     pc->simple_scene_walls(100);
     m_dynamicsWorld = pc->getScene();
-    _robot = new Robot(pc->addBox(btVector3(2,0.5,2), btVector3(0,0,0), 8), pc->getScene());
+btRigidBody* chassis =pc->addBox(btVector3(15,17.5,15), btVector3(0,0,0), 8);
+    chassis->setFriction(0.000000000001);
+    _robot = new Robot(chassis, pc->getScene());
     pc->getScene()->addVehicle(_robot);
-     _MD = new Wheel(_robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-     _MG = new Wheel(_robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-     _ED = new Wheel(_robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
-     _EG = new Wheel(_robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
-    m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+     _MD = new Wheel(_robot, btVector3(16,-17.5+3-0.01,0),btVector3(0,-1,0),3,true);
+     _MG = new Wheel(_robot, btVector3(-16,-17.5+3-0.01,0),btVector3(0,-1,0),3,true);
+     //_ED = new Wheel(_robot, btVector3(19,-17.5+3,0),btVector3(0,-1,0),3,false);
+     //_EG = new Wheel(_robot, btVector3(-19,-17.5+3,0),btVector3(0,-1,0),3,false);
+    m_wheelShape = new btCylinderShapeX(btVector3(1,3,3));
+    _dist_sensor = new DistSensor(pc->getScene(),chassis,btVector3(0,-16,15),btVector3(0,0,15),btVector3(4,1,1),0.000001);
 }
 
 	void	BasicDemo::exitPhysics() {}
@@ -29,7 +32,7 @@
       else
       printf("Pas de roue gauche\n");
       pc->nextStep();
-      printf("%lu            \r", pc->getTime());
+      printf("%lf            \r", _dist_sensor->getDist());
 
     }
     renderme();
@@ -43,7 +46,6 @@
     //pc->getScene()->debugDrawWorld();
     glFlush();
     swapBuffers();
-    printf("toto\n");
   }
 	void	BasicDemo::clientResetScene() {
     exitPhysics();

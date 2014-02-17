@@ -1,5 +1,7 @@
 #include "dist_sensor.hpp"
 
+int DistSensor::MAX_DIST = 100000;
+
 DistSensor::DistSensor(btDynamicsWorld* world, btRigidBody* chassis) : _chassis(chassis), _world(world) {}
 
 DistSensor::DistSensor(btDynamicsWorld* world, btRigidBody* chassis, const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass) : _chassis(chassis), _world(world)  {
@@ -7,9 +9,9 @@ DistSensor::DistSensor(btDynamicsWorld* world, btRigidBody* chassis, const btVec
 }
 
 void DistSensor::init(const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass){
-  _dir = direction;
  //NOTE: boxsize vu de face, X profondeur, Y hauteur, Z largeur
  //NOTE: boxsize en halfextents i.e. dimension d'un quart de boite
+  _box_depth = boxSize.getZ();
  //creation de la boite
  btCollisionShape* boxShape = new btBoxShape(boxSize);
  btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0,0)));
@@ -45,8 +47,9 @@ double DistSensor::getDist(){
 void DistSensor::calcDist(){
   btTransform trans;
  _sensor_box->getMotionState()->getWorldTransform(trans);//TODO check if it's the right vect 
- btVector3 start = trans.getOrigin();
- btVector3 end = start;//TODO check if it's the right vect 
+btVector3 worldDir = btVector3(0,0,1).rotate(trans.getRotation().getAxis(), trans.getRotation().getAngle()).normalize();
+ btVector3 start = trans.getOrigin()+worldDir*_box_depth;
+ btVector3 end = start+worldDir*MAX_DIST;//TODO check if it's the right vect 
  btCollisionWorld::ClosestRayResultCallback rayCallback(start,end);
  //rayCallback.m_flags |= btTriangleRaycastCallback::kF_FilterBackfaces;
  _world->rayTest(start,end,rayCallback);

@@ -13,6 +13,7 @@
 #include "../../src/physical_calculator/physical_calculator.hpp"
 #include "../../src/physical_calculator/robot.hpp"
 #include "../../src/physical_calculator/wheel.hpp"
+#include "../../src/physical_calculator/dist_sensor.hpp"
 #include <cstdio>
 /*class btBroadphaseInterface;
 class btCollisionShape;
@@ -34,6 +35,7 @@ class BasicDemo : public PlatformDemoApplication
   Wheel* _ED;
   Wheel* _MG;
   Wheel* _EG;
+  DistSensor* _dist_sensor;
 
 	public:
 

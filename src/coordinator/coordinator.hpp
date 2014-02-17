@@ -23,6 +23,7 @@ class Coordinator: public QObject{
   Q_OBJECT
   
   signals:
+  //! \brief Send user message to UI and log file
   void GUISend(QString message);
   void calcNextStep(double, int); 
   void log(QString); 
@@ -33,6 +34,7 @@ public:
   enum Slot{MAIN_ROBOT1,SECOND_ROBOT1,MAIN_ROBOT2,SECOND_ROBOT2};
   ~Coordinator();
   /* Hugo : I don't know if this function must be static or not */
+  // used in test3dCoordinator
   PhysicalCalculator& getPhysicalCalculatorInstance();
 
 
@@ -54,8 +56,6 @@ public slots:
   void openRobot(const QString& XMLPath, Slot slot);
   //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
   
-  // used in test3dCoordinator
-  /*PhysicalCalculator getPhysicalCalculatorScene()const;*/
 						  
 						   
 
@@ -121,7 +121,6 @@ private:
 
   static Coordinator* _instance;
   PhysicalCalculator _physic;
-  //MainWindow _gui;
 
   bool _running;
   int _sync; 

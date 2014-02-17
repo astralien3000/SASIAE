@@ -4,6 +4,7 @@
 #include <btBulletDynamicsCommon.h>
 
 class DistSensor {
+  static int MAX_DIST;
 public:
   DistSensor(btDynamicsWorld* world, btRigidBody* chassis = NULL);
   DistSensor(btDynamicsWorld* world, btRigidBody* chassis, const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass = btScalar(0.001));
@@ -14,7 +15,7 @@ public:
 private:
   btRigidBody* _chassis;
   btRigidBody* _sensor_box;
-  btVector3 _dir;
+  btScalar _box_depth;
   double _cache;
   btDynamicsWorld* _world;
 
