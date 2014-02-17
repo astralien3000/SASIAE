@@ -37,4 +37,6 @@ double Wheel::getTorque() {
 
 void Wheel::setTorque(double f) {
   _robot->applyEngineForce(f,_wheel_number);
+  if(f == 0) 
+    _robot->setBrake(10000,_wheel_number);
 }
