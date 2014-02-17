@@ -56,7 +56,7 @@ btVector3 worldDir = btVector3(0,0,1).rotate(trans.getRotation().getAxis(), tran
  if(rayCallback.hasHit()) {
   //btVector3 p = start.lerp(end, rayCallback.m_closestHitFraction);
   //_cache = start.distance(p);
-  _cache = start.distance(end)*rayCallback.m_closestHitFraction;
+  _cache = trans.getOrigin().distance(end)*rayCallback.m_closestHitFraction;
  }
  else {
    _cache = INFINITY;
