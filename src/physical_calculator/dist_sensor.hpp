@@ -14,6 +14,7 @@ public:
 private:
   btRigidBody* _chassis;
   btRigidBody* _sensor_box;
+  btVector3 _dir;
   double _cache;
   btDynamicsWorld* _world;
 
