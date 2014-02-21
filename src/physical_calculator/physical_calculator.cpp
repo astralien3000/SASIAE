@@ -10,6 +10,8 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
   _solver = new btSequentialImpulseConstraintSolver;
   _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
+  btContactSolverInfo& info = _scene->getSolverInfo();
+  info.m_numIterations = 20;
   _clock= new btClock();
 }
 
@@ -91,7 +93,7 @@ void PhysicalCalculator::init() {
   _scene->setGravity(btVector3(0,-10,0));
 
 }
-
+/*
 void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
   (void) eg;
   (void) ed;
@@ -116,3 +118,4 @@ Robot * PhysicalCalculator::getRobot(btVector3 boxSize, btVector3 position, btSc
 
 return robot;
 }
+*/

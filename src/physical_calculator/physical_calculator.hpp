@@ -3,8 +3,8 @@
 #include <btBulletDynamicsCommon.h>
 #include <QtCore/QObject>
 #include <aversive.hpp>
-#include "wheel.hpp"
-#include "robot.hpp"
+//#include "wheel.hpp"
+//#include "robot.hpp"
 
 
 //! \brief Physic Calculator
@@ -38,8 +38,8 @@ public:
   void nextStep(float time=1/80.f, int addedoperations=20);
 
   unsigned long int getTime() const;
-  void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
-  Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);
+  //void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
+  //Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);
   
   //! \brief Constructor
   /*!
