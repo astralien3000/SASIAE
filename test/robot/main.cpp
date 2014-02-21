@@ -29,12 +29,12 @@ int main(int argc, char** argv) {
   Aversive::init();
   
   Task t1([]() {
-      if(enc_l.getValue() >= 1000 && MOT_L != 0) {
-	mot_l.setValue(0);
+      if(enc_l.getValue() >= 10000 && MOT_L >= 0) {
+	mot_l.setValue(-10);
 	//io << "stop left !\n";
       }
-      if(enc_r.getValue() >= 5000 && MOT_R != 0) {
-	mot_r.setValue(0);
+      if(enc_r.getValue() >= 50000 && MOT_R >= 0) {
+	mot_r.setValue(-10);
 	//io << "stop right !\n";
       }
     });

@@ -17,7 +17,7 @@ public slots:
   virtual void simulStep() = 0;
 
 signals:
-  //virtual void send(QString message) = 0;
+  void send(Modules*,QString);
   
 
 };

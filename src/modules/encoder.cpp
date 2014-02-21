@@ -27,13 +27,13 @@ Encoder::Encoder(Wheel* wheel, QString params, QObject* parent)
 }
 
 void Encoder::received(QString message) {
-    qDebug() << "Message du robot vers l'encodeur Oo :" << message;
+  qDebug() << "Message du robot vers l'encodeur Oo :" << message;
 }
 
 void Encoder::simulStep() {
   _dataRoot->child(1,1)->setText(QString() + _wheel->getRotation());
   _dataRoot->child(2,1)->setText(QString() + ((int)_wheel->getRotation()*(double)_accuracy));
-  emit(send(QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
+  emit(send(this, QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
 }
 
 QStandardItem* Encoder::getData() {

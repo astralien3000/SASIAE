@@ -23,7 +23,7 @@ public slots:
   virtual void simulStep();
 
 signals:
-  virtual void send(QString message);
+  virtual void send(Modules*,QString message);
  
 private:
   Wheel* _wheel;  

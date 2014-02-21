@@ -75,6 +75,8 @@ private slots:
   */
   void MReceived(QString);
 
+  void sendModuleMessage(Modules* m, QString msg);
+
 private:
 
   QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;

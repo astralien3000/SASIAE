@@ -5,7 +5,7 @@
 #include "../modules/encoder.hpp"
 #include "../modules/motor_wheel.hpp"
 #include "../modules/modules.hpp"
-#include<cstdio>
+#include <cstdio>
 
 Coordinator* Coordinator::_instance=NULL;
 
@@ -128,10 +128,13 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
   _moduleFromName.insert("right_encoder",encd);
   _moduleInfo.insert(encd, QPair<QString,QString>(XMLPath,"right_encoder"));
   connect(this, SIGNAL(modulesNextStep()), encd, SLOT(simulStep())); 
+  connect(encd, SIGNAL(send(Modules*,QString)), this, SLOT(sendModuleMessage(Modules*,QString)));
   Modules *encg = new Encoder(_EG, "", this);
   _moduleFromName.insert("left_encoder",encg);
   _moduleInfo.insert(encg, QPair<QString,QString>(XMLPath,"left_encoder"));
-connect(this, SIGNAL(modulesNextStep()), encg, SLOT(simulStep())); 
+  addModuleAndCodeName(encg, "", "left_encoder");
+  connect(this, SIGNAL(modulesNextStep()), encg, SLOT(simulStep()));
+  connect(encg, SIGNAL(send(Modules*,QString)), this, SLOT(sendModuleMessage(Modules*,QString)));
   Modules *motd = new MotorWheel(_MD, "", this);
   _moduleFromName.insert("right_motor",motd);
   _moduleInfo.insert(motd, QPair<QString,QString>(XMLPath,"right_motor"));
@@ -276,6 +279,11 @@ void Coordinator::gotoNextStep() {
     }
 }
 
+void Coordinator::sendModuleMessage(Modules* m, QString msg) {
+  QPair<QString, QString> mod_bot = _moduleInfo.value(m);
+  sendDeviceMessage(mod_bot.second, msg, mod_bot.first);
+}
+
 void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
   if(_codeInfo.contains(code))
     sendDeviceMessage(name, msg, _codeInfo.value(code));
@@ -285,6 +293,7 @@ void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QProcess* p) {
   sendMessages(QString("D ") + name + " " + msg + "\n", p);
+  qDebug() << QString("D ") + name + " " + msg + "\n" << endl;
 }
 
 void Coordinator::sendMessages(QString msg, QProcess* p) {
@@ -366,8 +375,8 @@ void Coordinator::sendSyncMessages() {
   //sync UI time
   emit(timer(_physic.getTime()));
   foreach(QProcess* code, _codeInfo) {
-    sendMessages(QString("T %1 %2").arg((int)_physic.getTime()*1000).arg((int)_codeFactor), code);
-    //qDebug() << QString("T %1 %2").arg((int)_physic.getTime()*1000).arg((int)_codeFactor) << endl;
+    sendMessages(QString("T %1 %2\n").arg((int)_physic.getTime()*1000).arg((int)_codeFactor), code);
+    qDebug() << QString("T %1 %2\n").arg((int)_physic.getTime()*1000).arg((int)_codeFactor) << endl;
   }
   emit(calcNextStep(_timeStep,_maxSubStep));  
 }
