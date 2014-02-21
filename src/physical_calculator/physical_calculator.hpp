@@ -34,9 +34,12 @@ public:
   void simple_scene_walls(btScalar size);
   //! \brief it adds a box in the world
   btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
+
+public slots:
   //! it calculates the next step
   void nextStep(double time=1/80.f, int addedoperations=20);
 
+public:
   unsigned long int getTime() const;
   //void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
   //Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);

@@ -97,7 +97,7 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
   // Only the module Servo is tested right now
   //Modules *mod =new Servo(0);
   QString code=XMLPath;
-  QString modName("TESTER");
+  //QString modName("TESTER");
   Modules *encd = new Encoder(_ED, "", this);
   _moduleFromName.insert("right_encoder",encd);
   _moduleInfo.insert(encd, QPair<QString,QString>(XMLPath,"right_encoder"));
@@ -112,7 +112,7 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
   _moduleInfo.insert(motg, QPair<QString,QString>(XMLPath,"left_motor"));
   //TODO really read the file  
 
-  qDebug() << "code +modName"<< code + modName << '\n' ;
+  //qDebug() << "code +modName"<< code + modName << '\n' ;
 
   /* 
    * The addModule function takes a concatenation of
@@ -195,7 +195,7 @@ void Coordinator::CTReceived() {
       qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
 
       /*TEST*/
-      sendDeviceMessage("TESTER", "Stop", client);
+      //sendDeviceMessage("TESTER", "Stop", client);
         
 
     }

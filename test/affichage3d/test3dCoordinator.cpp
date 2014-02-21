@@ -34,7 +34,7 @@ void	BasicDemo::initPhysics() {
   m_dynamicsWorld =(cdn->getPhysicalCalculatorInstance()).getScene();
 
   cdn->openTable("coucou");
-  cdn->openRobot("Le robot",Coordinator::MAIN_ROBOT1);
+  cdn->openRobot("",Coordinator::MAIN_ROBOT1);
   /*
     pc->simple_scene_walls(100);
   */

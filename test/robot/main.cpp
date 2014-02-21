@@ -7,7 +7,7 @@
 #include <device/eirbot2014/motor.hpp>
 #include <device/eirbot2014/encoder.hpp>
 
-#include <device/stream/uart_stream.hpp>
+//#include <device/stream/uart_stream.hpp>
 
 s32 MOT_L = 0;
 s32 MOT_R = 0;
@@ -18,7 +18,7 @@ s32 ENC_R = 0;
 Motor<s32> mot_l("left_motor", &MOT_L), mot_r("right_motor", &MOT_R);
 Encoder<s32> enc_l("left_encoder", &ENC_L), enc_r("right_encoder", &ENC_R);  
 
-UartStream<0> io("stdio");
+//UartStream<0> io("stdio");
 
 Scheduler& sched = Scheduler::instance();
 
