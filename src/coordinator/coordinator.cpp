@@ -95,9 +95,7 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
 
   /*needed for communication tests*/
   // Only the module Servo is tested right now
-  //Modules *mod =new Servo(0);
   QString code=XMLPath;
-  //QString modName("TESTER");
   Modules *encd = new Encoder(_ED, "", this);
   _moduleFromName.insert("right_encoder",encd);
   _moduleInfo.insert(encd, QPair<QString,QString>(XMLPath,"right_encoder"));
@@ -111,8 +109,6 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
   _moduleFromName.insert("left_motor",motg);
   _moduleInfo.insert(motg, QPair<QString,QString>(XMLPath,"left_motor"));
   //TODO really read the file  
-
-  //qDebug() << "code +modName"<< code + modName << '\n' ;
 
   /* 
    * The addModule function takes a concatenation of
@@ -166,56 +162,56 @@ void Coordinator::CTReceived() {
   /* obtain the robot code name corresponding */  
   QString code=_codeInfo.key(client);
   
-  QString message=readMessage(client);
-  qDebug() << "Message : " << message;
-  QStringList args=message.split(" ");
-  QString name;
-  if(args.size()>1)
-    name=args[1];
+  while(client->canReadLine()) {
+    QString message=readMessage(client);
+    qDebug() << "Message : " << message;
+    QStringList args=message.split(" ");
+    QString name;
+    if(args.size()>1)
+      name=args[1];
 
-  switch((args[0].toStdString())[0]/*catch message first letter*/){
-  case('S'):
-    sendMessages("S",client);
-    client->closeWriteChannel();
-    qDebug() << "client closed" ;
-    if(client->waitForFinished())
+    switch((args[0].toStdString())[0]/*catch message first letter*/){
+    case('S'):
+      sendMessages("S",client);
+      client->closeWriteChannel();
       qDebug() << "client closed" ;
-    QCoreApplication::exit();
+      if(client->waitForFinished())
+	qDebug() << "client closed" ;
+      QCoreApplication::exit();
 
-    break;
-  case('D'): /* device message */
-    Modules * mod;
-    name = code+name; /* Cf note in openRobot */
-    qDebug() << "name : " << name ;
+      break;
+    case('D'): /* device message */
+      Modules * mod;
+      name = code+name; /* Cf note in openRobot */
+      qDebug() << "name : " << name ;
 
-    if(_moduleFromName.contains(name)){
-      mod=_moduleFromName.value(name);
-      args.removeFirst(); /* remove destination from the message */
-      args.removeFirst(); /* remove name from the message */
-      qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
+      if(_moduleFromName.contains(name)){
+	mod=_moduleFromName.value(name);
+	args.removeFirst(); /* remove destination from the message */
+	args.removeFirst(); /* remove name from the message */
+	qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
       
-      mod->received(args.join(" "));
-      /*TEST*/
-      //sendDeviceMessage("TESTER", "Stop", client);
-    }
-    else{
-      mod=NULL;
-      qDebug()<<"This device's name does not correspond to a module."  << '\n';
-    }
-    break;
-  case('T'): /* Synchronisation message */
-    if(++_sync>_codeInfo.size()) /* all modules are synchronised */
-      gotoNextStep();
-    break;
-  case('M'): /* other message (GUI) */
-    args.removeFirst();
-    qDebug() << "message to GUI : " << args.join(" ") << '\n';
-    // Ne fonctionne pas encore
-    //emit(GUISend(args.join(" ")));
+	mod->received(args.join(" "));
+      }
+      else{
+	mod=NULL;
+	qDebug()<<"This device's name does not correspond to a module."  << '\n';
+      }
+      break;
+    case('T'): /* Synchronisation message */
+      if(++_sync>_codeInfo.size()) /* all modules are synchronised */
+	gotoNextStep();
+      break;
+    case('M'): /* other message (GUI) */
+      args.removeFirst();
+      qDebug() << "message to GUI : " << args.join(" ") << '\n';
+      // Ne fonctionne pas encore
+      //emit(GUISend(args.join(" ")));
     
-    break;
-  default:
-    qDebug() << "Unrecognized message header" << endl;
+      break;
+    default:
+      qDebug() << "Unrecognized message header" << endl;
+    }
   }
 }
 
