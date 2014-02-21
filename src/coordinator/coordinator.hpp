@@ -32,6 +32,8 @@ class Coordinator: public QObject{
   //! \brief time for UI sync in ms
   void timer(unsigned long int);
 
+  void modulesNextStep(void);
+
 public:
   enum Slot{MAIN_ROBOT1,SECOND_ROBOT1,MAIN_ROBOT2,SECOND_ROBOT2};
   ~Coordinator();
@@ -88,8 +90,12 @@ private:
   void sendDeviceMessage(QString name, QString msg, QProcess* p);
   void sendDeviceMessage(QString name, QString msg, QString code);
   void sendMessages(QString msg, QProcess* p);
+  
+public:
   //! \brief send sync message to all Robot Code Process
   void sendSyncMessages();
+
+private:
   void closeRobot(Slot robot);
   void closeRobot(QProcess *robot);
   //! \brief read one line of process output

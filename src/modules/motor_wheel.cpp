@@ -50,5 +50,5 @@ void MotorWheel::received(QString message) {
   }
 }
 void MotorWheel::simulStep() {
-  _wheel->setTorque(_motorMaxTorque*_gearRatio*_inputRatio);
+  _wheel->setTorque(_motorMaxTorque*_gearRatio*_inputRatio / 127.0);
 }

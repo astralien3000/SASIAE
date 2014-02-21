@@ -76,14 +76,42 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   (void) slot;
   /* For the tests*/
   
+  
+  
   /*needed for test3dCoordinator*/
+  //setCameraDistance(btScalar(340.));
+  _physic.simple_scene_walls(300);
+  btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
+  //////////////////////////
+  btCollisionShape* boxA = new btBoxShape(btVector3(1,0.25,1));
+  btCollisionShape* boxB = new btBoxShape(btVector3(15,17.25,15));
+  //btCollisionShape* boxB = new btBoxShape(btVector3(15,17.5,15));
+  btCompoundShape* cyl0 = new btCompoundShape();
+  cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(6,-17,14)),boxA);
+  cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(-6,-17,14)),boxA);
+  cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(6,-17,-14)),boxA);
+  cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(-6,-17,-14)),boxA);
+  cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.5,0)),boxB);
+  
   
   btVector3 boxSize=btVector3(15,17.5,15);
   btVector3 position=btVector3(0,17.5,0);
   btScalar mass=80;
-  Robot* robot =new Robot(_physic.addBox(boxSize, position, mass), _physic.getScene());
+    btVector3 localInertia;
+    btDefaultMotionState* MT = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,17.5,0)));
+    cyl0->calculateLocalInertia(mass,localInertia);
+    btRigidBody::btRigidBodyConstructionInfo ci(mass,MT,cyl0,localInertia);
+    //ci.m_startWorldTransform.setOrigin(btVector3(0,3,0));
 
-  _robotObject.insert(MAIN_ROBOT1,robot);
+    btRigidBody* chassis = new btRigidBody(ci);//1,0,cyl0,localInertia);
+    m_dynamicsWorld->addRigidBody(chassis);
+//////////////////////////
+//btRigidBody* chassis=pc->addBox(btVector3(15,17.5,15), btVector3(0,0,0), 800);
+    //chassis->setFriction(0.020);
+    Robot* robot = new Robot(chassis, _physic.getScene());
+    _physic.getScene()->addVehicle(robot);
+
+    _robotObject.insert(MAIN_ROBOT1,robot);
 
 Wheel*     _MD = new Wheel(robot, btVector3(16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
 Wheel*     _MG = new Wheel(robot, btVector3(-16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
@@ -99,15 +127,21 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
   Modules *encd = new Encoder(_ED, "", this);
   _moduleFromName.insert("right_encoder",encd);
   _moduleInfo.insert(encd, QPair<QString,QString>(XMLPath,"right_encoder"));
+  connect(this, SIGNAL(modulesNextStep()), encd, SLOT(simulStep())); 
   Modules *encg = new Encoder(_EG, "", this);
   _moduleFromName.insert("left_encoder",encg);
   _moduleInfo.insert(encg, QPair<QString,QString>(XMLPath,"left_encoder"));
+connect(this, SIGNAL(modulesNextStep()), encg, SLOT(simulStep())); 
   Modules *motd = new MotorWheel(_MD, "", this);
   _moduleFromName.insert("right_motor",motd);
   _moduleInfo.insert(motd, QPair<QString,QString>(XMLPath,"right_motor"));
+  connect(this, SIGNAL(modulesNextStep()), motd, SLOT(simulStep())); 
   Modules *motg = new MotorWheel(_MG, "", this);
   _moduleFromName.insert("left_motor",motg);
   _moduleInfo.insert(motg, QPair<QString,QString>(XMLPath,"left_motor"));
+  connect(this, SIGNAL(modulesNextStep()), motg, SLOT(simulStep())); 
+
+  _MG->setTorque(1600);
   //TODO really read the file  
 
   /* 
@@ -148,6 +182,8 @@ Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0
     qDebug() << "error starting client process" << '\n' ;
     return ;
   }
+
+  //sendSyncMessages();
    
 }
 
@@ -330,10 +366,10 @@ void Coordinator::sendSyncMessages() {
   //sync UI time
   emit(timer(_physic.getTime()));
   foreach(QProcess* code, _codeInfo) {
-    sendMessages(QString("T ") + _physic.getTime() + " " + _codeFactor, code);
+    sendMessages(QString("T %1 %2").arg((int)_physic.getTime()*1000).arg((int)_codeFactor), code);
+    //qDebug() << QString("T %1 %2").arg((int)_physic.getTime()*1000).arg((int)_codeFactor) << endl;
   }
-  emit(calcNextStep(_timeStep,_maxSubStep));
-  
+  emit(calcNextStep(_timeStep,_maxSubStep));  
 }
 /*
 void stopSimulation(){
