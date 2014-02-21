@@ -12,11 +12,11 @@ class RDS : public Modules {
 	Q_OBJECT
 
 public:
-  RDS();
+  RDS(Balise *balise);
 
 public slots:
   virtual void balise_add(Balise *balise_to_add);
-  virtual list<btVector3>* get_other_position(Balise *robot_balise);
+  virtual list<btVector3>* get_position();
   virtual QStandardItem* getData();
   virtual void received(QString message);
   virtual void simulStep();
@@ -27,6 +27,7 @@ signals:
 
 private:
   list<Balise*> *balises;
+  Balise* _myBalise;
   QStandardItem* _dataRoot;
 };
 
