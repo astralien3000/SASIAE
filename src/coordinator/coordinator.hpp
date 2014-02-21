@@ -12,6 +12,7 @@
 #include <QtCore/QString>
 #include <QtCore/QPair>
 #include <QtCore/QDebug>
+#include <QtCore/QCoreApplication>
 
 //#include <cstring>
 //#include <iostream>
@@ -72,16 +73,15 @@ private slots:
   void MReceived(QString);
 
 private:
-  QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
 
+  QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
   QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
-    
-  // The _moduleInfo's key must be ROBOTCODENAMEmodulename
+  /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
   QHash<QString/*module_name*/, Modules* /*modules*/> _moduleFromName;
-  
   QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
-  
-  QHash<QObject* /* modules*/, QPair<QString/*robot_code_name*/, QString /*module_name*/> > _moduleInfo;
+  QHash<QObject* /* modules*/, 
+	QPair<QString/*robot_code_name*/, QString /*module_name*/> > 
+  _moduleInfo;
 
   void gotoNextStep(); 
   void sendDeviceMessage(QString name, QString msg, QProcess* p);
@@ -93,8 +93,8 @@ private:
   void closeRobot(QProcess *robot);
   //! \brief read one line of process output
   /*
-    The line must be a message : 
-    for example : "D TESTER I'm new \n"
+   * The line must be a message : 
+   * for example : "D TESTER I'm new \n"
    */
   QString readMessage(QProcess * proc)const;
 
@@ -121,6 +121,7 @@ private:
 
   static Coordinator* _instance;
   PhysicalCalculator _physic;
+  // Ne fonctionne pas encore
   //MainWindow _gui;
 
   bool _running;

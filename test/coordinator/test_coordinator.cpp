@@ -8,14 +8,20 @@ class TestCoordinator : public QObject
 {
   Q_OBJECT
   private slots:
-    void syncCalculator();
-
+      void testsyncCalculator();
+      void testopenRobotANDCTReceived();
 };
 
-void TestCoordinator::syncCalculator() {
+void TestCoordinator::testopenRobotANDCTReceived(){
+  Coordinator& c = Coordinator::getInstance(); 
+  c.openRobot("client",Coordinator::MAIN_ROBOT1);
+
+}
+
+void TestCoordinator::testsyncCalculator() {
   Coordinator& c = Coordinator::getInstance(); 
   QSignalSpy spyNext(&c, SIGNAL(calcNextStep(double,int)));
-  QSignalSpy spyTimer(&c, SIGNAL(timer(double)));
+  QSignalSpy spyTimer(&c, SIGNAL(timer(unsigned long int)));
   c.play();
   c.pause();
   QCOMPARE(spyNext.count(), 1); //signal was emitted exactly one time

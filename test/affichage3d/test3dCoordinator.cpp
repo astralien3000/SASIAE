@@ -1,4 +1,24 @@
-#include "test3dCoordinator.hpp"
+#include "test3d.hpp"
+
+BasicDemo::BasicDemo()
+{
+  cdn = &Coordinator::getInstance();
+}
+
+static BasicDemo::DemoApplication* Create()
+{
+  BasicDemo* demo = new BasicDemo;
+  demo->myinit();
+  demo->initPhysics();
+  return demo;
+}
+
+
+BasicDemo::~BasicDemo()
+{
+  exitPhysics();
+}
+
 void	BasicDemo::initPhysics() {
   setTexturing(true);
   setShadows(true);
@@ -9,6 +29,10 @@ void	BasicDemo::initPhysics() {
    *
    *
    */
+  m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+  m_dynamicsWorld =(cdn->getPhysicalCalculatorInstance()).getScene();
+
+  cdn->openTable("coucou");
   cdn->openRobot("Le robot",Coordinator::MAIN_ROBOT1);
   /*
     pc->simple_scene_walls(100);
@@ -21,7 +45,6 @@ void	BasicDemo::initPhysics() {
   // _MG = new Wheel(_robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
   // _ED = new Wheel(_robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
   // _EG = new Wheel(_robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
-  m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
 }
 
 void	BasicDemo::exitPhysics() {}
@@ -31,13 +54,13 @@ void BasicDemo::clientMoveAndDisplay() {
   //float ms = getDeltaTimeMicroseconds();
   /*if(pc) {
     if(_MD)
-      _MD->setTorque(20);
+    _MD->setTorque(20);
     else
-      printf("Pas de roue droite\n");
+    printf("Pas de roue droite\n");
     if(_MG)
-      _MG->setTorque(20);
+    _MG->setTorque(20);
     else
-      printf("Pas de roue gauche\n");
+    printf("Pas de roue gauche\n");
   */
   cdn->calcNextStep(1/80.f,20);
   
@@ -74,7 +97,7 @@ void BasicDemo::renderme() {
   /*
     This is very dirty but I don't know how to
     do otherwise.
-   */
+  */
   Robot *_robot=cdn->getRobot(Coordinator::MAIN_ROBOT1);
 
   for(i=0; i<_robot->getNumWheels();i++) {
@@ -82,7 +105,7 @@ void BasicDemo::renderme() {
       this step makes the wheel visible.
       We don't want to use the pc in test3dCoordinator.
       The work need to be done in the class PhysicalCalculator.
-     */
+    */
     _robot->updateWheelTransform(i, true);
     _robot->getWheelInfo(i).m_worldTransform.getOpenGLMatrix(m);
     m_shapeDrawer->drawOpenGL(m, m_wheelShape, wheelColor,false,min,max);

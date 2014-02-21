@@ -13,17 +13,19 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+
 #include "test3d.hpp"
 #include "GlutStuff.h"
 #include <btBulletDynamicsCommon.h>
 #include <LinearMath/btHashMap.h>
-
+#include<cstdio>
 
 	
 int main(int argc,char** argv)
 {
 
 	BasicDemo ccdDemo;
+	fprintf(stderr,"after declaration");
   ccdDemo.myinit();
 	ccdDemo.initPhysics();
 

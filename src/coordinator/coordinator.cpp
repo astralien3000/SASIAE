@@ -1,27 +1,32 @@
 #include "coordinator.hpp"
 #include "../modules/servo.hpp"
-
+#include "../physical_calculator/robot.hpp"
+#include "../physical_calculator/wheel.hpp"
+#include<cstdio>
 
 Coordinator* Coordinator::_instance=NULL;
 
 
 Coordinator& Coordinator::getInstance() {
-  if(Coordinator::_instance)
+  if(Coordinator::_instance){
     return *Coordinator::_instance;
-  else
-    return *(Coordinator::_instance = new Coordinator()); 
+  }
+  else{
+    Coordinator::_instance = new Coordinator();
+    return *(Coordinator::_instance); 
+  }
 }
 
 PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
-Robot *Coordinator::getRobot(Slot theRobot){
-  Robot * robot=_robotObject.value(theRobot);
+Robot *Coordinator::getRobot(Slot robotSlot){
+  Robot * robot=_robotObject.value(robotSlot);
   return robot;
 }
 
-Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
+Coordinator::Coordinator() : _physic(new PhysicalCalculator)/*, _gui()*/{
   _running = false;
   _codeFactor = 1;
   _sync = 1;
@@ -62,6 +67,7 @@ void Coordinator::stepDone() {
 void Coordinator::openTable(const QString& XMLPath) {
   //TODO really read the file
   (void) XMLPath;
+  _physic.simple_scene_walls(400);
 }
 void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
@@ -69,10 +75,11 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   /* For the tests*/
   
   /*needed for test3dCoordinator*/
+  
   btVector3 boxSize=btVector3(2,0.5,2);
   btVector3 position=btVector3(0,0,0);
   btScalar mass=8;
-  Robot* robot = _physic.getRobot(boxSize, position, mass);
+  Robot* robot =new Robot(_physic.addBox(boxSize, position, mass), _physic.getScene());
 
   _robotObject.insert(MAIN_ROBOT1,robot);
   Wheel* _MD = new Wheel(robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
@@ -80,20 +87,25 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   Wheel* _ED = new Wheel(robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
   Wheel* _EG = new Wheel(robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
 
-  _physic.addRobotToScene(robot,_MD, _MG, _ED, _EG) ;
-  
+  (_physic.getScene())->addVehicle(robot);
+  /* End of robot construction */  
 
   /*needed for communication tests*/
+  // Only the module Servo is tested right now
   Modules *mod =new Servo(0);
   QString code=XMLPath;
-  QString name("TESTER");
+  QString modName("TESTER");
 
   //TODO really read the file  
-  //Don't forget to join robotCodeName and moduleName for addModule.
 
-  qDebug() << "code +name"<< code + name << '\n' ;
+  qDebug() << "code +modName"<< code + modName << '\n' ;
 
-  if(!addModule(code+name,mod)){
+  /* 
+   * The addModule function takes a concatenation of
+   * the robot code name and the module name in order to 
+   * differentiate two identical modules in two different robots.
+   */
+  if(!addModule(code+modName,mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
   }
@@ -105,12 +117,16 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
     return;
   }
 
-  if(!addModuleAndCodeName(mod, code, name )){
+  if(!addModuleAndCodeName(mod, code, modName )){
     qDebug() << "error addModuleAndCodeName" << '\n' ;
     return;
   }
 
-  /*The coordinator launches the processus robot which launches the ClientThread.*/
+  /*
+   * The coordinator launches the processus robot
+   * which launches the ClientThread.
+   * /!\ En dur pour l'instant. /!\ 
+   */
   proc->start("./client",QStringList());
 
   if(!proc->waitForStarted()) {
@@ -125,51 +141,63 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
 
 void Coordinator::CTReceived() {
-  /* A terme le nom du code robot qui envoie le message
-     est récupéré */
-
-  
-  /**/
   if(NULL==sender()) {
     qDebug() << "sender null in CTReceived";
     return ;
   } 
-  QProcess * client=(QProcess*)sender();//=_codeInfo.value(code);
+  /* catch the processus sender */
+  QProcess * client=(QProcess*)sender();
+  /* obtain the robot code name corresponding */  
   QString code=_codeInfo.key(client);
   
   QString message=readMessage(client);
   QStringList args=message.split(" ");
   QString name;
-  name=args[1];
+  if(args.size()>1)
+    name=args[1];
 
-  switch((args[0].toStdString())[0]){
-  case('D'):
+  switch((args[0].toStdString())[0]/*catch message first letter*/){
+  case('S'):
+    sendMessages("S",client);
+    client->closeWriteChannel();
+    qDebug() << "client closed" ;
+    if(client->waitForFinished())
+      qDebug() << "client closed" ;
+    QCoreApplication::exit();
+
+    break;
+  case('D'): /* device message */
     Modules * mod;
-    name =code+name;
+    name = code+name; /* Cf note in openRobot */
     qDebug() << "name : " << name ;
 
     if(_moduleFromName.contains(name)){
       mod=_moduleFromName.value(name);
-      args.removeFirst(); // remove destination
-      args.removeFirst(); // remove name
+      args.removeFirst(); /* remove destination from the message */
+      args.removeFirst(); /* remove name from the message */
       qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
+
+      /*TEST*/
+      sendDeviceMessage("TESTER", "Stop", client);
+        
+
     }
     else{
       mod=NULL;
       qDebug()<<"This device's name does not correspond to a module."  << '\n';
     }
     break;
-  case('T'):
-    if(++_sync>_codeInfo.size()) // all modules are synchronised
+  case('T'): /* Synchronisation message */
+    if(++_sync>_codeInfo.size()) /* all modules are synchronised */
       gotoNextStep();
-
     break;
-  case('M'):
+  case('M'): /* other message (GUI) */
     args.removeFirst();
     qDebug() << "message to GUI : " << args.join(" ") << '\n';
+    // Ne fonctionne pas encore
     //emit(GUISend(args.join(" ")));
+    
     break;
-    // verif du bon etat du message ?
   default:
     ;
   }
@@ -179,7 +207,7 @@ void Coordinator::CTReceived() {
 void Coordinator::MReceived(QString message) {
   if(sender() != 0) 
     {
-      //find which modules send the message
+      /* find which modules send the message */
       if(_moduleInfo.contains(sender()))
   	{
   	  QString code = _moduleInfo.value(sender()).first;
@@ -295,7 +323,17 @@ void Coordinator::sendSyncMessages() {
   emit(calcNextStep(_timeStep,_maxSubStep));
   
 }
+/*
+void stopSimulation(){
+  sendDeviceMessage("TESTER", "Stop", client);
 
+}
+
+void stopRobotSimulated(Slot robotSlot){
+  
+
+}
+*/
 
 /*btDiscreteDynamicWorlds* Coordinator::getPhysicalCalculatorScene()const {
   return _physic.getScene();

@@ -6,13 +6,18 @@ TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
 INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae 
-
+CONFIG += debug
 
 QMAKE_CXXFLAGS = -std=c++0x
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU 
 
 # Input
-HEADERS += ../../src/coordinator/coordinator.hpp \
+HEADERS +=../../src/physical_calculator/wheel.hpp \
+ ../../src/physical_calculator/robot.hpp \
+ ../../src/physical_calculator/physical_calculator.hpp \
+../../src/coordinator/coordinator.hpp \
+ ../../src/modules/servo.hpp \
+ ../../src/modules/modules.hpp \
  CommandLineArguments.h \
  DebugCastResult.h \ 
  DemoApplication.h \ 
@@ -29,7 +34,12 @@ HEADERS += ../../src/coordinator/coordinator.hpp \
  Win32DemoApplication.h \
  test3dCoordinator.hpp \
  
-SOURCES += ../../src/coordinator/coordinator.cpp \
+SOURCES += ../../src/physical_calculator/wheel.cpp \
+ ../../src/physical_calculator/robot.cpp \
+ ../../src/physical_calculator/physical_calculator.cpp \
+ ../../src/coordinator/coordinator.cpp \
+ ../../src/modules/modules.cpp \
+ ../../src/modules/servo.cpp \
  main.cpp \ 
  DemoApplication.cpp \
  GLDebugDrawer.cpp \

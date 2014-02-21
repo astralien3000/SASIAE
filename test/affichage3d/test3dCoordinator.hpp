@@ -13,21 +13,21 @@
 
 #include <cstdio>
 /*class btBroadphaseInterface;
-class btCollisionShape;
-class btOverlappingPairCache;
-class btCollisionDispatcher;
-class btConstraintSolver;
-struct btCollisionAlgorithmCreateFunc;
-class btDefaultCollisionConfiguration;
+  class btCollisionShape;
+  class btOverlappingPairCache;
+  class btCollisionDispatcher;
+  class btConstraintSolver;
+  struct btCollisionAlgorithmCreateFunc;
+  class btDefaultCollisionConfiguration;
 */
 ///BasicDemo is good starting point for learning the code base and porting.
 
 class BasicDemo : public PlatformDemoApplication
 {
-  protected:
+protected:
   Coordinator* cdn;
   btCollisionShape* m_wheelShape;
-      /*
+  /*
     FROM PC to Coordinator
 
     btCollisionShape* m_wheelShape;
@@ -37,33 +37,24 @@ class BasicDemo : public PlatformDemoApplication
     Wheel* _MG;
     Wheel* _EG;
   */
-	public:
+public:
 
-	BasicDemo()
-	{
-	  cdn = &Coordinator::getInstance();
-	}
-	virtual ~BasicDemo()
-	{
-	  //delete cdn;
-	  exitPhysics();
-	}
-	void	initPhysics();
-
-	void	exitPhysics();
+  BasicDemo();
+  virtual ~BasicDemo()
+  {
+    //delete cdn;
+    exitPhysics();
+  }
+  void	initPhysics();
+  
+  void	exitPhysics();
   virtual void renderme();
-	virtual void clientMoveAndDisplay();
+  virtual void clientMoveAndDisplay();
 
-	virtual void displayCallback();
-	virtual void	clientResetScene();
+  virtual void displayCallback();
+  virtual void	clientResetScene();
 	
-	static DemoApplication* Create()
-	{
-		BasicDemo* demo = new BasicDemo;
-		demo->myinit();
-		demo->initPhysics();
-		return demo;
-	}
+  static DemoApplication* Create();
 
 	
 };
