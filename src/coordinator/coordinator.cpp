@@ -33,7 +33,6 @@ Coordinator::Coordinator() : _physic(new PhysicalCalculator)/*, _gui()*/{
   _codeFactor = 1;
   _timeStep = 1./120.;
   _maxSubStep = 20;
-  //connect(this, SIGNAL(GUISend(QString)), &_gui,SLOT(CReceived(QString)));
   connect(this, SIGNAL(calcNextStep(double,int)), &_physic, SLOT(nextStep(double,int)));
 }
 

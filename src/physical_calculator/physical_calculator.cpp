@@ -10,6 +10,8 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
   _solver = new btSequentialImpulseConstraintSolver;
   _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
+  btContactSolverInfo& info = _scene->getSolverInfo();
+  info.m_numIterations = 20;
   _clock= new btClock();
 }
 
@@ -92,3 +94,29 @@ void PhysicalCalculator::init() {
 
 }
 
+/*
+void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
+  (void) eg;
+  (void) ed;
+
+  _scene->addVehicle(robot);
+  
+  //btCylinderShapeX* m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+
+    if(md)
+      md->setTorque(20);
+    else
+      printf("Pas de roue droite\n");
+    if(mg)
+      mg->setTorque(20);
+    else
+      printf("Pas de roue gauche\n");
+
+}
+
+Robot * PhysicalCalculator::getRobot(btVector3 boxSize, btVector3 position, btScalar mass){
+  Robot* robot =new Robot(addBox(boxSize, position, mass), _scene);
+
+return robot;
+}
+*/

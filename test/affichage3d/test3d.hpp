@@ -15,6 +15,9 @@
 #include "../../src/physical_calculator/wheel.hpp"
 #include "../../src/coordinator/coordinator.hpp"
 
+
+#include "../../src/physical_calculator/dist_sensor.hpp"
+
 #include <cstdio>
 /*class btBroadphaseInterface;
   class btCollisionShape;
@@ -37,6 +40,7 @@ protected:
   Wheel* _ED;
   Wheel* _MG;
   Wheel* _EG;
+  DistSensor* _dist_sensor;
 
 public:
 
