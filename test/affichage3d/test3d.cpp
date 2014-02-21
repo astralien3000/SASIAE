@@ -1,5 +1,5 @@
 #include "test3d.hpp"
-<<<<<<< HEAD
+
 
 
 BasicDemo::BasicDemo()
