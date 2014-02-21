@@ -32,13 +32,13 @@ MotorWheel::MotorWheel(Wheel* wheel, QString params, QObject* parent)
   }
   //build data tree for UI
   _dataRoot = new QStandardItem("Motor Wheel");
-  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Max torque") << new QStandardItem(QString()+ _accuracy));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Max torque") << new QStandardItem(QString()+ _motorMaxTorque));
   _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Gear ratio") << new QStandardItem(QString()+ _wheel->getRotation()));
   _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Command ratio") << new QStandardItem(QString("0")));
   _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Real torque") << new QStandardItem(QString("0")));
 }
 
-virtual QStandardItem* getData() {
+QStandardItem* MotorWheel::getData() {
   return _dataRoot;
 }
 

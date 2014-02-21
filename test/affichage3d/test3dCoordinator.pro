@@ -5,8 +5,9 @@
 TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
-INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae 
+INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/
 CONFIG += debug
+QT += widgets
 
 QMAKE_CXXFLAGS = -std=c++0x
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU 
@@ -18,6 +19,8 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
 ../../src/coordinator/coordinator.hpp \
  ../../src/modules/servo.hpp \
  ../../src/modules/modules.hpp \
+ ../../src/modules/encoder.hpp \
+ ../../src/modules/motor_wheel.hpp \
  CommandLineArguments.h \
  DebugCastResult.h \ 
  DemoApplication.h \ 
@@ -40,6 +43,8 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/coordinator/coordinator.cpp \
  ../../src/modules/modules.cpp \
  ../../src/modules/servo.cpp \
+ ../../src/modules/encoder.cpp \
+ ../../src/modules/motor_wheel.cpp \
  main.cpp \ 
  DemoApplication.cpp \
  GLDebugDrawer.cpp \

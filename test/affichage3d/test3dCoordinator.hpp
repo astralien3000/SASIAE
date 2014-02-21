@@ -10,7 +10,7 @@
 #endif
 
 #include "../../src/coordinator/coordinator.hpp"
-
+#include <QApplication>
 #include <cstdio>
 /*class btBroadphaseInterface;
   class btCollisionShape;
@@ -27,6 +27,7 @@ class BasicDemo : public PlatformDemoApplication
 protected:
   Coordinator* cdn;
   btCollisionShape* m_wheelShape;
+  QApplication* _app;
   /*
     FROM PC to Coordinator
 
@@ -40,11 +41,7 @@ protected:
 public:
 
   BasicDemo();
-  virtual ~BasicDemo()
-  {
-    //delete cdn;
-    exitPhysics();
-  }
+  virtual ~BasicDemo();
   void	initPhysics();
   
   void	exitPhysics();

@@ -36,6 +36,6 @@ void Encoder::simulStep() {
   emit(send(QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
 }
 
-virtual QStandardItem* getData() {
+QStandardItem* Encoder::getData() {
   return _dataRoot;
 }

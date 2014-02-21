@@ -2,6 +2,7 @@
 //#include "modules.hpp"
 #include "../physical_calculator/physical_calculator.hpp"
 #include "../modules/modules.hpp"
+#include "../physical_calculator/robot.hpp"
 //#include "../gui/mainwindow.h"
 
 #include <QtCore/QThread>

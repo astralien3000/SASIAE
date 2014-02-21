@@ -2,6 +2,9 @@
 #include "../modules/servo.hpp"
 #include "../physical_calculator/robot.hpp"
 #include "../physical_calculator/wheel.hpp"
+#include "../modules/encoder.hpp"
+#include "../modules/motor_wheel.hpp"
+#include "../modules/modules.hpp"
 #include<cstdio>
 
 Coordinator* Coordinator::_instance=NULL;
@@ -26,7 +29,7 @@ Robot *Coordinator::getRobot(Slot robotSlot){
   return robot;
 }
 
-Coordinator::Coordinator() : _physic(new PhysicalCalculator)/*, _gui()*/{
+Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
   _running = false;
   _codeFactor = 1;
   _sync = 1;
@@ -75,26 +78,38 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   
   /*needed for test3dCoordinator*/
   
-  btVector3 boxSize=btVector3(2,0.5,2);
-  btVector3 position=btVector3(0,0,0);
-  btScalar mass=8;
+  btVector3 boxSize=btVector3(15,17.5,15);
+  btVector3 position=btVector3(0,17.5,0);
+  btScalar mass=80;
   Robot* robot =new Robot(_physic.addBox(boxSize, position, mass), _physic.getScene());
 
   _robotObject.insert(MAIN_ROBOT1,robot);
-  Wheel* _MD = new Wheel(robot, btVector3(1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-  Wheel* _MG = new Wheel(robot, btVector3(-1.5,-0.1,0),btVector3(0,-1,0),.5,true);
-  Wheel* _ED = new Wheel(robot, btVector3(1.9,-0.1,0),btVector3(0,-1,0),.5,false);
-  Wheel* _EG = new Wheel(robot, btVector3(-1.9,-0.1,0),btVector3(0,-1,0),.5,false);
+
+Wheel*     _MD = new Wheel(robot, btVector3(16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
+Wheel*     _MG = new Wheel(robot, btVector3(-16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
+Wheel*     _ED = new Wheel(robot, btVector3(19,-17.5+3-0.00,0),btVector3(0,-1,0),3,false);
+Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0),3,false);
 
   (_physic.getScene())->addVehicle(robot);
   /* End of robot construction */  
 
   /*needed for communication tests*/
   // Only the module Servo is tested right now
-  Modules *mod =new Servo(0);
+  //Modules *mod =new Servo(0);
   QString code=XMLPath;
   QString modName("TESTER");
-
+  Modules *encd = new Encoder(_ED, "", this);
+  _moduleFromName.insert("right_encoder",encd);
+  _moduleInfo.insert(encd, QPair<QString,QString>(XMLPath,"right_encoder"));
+  Modules *encg = new Encoder(_EG, "", this);
+  _moduleFromName.insert("left_encoder",encg);
+  _moduleInfo.insert(encg, QPair<QString,QString>(XMLPath,"left_encoder"));
+  Modules *motd = new MotorWheel(_MD, "", this);
+  _moduleFromName.insert("right_motor",motd);
+  _moduleInfo.insert(motd, QPair<QString,QString>(XMLPath,"right_motor"));
+  Modules *motg = new MotorWheel(_MG, "", this);
+  _moduleFromName.insert("left_motor",motg);
+  _moduleInfo.insert(motg, QPair<QString,QString>(XMLPath,"left_motor"));
   //TODO really read the file  
 
   qDebug() << "code +modName"<< code + modName << '\n' ;
@@ -104,10 +119,10 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
    * the robot code name and the module name in order to 
    * differentiate two identical modules in two different robots.
    */
-  if(!addModule(code+modName,mod)){
+  /*if(!addModule(code+modName,mod)){
     qDebug() << "error addToRobotModule" << '\n' ;
     return;
-  }
+  }*/
 
   QProcess* proc=new QProcess(this);
   
@@ -115,27 +130,29 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
     qDebug() << "error addToRobotCode" << '\n' ;
     return;
   }
-
+/*
   if(!addModuleAndCodeName(mod, code, modName )){
     qDebug() << "error addModuleAndCodeName" << '\n' ;
     return;
-  }
+  }*/
 
   /*
    * The coordinator launches the processus robot
    * which launches the ClientThread.
    * /!\ En dur pour l'instant. /!\ 
    */
-  proc->start("./client",QStringList());
+  qDebug() << "connecting signal..." << '\n' ;
+  QObject::connect(proc,SIGNAL(readyRead()),this,SLOT(CTReceived()));
+  qDebug() << "signal connected" << '\n' ;
+  
+
+	proc->start("./client",QStringList());
 
   if(!proc->waitForStarted()) {
     qDebug() << "error starting client process" << '\n' ;
     return ;
   }
    
-  qDebug() << "connecting signal..." << '\n' ;
-  QObject::connect(proc,SIGNAL(readyRead()),this,SLOT(CTReceived()));
-  qDebug() << "signal connected" << '\n' ;
 }
 
 
@@ -150,6 +167,7 @@ void Coordinator::CTReceived() {
   QString code=_codeInfo.key(client);
   
   QString message=readMessage(client);
+  qDebug() << "Message : " << message;
   QStringList args=message.split(" ");
   QString name;
   if(args.size()>1)

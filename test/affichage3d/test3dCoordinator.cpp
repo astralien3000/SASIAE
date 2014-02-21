@@ -1,4 +1,4 @@
-#include "test3d.hpp"
+#include "test3dCoordinator.hpp"
 
 BasicDemo::BasicDemo()
 {
@@ -23,13 +23,14 @@ void	BasicDemo::initPhysics() {
   setTexturing(true);
   setShadows(true);
   setCameraDistance(btScalar(50.));
-    
+  int a = 0;
+  _app = new QApplication(a,NULL);
   /* this function ( in src/coordinator/coordinator/coorcinator.cpp )
    * creates 4 wheels, one robot's body and merges them together.
    *
    *
    */
-  m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
+  m_wheelShape = new btCylinderShapeX(btVector3(1,3,3));
   m_dynamicsWorld =(cdn->getPhysicalCalculatorInstance()).getScene();
 
   cdn->openTable("coucou");
@@ -62,8 +63,10 @@ void BasicDemo::clientMoveAndDisplay() {
     else
     printf("Pas de roue gauche\n");
   */
-  cdn->calcNextStep(1/80.f,20);
-  
+  //cdn->calcNextStep(1/80.f,20);
+  cdn->play();
+  cdn->pause();
+  _app->processEvents();
   /* the function getPhysicalCalculatorInstance is static. Is it wrong ?*/
   printf("%lu            \r", (cdn->getPhysicalCalculatorInstance()).getTime());
   
@@ -79,7 +82,7 @@ void BasicDemo::displayCallback() {
   //pc->getScene()->debugDrawWorld();
   glFlush();
   swapBuffers();
-  printf("toto\n");
+  
 }
 void	BasicDemo::clientResetScene() {
   exitPhysics();

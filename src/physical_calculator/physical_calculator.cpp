@@ -81,7 +81,7 @@ void PhysicalCalculator::simple_scene_walls(btScalar size){
   
 }
 
-void PhysicalCalculator::nextStep(float time, int addedoperations){
+void PhysicalCalculator::nextStep(double time, int addedoperations){
   _scene->stepSimulation(time,addedoperations);
 }
 
