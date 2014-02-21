@@ -44,8 +44,10 @@ QStandardItem* MotorWheel::getData() {
 
 void MotorWheel::received(QString message) {
   QStringList list = message.split(" ");
-  if(list.at(0) == "value")
+  if(list.at(0) == "value") {
     _inputRatio = list.at(1).toDouble();
+    qDebug() << "Motor's value !!! ==> " << _inputRatio << endl;
+  }
 }
 void MotorWheel::simulStep() {
   _wheel->setTorque(_motorMaxTorque*_gearRatio*_inputRatio);

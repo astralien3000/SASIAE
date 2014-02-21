@@ -193,11 +193,10 @@ void Coordinator::CTReceived() {
       args.removeFirst(); /* remove destination from the message */
       args.removeFirst(); /* remove name from the message */
       qDebug()<< "Message (" << args.join(" ") << ")send to module "<< mod << " named " <<  _moduleFromName.key(mod) << '\n';
-
+      
+      mod->received(args.join(" "));
       /*TEST*/
       //sendDeviceMessage("TESTER", "Stop", client);
-        
-
     }
     else{
       mod=NULL;
@@ -216,7 +215,7 @@ void Coordinator::CTReceived() {
     
     break;
   default:
-    ;
+    qDebug() << "Unrecognized message header" << endl;
   }
 }
 
