@@ -26,6 +26,7 @@ signals:
   virtual void send(QString message);
 
 private:
+  int _mode;
   list<Balise*> *balises;
   Balise* _myBalise;
   QStandardItem* _dataRoot;
