@@ -1,0 +1,170 @@
+\subsection{Format XML}
+\subsubsection{Descritpion d'un robot}
+\begin{changemargin}{-1cm}{-1cm}
+\begin{lstlisting}[caption=Description du Robot, label=descbot]
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="robot">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="mesh">
+            <xs:complexType>
+                <xs:attribute name="src" type="xs:string"/>
+            </xs:complexType>
+            </xs:element>
+            <xs:element name="microcontroller">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="modules">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="module">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="location" minOccurs="0" maxOccurs="xs:unbounded">
+                                    <xs:complexType>
+                                        <xs:attribute name="X" type="xs:Integer"/>
+                                        <xs:attribute name="Y" type="xs:Integer"/>
+                                        <xs:attribute name="Z" type="xs:Integer"/>
+                                        <xs:attribute name="alpha">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            </xs:restriction> 
+                                        </xs:attribute>
+                                        <xs:attribute name="beta">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            </xs:restriction>
+                                        </xs:attribute>
+                                        <xs:attribute name="gamma">
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="0"/>
+                                                <xs:maxInclusive value="360"/>
+                                            </xs:restriction>
+                                        </xs:attribute>
+                                    </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="parameters">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="parameter" minOccurs="0" maxOccurs="xs:unbounded">
+                                                <xs:complexType>
+                                                    <xs:attribute name="name" type="xs:String" use="required"/>
+                                                    <xs:attribute name="type" type="xs:String" use="required"/>
+                                                    <xs:attribute name="value" type="xs:String" use="required"/>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+				<xs:attribute name="name" type="xs:string"/>
+                            </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+	        <xs:attribute name="name" type="xs:string"/>
+            </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+  \end{lstlisting}
+\end{changemargin}
+
+\subsubsection{Exemple de Robot}
+\begin{lstlisting}[caption=Exemple de Robot, label=exrobot]
+<robot>
+	<mesh src="~/mesh/robots/robot1A1314.stl"/>
+	<microcontroller name="UNIOC">
+		<modules>
+			<module name="GP2">
+				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma"0"/>
+				<parameters>
+                                	<parameter name="bell" type="int" value="20"/>
+				</parameters>
+			</module>
+		</modules>
+	</microcontroller>
+</robot>
+\end{lstlisting}
+  
+\clearpage
+\subsubsection{Description de la Table}
+ \begin{lstlisting}[caption=Description de la Table, label=desctable]
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="table">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="mesh">
+                <xs:attribute name="src" type="xs:string">
+            </xs:element>
+            <xs:element name="toys">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="toy">
+                    <xs:complexType>
+                        <xs:attribute name="weight" type="xs:integer"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:sequence>
+                            <xs:element name="location" minOccurs="1" maxOccurs="xs:unbounded">
+                            <xs:complexType>
+				<xs:attribute name="X" type="xs:Integer"/>
+				<xs:attribute name="Y" type="xs:Integer"/>
+				<xs:attribute name="Z" type="xs:Integer"/>
+				<xs:attribute name="alpha">
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    </xs:restriction> 
+				</xs:attribute>
+				<xs:attribute name="beta">
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    </xs:restriction>
+				</xs:attribute>
+                                <xs:attribute name="gamma">
+				    <xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="360"/>
+				    <xs:restriction>
+				</xs:attribute>
+			    </xs:complexType>
+			    </xs:element>
+			    <xs:element name="mesh">
+			    <xs:complexType>
+				<xs:attribute name="src" type="xs:string">
+			    </xs:complexType>
+			    </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            </xs:element>
+	</xs:sequence>
+    </xs:complexType>
+</xs:element>
+\end{lstlisting}
+  
+\subsubsection{Exemple de Table}
+\begin{lstlisting}[caption=Exemple de table, label=desctable]
+<table>
+    <mesh src="~/mesh/table/t1314.stl"/>
+	<toys>
+	    <toy name="triangle1" weight="170">
+		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
+		<mesh src="~/mesh/jouets/triangle1314.stl"/>
+	    </toy>
+	</toys>
+</table>
+\end{lstlisting}

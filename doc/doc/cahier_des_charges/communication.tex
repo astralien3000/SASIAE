@@ -1,0 +1,8 @@
+%% Clément %%
+%% Je ne vois pas trop quoi dire ici, c'est dis dans les parties de chacun des modules
+
+\section{Communication entre les modules du simulateur}
+
+Comme l'application sera codée avec le framework Qt, nous utiliserons son système de signaux/slots pour faire communiquer les différents modules du simulateur (un thread par module). Ce système est très flexible, et permet aux objets de ne pas être conscient des objets avec qui ils communiquent. Cela permettra à l'interface graphique d'être indépendante des autres composants du simulateur, et vice-versa.
+
+Néanmoins, le coordinateur étant le point centrale du simulateur, il se chargera d'instancier et d'interconnecter les différents signaux/slots des différents modules. C'est également dans ce module que nous retrouverons le système de communication avec les différents codes robot.

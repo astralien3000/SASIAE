@@ -1,0 +1,54 @@
+%TODO 
+% relire et changer pargraphe représentation selon commentaires !
+Pour pouvoir répondre aux signaux de l'exécutable, le simulateur doit savoir où, quoi et comment regarder. Donc, il faut mettre en place un langage de description des robots et de l'environnement.
+
+\label{langdesc}
+
+\subsection{Description des Robots}
+
+\label{desc_robot}
+
+Les robots sont des objets complexes et modifiés chaque année. Il est donc impératif d'avoir un langage facile à maitriser, modifier et ce, sans connaissance du fonctionnement du simulateur. Il devra spécifier où sont placés les actionneurs et autres capteurs. Leur position doit être fournie dans le repère cartésien centré sur le barycentre du robot et son angle de rotation propre (rotation autour de la verticale). Lorsque l'utilisateur questionne l'élément il doit pouvoir renvoyer son état. Pour ce faire, il interrogera la bibliothèque dynamique contenant la spécification de chaque capteurs. Le langage doit aussi spécifier si une partie du robot est mobile, ainsi que son degré de mobilité. En outre, chacun de ces éléments doit être identifié de manière unique pour permettre à l'exécutable d'appeler l'objet en question. Ce lien est fournit par la broche sur laquelle vient se brancher cet élément. Enfin, pour répondre aux critères de simplicité, la description du robot se fera selon le schéma de descritpion XML en annexe \ref{descbot}.
+
+\subsection{Description de la Table}
+
+La table est la partie majoritaire de la simulation. C'est l'environnement sur lequel se déplacent les robots. Elle possède des parties fixes, généralement composées de formes géométriques simples, et des parties mobiles. La table nécessite donc aussi une description avec le placement de ses parties mobiles à l'initialisation. Le fichier de description doit donc contenir ces informations ainsi que la nature de l'élément de jeu concerné. Sa forme, sa position de départ mais aussi son poid nécessaire à la simulation. De même que pour les Robots, la description sera en XML et respectera le fichier de descritpion en annexe \ref{desctable}.
+
+\subsection{Représentation}
+
+% Cette phrase n'est pas claire 
+% par description est-ce tu veux dire fichier de description ? si oui quel   % format ?
+% interpréter les demandes de l'exécutable, oui mais lequel ? exécutable     % robot ?
+% moteur physique soit capable de fournir les données demandées. 
+% Ok mais les fournir à qui ? pourquoi ?
+
+% c'est mieu? JR
+Chacun de ces éléments doit avoir une description telle que présentée dans le paragraphe précédent pour pouvoir paramétrer le moteur physque.
+Ainsi qu'une représentation en 3 dimensions pour que ce dernier soit capable de fournir les données demandées par les modules de la bibliothèque dynamique. 
+
+Il faut donc utiliser un système de maillage compréhensible par le moteur physique et par l'interface utilisateur qui en fera une projection dans le plan de la table. Les formes de la table sont toujours simples mais celles des robots peuvent être assez rapidement compliquées. C'est pourquoi le format de mesh doit pouvoir être exporté d'un logiciel de dessin ou de CAO tel que Blender ou Autodesk Inventor.
+
+%% ldauphin
+Le format de description de maillage qui semble le plus simple et supporté en export par tout les logiciels de CAO est le format STL (STereoLithographie). Le simulateur devra donc parser ce format pour le transformer en données compréhensibles par le moteur physique. 
+
+%% ldauphin
+Ce format permet de définir plusieurs objets solides par leurs faces, elles mêmes déterminées par des points dans l'espace. Il peut être textuel ou binaire. Nous supporterons dans un premier temps uniquement le format textuel.
+
+Voici un exemple de fichier STL :
+
+\begin{verbatim}
+solid name
+
+    facet normal ni nj nk
+        outer loop
+            vertex v1x v1y v1z
+            vertex v2x v2y v2z
+            vertex v3x v3y v3z
+            ...
+        endloop
+    endfacet
+    
+    ...
+
+endsolid name
+\end{verbatim}

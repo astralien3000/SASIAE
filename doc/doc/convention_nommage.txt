@@ -1,0 +1,34 @@
+Ce document est ici pour éviter l'ambiguité dans les nom des objets
+que l'on utilise.  En effet, les différents capteurs et actionneurs
+d'un robot sont définis dans les deux parties du projet : le
+simulateur et aversive++.  Il faut donc leur choisir des noms qui
+indiquent de quelle partie du code on parle.
+
+
+Coté Aversive++ :
+
+Nous allons parler de "Device" pour désigner tout ce qui est considéré
+comme un capteur/actionneur par le code robot.  On parlera du "Device"
+Encodeur, et de "Device" Moteur de propulsion.
+
+
+
+Côté SASIAE :
+
+Un "Module" désigne une bibliothèque dynamique (ou du code chargé à
+l'execution), qui se chargera de calculer les données à envoyer à
+l'executable robot.  Un "Module" est donc la plupart du temps associé
+à un capteur/actionneur, on parlera donc du "Module" Encodeur, et du
+"Module" Bloc de propulsion (On parle ici de bolc car il est lié au
+moteur plus un roue).
+
+SASIAE utilise un "Moteur physique" appelé Bullet pour simuler
+l'environnement du robot, le mot "Moteur" est le mot utilisé par tout
+le monde pour désigner ce type de bibliothèque, mais comme cela peut
+préter à confusion avec les moteurs (actionneurs/device/module) nous
+l'appèlerons "Calculateur Physique".
+
+L'environnemnt simulé, c'est à dire les données que manipule le
+calculateur physique est appelé la Scène. C'est la scène qui sera
+envoyé aux modules (pour calcul et modification) et à l'interface
+graphique (pour affichage).

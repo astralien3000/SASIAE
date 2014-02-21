@@ -1,0 +1,7 @@
+Fichier C++ en .cpp et .hpp
+Dans l'écriture d'une classe ( .hpp ), 
+le bloc public vient en premier puis vient le bloc private.
+
+les attributs ( private ) s'écrivent '_attr'.
+les méthodes/fonctions s'écrivent maNouvelleFonction.
+Classes et constructeurs avec une capitale en première lettre.

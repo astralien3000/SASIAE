@@ -1,0 +1,47 @@
+%% Clément : je pense que c'est mieux tourné de cette manière, je travaille encore dessus
+
+Les bibliothèques dynamiques simulant chacune un module physique des robots (actionneur, capteur) sont à la charge de l'utilisateur. Néanmoins, SASIAE sera fourni avec quelques modules de base ainsi que la documentation nécessaire pour implémenter de nouveaux modules.
+
+Chacune de ces bibliothèques dynamiques seront, de part l'utilisation du framework Qt, des plugins qui pourront dont aisément s'intégrer dans le reste de l'application. Nous utiliserons donc la classe QPluginLoader que nous instancierons autant de fois que de types de module sont nécessaires.
+
+Un plugin représente bien un type de module et non un module seul car un robot voire même les robots simulés peuvent embarquer plusieurs fois le même composant. Le plugin contiendra évidement le code permettant la simulation du composant mais surtout, en tant qu'objet principale, une fabrique permettant d'instancier le dit composant et d'obtenir quelques informations à son sujet.
+
+De part le besoin de généraliser le processus d'instanciation et d'utilisation d'un composant, la fabrique ainsi que la classe simulant un composant respecteront toutes deux des interfaces bien définies et seront ces dernières qui seront également bien documentées, permettant ainsi au client de créer de nouveaux composants dans le futur de manière aisée. (\`A noter qu'un développement supplémentaire dans Aversive++ sera certainement également nécessaire pour apporter une abstraction de ce nouveau composant au code robot)
+
+La fabrique respectera l'interface \emph{ModuleFab} suivante (encore incomplète/à discuter) :
+\begin{itemize}
+    \item Module* create(const QMap\textless QString, QVariant\textgreater \&) const : permet d'instancier un module avec les paramètres donnés dans la QMap
+    \item QString name() const : retourne le nom du module correspondant
+    \item ...
+\end{itemize}
+
+Tandis que les modules respecteront l'interface \emph{Module} suivante (de même) :
+\begin{itemize}
+    \item $[$slot$]$ refresh() \emph{(paramètres à réfléchir)} : permet de rafraichir le module après qu'un pas de simulation ait été calculé
+    \item $[$signal$]$ message(QString) : permet d'ajouter un message dans le journal/log
+    \item $[$signal$]$ hasChanged(const Module*) : permet d'informer que le module à changer d'état (permettant de mettre à jour l'UI et envoyer le nouvel état à l'API du code robot correspondant)
+    \item const QSharedPointer / QMap\textless QString, QVariant\textgreater\ \emph{(à réfléchir)} data() const : permet de récupérer la/les valeurs du composant
+    \item ...
+\end{itemize}
+
+%benoit
+%Tous les modules de la bibliothèque ont une classe dans l'api, le dialogue entre code robot (via API) et le module de la bibliothèque ce fait par message text voir %TODO ref%
+%.
+
+%Le coordinateur dialogue avec les modules par 4 méthode défini dans la classe abstraite moduleDynamique, qui sont :
+%\begin{itemize}
+%    \item{Constructeur(CoordinateurModule *)} : permet de donner au  module l'objet a contacter.
+%    \item{apiMessage(const char* s)} : donne un message de la part du code robot.
+%    \item{simulStep(btDiscreteDynamicsWorld* world)} : indique qu'un pas de simulation a été calculé, et qu'il faut le transformer en donnée pour le code robot. Le pas de simulation suivant ne sera pas calculer tant que tous les modules n'auront pas fini leurs simulStep.
+%\end{itemize}
+
+%Dans l'autre sens, defini par l'interface CoordinateurModule:
+%\begin{itemize}
+%    \item{send()} : envoie d'un message text à l'API
+%    \item{valeurCapteur<type t>(t valeur)} : valeur d'un capteur a retressetre a l'utilisateur et au robot.
+    %\item{done()} : indique au coordinateur que le module a fini son traitement et qu'un nouveau pas de simulation peut commencer.
+%    \item{bulletAdd(btRigidBody* objet)} indique au coordinateur d'ajouter un objet dans la scene.
+%\end{itemize}
+
+%Les modules ne communique pas a proprement parler au moteur physique, ils ont juste access au objets de la simulation via une pointeur et a leurs propriété modifié au cours la simulation.
+%Un capteur de distance pourra par exemple crée son propre rayTest pour calculer la distance de son module à l'obstacle suivant.
