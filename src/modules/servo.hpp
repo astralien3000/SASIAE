@@ -1,21 +1,35 @@
+#ifndef __SERVO_H_
+#define __SERVO_H_
+
+
 #include "modules.hpp"
-#include <QObject>
-#include <QString>
+
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QDebug>
+#include <QtGui/QStandardItem>
+
 
 class Servo : public Modules {
-Q_OBJECT
 
 public:
-  Servo(int position);
+  Servo(int _position, QObject * parent = 0);
+  ~Servo();
 
 public slots:
-  virtual void received(QString message);  
-  virtual void simulStep();
+  void received(QString message);
+  void simulStep();
+  virtual QStandardItem* getData();
 
 signals:
-  virtual void send(QString message);
- 
-private:
-  int position;
+  //virtual void send(QString message);
 
+private:
+	int _position;
+	QStandardItem* _dataRoot;
 };
+
+
+
+#endif

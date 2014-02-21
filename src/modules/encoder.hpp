@@ -4,6 +4,7 @@
 //#include "../PhysicalCalculator/wheel.hpp"
 #include "wheel.hpp"
 #include "modules.hpp"
+#include <QStandardItem>
 #include <QString>
 #include <QObject>
 #include <QRegExp>
@@ -15,6 +16,7 @@ Q_OBJECT
 public:
   Encoder(Wheel* wheel, QString params, QObject* parent = 0);
   static const QString xmlAccuracyName;
+  virtual QStandardItem* getData(); 
 
 public slots:
   virtual void received(QString message);  
@@ -26,6 +28,7 @@ signals:
 private:
   Wheel* _wheel;  
   int _accuracy;
+  QStandardItem* _dataRoot;
 };
 
 #endif

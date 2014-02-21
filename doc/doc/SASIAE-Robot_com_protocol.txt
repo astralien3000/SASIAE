@@ -1,0 +1,18 @@
+From SASIAE to Robot:
+     "T xxx yyy\n" : synchronization command, xxx must be microseconds since the simulation started, yyy is the amount of iteration of robotLoop to execute
+     "B\n" : begin the match
+     "D xxx yyy\n" : send yyy message to xxx named device
+     "S\n" : stop the simulation
+
+From Robot to SASIAE:
+     "D xxx yyy\n" : send yyy message to xxx named 
+     "M t xxx\n" : t among I(nfo), W(arning), E(rror) or D(ebug), xxx is the message
+
+For "D xxx yyy\n" messages, yyy must be:
+    - "init v v v ..."
+    - "value v"
+    - "ivalues i:v i:v i:v ..."
+    - "values v v v ..."
+
+If v is a string, it must be surrounded by " (double-quotes), double-quotes and \ (backslashes) must be escaped with a \.
+String shouldn't contain new-line character (ASCII code 10) by any means.

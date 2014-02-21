@@ -19,6 +19,11 @@ Encoder::Encoder(Wheel* wheel, QString params, QObject* parent)
 	xml.readNext(); //leaving closer
     }
   } 
+  //building data tree for UI
+  _dataRoot = new QStandardItem("Encoder");
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Accuracy") << new QStandardItem(QString()+ _accuracy));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Rotation") << new QStandardItem(QString()+ _wheel->getRotation()));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Value") << new QStandardItem(QString("0")));
 }
 
 void Encoder::received(QString message) {
@@ -26,5 +31,11 @@ void Encoder::received(QString message) {
 }
 
 void Encoder::simulStep() {
+  _dataRoot->child(1,1)->setText(QString() + _wheel->getRotation());
+  _dataRoot->child(2,1)->setText(QString() + ((int)_wheel->getRotation()*(double)_accuracy));
   emit(send(QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
+}
+
+virtual QStandardItem* getData() {
+  return _dataRoot;
 }

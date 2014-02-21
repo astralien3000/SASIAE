@@ -1,23 +1,31 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "ui_mainwindow.h"
+#include <QtWidgets/QMainWindow>
+#include <QtCore/QDebug>
 
+//#include "ui_mainwindow.h"
+namespace Ui {
+class MainWindow;
+}
 
-
-class MainWindow:  public QMainWindow,public Ui_MainWindow {
-
-Q_OBJECT
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
 public:
-    MainWindow();
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+
+private:
+    Ui::MainWindow *ui;
 
 public slots:
-    void do_sth();
+  void do_sth();
+  void CReceived(QString message);
+
 
 };
 
-
-QT_END_NAMESPACE
-
 #endif // MAINWINDOW_H
+
