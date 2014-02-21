@@ -2,6 +2,8 @@
 #define XML_PARSER_HPP
 
 #include <QString>
+#include <QDomDocument>
+
 namespace XMLParser{
 	union positionVector {
 		struct{

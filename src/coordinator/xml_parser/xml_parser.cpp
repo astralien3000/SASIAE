@@ -3,6 +3,9 @@
 XMLParser::XMLParser(){}
 XMLParser::~XMLParser(){}
 
-static const struct robotConfig& XMLParser::parse(const QString& path){
+const struct robotConfig& XMLParser::parse(const QString& path){
+	/*TODO: Validation du fichier */
+	QDomDocument doc(path);
+
 	return NULL;
 }
