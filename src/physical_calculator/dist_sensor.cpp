@@ -14,13 +14,15 @@ void DistSensor::init(const btVector3 &pos, const btVector3 &direction, const bt
   _box_depth = boxSize.getZ();
  //creation de la boite
  btCollisionShape* boxShape = new btBoxShape(boxSize);
- btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),btVector3(0,0,0)));
+ btTransform trans;
+ _chassis->getMotionState()->getWorldTransform(trans);
+ btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(_chassis->getOrientation(),trans.getOrigin()+pos));
  btVector3 boxInertial(0,0,0);
  boxShape->calculateLocalInertia(mass, boxInertial);
  btRigidBody::btRigidBodyConstructionInfo boxBodyCi(mass, boxMotionState, boxShape, boxInertial);
  _sensor_box = new btRigidBody(boxBodyCi);
  _world->addRigidBody(_sensor_box);
- //creation de la contraint
+ //creation de la contrainte
  //lx = -z y x
  btVector3 normal = direction;
  normal.normalize();

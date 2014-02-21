@@ -21,9 +21,10 @@ void Wheel::init(const btVector3 &pos, const btVector3 &direction, btScalar radi
   btWheelInfo& wheel = _robot->addWheel(pos,direction, btVector3(-1,0,0),radius,motorized);
       wheel.m_suspensionStiffness = 20.f;//suspensionStiffness;
       wheel.m_wheelsDampingRelaxation = 2.3f;//suspensionDamping;
-      wheel.m_wheelsDampingCompression = 4.4f;//suspensionCompression;
+      wheel.m_wheelsDampingCompression = 4.4f;//suspensionCompression;  
+      wheel.m_maxSuspensionTravelCm = 0;
       wheel.m_frictionSlip = 1000;//wheelFriction;
-      wheel.m_rollInfluence = .1f;//rollInfluence;
+      wheel.m_rollInfluence = .7f;//rollInfluence;
   _wheel_number = _robot->getNumWheels() - 1;
 }
 
@@ -36,7 +37,8 @@ double Wheel::getTorque() {
 }
 
 void Wheel::setTorque(double f) {
-  _robot->applyEngineForce(f,_wheel_number);
   if(f == 0) 
-    _robot->setBrake(10000,_wheel_number);
+    _robot->setBrake(100000,_wheel_number);
+  else
+  _robot->applyEngineForce(f,_wheel_number);
 }
