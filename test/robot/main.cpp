@@ -32,11 +32,14 @@ int main(int argc, char** argv) {
       if(enc_l.getValue() >= 10000 && MOT_L >= 0) {
 	mot_l.setValue(-10);
 	//io << "stop left !\n";
+	//Aversive::stop();
       }
       if(enc_r.getValue() >= 50000 && MOT_R >= 0) {
 	mot_r.setValue(-10);
 	//io << "stop right !\n";
       }
+      //ClientThread::instance().sendMessage(ClientThread::INFO, "TEST");
+      
     });
   t1.setPeriod(10000);
   t1.setRepeat();

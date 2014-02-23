@@ -1,6 +1,8 @@
 #ifndef ROBOT_COORDINATOR_HPP
 #define ROBOT_COORDINATOR_HPP
 
+#include "base_coordinator.hpp"
+
 #include <QHash>
 #include <QString>
 #include <QProcess>
@@ -13,28 +15,44 @@
   Write messages in process.
 
  */
-class RobotCoordinator {
+class RobotCoordinator : public BaseCoordinator {
   Q_OBJECT;
 
 signals:
   //! \brief Ask to forward a device message
-  void sendDeviceMessage(QString);
+  void recvDeviceMessage(QString,QString);
+
+  //! \brief Ask to forward a GUI message
+  void recvGuiMessage(QString);
 
   //! \brief Signal a robot's destruction
   void destroyRobot(QString);
 
+  //! \brief Emited when all robots are synchronised
+  void synchronised(void);
+
+private slots:
+  //! \brief Handle message recieved from robots process
+  void handleRecv(void);
+
 public slots:
   //! \brief Send a message to the right named robot
-  void forwardModuleMessage(QString,QString);
+  void sendModuleMessage(QString, QString);
 
   //! \brief Send to all robots a Sync message "T x y"
-  void sendSyncMessage(void);
+  void sendSyncMessage(int);
 
   //! \brief Load a robot from a binary
-  bool loadRobot(QString);
+  bool loadRobot(QString name, QString path);
 
   //! \brief Delete a robot
-  bool unloadRobot(QString);
+  bool unloadRobot(QString name);
+
+  //! \brief Sync
+  void update(void);
+
+  //! \brief Timestamp recv
+  void setTimestamp(int);
 
 public:
   //! \brief Default Constructor
@@ -46,6 +64,12 @@ public:
 private:
   //! \brief robots list
   QHash<QString, QProcess*> _robots;
+
+  //! \brief number of synchronised robots
+  int _sync;
+
+  //! \brief last timestamp
+  int _time;
 };
 
 #endif//ROBOT_COORDINATOR_HPP

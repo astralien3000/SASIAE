@@ -1,9 +1,12 @@
 #ifndef MODULE_COORDINATOR_HPP
 #define MODULE_COORDINATOR_HPP
 
+#include "base_coordinator.hpp"
+
 #include <QHash>
 #include <QPair>
 #include <QString>
+#include <QProcess>
 
 class Module;
 
@@ -14,7 +17,7 @@ class Module;
   Forward mesages to the right module.
 
  */
-class ModuleCoordinator {
+class ModuleCoordinator : public BaseCoordinator {
   Q_OBJECT;
 
 signals:
@@ -26,10 +29,13 @@ signals:
 
 public slots:
   //! \brief Parse a message to give it to the right module
-  void forwardDeviceMessage(QString);
+  void forwardDeviceMessage(QString,QString);
 
   //! \brief Format a message to be readable by Aversive, and send it
-  void forwardModuleMessage(Module*,QString);
+  void forwardModuleMessage(QString);
+
+  //! \brief Update modules
+  void update(void);
 
 public:
   //! \brief Default Constructor
@@ -39,13 +45,13 @@ public:
   ~ModuleCoordinator(void);
 
   //! \brief Add a robot's named module
-  bool addModule(QString robot_name, QString module_name, Module* module);
+  bool addModule(QString rname, QString mname, Module* mod);
 
   //! \brief Remove a robot's named module
-  bool delModule(QString robot_name, QString module_name);
+  bool delModule(QString rname, QString mname);
 
   //! \brief Remove all robot's modules
-  bool delRobotModules(QString robot_name);
+  bool delRobotModules(QString rname);
 
 private:
 

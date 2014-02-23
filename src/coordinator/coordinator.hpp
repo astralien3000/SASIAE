@@ -75,7 +75,7 @@ private slots:
   */
   void MReceived(QString);
 
-  void sendModuleMessage(Modules* m, QString msg);
+  void sendModuleMessage(QString msg);
 
 private:
 
@@ -88,7 +88,9 @@ private:
 	QPair<QString/*robot_code_name*/, QString /*module_name*/> > 
   _moduleInfo;
 
+private slots:
   void gotoNextStep(); 
+private:
   void sendDeviceMessage(QString name, QString msg, QProcess* p);
   void sendDeviceMessage(QString name, QString msg, QString code);
   void sendMessages(QString msg, QProcess* p);
@@ -96,6 +98,8 @@ private:
 public:
   //! \brief send sync message to all Robot Code Process
   void sendSyncMessages();
+  
+  void update(void);
 
 private:
   void closeRobot(Slot robot);

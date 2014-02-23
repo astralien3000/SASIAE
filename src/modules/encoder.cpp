@@ -5,7 +5,7 @@
 const QString Encoder::xmlAccuracyName = "accuracy";
 
 Encoder::Encoder(Wheel* wheel, QString params, QObject* parent) 
-  : Modules(parent), _wheel(wheel) {
+  : Module(parent), _wheel(wheel) {
   //defaults
     _accuracy = 1024;
   //read from params :
@@ -30,12 +30,12 @@ void Encoder::received(QString message) {
   qDebug() << "Message du robot vers l'encodeur Oo :" << message;
 }
 
-void Encoder::simulStep() {
+void Encoder::update(void) {
   _dataRoot->child(1,1)->setText(QString() + _wheel->getRotation());
   _dataRoot->child(2,1)->setText(QString() + ((int)_wheel->getRotation()*(double)_accuracy));
-  emit(send(this, QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
+  emit(send(QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
 }
 
-QStandardItem* Encoder::getData() {
+QStandardItem* Encoder::getGuiItem() {
   return _dataRoot;
 }

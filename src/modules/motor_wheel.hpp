@@ -1,22 +1,22 @@
 #include "wheel.hpp"
-#include "modules.hpp"
+#include "module.hpp"
 #include <QStandardItem>
 #include <QObject>
 #include <QString>
 #include <QRegExp>
 
-class MotorWheel : public Modules {
+class MotorWheel : public Module {
 Q_OBJECT
 
 public:
   MotorWheel(Wheel* wheel, QString params, QObject* parent = 0);
   static const QString xmlGearName;
   static const QString xmlTorqueName;
-  virtual QStandardItem* getData(); 
+  virtual QStandardItem* getGuiItem(void); 
 
 public slots:
   virtual void received(QString message);  
-  virtual void simulStep();
+  virtual void update(void);
 
 signals:
   virtual void send(QString message);

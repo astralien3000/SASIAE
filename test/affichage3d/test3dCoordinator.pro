@@ -16,9 +16,15 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \
  ../../src/physical_calculator/physical_calculator.hpp \
-../../src/coordinator/coordinator.hpp \
+ ../../src/coordinator/coordinator.hpp \
+ ../../src/coordinator/physical_coordinator.hpp \
+ ../../src/coordinator/robot_coordinator.hpp \
+ ../../src/coordinator/module_coordinator.hpp \
+ ../../src/coordinator/schedule_coordinator.hpp \
+ ../../src/coordinator/base_coordinator.hpp \
  ../../src/modules/servo.hpp \
  ../../src/modules/modules.hpp \
+ ../../src/modules/module.hpp \
  ../../src/modules/encoder.hpp \
  ../../src/modules/motor_wheel.hpp \
  CommandLineArguments.h \
@@ -41,6 +47,10 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/physical_calculator/robot.cpp \
  ../../src/physical_calculator/physical_calculator.cpp \
  ../../src/coordinator/coordinator.cpp \
+ ../../src/coordinator/physical_coordinator.cpp \
+ ../../src/coordinator/robot_coordinator.cpp \
+ ../../src/coordinator/module_coordinator.cpp \
+ ../../src/coordinator/schedule_coordinator.cpp \
  ../../src/modules/modules.cpp \
  ../../src/modules/servo.cpp \
  ../../src/modules/encoder.cpp \

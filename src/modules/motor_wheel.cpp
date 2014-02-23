@@ -9,7 +9,7 @@ const QString MotorWheel::xmlGearName = "gear";
 const QString MotorWheel::xmlTorqueName = "torque";
 
 MotorWheel::MotorWheel(Wheel* wheel, QString params, QObject* parent)
- : Modules(parent), _wheel(wheel) {
+ : Module(parent), _wheel(wheel) {
   //default params :
   _motorMaxTorque = 1000;
   _gearRatio = 1;
@@ -38,7 +38,7 @@ MotorWheel::MotorWheel(Wheel* wheel, QString params, QObject* parent)
   _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Real torque") << new QStandardItem(QString("0")));
 }
 
-QStandardItem* MotorWheel::getData() {
+QStandardItem* MotorWheel::getGuiItem() {
   return _dataRoot;
 }
 
@@ -49,6 +49,6 @@ void MotorWheel::received(QString message) {
     qDebug() << "Motor's value !!! ==> " << _inputRatio << endl;
   }
 }
-void MotorWheel::simulStep() {
+void MotorWheel::update(void) {
   _wheel->setTorque(_motorMaxTorque*_gearRatio*_inputRatio / 127.0);
 }

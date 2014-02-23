@@ -64,14 +64,15 @@ void BasicDemo::clientMoveAndDisplay() {
     else
     printf("Pas de roue gauche\n");
   */
-  cdn->calcNextStep(1/80.f,20);
-  cdn->sendSyncMessages();
+  //cdn->calcNextStep(1/80.f,20);
+  //cdn->sendSyncMessages();
+  cdn->update();
   //cdn->play();
   //cdn->pause();
-  emit cdn->modulesNextStep();
+  //emit cdn->modulesNextStep();
   _app->processEvents();
   /* the function getPhysicalCalculatorInstance is static. Is it wrong ?*/
-  printf("%lu            \r", (cdn->getPhysicalCalculatorInstance()).getTime());
+  //printf("%lu            \r", (cdn->getPhysicalCalculatorInstance()).getTime());
 
   renderme();
   glFlush();

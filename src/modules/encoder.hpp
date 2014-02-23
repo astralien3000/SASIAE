@@ -3,27 +3,27 @@
 
 //#include "../PhysicalCalculator/wheel.hpp"
 #include "wheel.hpp"
-#include "modules.hpp"
+#include "module.hpp"
 #include <QStandardItem>
 #include <QString>
 #include <QObject>
 #include <QRegExp>
 #include <QDebug>
 
-class Encoder : public Modules {
+class Encoder : public Module {
 Q_OBJECT
 
 public:
   Encoder(Wheel* wheel, QString params, QObject* parent = 0);
   static const QString xmlAccuracyName;
-  virtual QStandardItem* getData(); 
+  virtual QStandardItem* getGuiItem(void); 
 
 public slots:
   virtual void received(QString message);  
-  virtual void simulStep();
+  virtual void update(void);
 
 signals:
-  virtual void send(Modules*,QString message);
+  virtual void send(QString message);
  
 private:
   Wheel* _wheel;  
