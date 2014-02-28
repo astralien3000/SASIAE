@@ -20,12 +20,14 @@ BasicDemo::~BasicDemo()
   exitPhysics();
 }
 
+int myargc;
+char** myargv;
+
 void	BasicDemo::initPhysics() {
   setTexturing(true);
   setShadows(true);
   setCameraDistance(btScalar(50.));
-  int a = 0;
-  _app = new QApplication(a,NULL);
+  _app = new QApplication(myargc,myargv);
   /* this function ( in src/coordinator/coordinator/coorcinator.cpp )
    * creates 4 wheels, one robot's body and merges them together.
    *

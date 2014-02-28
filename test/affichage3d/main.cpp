@@ -20,19 +20,24 @@ subject to the following restrictions:
 #include <LinearMath/btHashMap.h>
 #include<cstdio>
 
-	
+//! \warning you have to defines theses vars else where...
+extern int myargc;
+extern char** myargv;
+
 int main(int argc,char** argv)
 {
+  myargc = argc;
+  myargv = argv;
 
-	BasicDemo ccdDemo;
-	fprintf(stderr,"after declaration");
+  BasicDemo ccdDemo;
+  fprintf(stderr,"after declaration");
   ccdDemo.myinit();
-	ccdDemo.initPhysics();
+  ccdDemo.initPhysics();
 
 
-	return glutmain(argc, argv,1024,600,"Bullet Physics Demo. http://bulletphysics.org",&ccdDemo);
+  return glutmain(argc, argv,1024,600,"Bullet Physics Demo. http://bulletphysics.org",&ccdDemo);
 	
-	//default glut doesn't return from mainloop
-	return 0;
+  //default glut doesn't return from mainloop
+  return 0;
 }
 
