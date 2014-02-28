@@ -49,8 +49,7 @@ int main(int argc, char** argv) {
   mot_l.setValue(100);
   mot_r.setValue(100);
 
-  while(Aversive::isRunning()) {
-    Aversive::sleep();
+  while(Aversive::sync()) {
     //io << "test " << ENC_L << " " << ENC_R << "\n";
   }
   
