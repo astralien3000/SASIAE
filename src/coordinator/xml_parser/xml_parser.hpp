@@ -18,32 +18,32 @@ namespace XMLParser{
 	};
 
 	struct parameter {
-		QString type;
-		QString name;
-		QVariant value;
+		QString *type;
+		QString *name;
+		QVariant *value;
 	};
 
 	struct moduleConfig {
-		QString name;
-		positionVector position;
-		QList<parameter> parameters;
+		QString *name;
+		positionVector *position;
+		QList<const parameter*> *parameters;
 	};
 
 	struct microCConfig {
-		QString name;
-		QList<moduleConfig> modules;
+		QString *name;
+		QList<const moduleConfig*> *modules;
 	};
 
 	struct robotConfig {
-		QString mesh_path;
-		QList<microcontrollerConfig> microcontrollers;
+		QString *mesh_path;
+		QList<const microcontrollerConfig*> *microcontrollers;
 	};
 }
 
 class XMLParser {
 	public:
-		static struct robotConfig& parse(QString&);
-}
+		static struct robotConfig* parse(QString&);
+};
 
 
 #endif //XML_PARSER_HPP
