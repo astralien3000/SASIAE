@@ -41,6 +41,8 @@ class XMLParser {
 	struct toyConfig {
 		positionVector* position;	
 		QString* mesh_path;
+		QString* name;
+		QVariant* weight;
 	};
 
 	struct tableConfig {
