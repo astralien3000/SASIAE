@@ -19,6 +19,9 @@ signals:
 public slots:
   //! \brief Begin comupation
   virtual void update(void) = 0;
+
+public:
+  virtual inline ~BaseCoordinator(void) {}
 };
 
 #endif//BASE_COORDINATOR_HPP
