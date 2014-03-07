@@ -3,8 +3,7 @@
 
 #include <QString>
 #include <QDomDocument>
-
-namespace XMLParser{
+class XMLParser {
 	union positionVector {
 		struct{
 			float x;
@@ -18,31 +17,40 @@ namespace XMLParser{
 	};
 
 	struct parameter {
-		QString *type;
-		QString *name;
-		QVariant *value;
+		QString* type;
+		QString* name;
+		QVariant* value;
 	};
 
 	struct moduleConfig {
-		QString *name;
-		positionVector *position;
-		QList<const parameter*> *parameters;
+		QString* name;
+		positionVector* position;
+		QList<const parameter*>* parameters;
 	};
 
 	struct microCConfig {
-		QString *name;
-		QList<const moduleConfig*> *modules;
+		QString* name;
+		QList<const moduleConfig*>* modules;
 	};
 
 	struct robotConfig {
-		QString *mesh_path;
-		QList<const microcontrollerConfig*> *microcontrollers;
+		QString* mesh_path;
+		QList<const microcontrollerConfig*>* microcontrollers;
 	};
-}
 
-class XMLParser {
+	struct toyConfig {
+		positionVector* position;	
+		QString* mesh_path;
+	};
+
+	struct tableConfig {
+		QString* mesh_path;
+		QList<const toyConfig*>* toys;
+	};
+
 	public:
-		static struct robotConfig* parse(QString&);
+		static struct robotConfig* parseRobot(QString&);
+		static struct robotConfig* parseTable(QString&);
 };
 
 
