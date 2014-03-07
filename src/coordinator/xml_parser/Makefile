@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS= -W -Wall -Wextra -std=c++0x
+CFLAGS= -W -Wall -Wextra -std=c++11 -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtXml -fPIC
 LDFLAGS=
 
 SRC= xml_parser.cpp text_xml_parser.cpp

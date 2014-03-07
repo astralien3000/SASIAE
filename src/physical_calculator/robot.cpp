@@ -25,5 +25,6 @@ btWheelInfo& Robot::addWheel (const btVector3 &connectionPointCS0,
 				     wheelRadius,
 				     _tuning,
 				     isFrontWheel);
-}
+  }
+
 

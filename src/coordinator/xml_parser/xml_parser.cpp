@@ -3,9 +3,71 @@
 XMLParser::XMLParser(){}
 XMLParser::~XMLParser(){}
 
-const struct robotConfig& XMLParser::parse(const QString& path){
+const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	/*TODO: Validation du fichier */
 	QDomDocument doc(path);
+	QDomNodeList mcs = doc.elementsByTagName("microcontroller");
 
-	return NULL;
+	if(mcs.isEmpty())
+		return NULL;
+	/* Ouverture de la première structure */
+	XMLParser::robotConfig *data = new XMLParser::robotConfig();
+
+	/* Noeud Courants de chaque niveau */
+	QDomNode tmp1, tmp2, tmp3;
+
+	/* Listes des noeuds utilisés */
+	QDomNodeList mods();
+	QDomNodeList params();
+
+	/* Pointeurs de sauvegardes des instances courantes */
+	XMLParser::microCConfig *currMC;
+	XMLParser::moduleConfig *currMod;
+	XMLParser::parameter* currParam;
+
+	/* Parcours des µC */
+	for(int i=0; i<mcs.length(); i++) {
+		/* Ajout d'une structure µC */
+		currMC = new XMLParser::microCConfig();
+
+		/*Sauvegarde du noeud courrant*/
+		tmp1 = mcs.item(i);
+
+		currMC->name = tmp1.attributes().namedItem("name").nodeValue();
+		mods = tmp1.toDocument().elementsByTagName("modules");
+
+		/* Parcours des modules */
+		for(int j=0 ; j<mods.length ; j++){
+			/* Ajout d'une structure module */
+			currMod = new XMLParser::moduleConfig();
+			tmp2=mods.item(j);
+
+			tmp3=tmp2.toDocument().elementsByTagName("location");
+			currMod->position = new XMLParser::position();
+			currMod->position->x = tmp3.attribute().namedItem("X").nodeValue();
+			currMod->position->y = tmp3.attribute().namedItem("Y").nodeValue();
+			currMod->position->z = tmp3.attribute().namedItem("Z").nodeValue();
+			currMod->position->alpha = tmp3.attribute().namedItem("alpha").nodeValue();
+			currMod->position->beta = tmp3.attribute().namedItem("beta").nodeValue();
+			currMod->position->gamma = tmp3.attribute().namedItem("gamma").nodeValue();
+			currMC->name=tmp2.attributes().namedItem("name").nodeValue();
+
+			for(k=0;k<-params.length();k++){
+				/* Ajout d'une structure parameter */
+				currParam = new XMLParser::parameter();
+
+				/* Sauvegarde du noeud */
+				tmp3 = params.item(k);
+
+				/* Récupération des valeurs des paramêtres */
+				currParam->name = tmp3.attribute().namedItem("name").nodeValue();
+				currParam->type = tmp3.attribute().namedItem("type").nodeValue();
+				currParam->value = tmp3.attribute().namedItem("value").nodeValue();
+				currMod->parameters->push_front(currParam);
+			}
+			currMC->modules->push_front(currMod);
+		}
+		data->microcontrollers->push_front(currMC);
+	}
+	return data;
 }

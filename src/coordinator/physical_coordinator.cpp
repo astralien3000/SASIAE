@@ -51,11 +51,16 @@ void PhysicalCoordinator::pause() {
   _data->running = false;
 }
 
-void PhysicalCoordinator::loadTable(QString path) {
+void PhysicalCoordinator::loadTable(const QString& path) {
   //! \warning default table loaded instead
   //! \todo really load the file
   (void)path;
   _data->physic->simple_scene_walls(300);
+}
+
+Mesh* PhysicalCoordinator::loadMesh(const QString& path) {
+  //! \todo call STL parser
+  return 0;
 }
 
 void PhysicalCoordinator::update(void) {

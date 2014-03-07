@@ -23,7 +23,7 @@ private:
 public slots:
   void do_sth();
   void CReceived(QString message);
-
+  void animate();
 
 };
 
