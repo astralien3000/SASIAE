@@ -6,6 +6,9 @@
 //! \brief PhysicalCalculator declaration (avoid include)
 class PhysicalCalculator;
 
+//! \brief represents a shape compatible with the physical calculator
+class Mesh;
+
 //! \brief Manage the physical coordinator
 /*!
 
@@ -32,7 +35,10 @@ public slots:
   void pause();
 
   //! \brief Load a Table from XML file
-  void loadTable(QString);
+  virtual void loadTable(const QString&);
+
+  //! \brief Load a STL file in the PhysicalCalculator
+  Mesh* loadMesh(const QString&);
 
   //! \brief Launch physical calculator's computation
   void update(void);

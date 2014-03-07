@@ -10,7 +10,9 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
   std::cout << "Creation de la fenetre principale..." << std::endl;
   MainWindow mainwindow;
+  mainwindow.animate();
   mainwindow.show();
+
   std::cout << "Boucle principale..." << std::endl;
   app.exec();
   std::cout << "Fin de l'application..." << std::endl;
