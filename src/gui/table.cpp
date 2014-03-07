@@ -1,16 +1,38 @@
 #include "table.h"
 
-#include <QPainter>
 
-#define SIZE 20
+
+#define SIZE 30
 Table::Table(QWidget*parent) :
     QGraphicsView(parent)
 {
 
-    QRectF robot(QPointF(0,5),QSizeF(SIZE,SIZE));
+
     setScene(new QGraphicsScene(this));
     scene()->setBackgroundBrush(QBrush(QColor(Qt::green)));
-    scene()->addRect(robot);
+    robot=new Rect();
+    robot->setRect(0,0,20,20);
+    scene()->addItem(robot);
+    //scene()->addRect(robot,QPen(),robotBackground);
+
+    QBrush robotBackground(Qt::blue);
+    robot->setBrush(robotBackground);
+    robot->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+    anim= new QPropertyAnimation(robot,"pos");
+    duration=5000;
+
 
 }
 
+void Table::startAnimation(){
+
+    anim->setDuration(duration);
+    anim->setStartValue(QPointF(0,0));
+    anim->setKeyValueAt(0.25,QPointF(100,300));
+    anim->setKeyValueAt(0.5,QPointF(500,100));
+    anim->setKeyValueAt(0.75,QPointF(90,80));
+    anim->setEndValue(QPointF(0,0));
+    anim->setLoopCount(-1);
+    anim->start();
+
+}

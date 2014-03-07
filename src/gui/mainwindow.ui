@@ -267,15 +267,6 @@
     <attribute name="headerMinimumSectionSize">
      <number>70</number>
     </attribute>
-    <attribute name="headerDefaultSectionSize">
-     <number>125</number>
-    </attribute>
-    <attribute name="headerMinimumSectionSize">
-     <number>70</number>
-    </attribute>
-    <attribute name="headerHighlightSections">
-     <bool>false</bool>
-    </attribute>
     <column>
      <property name="text">
       <string>Robots</string>
@@ -381,7 +372,7 @@
      </item>
     </item>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="Table" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -398,7 +389,7 @@
      <x>0</x>
      <y>0</y>
      <width>860</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSimulateur">
@@ -604,6 +595,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Table</class>
+   <extends>QGraphicsView</extends>
+   <header>table.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -17,6 +17,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::animate(){
+    ui->graphicsView->startAnimation();
+}
 
 void MainWindow::do_sth()
 {
