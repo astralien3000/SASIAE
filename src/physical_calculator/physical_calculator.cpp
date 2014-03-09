@@ -13,7 +13,7 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   btContactSolverInfo& info = _scene->getSolverInfo();
   info.m_numIterations = 20;
   _clock= new btClock();
-  objectsList = new list<printableMobileObject>;
+  //_objectsList = new Qlist<printableMobileObject>;
 }
 
 PhysicalCalculator::~PhysicalCalculator(){
@@ -28,7 +28,7 @@ PhysicalCalculator::~PhysicalCalculator(){
 
 /*
   The position vector points to the center of
-  the box. The size vector goes from the position 
+  the box. The size vector goes from the position
   to a vertex of the box.
  */
 btRigidBody* PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mass){
@@ -55,17 +55,17 @@ btDiscreteDynamicsWorld* PhysicalCalculator::getScene(){
 void PhysicalCalculator::simple_scene(btScalar size){
   this->init();
   btCollisionShape *planeShape;
-  
+
   //new btStaticPlaneShape(btVector3(0,1,0), 1);
   planeShape = new btBoxShape(btVector3(size,1,size));
   //planeShape = new btBoxShape(btVector3(50,50,50));
-  
+
 
   //No movement for the ground
   btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1), btVector3(0,-1,0)));
 
   btRigidBody::btRigidBodyConstructionInfo groundBodyCI(0, groundMotionState, planeShape, btVector3(0,0,0));
-  
+
   btRigidBody* groundBody = new btRigidBody(groundBodyCI);
   //groundBody->setFriction(1);
   //groundBody->setRollingFriction(1);
@@ -79,7 +79,7 @@ void PhysicalCalculator::simple_scene_walls(btScalar size){
   addBox(btVector3(2,WALL_HEIGHT,size),btVector3(size+2,WALL_HEIGHT,0),0);
   addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,-size-2),0);
   addBox(btVector3(2,WALL_HEIGHT,size),btVector3(-size-2,WALL_HEIGHT,0),0);
-  
+
 }
 
 void PhysicalCalculator::nextStep(double time, int addedoperations){
@@ -95,8 +95,8 @@ void PhysicalCalculator::init() {
 
 }
 
-  position_data getObjectsList() {
-    return objectsList;
+  QList<printableMobileObject>* PhysicalCalculator::getObjectsList() {
+    return _objectsList;
   }
 
 
@@ -106,7 +106,7 @@ void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, 
   (void) ed;
 
   _scene->addVehicle(robot);
-  
+
   //btCylinderShapeX* m_wheelShape = new btCylinderShapeX(btVector3(1,0.5,0.5));
 
     if(md)

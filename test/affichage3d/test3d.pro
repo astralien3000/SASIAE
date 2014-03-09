@@ -1,7 +1,8 @@
 TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
-INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/physical_calculator/  ../../../aversive--/include/sasiae 
+QT+=widgets
+INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/physical_calculator/  ../../../aversive--/include/sasiae /usr/include/qt5
 
 
 QMAKE_CXXFLAGS = -std=c++11
@@ -10,12 +11,13 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \
  ../../src/physical_calculator/physical_calculator.hpp \
+  ../../src/physical_calculator/printable_mobile_object.hpp \
  ../../src/physical_calculator/dist_sensor.hpp \
  CommandLineArguments.h \
- DebugCastResult.h \ 
- DemoApplication.h \ 
- GLDebugDrawer.h \ 
- GLDebugFont.h \ 
+ DebugCastResult.h \
+ DemoApplication.h \
+ GLDebugDrawer.h \
+ GLDebugFont.h \
  GL_DialogDynamicsWorld.h \
  GL_DialogWindow.h \
  GL_ShapeDrawer.h \
@@ -26,12 +28,13 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  stb_image.h \
  Win32DemoApplication.h \
  test3d.hpp \
- 
+
 SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/physical_calculator/robot.cpp \
  ../../src/physical_calculator/physical_calculator.cpp \
+ ../../src/physical_calculator/printable_mobile_object.cpp \
  ../../src/physical_calculator/dist_sensor.cpp \
- main.cpp \ 
+ main.cpp \
  DemoApplication.cpp \
  GLDebugDrawer.cpp \
  GLDebugFont.cpp \

@@ -10,8 +10,8 @@
 struct position_data {
   btVector3 position; // TODO : transform it to QVector<int>
   //QVector<int> position;
- //vector de position x y z 
- int angle;
+ //vector de position x y z
+  btQuaternion angle;
 };
 
 class printableMobileObject /*: public Mesh*/ {
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif 
+#endif

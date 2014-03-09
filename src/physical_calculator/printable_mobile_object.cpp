@@ -9,7 +9,6 @@ struct position_data * printableMobileObject::getPosition() {
   	btTransform trans;
   	_body->getMotionState()->getWorldTransform(trans);
   	_pos->position=trans.getOrigin();
-  	//_pos->angle=trans.getRotation();
-	
+  	_pos->angle=trans.getRotation();
 	return _pos;
 }

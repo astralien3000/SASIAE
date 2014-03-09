@@ -21,6 +21,9 @@ BasicDemo::~BasicDemo()
   exitPhysics();
 }
 
+int myargc;
+char** myargv;
+
 	void	BasicDemo::initPhysics() {
     setTexturing(true);
     //setShadows(true);
@@ -109,10 +112,10 @@ void BasicDemo::clientMoveAndDisplay() {
     swapBuffers();
     int toto;
 
-  }
-  renderme();
-  glFlush();
-  swapBuffers();
+
+  // renderme();
+  // glFlush();
+  // swapBuffers();
 }
 
 	void BasicDemo::displayCallback() {

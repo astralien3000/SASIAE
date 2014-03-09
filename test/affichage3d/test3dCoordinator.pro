@@ -10,12 +10,13 @@ CONFIG += debug
 QT += widgets
 
 QMAKE_CXXFLAGS = -std=c++11
-LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU 
+LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 
 # Input
 HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \
  ../../src/physical_calculator/physical_calculator.hpp \
+   ../../src/physical_calculator/printable_mobile_object.hpp \
  ../../src/coordinator/coordinator.hpp \
  ../../src/coordinator/physical_coordinator.hpp \
  ../../src/coordinator/robot_coordinator.hpp \
@@ -28,10 +29,10 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/modules/encoder.hpp \
  ../../src/modules/motor_wheel.hpp \
  CommandLineArguments.h \
- DebugCastResult.h \ 
- DemoApplication.h \ 
- GLDebugDrawer.h \ 
- GLDebugFont.h \ 
+ DebugCastResult.h \
+ DemoApplication.h \
+ GLDebugDrawer.h \
+ GLDebugFont.h \
  GL_DialogDynamicsWorld.h \
  GL_DialogWindow.h \
  GL_ShapeDrawer.h \
@@ -42,10 +43,11 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  stb_image.h \
  Win32DemoApplication.h \
  test3dCoordinator.hpp \
- 
+
 SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/physical_calculator/robot.cpp \
  ../../src/physical_calculator/physical_calculator.cpp \
+   ../../src/physical_calculator/printable_mobile_object.cpp \
  ../../src/coordinator/coordinator.cpp \
  ../../src/coordinator/physical_coordinator.cpp \
  ../../src/coordinator/robot_coordinator.cpp \
@@ -55,7 +57,7 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/modules/servo.cpp \
  ../../src/modules/encoder.cpp \
  ../../src/modules/motor_wheel.cpp \
- main.cpp \ 
+ main.cpp \
  DemoApplication.cpp \
  GLDebugDrawer.cpp \
  GLDebugFont.cpp \
