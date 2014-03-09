@@ -2,7 +2,7 @@
 #define ROBOT_HPP
 
 #include <btBulletDynamicsCommon.h>
-#include "printableMobileObject.hpp"
+#include "printable_mobile_object.hpp"
 
 class Robot : public btRaycastVehicle, public printableMobileObject {
 private:
@@ -10,6 +10,7 @@ private:
   //rajouter la balise
 public:
   Robot(btRigidBody* chassis, btDynamicsWorld *world);
+  Robot(btRigidBody* chassis, btDynamicsWorld *world, QString name); 
   ~Robot();
 
   /* This function is called in Wheel::init().

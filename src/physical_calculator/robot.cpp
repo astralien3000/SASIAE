@@ -3,7 +3,20 @@
 Robot::Robot(btRigidBody* chassis, btDynamicsWorld *world) 
   : btRaycastVehicle(	_tuning,
 			chassis, 
-			new btDefaultVehicleRaycaster(world)) {
+			new btDefaultVehicleRaycaster(world)),
+    printableMobileObject(chassis){
+  setCoordinateSystem(0,1,2);
+  chassis->setDamping(0.5,0.6);  
+  chassis->setFriction(0.00001);
+  chassis->setRollingFriction(1);
+}
+
+
+Robot::Robot(btRigidBody* chassis, btDynamicsWorld *world, QString name) 
+  : btRaycastVehicle(	_tuning,
+			chassis, 
+			new btDefaultVehicleRaycaster(world)),
+    printableMobileObject(name,chassis){
   setCoordinateSystem(0,1,2);
   chassis->setDamping(0.5,0.6);  
   chassis->setFriction(0.00001);

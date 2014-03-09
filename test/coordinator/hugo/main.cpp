@@ -7,6 +7,6 @@ int main(int argc, char * argv[]){
 
   BigDaddy.openRobot("client",Coordinator::MAIN_ROBOT1);
 
-
-  return app.exec();
+ app.exec();
+ return 0;
 }

@@ -5,11 +5,11 @@
 TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
-INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/
+INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/
 CONFIG += debug
 QT += widgets
 
-QMAKE_CXXFLAGS = -std=c++0x
+QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU 
 
 # Input
