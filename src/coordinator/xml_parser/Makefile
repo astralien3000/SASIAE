@@ -1,12 +1,11 @@
 CC=g++
-CFLAGS= -W -Wall -Wextra -std=c++0x -I/usr/include/qt5 -I/usr/include/qt5/QtCore
+CFLAGS= -W -Wall -Wextra -std=c++11 -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtXml -fPIC
 LDFLAGS=
 
-SRC= xml_parser.cpp text_xml_parser.cpp
+SRC= xml_parser.cpp
 OBJ= $(SRC:.cpp=.o)
-EXEC=test_xml_parser
 
-all: $(EXEC)
+all: $(OBJ)
 
 $(EXEC): $(OBJ)
 	@echo "Linking\t$^ in\t[$@]"

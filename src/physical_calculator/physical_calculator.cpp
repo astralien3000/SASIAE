@@ -13,6 +13,7 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   btContactSolverInfo& info = _scene->getSolverInfo();
   info.m_numIterations = 20;
   _clock= new btClock();
+  objectsList = new list<printableMobileObject>;
 }
 
 PhysicalCalculator::~PhysicalCalculator(){
@@ -93,6 +94,11 @@ void PhysicalCalculator::init() {
   _scene->setGravity(btVector3(0,-10,0));
 
 }
+
+  position_data getObjectsList() {
+    return objectsList;
+  }
+
 
 /*
 void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){

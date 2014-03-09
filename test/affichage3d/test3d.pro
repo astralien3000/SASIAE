@@ -4,9 +4,8 @@ DEPENDPATH += .
 INCLUDEPATH += . /usr/include/bullet /usr/local/include/bullet /usr/local/lib ../../src/physical_calculator/  ../../../aversive--/include/sasiae 
 
 
-QMAKE_CXXFLAGS = -std=c++0x
-LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU 
-
+QMAKE_CXXFLAGS = -std=c++11
+LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 # Input
 HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \

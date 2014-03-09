@@ -2,9 +2,8 @@
 #define XML_PARSER_HPP
 
 #include <QString>
-#include <QDomDocument>
-
-namespace XMLParser{
+#include <QtXml>
+class XMLParser {
 	union positionVector {
 		struct{
 			float x;
@@ -18,31 +17,44 @@ namespace XMLParser{
 	};
 
 	struct parameter {
-		QString *type;
-		QString *name;
-		QVariant *value;
+		QString type;
+		QString name;
+		QString value;
 	};
 
 	struct moduleConfig {
-		QString *name;
-		positionVector *position;
-		QList<const parameter*> *parameters;
+		QString name;
+		positionVector* position;
+		QList<const parameter*>* parameters;
 	};
 
 	struct microCConfig {
-		QString *name;
-		QList<const moduleConfig*> *modules;
+		QString name;
+		QList<const moduleConfig*>* modules;
 	};
 
 	struct robotConfig {
-		QString *mesh_path;
-		QList<const microcontrollerConfig*> *microcontrollers;
+		QString mesh_path;
+		QList<const microCConfig*>* microcontrollers;
 	};
-}
 
-class XMLParser {
+	struct toyConfig {
+		positionVector* position;	
+		QString mesh_path;
+		QString name;
+		QVariant* weight;
+	};
+
+	struct tableConfig {
+		QString mesh_path;
+		QList<const toyConfig*>* toys;
+	};
+
 	public:
-		static struct robotConfig* parse(QString&);
+		XMLParser();
+		~XMLParser();
+		const struct XMLParser::robotConfig* parseRobot(const QString& path);
+		const struct XMLParser::robotConfig* parseTable(const QString& path);
 };
 
 

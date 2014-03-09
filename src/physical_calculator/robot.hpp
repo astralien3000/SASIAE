@@ -2,8 +2,9 @@
 #define ROBOT_HPP
 
 #include <btBulletDynamicsCommon.h>
+#include "printableMobileObject.hpp"
 
-class Robot : public btRaycastVehicle {
+class Robot : public btRaycastVehicle, public printableMobileObject {
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
   //rajouter la balise
