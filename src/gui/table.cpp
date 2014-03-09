@@ -11,11 +11,12 @@ Table::Table(QWidget*parent) :
     setScene(new QGraphicsScene(this));
     scene()->setBackgroundBrush(QBrush(QColor(Qt::green)));
     robot=new Rect();
-    robot->setRect(0,0,20,20);
+    robot->setRect(0,0,100,100);
     scene()->addItem(robot);
     //scene()->addRect(robot,QPen(),robotBackground);
 
-    QBrush robotBackground(Qt::blue);
+    QPixmap robotImg("petitrobot.png");
+    QBrush robotBackground(robotImg);
     robot->setBrush(robotBackground);
     robot->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     anim= new QPropertyAnimation(robot,"pos");

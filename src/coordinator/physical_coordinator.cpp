@@ -63,4 +63,5 @@ void PhysicalCoordinator::update(void) {
   _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
   emit timestamp(_data->physic->getTime());
   emit nextStep();
+  //emit nextStepAnimation(); 
 }
