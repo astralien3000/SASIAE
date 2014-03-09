@@ -19,7 +19,7 @@ class XMLParser {
 	struct parameter {
 		QString type;
 		QString name;
-		QVariant* value;
+		QString value;
 	};
 
 	struct moduleConfig {

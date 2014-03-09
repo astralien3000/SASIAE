@@ -17,8 +17,8 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	QDomNode tmp1, tmp2, tmp3;
 
 	/* Listes des noeuds utilisés */
-	QDomNodeList mods();
-	QDomNodeList params();
+	QDomNodeList mods;
+	QDomNodeList params;
 
 	/* Pointeurs de sauvegardes des instances courantes */
 	XMLParser::microCConfig *currMC;
@@ -37,22 +37,24 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 		mods = tmp1.toDocument().elementsByTagName("modules");
 
 		/* Parcours des modules */
-		for(int j=0 ; j<mods.length ; j++){
+		for(int j=0 ; j<mods.length() ; j++){
 			/* Ajout d'une structure module */
 			currMod = new XMLParser::moduleConfig();
 			tmp2=mods.item(j);
 
-			tmp3=tmp2.toDocument().elementsByTagName("location");
-			currMod->position = new XMLParser::position();
-			currMod->position->x = tmp3.attribute().namedItem("X").nodeValue();
-			currMod->position->y = tmp3.attribute().namedItem("Y").nodeValue();
-			currMod->position->z = tmp3.attribute().namedItem("Z").nodeValue();
-			currMod->position->alpha = tmp3.attribute().namedItem("alpha").nodeValue();
-			currMod->position->beta = tmp3.attribute().namedItem("beta").nodeValue();
-			currMod->position->gamma = tmp3.attribute().namedItem("gamma").nodeValue();
-			currMC->name=tmp2.attributes().namedItem("name").nodeValue();
+			tmp3=tmp2.toDocument().elementsByTagName("location").item(0);
+			currMod->position = new XMLParser::positionVector();
 
-			for(k=0;k<-params.length();k++){
+			/* Extraction des Attributs */
+			currMod->position->x = tmp3.toElement().attribute("X").toInt();
+			currMod->position->y = tmp3.toElement().attribute("Y").toInt();
+			currMod->position->z = tmp3.toElement().attribute("Z").toInt();
+			currMod->position->alpha = tmp3.toElement().attribute("alpha").toInt();
+			currMod->position->beta = tmp3.toElement().attribute("beta").toInt();
+			currMod->position->gamma = tmp3.toElement().attribute("gamma").toInt();
+			currMC->name=tmp2.toElement().attribute("name");
+
+			for(int k=0;k<-params.length();k++){
 				/* Ajout d'une structure parameter */
 				currParam = new XMLParser::parameter();
 
@@ -60,9 +62,9 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 				tmp3 = params.item(k);
 
 				/* Récupération des valeurs des paramêtres */
-				currParam->name = tmp3.attribute().namedItem("name").nodeValue();
-				currParam->type = tmp3.attribute().namedItem("type").nodeValue();
-				currParam->value = tmp3.attribute().namedItem("value").nodeValue();
+				currParam->name = tmp3.toElement().attribute("name");
+				currParam->type = tmp3.toElement().attribute("type");
+				currParam->value = tmp3.toElement().attribute("value");
 				currMod->parameters->push_front(currParam);
 			}
 			currMC->modules->push_front(currMod);
