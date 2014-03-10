@@ -4,12 +4,52 @@
 
 TEMPLATE = app
 TARGET = gui
-INCLUDEPATH += .
+INCLUDEPATH += . \
+/usr/include/bullet \
+/usr/include/bullet/Glut/GL \
+../../../aversive--/include/sasiae
+
 QT += widgets
+QMAKE_CXXFLAGS = -std=c++11
+LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 
 # Input
 HEADERS += mainwindow.h ui_mainwindow.h \
-    table.h
+    table.h \
+
+HEADERS += ../coordinator/coordinator.hpp \
+    ../coordinator/physical_coordinator.hpp \
+    ../coordinator/robot_coordinator.hpp \
+    ../coordinator/module_coordinator.hpp \
+    ../coordinator/schedule_coordinator.hpp \
+    ../coordinator/base_coordinator.hpp
+
+HEADERS += ../physical_calculator/physical_calculator.hpp \
+    ../physical_calculator/robot.hpp \
+    ../physical_calculator/wheel.hpp \
+    ../physical_calculator/printable_mobile_object.hpp
+
+HEADERS += ../modules/servo.hpp \
+    ../modules/module.hpp \
+    ../modules/encoder.hpp \
+    ../modules/motor_wheel.hpp
+
 FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp
+
+SOURCES += ../coordinator/coordinator.cpp \
+    ../coordinator/physical_coordinator.cpp \
+    ../coordinator/robot_coordinator.cpp \
+    ../coordinator/module_coordinator.cpp \
+    ../coordinator/schedule_coordinator.cpp
+
+SOURCES += ../physical_calculator/physical_calculator.cpp \
+    ../physical_calculator/robot.cpp \
+    ../physical_calculator/wheel.cpp \
+    ../physical_calculator/printable_mobile_object.cpp
+
+SOURCES += ../modules/motor_wheel.cpp \
+    ../modules/servo.cpp \
+    ../modules/encoder.cpp
+

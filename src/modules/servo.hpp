@@ -2,7 +2,7 @@
 #define __SERVO_H_
 
 
-#include "modules.hpp"
+#include "module.hpp"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
