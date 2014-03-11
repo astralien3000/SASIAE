@@ -4,7 +4,7 @@
 #include <btBulletDynamicsCommon.h>
 #include "printable_mobile_object.hpp"
 
-class Robot : public btRaycastVehicle, public printableMobileObject {
+class Robot : public btRaycastVehicle, public PrintableMobileObject {
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
   //rajouter la balise

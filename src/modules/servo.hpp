@@ -11,7 +11,7 @@
 #include <QtGui/QStandardItem>
 
 
-class Servo : public Modules {
+class Servo : public Module {
 
 public:
   Servo(int _position, QObject * parent = 0);

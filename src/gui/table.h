@@ -3,34 +3,27 @@
 
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
+#include <QGraphicsItemAnimation>
 #include <QtGui>
-
-
-class Rect : public QObject, public QGraphicsRectItem {
-    Q_OBJECT
-
-public:
-    Q_PROPERTY(QPointF pos READ pos WRITE setPos)
-
-    Rect(QGraphicsItem* item=0):QObject(), QGraphicsRectItem(){};
-};
+#include "item_robot.h"
 
 class Table : public QGraphicsView
 {
     Q_OBJECT
 public:
     explicit Table(QWidget *parent = 0);
+    QTimeLine *timer;
     //QGraphicsRectItem * robotItem;
-    void startAnimation();
+    //void startAnimation();
 signals:
 
 public slots:
 
 private:
     //QRectF robot;
-    Rect * robot;
-    QPropertyAnimation * anim;
-    int duration;
+    ItemRobot * robot;
+    //QPropertyAnimation * anim;
+    //int duration;
 };
 
 #endif // TABLE_H

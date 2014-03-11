@@ -4,13 +4,18 @@
 #include "base_coordinator.hpp"
 #include <QtCore/QVector>
 
+#include "../physical_calculator/printable_mobile_object.hpp"
+
+//class PrintableMobileObject ;
+
 class GuiCoordinator : public BaseCoordinator {
   Q_OBJECT;
 
 signals:
 
 public slots:
-  QVector getAllPostions()const;
+  /*QVector<int> */
+   void getAllPositions()const;
 
 public:
 
@@ -20,10 +25,10 @@ public:
   GuiCoordinator(void);
 
   //! \brief Destructor
-  ~GuiCoordinator();
+  ~GuiCoordinator(void);
 
 private:
-  PhysicalCalculator *pc;
+  PrintableMobileObject *pmo;
 
 };
 

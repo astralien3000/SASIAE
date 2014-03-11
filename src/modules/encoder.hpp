@@ -1,8 +1,8 @@
 #ifndef __ENCODER_H_
 #define __ENCODER_H_
 
-//#include "../PhysicalCalculator/wheel.hpp"
-#include "wheel.hpp"
+#include "../physical_calculator/wheel.hpp"
+//#include "wheel.hpp"
 #include "module.hpp"
 #include <QStandardItem>
 #include <QString>

@@ -14,17 +14,16 @@ struct position_data {
   btQuaternion angle;
 };
 
-class printableMobileObject /*: public Mesh*/ {
+class PrintableMobileObject /*: public Mesh*/ {
 private:
   QString _name;
   struct position_data * _pos;
 protected:
   btRigidBody *_body;
 public:
-  printableMobileObject(QString name, btRigidBody *body);
-  printableMobileObject(btRigidBody *body);
+  PrintableMobileObject(QString name, btRigidBody *body);
+  PrintableMobileObject(btRigidBody *body);
   position_data * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
-
 };
 
 #endif

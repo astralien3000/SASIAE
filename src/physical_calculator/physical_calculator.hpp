@@ -23,10 +23,10 @@ class PhysicalCalculator : public QObject {
 
 Q_OBJECT
 private:
-  QList<printableMobileObject> *_objectsList;
+  QList<PrintableMobileObject> *_objectsList;
 
 public:
-  QList<printableMobileObject>* getObjectsList();
+  QList<PrintableMobileObject>* getObjectsList();
 public:
   //! \brief it creates an empty scene
   void empty_scene();

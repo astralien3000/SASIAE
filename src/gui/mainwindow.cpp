@@ -17,8 +17,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::animate(){
+/*void MainWindow::animate(){
     ui->graphicsView->startAnimation();
+}
+*/
+
+QTimeLine *MainWindow::getTimer()const{
+ return   ui->graphicsView->timer;
 }
 
 void MainWindow::do_sth()

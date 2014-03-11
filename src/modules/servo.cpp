@@ -4,7 +4,7 @@
 Servo::~Servo(){
 }
 
-Servo::Servo(int position, QObject* parent) : Modules(parent) {
+Servo::Servo(int position, QObject* parent) : Module(parent) {
 	this->_position = position;
 	_dataRoot = new QStandardItem("Servo");
 	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ _position));

@@ -163,7 +163,7 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   
   //! \todo really read the file  
 
-  _bot_cdn->loadRobot("bot", "./client");
+  /*_bot_cdn->loadRobot("bot", "./client");*/
 }
 
 

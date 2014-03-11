@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtCore/QDebug>
+#include <QtGui>
 
 //#include "ui_mainwindow.h"
 namespace Ui {
@@ -23,9 +24,8 @@ private:
 public slots:
   void do_sth();
   void CReceived(QString message);
-  void animate();
-
+  //void animate();
+  QTimeLine *getTimer()const;
 };
 
 #endif // MAINWINDOW_H
-

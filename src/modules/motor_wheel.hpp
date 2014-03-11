@@ -1,4 +1,5 @@
-#include "wheel.hpp"
+//#include "wheel.hpp"
+#include "../physical_calculator/wheel.hpp"
 #include "module.hpp"
 #include <QStandardItem>
 #include <QObject>

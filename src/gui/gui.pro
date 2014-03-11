@@ -16,13 +16,15 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 # Input
 HEADERS += mainwindow.h ui_mainwindow.h \
     table.h \
+    item_robot.h
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
     ../coordinator/robot_coordinator.hpp \
     ../coordinator/module_coordinator.hpp \
     ../coordinator/schedule_coordinator.hpp \
-    ../coordinator/base_coordinator.hpp
+    ../coordinator/base_coordinator.hpp \
+    ../coordinator/gui_coordinator.hpp
 
 HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/robot.hpp \
@@ -36,13 +38,15 @@ HEADERS += ../modules/servo.hpp \
 
 FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
-    table.cpp
+    table.cpp \
+    item_robot.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \
     ../coordinator/robot_coordinator.cpp \
     ../coordinator/module_coordinator.cpp \
-    ../coordinator/schedule_coordinator.cpp
+    ../coordinator/schedule_coordinator.cpp \
+    ../coordinator/gui_coordinator.cpp
 
 SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/robot.cpp \
