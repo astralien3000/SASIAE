@@ -8,21 +8,19 @@
 //used as a list in the gui coordinateur to be printed on Qt
 
 struct position_data {
-  btVector3 position; // TODO : transform it to QVector<int>
-  //QVector<int> position;
- //vector de position x y z
-  btQuaternion angle;
+	QVector<int> positionTest;
+	btQuaternion angle;
 };
 
 class PrintableMobileObject /*: public Mesh*/ {
 private:
-  QString _name;
-  struct position_data * _pos;
+	QString _name;
+	struct position_data * _pos;
 protected:
-  btRigidBody *_body;
+	btRigidBody *_body;
 public:
-  PrintableMobileObject(QString name, btRigidBody *body);
-  PrintableMobileObject(btRigidBody *body);
+	PrintableMobileObject(QString name, btRigidBody *body);
+	PrintableMobileObject(btRigidBody *body);
   position_data * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
 
