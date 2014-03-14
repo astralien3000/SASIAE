@@ -14,6 +14,10 @@ PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
     _pos=new PositionData();
     objects.append(this);
 }
+PrintableMobileObject::~PrintableMobileObject() {
+	int objectPosition = objects.indexOf(this);
+	objects.remove(objectPosition);
+}
 
 PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
     _name("unknown") /*_pos(new struct position_data)*/,_body(body)
