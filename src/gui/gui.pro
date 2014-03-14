@@ -7,7 +7,8 @@ TARGET = gui
 INCLUDEPATH += . \
 /usr/include/bullet \
 /usr/include/bullet/Glut/GL \
-../../../aversive--/include/sasiae
+../../../aversive--/include/sasiae \
+/usr/local/include/bullet
 
 QT += widgets
 QMAKE_CXXFLAGS = -std=c++11
@@ -29,7 +30,8 @@ HEADERS += ../coordinator/coordinator.hpp \
 HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/robot.hpp \
     ../physical_calculator/wheel.hpp \
-    ../physical_calculator/printable_mobile_object.hpp
+    ../physical_calculator/printable_mobile_object.hpp \
+    ../physical_calculator/position_data.hpp
 
 HEADERS += ../modules/servo.hpp \
     ../modules/module.hpp \
@@ -51,7 +53,8 @@ SOURCES += ../coordinator/coordinator.cpp \
 SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/robot.cpp \
     ../physical_calculator/wheel.cpp \
-    ../physical_calculator/printable_mobile_object.cpp
+    ../physical_calculator/printable_mobile_object.cpp \
+    ../physical_calculator/position_data.cpp
 
 SOURCES += ../modules/motor_wheel.cpp \
     ../modules/servo.cpp \
