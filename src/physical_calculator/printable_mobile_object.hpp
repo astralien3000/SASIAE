@@ -29,9 +29,9 @@ protected:
 public:
   PrintableMobileObject(QString name, btRigidBody *body);
   ~PrintableMobileObject();
-  const QVector<const PrintableMobileObject*>& getObjectsList();
+  static const QVector<const PrintableMobileObject*>& getObjectsList();
   PrintableMobileObject(btRigidBody *body);
-  PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+  const PositionData * getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
 
 #endif

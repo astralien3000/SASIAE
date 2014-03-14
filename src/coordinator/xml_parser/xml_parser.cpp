@@ -120,6 +120,23 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	return data;
 }
 
+XMLParser::moduleConfig::~moduleConfig() {
+	for(int i=0; i<parameters.length(); i++)
+		delete parameters.at(i);
+}
+XMLParser::microCConfig::~microCConfig() {
+	for(int i=0; i<modules.length(); i++)
+		delete modules.at(i);
+}
+XMLParser::robotConfig::~robotConfig() {
+	for(int i=0; i<microcontrollers.length(); i++)
+		delete microcontrollers.at(i);
+}
+XMLParser::tableConfig::~tableConfig() {
+	for(int i=0; i<toys.length(); i++)
+		delete toys.at(i);
+}
+
 const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) {
   const QDomDocument* doc = open(path, QString("table.xsd"));
   if(doc == NULL) {
@@ -159,6 +176,3 @@ const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) 
   return data;
 }
 
-XMLParser::moduleConfig::~moduleConfig {
-	//modules.begin()
-}
