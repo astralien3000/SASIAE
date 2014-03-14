@@ -114,3 +114,42 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	}
 	return data;
 }
+
+const struct XMLParser::tableConfig* parseTable(const QString& path) {
+  const QDomDocument* doc = open(path, "table.xsd");
+  if(doc == NULL) {
+    return NULL;
+  }
+  QDomNode t = doc.getElementsByTagName("table").item(0);
+  tableConfig* data = new tableConfig();
+  
+  data->mesh_path = t.firstChildElement("mesh").attribute("src");
+  
+  QDomNodeList toys = t.getElementsByTagElement("toy");
+  for(int i = 0; i < toys.length(); i++) {
+    if(!toys.item(i).isElement()) {
+      continue;
+    }
+    
+    QDomElement toyElem = toys.item(i).toElement();
+    
+    toyConfig* toy = new toyConfig();
+    toy->name = toyElem.attribute("name");
+    toy->weight = toyElem.attribute("weight").toInt();
+    
+    toy->mesh = toyElem.firstChildElement("mesh").attribute("src");
+    
+    QDomElement loc = toy.firstChildElement("location");
+    toy->position.x = loc.attribute("X").toInt();
+    toy->position.y = loc.attribute("Y").toInt();
+    toy->position.z = loc.attribute("Z").toInt();
+    toy->position.alpha = loc.attribute("alpha").toInt();
+    toy->position.beta = loc.attribute("beta").toInt();
+    toy->position.gamma = loc.attribute("gamma").toInt();
+    
+    data->toys.push_front(toy);
+  }
+  
+  delete doc;
+  return data;
+}

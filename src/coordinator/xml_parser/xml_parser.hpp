@@ -51,10 +51,10 @@ class XMLParser {
 		};
 
 		struct toyConfig {
-			positionVector* position;	
+			positionVector position;	
 			QString mesh_path;
 			QString name;
-			QVariant* weight;
+			int weight;
 		};
 
 		struct tableConfig {
@@ -65,7 +65,7 @@ class XMLParser {
 		XMLParser();
 		~XMLParser();
 		static const struct XMLParser::robotConfig* parseRobot(const QString& path);
-		static const struct XMLParser::robotConfig* parseTable(const QString& path);
+		static const struct XMLParser::robotTable* parseTable(const QString& path);
 };
 
 
