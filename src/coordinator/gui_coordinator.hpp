@@ -5,14 +5,8 @@
 #include <QQuaternion>
 
 #include "../physical_calculator/printable_mobile_object.hpp"
+#include "../physical_calculator/position_data.hpp"
 #include "../gui/mainwindow.h"
-
-//class PrintableMobileObject ;
-
-struct QtPositionData{
-    QVector<float> _pos;
-    QQuaternion _rot;
-};
 
 class GuiCoordinator: public QObject {
   Q_OBJECT;
@@ -20,8 +14,7 @@ class GuiCoordinator: public QObject {
 signals:
 
 public slots:
-  /*QVector<int> */
-   struct QtPositionData * getAllPositions()const;
+  QVector<const PositionData*>* getAllPositions()const;
 
 
 public:
@@ -36,8 +29,6 @@ public:
 private:
   //PrintableMobileObject *pmo;
     MainWindow * _mainWindow;
-    QtPositionData * _test;
-
 };
 
 #endif
