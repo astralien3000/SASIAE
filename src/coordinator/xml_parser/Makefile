@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS= -W -Wall -Wextra -std=c++11 -g -O0
-INCLUDE= -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtXml -fPIC
+INCLUDE= -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtXml -I/usr/include/qt5/QtXmlPatterns -fPIC
 LDFLAGS=
 
 SRC= xml_parser.cpp
