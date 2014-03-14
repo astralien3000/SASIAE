@@ -6,6 +6,7 @@
 #include "module_coordinator.hpp"
 
 class Module;
+class Robot;
 
 //! \brief Load robot from an XML Config
 /*!

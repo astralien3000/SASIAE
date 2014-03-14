@@ -5,6 +5,8 @@
 #include "../modules/motor_wheel.hpp"
 #include "../modules/encoder.hpp"
 
+#include "../physical_calculator/robot.hpp"
+
 ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, ModuleCoordinator& mod_cdn)
   : _phy_cdn(phy_cdn), _mod_cdn(mod_cdn) {
   
@@ -14,13 +16,13 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   auto robot_cfg = XMLParser::parseRobot(path);
 
   // Loading mesh
-  // TODO : transform mesh into robot !
-  _robot_mesh[name] = _phy_cdn.loadMesh(robot_cfg->mesh_path);
+  // TODO : get the scene
+  _robot_mesh[name] = new Robot((btRigidBody*)0, (btDynamicsWorld*)0); //new Robot(_phy_cdn.loadMesh(robot_cfg->mesh_path), (btDynamicsWorld*)0);
   
   // Loading microcontrollers
-  for(auto mi = robot_cfg->microcontrollers->begin() ; mi != robot_cfg->microcontrollers->end() ; ++mi) {
+  for(auto mi = robot_cfg->microcontrollers.begin() ; mi != robot_cfg->microcontrollers.end() ; ++mi) {
     // Loading modules
-    for(auto mo = (*mi)->modules->begin() ; mo != (*mi)->modules->end() ; ++mo) {
+    for(auto mo = (*mi)->modules.begin() ; mo != (*mi)->modules.end() ; ++mo) {
       Module* mod = loadModule((*mo)->name);
       _mod_cdn.addModule(name, (*mo)->name, mod);
     }
