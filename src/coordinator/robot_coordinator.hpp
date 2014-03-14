@@ -43,6 +43,8 @@ public slots:
   void sendSyncMessage(int);
 
   //! \brief Load a robot from a binary
+  //! \param name : the name of the robot, with which modules will be bound
+  //! \param path : the path to the binary to execute
   bool loadRobot(QString name, QString path);
 
   //! \brief Delete a robot
