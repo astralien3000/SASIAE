@@ -158,3 +158,7 @@ const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) 
   delete doc;
   return data;
 }
+
+XMLParser::moduleConfig::~moduleConfig {
+	//modules.begin()
+}

@@ -39,16 +39,19 @@ class XMLParser {
 			QString name;
 			positionVector position;
 			QList<const parameter*> parameters;
+			~moduleConfig();
 		};
 
 		struct microCConfig {
 			QString name;
 			QList<const moduleConfig*> modules;
+			~moduleConfig();
 		};
 
 		struct robotConfig {
 			QString mesh_path;
 			QList<const microCConfig*> microcontrollers;
+			~robotConfig();
 		};
 
 		struct toyConfig {
@@ -61,6 +64,7 @@ class XMLParser {
 		struct tableConfig {
 			QString mesh_path;
 			QList<const toyConfig*> toys;
+			~tableConfig();
 		};
 
 		XMLParser();

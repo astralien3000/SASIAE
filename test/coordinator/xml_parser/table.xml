@@ -1,0 +1,10 @@
+<table>
+    <mesh src="~/mesh/table/t1314.stl"/>
+	<toys>
+	    <toy name="triangle1" weight="170">
+		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
+		<mesh src="~/mesh/jouets/triangle1314.stl"/>
+	    </toy>
+	</toys>
+</table>
+
