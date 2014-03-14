@@ -66,7 +66,7 @@ class XMLParser {
 		XMLParser();
 		~XMLParser();
 		static const struct XMLParser::robotConfig* parseRobot(const QString& path);
-		static const struct XMLParser::robotTable* parseTable(const QString& path);
+		static const struct XMLParser::tableConfig* parseTable(const QString& path);
 };
 
 

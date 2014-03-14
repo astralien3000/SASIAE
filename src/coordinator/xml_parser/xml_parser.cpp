@@ -120,17 +120,17 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	return data;
 }
 
-const struct XMLParser::tableConfig* parseTable(const QString& path) {
-  const QDomDocument* doc = open(path, "table.xsd");
+const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) {
+  const QDomDocument* doc = open(path, QString("table.xsd"));
   if(doc == NULL) {
     return NULL;
   }
-  QDomNode t = doc.getElementsByTagName("table").item(0);
+  QDomElement t = doc->elementsByTagName("table").item(0).toElement();
   tableConfig* data = new tableConfig();
   
   data->mesh_path = t.firstChildElement("mesh").attribute("src");
   
-  QDomNodeList toys = t.getElementsByTagElement("toy");
+  QDomNodeList toys = t.elementsByTagName("toy");
   for(int i = 0; i < toys.length(); i++) {
     if(!toys.item(i).isElement()) {
       continue;
@@ -142,9 +142,9 @@ const struct XMLParser::tableConfig* parseTable(const QString& path) {
     toy->name = toyElem.attribute("name");
     toy->weight = toyElem.attribute("weight").toInt();
     
-    toy->mesh = toyElem.firstChildElement("mesh").attribute("src");
+    toy->mesh_path = toyElem.firstChildElement("mesh").attribute("src");
     
-    QDomElement loc = toy.firstChildElement("location");
+    QDomElement loc = toyElem.firstChildElement("location");
     toy->position.x = loc.attribute("X").toInt();
     toy->position.y = loc.attribute("Y").toInt();
     toy->position.z = loc.attribute("Z").toInt();
