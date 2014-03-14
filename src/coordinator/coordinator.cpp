@@ -5,28 +5,32 @@
 #include "../modules/encoder.hpp"
 #include "../modules/motor_wheel.hpp"
 #include "../modules/modules.hpp"
+
 #include <cstdio>
+#include <iostream>
 
 #include "physical_coordinator.hpp"
 #include "robot_coordinator.hpp"
 #include "module_coordinator.hpp"
 #include "schedule_coordinator.hpp"
+#include "gui_coordinator.hpp"
 
 PhysicalCoordinator* _phy_cdn;
 RobotCoordinator* _bot_cdn;
 ModuleCoordinator* _mod_cdn;
 ScheduleCoordinator* _sch_cdn;
+GuiCoordinator* _gui_cdn;
 
 Coordinator* Coordinator::_instance=NULL;
 
 
 
-Coordinator& Coordinator::getInstance() {
+Coordinator& Coordinator::getInstance(int argc, char *argv[]) {
   if(Coordinator::_instance){
     return *Coordinator::_instance;
   }
   else{
-    Coordinator::_instance = new Coordinator();
+    Coordinator::_instance = new Coordinator(argc,argv);
     return *(Coordinator::_instance); 
   }
 }
@@ -38,11 +42,13 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
 Robot *Coordinator::getRobot(Slot robotSlot){
 }
 
-Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
+Coordinator::Coordinator(int argc, char* argv[]) :
+    QApplication(argc,argv), _physic(this)/*, _gui()*/{
   _phy_cdn = new PhysicalCoordinator(&_physic);
   _bot_cdn = new RobotCoordinator;
   _mod_cdn = new ModuleCoordinator;
   _sch_cdn = new ScheduleCoordinator;
+  _gui_cdn = new GuiCoordinator;
 
   _sch_cdn->addCoordinator(_phy_cdn);
   _sch_cdn->addCoordinator(_bot_cdn);
@@ -71,6 +77,15 @@ Coordinator::Coordinator() : _physic(this)/*, _gui()*/{
 	  _bot_cdn,
 	  SLOT(setTimestamp(int))
 	  );
+
+  std::cout << "Creation de la fenetre principale..." << std::endl;
+  _gui_cdn->getMainWindow()->show();
+  _gui_cdn->getMainWindow()->getTimer()->start();
+
+
+  std::cout << "Boucle principale..." << std::endl;
+  this->exec();
+
 }
 
 Coordinator::~Coordinator(){

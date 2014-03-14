@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsRectItem>
+#include <QGraphicsItemAnimation>
 #include <QPixmap>
 #include <QBrush>
 
@@ -13,7 +14,7 @@ public:
     //Q_PROPERTY(QPointF pos READ pos WRITE setPos)
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     ItemRobot(QBrush& robotBackground, QGraphicsRectItem *item=0) ;
-    void move(int step);
+    void itemMove(QGraphicsItemAnimation * anim,qreal x, qreal y);
 
 private:
 /*Coordonates*/

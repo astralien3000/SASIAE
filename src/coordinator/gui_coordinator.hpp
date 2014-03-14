@@ -1,11 +1,11 @@
 #ifndef GUI_COORDINATOR_HPP
 #define GUI_COORDINATOR_HPP
 
-#include "coordinator.hpp"
 #include <QtCore/QVector>
 #include <QQuaternion>
 
 #include "../physical_calculator/printable_mobile_object.hpp"
+#include "../gui/mainwindow.h"
 
 //class PrintableMobileObject ;
 
@@ -14,7 +14,7 @@ struct QtPositionData{
     QQuaternion _rot;
 };
 
-class GuiCoordinator : public Coordinator {
+class GuiCoordinator: public QObject {
   Q_OBJECT;
 
 signals:
@@ -28,11 +28,14 @@ public:
   //! \brief Default Constructor
   GuiCoordinator(void);
 
+  //! \brief Return the Gui mainWindow
+  MainWindow* getMainWindow(void)const;
   //! \brief Destructor
   ~GuiCoordinator(void);
 
 private:
   //PrintableMobileObject *pmo;
+    MainWindow * _mainWindow;
     QtPositionData * _test;
 
 };

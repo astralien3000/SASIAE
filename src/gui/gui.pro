@@ -17,7 +17,8 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 # Input
 HEADERS += mainwindow.h ui_mainwindow.h \
     table.h \
-    item_robot.h
+    item_robot.h \
+    ../physical_calculator/position_data.hpp
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -41,7 +42,8 @@ HEADERS += ../modules/servo.hpp \
 FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
-    item_robot.cpp
+    item_robot.cpp \
+    ../physical_calculator/position_data.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \

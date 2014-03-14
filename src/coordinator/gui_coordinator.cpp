@@ -6,12 +6,18 @@
 
 GuiCoordinator::GuiCoordinator(void){
     _test=new QtPositionData();
+    _mainWindow=new MainWindow();
+}
+
+MainWindow* GuiCoordinator::getMainWindow(void)const{
+    return _mainWindow;
 }
 
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-/*QVector<int>*/ QtPositionData *GuiCoordinator::getAllPositions()const{
+/* old version
+ * QtPositionData *GuiCoordinator::getAllPositions()const{
   PositionData * objectPosition;
   objectPosition=(_robotObject.value(MAIN_ROBOT1))->getPosition();
   //objectsList=pmo->getPosition();
@@ -19,3 +25,4 @@ GuiCoordinator::~GuiCoordinator(void){
     _test->_rot=objectPosition->getQtRotation();
     return _test;
 }
+*/
