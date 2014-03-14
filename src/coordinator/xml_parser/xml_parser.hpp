@@ -45,7 +45,7 @@ class XMLParser {
 		struct microCConfig {
 			QString name;
 			QList<const moduleConfig*> modules;
-			~moduleConfig();
+			~microCConfig();
 		};
 
 		struct robotConfig {
@@ -59,7 +59,6 @@ class XMLParser {
 			QString mesh_path;
 			QString name;
 			QVariant* weight;
-			~toyConfig();
 		};
 
 		struct tableConfig {

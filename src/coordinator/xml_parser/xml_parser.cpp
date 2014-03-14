@@ -120,8 +120,25 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	return data;
 }
 
-XMLParser::moduleConfig::~moduleConfig {
-	//modules.begin()
+XMLParser::moduleConfig::~moduleConfig() {
+	for(int i=0; i<parameters.length(); i++)
+		delete parameters.at(i);
 }
+XMLParser::microCConfig::~microCConfig() {
+	for(int i=0; i<modules.length(); i++)
+		delete modules.at(i);
+}
+XMLParser::robotConfig::~robotConfig() {
+	for(int i=0; i<microcontrollers.length(); i++)
+		delete microcontrollers.at(i);
+}
+XMLParser::tableConfig::~tableConfig() {
+	for(int i=0; i<toys.length(); i++)
+		delete toys.at(i);
+}
+
+
+
+
 
 
