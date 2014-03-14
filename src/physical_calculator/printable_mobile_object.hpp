@@ -5,7 +5,6 @@
 #include <QString>
 #include <QVector>
 
-<<<<<<< HEAD
 #include "position_data.hpp"
 
 /*
@@ -24,7 +23,6 @@ private:
 protected:
 	btRigidBody *_body;
 public:
-<<<<<<< HEAD
   PrintableMobileObject(QString name, btRigidBody *body);
   PrintableMobileObject(btRigidBody *body);
   PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
