@@ -2,7 +2,7 @@
 #define PHYSICAL_CALCULATOR_HPP
 #include <btBulletDynamicsCommon.h>
 #include <QtCore/QObject>
-#include <QList>
+#include <QVector>
 #include "printable_mobile_object.hpp"
 //#include <aversive.hpp>
 //#include "wheel.hpp"
@@ -22,11 +22,9 @@
 class PhysicalCalculator : public QObject {
 
 Q_OBJECT
-private:
-  QList<PrintableMobileObject> *_objectsList;
 
 public:
-  QList<PrintableMobileObject>* getObjectsList();
+  QVector<PrintableMobileObject*> getObjectsList();
 public:
   //! \brief it creates an empty scene
   void empty_scene();

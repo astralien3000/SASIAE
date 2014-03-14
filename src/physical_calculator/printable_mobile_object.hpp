@@ -5,7 +5,6 @@
 #include <QString>
 #include <QVector>
 
-<<<<<<< HEAD
 #include "position_data.hpp"
 
 /*
@@ -16,7 +15,11 @@ struct PositionData {
 };
 */
 
+
 class PrintableMobileObject /*: public Mesh*/ {
+public:
+	static QVector<PrintableMobileObject*> objects;
+//destructeur -> enlever les objets qui n'existent plus.
 private:
   QString _name;
   //struct position_data * _pos;
@@ -24,8 +27,8 @@ private:
 protected:
 	btRigidBody *_body;
 public:
-<<<<<<< HEAD
   PrintableMobileObject(QString name, btRigidBody *body);
+  ~PrintableMobileObject();
   PrintableMobileObject(btRigidBody *body);
   PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };

@@ -4,12 +4,14 @@ PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
     _name(name) /*_pos(new struct position_data)*/,_body(body)
 {
     _pos=new PositionData();
+    objects.append(this);
 }
 
 PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
     _name("unknown") /*_pos(new struct position_data)*/,_body(body)
 {
     _pos=new PositionData();
+    objects.append(this);
 }
 
 
