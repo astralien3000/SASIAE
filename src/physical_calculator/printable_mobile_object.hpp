@@ -17,8 +17,8 @@ struct PositionData {
 
 
 class PrintableMobileObject /*: public Mesh*/ {
-public:
-	static QVector<PrintableMobileObject*> objects;
+private:
+	static QVector<const PrintableMobileObject*> objects;
 //destructeur -> enlever les objets qui n'existent plus.
 private:
   QString _name;
@@ -29,6 +29,7 @@ protected:
 public:
   PrintableMobileObject(QString name, btRigidBody *body);
   ~PrintableMobileObject();
+  const QVector<const PrintableMobileObject*>& getObjectsList();
   PrintableMobileObject(btRigidBody *body);
   PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
