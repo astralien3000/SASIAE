@@ -1,0 +1,14 @@
+<robot>
+	<mesh src="~/mesh/robots/robot1A1314.stl"/>
+	<microcontroller name="UNIOC">
+		<modules>
+			<module name="GP2">
+				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
+				<parameters>
+					<parameter name="bell" type="int" value="20"/>
+				</parameters>
+			</module>
+		</modules>
+	</microcontroller>
+</robot>
+

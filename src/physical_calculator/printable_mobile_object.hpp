@@ -5,14 +5,16 @@
 #include <QString>
 #include <QVector>
 
+<<<<<<< HEAD
 #include "position_data.hpp"
 
-/*struct position_data {
-  btVector3 position; // TODO : transform it to QVector<int>
-  //QVector<int> position;
- //vector de position x y z
-  btQuaternion angle;
-};*/
+/*
+Alternative
+struct PositionData {
+	QVector<int> positionTest;
+	btQuaternion angle;
+};
+*/
 
 class PrintableMobileObject /*: public Mesh*/ {
 private:
@@ -20,8 +22,9 @@ private:
   //struct position_data * _pos;
     PositionData * _pos;
 protected:
-  btRigidBody *_body;
+	btRigidBody *_body;
 public:
+<<<<<<< HEAD
   PrintableMobileObject(QString name, btRigidBody *body);
   PrintableMobileObject(btRigidBody *body);
   PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation

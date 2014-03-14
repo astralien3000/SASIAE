@@ -1,15 +1,15 @@
 #include "xml_parser.hpp"
+#include <QDebug>
 
 XMLParser::XMLParser(){}
 XMLParser::~XMLParser(){}
 
 const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	/*TODO: Validation du fichier */
+	qDebug()<<QString("Ouverture du fichier");
 	QDomDocument doc(path);
-	QDomNodeList mcs = doc.elementsByTagName("microcontroller");
+	QDomNodeList r = doc.elementsByTagName("robot");
 
-	if(mcs.isEmpty())
-		return NULL;
 	/* Ouverture de la première structure */
 	XMLParser::robotConfig *data = new XMLParser::robotConfig();
 
@@ -17,6 +17,7 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	QDomNode tmp1, tmp2, tmp3;
 
 	/* Listes des noeuds utilisés */
+	QDomNodeList mcs;
 	QDomNodeList mods;
 	QDomNodeList params;
 
@@ -24,6 +25,11 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	XMLParser::microCConfig *currMC;
 	XMLParser::moduleConfig *currMod;
 	XMLParser::parameter* currParam;
+
+	
+	/* Ajout du lien vers le mesh du robot */
+	qDebug()<<"Je reçoit :"<<r.item(0).firstChildElement("mesh").attribute("src");
+	data->mesh_path=r.item(0).firstChildElement("mesh").attribute("src");
 
 	/* Parcours des µC */
 	for(int i=0; i<mcs.length(); i++) {
