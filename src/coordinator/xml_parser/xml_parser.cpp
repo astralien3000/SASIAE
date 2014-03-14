@@ -9,25 +9,25 @@
 XMLParser::XMLParser(){}
 XMLParser::~XMLParser(){}
 
-const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
+const QDomDocument* XMLParser::open(const QString& xml_path, const QString& xsd_path){
 	/* Vérification XSD */
 	/* Ouverture */
 	QXmlSchema schema;
-	QFile g("./robot.xsd");
+	QFile g(xsd_path);
 	if (!g.open(QIODevice::ReadOnly))
-      return NULL;
+		return NULL;
 	schema.load(&g);
 	g.close();
 	if(!schema.isValid()){
-			qDebug()<<"Invalid Schema";
-			return NULL;
+		qDebug()<<"Invalid Schema";
+		return NULL;
 	}
 
 	/* Ouverture du fichier en un Dom Document*/
-	QDomDocument doc("doc");
-	QFile f(path);
-  if (!f.open(QIODevice::ReadOnly))
-      return NULL;
+	QDomDocument* doc = new QDomDocument("doc");
+	QFile f(xml_path);
+	if (!f.open(QIODevice::ReadOnly))
+		return NULL;
 
 	/* Validation du schema */
 	QXmlSchemaValidator validator(schema);
@@ -35,15 +35,20 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 		qDebug()<<"Bad XML File";
 		return NULL;
 	}
-	
-	f.seek(0);
-  if (!doc.setContent(&f)) {
-      f.close();
-      return NULL;
-  }
-  f.close();
 
-	QDomNode r = doc.elementsByTagName("robot").item(0);
+	f.seek(0);
+	if (!doc->setContent(&f)) {
+		f.close();
+		return NULL;
+	}
+	f.close();
+	return doc;
+}
+
+const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
+	/* Ouverture d'un fichier xml */
+	const QDomDocument* doc = open(path,QString("./robot.xsd"));
+	QDomNode r = doc->elementsByTagName("robot").item(0);
 
 	/* Ouverture de la première structure */
 	XMLParser::robotConfig *data = new XMLParser::robotConfig();

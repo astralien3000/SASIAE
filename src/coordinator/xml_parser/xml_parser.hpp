@@ -6,6 +6,7 @@
 
 class XMLParser {
 
+	static const QDomDocument* open(const QString& xml_path, const QString& xsd_path);
 	public:
 		union positionVector {
 			struct{
