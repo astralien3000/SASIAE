@@ -119,3 +119,9 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	}
 	return data;
 }
+
+XMLParser::moduleConfig::~moduleConfig {
+	//modules.begin()
+}
+
+
