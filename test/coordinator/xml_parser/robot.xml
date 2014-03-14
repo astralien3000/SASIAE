@@ -1,5 +1,6 @@
 <robot>
 	<mesh src="~/mesh/robots/robot1A1314.stl"/>
+	<microcontrollers>
 	<microcontroller name="UNIOC">
 		<modules>
 			<module name="GP2">
@@ -10,5 +11,6 @@
 			</module>
 		</modules>
 	</microcontroller>
+	</microcontrollers>
 </robot>
 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="robot">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="mesh">
+<xs:complexType>
+<xs:attribute name="src" type="xs:string"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="microcontrollers">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="microcontroller" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="modules">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="module">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="location" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:attribute name="X" type="xs:integer"/>
+<xs:attribute name="Y" type="xs:integer"/>
+<xs:attribute name="Z" type="xs:integer"/>
+<xs:attribute name="alpha">
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="360"/>
+</xs:restriction> 
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="beta">
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="360"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="gamma">
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="360"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+<xs:element name="parameters">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:attribute name="name" type="xs:string" use="required"/>
+<xs:attribute name="type" type="xs:string" use="required"/>
+<xs:attribute name="value" type="xs:string" use="required"/>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+

@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QtXml>
+
 class XMLParser {
 
 	public:
@@ -35,18 +36,18 @@ class XMLParser {
 
 		struct moduleConfig {
 			QString name;
-			positionVector* position;
-			QList<const parameter*>* parameters;
+			positionVector position;
+			QList<const parameter*> parameters;
 		};
 
 		struct microCConfig {
 			QString name;
-			QList<const moduleConfig*>* modules;
+			QList<const moduleConfig*> modules;
 		};
 
 		struct robotConfig {
 			QString mesh_path;
-			QList<const microCConfig*>* microcontrollers;
+			QList<const microCConfig*> microcontrollers;
 		};
 
 		struct toyConfig {
@@ -58,7 +59,7 @@ class XMLParser {
 
 		struct tableConfig {
 			QString mesh_path;
-			QList<const toyConfig*>* toys;
+			QList<const toyConfig*> toys;
 		};
 
 		XMLParser();
