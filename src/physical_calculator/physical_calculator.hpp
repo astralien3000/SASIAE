@@ -24,7 +24,7 @@ class PhysicalCalculator : public QObject {
 Q_OBJECT
 
 public:
-  QVector<PrintableMobileObject*> getObjectsList();
+  const QVector<PrintableMobileObject*>* getObjectsList();
 public:
   //! \brief it creates an empty scene
   void empty_scene();
