@@ -1,10 +1,27 @@
 #include "printable_mobile_object.hpp"
 
-PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) : _name(name), _pos(new struct position_data),_body(body){}
+PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
+    _name(name) /*_pos(new struct position_data)*/,_body(body)
+{
+    _pos=new PositionData();
+}
 
-PrintableMobileObject::PrintableMobileObject(btRigidBody *body): _name("unknown"), _pos(new struct position_data),_body(body){}
+PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
+    _name("unknown") /*_pos(new struct position_data)*/,_body(body)
+{
+    _pos=new PositionData();
+}
 
 
+
+PositionData *PrintableMobileObject::getPosition() {
+  	btTransform trans;
+  	_body->getMotionState()->getWorldTransform(trans);
+    _pos->setPosition(trans.getOrigin());
+    _pos->setRotation(trans.getRotation());
+return _pos;
+}
+/*
 struct position_data * PrintableMobileObject::getPosition() {
 	btTransform trans;
 	_body->getMotionState()->getWorldTransform(trans);
@@ -15,3 +32,4 @@ struct position_data * PrintableMobileObject::getPosition() {
 	_pos->angle=trans.getRotation();
 	return _pos;
 }
+*/

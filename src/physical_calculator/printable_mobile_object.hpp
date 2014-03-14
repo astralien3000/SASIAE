@@ -4,24 +4,30 @@
 #include <btBulletDynamicsCommon.h>
 #include <QString>
 #include <QVector>
-// #include Mesh
-//used as a list in the gui coordinateur to be printed on Qt
 
-struct position_data {
+<<<<<<< HEAD
+#include "position_data.hpp"
+
+/*
+Alternative
+struct PositionData {
 	QVector<int> positionTest;
 	btQuaternion angle;
 };
+*/
 
 class PrintableMobileObject /*: public Mesh*/ {
 private:
-	QString _name;
-	struct position_data * _pos;
+  QString _name;
+  //struct position_data * _pos;
+    PositionData * _pos;
 protected:
 	btRigidBody *_body;
 public:
-	PrintableMobileObject(QString name, btRigidBody *body);
-	PrintableMobileObject(btRigidBody *body);
-  position_data * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+<<<<<<< HEAD
+  PrintableMobileObject(QString name, btRigidBody *body);
+  PrintableMobileObject(btRigidBody *body);
+  PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
 
 #endif
