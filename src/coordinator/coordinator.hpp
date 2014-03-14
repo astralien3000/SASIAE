@@ -77,8 +77,8 @@ private slots:
 
   void sendModuleMessage(QString msg);
 
-private:
-
+//private:
+protected:
   QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
   QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
   /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
@@ -129,9 +129,9 @@ private:
    */
   bool addModuleAndCodeName(Modules * key, QString code, QString module );
    
-
+protected:
   Coordinator();
-
+private:
   static Coordinator* _instance;
   PhysicalCalculator _physic;
 
