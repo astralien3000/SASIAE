@@ -1,6 +1,12 @@
 #include "printable_mobile_object.hpp"
 
-QVector<PrintableMobileObject*> PrintableMobileObject::objects;
+QVector<const PrintableMobileObject*> PrintableMobileObject::objects;
+
+
+  const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
+  	return PrintableMobileObject::objects;
+  }
+
 
 PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
     _name(name) /*_pos(new struct position_data)*/,_body(body)
