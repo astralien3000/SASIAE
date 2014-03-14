@@ -18,10 +18,15 @@
 //#include <cstring>
 //#include <iostream>
 
+#include "../gui/ui_mainwindow.h"
+#include "../gui/mainwindow.h"
+#include <QtWidgets/QApplication>
+
+
 #define COORD_BUFFER_SIZE 1024
 
 
-class Coordinator: public QObject{
+class Coordinator:public QApplication{
   Q_OBJECT
   
   signals:
@@ -45,7 +50,7 @@ public:
 public slots:
 
   //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
-  static Coordinator& getInstance();
+  static Coordinator& getInstance(int argc, char* argv[]);
 
   Robot * getRobot(Slot theRobot);
 
@@ -77,8 +82,8 @@ private slots:
 
   void sendModuleMessage(QString msg);
 
-private:
-
+//private:
+protected:
   QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
   QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
   /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
@@ -130,8 +135,8 @@ private:
   bool addModuleAndCodeName(Modules * key, QString code, QString module );
    
 
-  Coordinator();
-
+private:
+  Coordinator(int argc, char* argv[]);
   static Coordinator* _instance;
   PhysicalCalculator _physic;
 

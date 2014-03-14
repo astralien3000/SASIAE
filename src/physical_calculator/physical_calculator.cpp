@@ -95,8 +95,8 @@ void PhysicalCalculator::init() {
 
 }
 
-  QList<PrintableMobileObject>* PhysicalCalculator::getObjectsList() {
-    return _objectsList;
+  const QVector<const PrintableMobileObject*>* PhysicalCalculator::getObjectsList() {
+    return getObjectsList();
   }
 
 

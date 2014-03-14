@@ -5,7 +5,9 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsItemAnimation>
 #include <QtGui>
+
 #include "item_robot.h"
+//#include "../coordinator/gui_coordinator.hpp"
 
 class Table : public QGraphicsView
 {
@@ -13,11 +15,11 @@ class Table : public QGraphicsView
 public:
     explicit Table(QWidget *parent = 0);
     QTimeLine *timer;
-    //QGraphicsRectItem * robotItem;
-    //void startAnimation();
+
 signals:
 
 public slots:
+    void moveRobot();
 
 private:
     //QRectF robot;
