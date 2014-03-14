@@ -28,7 +28,7 @@ PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
 
 
 
-PositionData *PrintableMobileObject::getPosition() {
+const PositionData *PrintableMobileObject::getPosition() const {
   	btTransform trans;
   	_body->getMotionState()->getWorldTransform(trans);
     _pos->setPosition(trans.getOrigin());

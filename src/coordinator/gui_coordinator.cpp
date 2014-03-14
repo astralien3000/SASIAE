@@ -5,7 +5,6 @@
 #include "../physical_calculator/printable_mobile_object.hpp"
 
 GuiCoordinator::GuiCoordinator(void){
-    _test=new QtPositionData();
     _mainWindow=new MainWindow();
 }
 
@@ -16,13 +15,13 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-/* old version
- * QtPositionData *GuiCoordinator::getAllPositions()const{
-  PositionData * objectPosition;
-  objectPosition=(_robotObject.value(MAIN_ROBOT1))->getPosition();
-  //objectsList=pmo->getPosition();
-    _test->_pos=objectPosition->getQtPosition();
-    _test->_rot=objectPosition->getQtRotation();
-    return _test;
+QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
+	const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+    QVector<const PositionData*> *result = new QVector<const PositionData*>;
+    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
+	{
+        result->append((*it)->getPosition());
+	}
+    return result;
+    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
 }
-*/
