@@ -28,7 +28,7 @@ protected:
 	btRigidBody *_body;
 public:
   PrintableMobileObject(QString name, btRigidBody *body);
-  ~PrintableMobileObject();
+  // ~PrintableMobileObject(); TODO
   PrintableMobileObject(btRigidBody *body);
   PositionData * getPosition(); //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
