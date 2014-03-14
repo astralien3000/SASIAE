@@ -6,6 +6,7 @@
 Table::Table(QWidget*parent) :
     QGraphicsView(parent)
 {
+    /* initialize Coordination*/
 
     /*Create the scene, fill it with a background */
     setScene(new QGraphicsScene(this));
@@ -23,39 +24,27 @@ Table::Table(QWidget*parent) :
      */
     scene()->addItem(robot);
 
-
+    QTimer *timer2 = new QTimer(this);
+    connect(timer2, SIGNAL(timeout()), this, SLOT(moveRobot()));
+    timer2->start(1000/60);
 
     timer = new QTimeLine(5000);
     timer->setFrameRange(0, 100);
 
-    QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
+    timer->setLoopCount(0);
+
+    /*QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
     animation->setItem(robot);
     animation->setTimeLine(timer);
-    for (int i = 0; i < 200; ++i)
+    robot->itemMove(animation,50,0);
+    robot->itemMove(animation,0,50);
+    robot->itemMove(animation,50,50);
+    robot->itemMove(animation,-100,-100);
+    /*for (int i = 0; i < 200; ++i)
         animation->setPosAt(i / 200.0, QPointF(i, i));
-
-  //robot->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-    //anim= new QPropertyAnimation(robot,"pos");
-    //duration=5000;
-
-
-}
-
-
-/*Une possibilité serait de faire un QGraphicsScene::update() à chaque fois qu'on reçoit une nouvelle
-position des robots depuis gui_coordinator. Ces update serait donc très fréquents.*/
-
-
-/*
-void Table::startAnimation(){
-
-    anim->setDuration(duration);
-    anim->setStartValue(QPointF(0,0));
-    anim->setKeyValueAt(0.25,QPointF(100,300));
-    anim->setKeyValueAt(0.5,QPointF(500,100));
-    anim->setKeyValueAt(0.75,QPointF(90,80));
-    anim->setEndValue(QPointF(0,0));
-    anim->setLoopCount(-1);
-    anim->start();
-}
 */
+}
+
+void Table::moveRobot() {
+    robot->moveBy(-1,-1);
+}
