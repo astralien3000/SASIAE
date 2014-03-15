@@ -17,7 +17,7 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 # Input
 HEADERS += mainwindow.h ui_mainwindow.h \
     table.h \
-    item_robot.h \
+    item_robot.h 
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \

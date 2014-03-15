@@ -8,7 +8,7 @@
 int main(int argc, char **argv) {
 	QCoreApplication app(argc, argv);	
 	/* Ouverture du fichier test */
-	std::cout<<"Ouverture du fichier de configuration"<<std::endl;
+	std::cout<<"Ouverture du fichier de configuration d'un robot"<<std::endl;
 	const XMLParser::robotConfig* robot = XMLParser::parseRobot(QString("./robot.xml"));
 	assert(robot!=NULL);
 
@@ -34,6 +34,23 @@ int main(int argc, char **argv) {
 	assert((*(*(*robot->microcontrollers.begin())->modules.begin())->parameters.begin())->name=="bell");
 	assert((*(*(*robot->microcontrollers.begin())->modules.begin())->parameters.begin())->value=="20");
 
+	std::cout<<"Fin de l'analyse"<<std::endl;
+	
+	std::cout<<"Ouverture du fichier de configuration d'une table"<<std::endl;
+	const XMLParser::tableConfig* table = XMLParser::parseTable(QString("./table.xml"));
+	assert(table!=NULL);
+	std::cout<<"Fichier de configuration ouvert\nAnalyse des données"<<std::endl;
+	assert(table->mesh_path=="~/mesh/table/t1314.stl");
+	assert(!table->toys.isEmpty());
+	assert((*table->toys.begin())->name=="triangle1");
+	assert((*table->toys.begin())->weight==170);
+	assert((*table->toys.begin())->mesh_path=="~/mesh/jouets/triangle1314.stl");
+	assert((*table->toys.begin())->position.x==10);
+	assert((*table->toys.begin())->position.y==10);
+	assert((*table->toys.begin())->position.z==10);
+	assert((*table->toys.begin())->position.alpha==0);
+	assert((*table->toys.begin())->position.beta==0);
+	assert((*table->toys.begin())->position.gamma==0);
 	std::cout<<"Fin de l'analyse"<<std::endl;
 	return EXIT_SUCCESS;
 }

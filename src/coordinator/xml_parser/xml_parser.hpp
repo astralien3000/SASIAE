@@ -6,6 +6,7 @@
 
 class XMLParser {
 
+	static const QDomDocument* open(const QString& xml_path, const QString& xsd_path);
 	public:
 		union positionVector {
 			struct{
@@ -38,34 +39,38 @@ class XMLParser {
 			QString name;
 			positionVector position;
 			QList<const parameter*> parameters;
+			~moduleConfig();
 		};
 
 		struct microCConfig {
 			QString name;
 			QList<const moduleConfig*> modules;
+			~microCConfig();
 		};
 
 		struct robotConfig {
 			QString mesh_path;
 			QList<const microCConfig*> microcontrollers;
+			~robotConfig();
 		};
 
 		struct toyConfig {
-			positionVector* position;	
+			positionVector position;	
 			QString mesh_path;
 			QString name;
-			QVariant* weight;
+			int weight;
 		};
 
 		struct tableConfig {
 			QString mesh_path;
 			QList<const toyConfig*> toys;
+			~tableConfig();
 		};
 
 		XMLParser();
 		~XMLParser();
 		static const struct XMLParser::robotConfig* parseRobot(const QString& path);
-		static const struct XMLParser::robotConfig* parseTable(const QString& path);
+		static const struct XMLParser::tableConfig* parseTable(const QString& path);
 };
 
 

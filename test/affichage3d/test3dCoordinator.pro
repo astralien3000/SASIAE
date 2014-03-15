@@ -7,10 +7,12 @@ TARGET = vue3d
 DEPENDPATH += .
 INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/
 CONFIG += debug
-QT += widgets
+QT += widgets xml
 
 QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
+
+FORMS += ../../src/gui/mainwindow.ui
 
 # Input
 HEADERS +=../../src/physical_calculator/wheel.hpp \
@@ -23,6 +25,7 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/coordinator/module_coordinator.hpp \
  ../../src/coordinator/schedule_coordinator.hpp \
  ../../src/coordinator/base_coordinator.hpp \
+ ../../src/coordinator/config_robot_coordinator.hpp \
  ../../src/modules/servo.hpp \
  ../../src/modules/modules.hpp \
  ../../src/modules/module.hpp \
@@ -53,6 +56,7 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/coordinator/robot_coordinator.cpp \
  ../../src/coordinator/module_coordinator.cpp \
  ../../src/coordinator/schedule_coordinator.cpp \
+ ../../src/coordinator/config_robot_coordinator.cpp \
  ../../src/modules/modules.cpp \
  ../../src/modules/servo.cpp \
  ../../src/modules/encoder.cpp \
