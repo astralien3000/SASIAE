@@ -35,6 +35,18 @@ Coordinator& Coordinator::getInstance(int argc, char *argv[]) {
   }
 }
 
+
+Coordinator& Coordinator::getInstance() {
+  if(Coordinator::_instance){
+    return *Coordinator::_instance;
+  }
+  else{
+    qDebug() << "Coordinator::getInstance() should not be called here";
+    Coordinator::_instance = new Coordinator(0,NULL);
+    return *(Coordinator::_instance);
+  }
+}
+
 PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
@@ -48,11 +60,12 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   _bot_cdn = new RobotCoordinator;
   _mod_cdn = new ModuleCoordinator;
   _sch_cdn = new ScheduleCoordinator;
-  _gui_cdn = new GuiCoordinator;
+  //_gui_cdn = new GuiCoordinator;
 
   _sch_cdn->addCoordinator(_phy_cdn);
   _sch_cdn->addCoordinator(_bot_cdn);
   _sch_cdn->addCoordinator(_mod_cdn);
+ // _sch_cdn->addCoordinator(_gui_cdn);
 
   // Device -> Module communication
   connect(
@@ -79,12 +92,10 @@ Coordinator::Coordinator(int argc, char* argv[]) :
 	  );
 
   std::cout << "Creation de la fenetre principale..." << std::endl;
-  _gui_cdn->getMainWindow()->show();
+  /*_gui_cdn->getMainWindow()->show();
   _gui_cdn->getMainWindow()->getTimer()->start();
+*/
 
-
-  std::cout << "Boucle principale..." << std::endl;
-  this->exec();
 
 }
 
@@ -178,7 +189,7 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   
   //! \todo really read the file  
 
-  /*_bot_cdn->loadRobot("bot", "./client");*/
+  _bot_cdn->loadRobot("bot", "./client");
 }
 
 

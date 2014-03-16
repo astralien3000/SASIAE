@@ -11,13 +11,16 @@ INCLUDEPATH += . \
 /usr/local/include/bullet
 
 QT += widgets
+QT += xml
 QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
 
 # Input
 HEADERS += mainwindow.h ui_mainwindow.h \
     table.h \
-    item_robot.h 
+    item_robot.h \ 
+    ../coordinator/config_robot_coordinator.hpp \
+    ../coordinator/xml_parser/xml_parser.hpp
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -42,6 +45,8 @@ FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
     item_robot.cpp \
+    ../coordinator/config_robot_coordinator.cpp \
+    ../coordinator/xml_parser/xml_parser.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \
@@ -59,4 +64,7 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
 SOURCES += ../modules/motor_wheel.cpp \
     ../modules/servo.cpp \
     ../modules/encoder.cpp
+
+OTHER_FILES += \
+    ../coordinator/xml_parser/Makefile
 

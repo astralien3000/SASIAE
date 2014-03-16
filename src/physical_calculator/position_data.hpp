@@ -14,8 +14,8 @@ public:
     PositionData();
     void setPosition(const btVector3 &);
     void setRotation(btQuaternion);
-    QVector<float> & getQtPosition(void);
-    QQuaternion & getQtRotation(void);
+    const QVector<float> & getQtPosition(void)const;
+    const QQuaternion &getQtRotation(void)const;
 private:
     QVector<float> _QPosition;
     QQuaternion _QRotation;

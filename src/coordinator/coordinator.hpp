@@ -52,6 +52,9 @@ public slots:
   //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
   static Coordinator& getInstance(int argc, char* argv[]);
 
+  //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
+  static Coordinator& getInstance();
+
   Robot * getRobot(Slot theRobot);
 
   //! \brief start the simulation

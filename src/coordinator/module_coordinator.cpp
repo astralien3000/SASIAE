@@ -5,7 +5,7 @@
 #include "../modules/module.hpp"
 
 ModuleCoordinator::ModuleCoordinator(void) {
-  
+  qDebug() << "moduleCoordinator Constructor";
 }
 
 ModuleCoordinator::~ModuleCoordinator(void) {
@@ -60,5 +60,6 @@ void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
   //qDebug() << "Modules\n";
   emit updateModules();
+  qDebug() << "module emit nextStep()";
   emit nextStep();
 }

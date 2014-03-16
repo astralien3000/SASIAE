@@ -25,6 +25,7 @@ public slots:
   void do_sth();
   void CReceived(QString message);
   //void animate();
+  void animateRobot(qreal x,qreal y);
   QTimeLine *getTimer()const;
 };
 

@@ -21,10 +21,10 @@ void PositionData::setRotation(btQuaternion quat){
     _QRotation=QQuaternion(ang,x,y,z);
 }
 
-QVector<float> & PositionData::getQtPosition(void){
+const QVector<float> & PositionData::getQtPosition(void)const{
     return _QPosition;
 }
-QQuaternion &PositionData::getQtRotation(void){
+const QQuaternion &PositionData::getQtRotation(void)const{
     return _QRotation;
 }
 

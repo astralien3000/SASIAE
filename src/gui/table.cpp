@@ -7,6 +7,7 @@ Table::Table(QWidget*parent) :
     QGraphicsView(parent)
 {
     /* initialize Coordination*/
+    qDebug() << "Table constructor";
 
     /*Create the scene, fill it with a background */
     setScene(new QGraphicsScene(this));
@@ -23,14 +24,19 @@ Table::Table(QWidget*parent) :
      * on the central widget graphicsView ( Table )
      */
     scene()->addItem(robot);
-
+/*
     QTimer *timer2 = new QTimer(this);
+    qDebug() << "connect timer2 to moveRobot";
     connect(timer2, SIGNAL(timeout()), this, SLOT(moveRobot()));
+    qDebug() << "timer2 connected to moveRobot";
     timer2->start(1000/60);
-
+*/
+    /*
+     * Without the time line the application
+     * doesn't work. Why ? (Hugo)
+      */
     timer = new QTimeLine(5000);
     timer->setFrameRange(0, 100);
-
     timer->setLoopCount(0);
 
     /*QGraphicsItemAnimation *animation = new QGraphicsItemAnimation;
@@ -45,6 +51,11 @@ Table::Table(QWidget*parent) :
 */
 }
 
+
 void Table::moveRobot() {
     robot->moveBy(-1,-1);
+}
+
+void Table::moveRobot(qreal x, qreal y) {
+    robot->setPos(x,y);
 }

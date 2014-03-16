@@ -43,3 +43,7 @@ Module* ConfigRobotCoordinator::loadModule(const QString& name) {
 
   return ret;
 }
+
+bool ConfigRobotCoordinator::bindRobot(const QString& name, const QString& path){
+    return true;
+}

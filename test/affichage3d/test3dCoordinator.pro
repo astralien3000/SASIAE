@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
-INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/
+INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/ /home/hugo/Qt/5.2.0/gcc_64/include/QtXmlPatterns
 CONFIG += debug
 QT += widgets xml
 
@@ -19,6 +19,7 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \
  ../../src/physical_calculator/physical_calculator.hpp \
    ../../src/physical_calculator/printable_mobile_object.hpp \
+   ../../src/physical_calculator/position_data.hpp \
  ../../src/coordinator/coordinator.hpp \
  ../../src/coordinator/physical_coordinator.hpp \
  ../../src/coordinator/robot_coordinator.hpp \
@@ -26,6 +27,7 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/coordinator/schedule_coordinator.hpp \
  ../../src/coordinator/base_coordinator.hpp \
  ../../src/coordinator/config_robot_coordinator.hpp \
+ ../../src/coordinator/xml_parser/xml_parser.hpp \
  ../../src/modules/servo.hpp \
  ../../src/modules/modules.hpp \
  ../../src/modules/module.hpp \
@@ -51,12 +53,14 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/physical_calculator/robot.cpp \
  ../../src/physical_calculator/physical_calculator.cpp \
    ../../src/physical_calculator/printable_mobile_object.cpp \
+   ../../src/physical_calculator/position_data.cpp \
  ../../src/coordinator/coordinator.cpp \
  ../../src/coordinator/physical_coordinator.cpp \
  ../../src/coordinator/robot_coordinator.cpp \
  ../../src/coordinator/module_coordinator.cpp \
  ../../src/coordinator/schedule_coordinator.cpp \
  ../../src/coordinator/config_robot_coordinator.cpp \
+ ../../src/coordinator/xml_parser/xml_parser.cpp \
  ../../src/modules/modules.cpp \
  ../../src/modules/servo.cpp \
  ../../src/modules/encoder.cpp \

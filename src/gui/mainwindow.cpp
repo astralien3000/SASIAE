@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
-
+#include <QDebug>
 MainWindow::MainWindow(QWidget* parent):
   QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    qDebug() << "MainWindow constructor";
     ui->setupUi(this);
   //Ui_MainWindow::setupUi(this);
 //        QObject::connect(button_robot1, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -17,10 +18,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*void MainWindow::animate(){
-    ui->graphicsView->startAnimation();
+void MainWindow::animateRobot(qreal x,qreal y){
+    qDebug() << "animateRobot";
+    //ui->graphicsView->moveRobot(x,y);
+    ui->graphicsView->moveRobot();
 }
-*/
+
 
 QTimeLine *MainWindow::getTimer()const{
  return   ui->graphicsView->timer;
