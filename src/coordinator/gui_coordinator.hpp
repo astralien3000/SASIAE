@@ -14,7 +14,7 @@ class GuiCoordinator: public QObject {
 signals:
 
 public slots:
-  QVector<const PositionData*>* getAllPositions()const;
+  const QVector<const PrintableMobileObject*>& getAllPositions()const;
 
 
 public:

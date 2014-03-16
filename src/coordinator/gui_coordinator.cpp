@@ -15,13 +15,14 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
-	const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-    QVector<const PositionData*> *result = new QVector<const PositionData*>;
-    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
-	{
-        result->append((*it)->getPosition());
-	}
-    return result;
-    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
+const QVector<const PrintableMobileObject*>& GuiCoordinator::getAllPositions() const {
+	// const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+ //    QVector<const PositionData*> *result = new QVector<const PositionData*>;
+ //    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
+	// {
+ //        result->append((*it)->getPosition());
+	// }
+ //    return result;
+ //    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
+    return PrintableMobileObject::getObjectsList();
 }
