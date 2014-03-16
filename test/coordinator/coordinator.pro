@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = test_coordinator
 INCLUDEPATH += /usr/local/include/bullet \
 /usr/include/bullet \
+/usr/local/include/qt5 \
 ../../src/modules \
 ../../../aversive--/include/sasiae
 

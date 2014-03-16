@@ -20,7 +20,7 @@
 
 #include "../gui/ui_mainwindow.h"
 #include "../gui/mainwindow.h"
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 
 #define COORD_BUFFER_SIZE 1024

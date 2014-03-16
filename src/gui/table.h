@@ -7,7 +7,7 @@
 #include <QtGui>
 
 #include "item_robot.h"
-//#include "../coordinator/gui_coordinator.hpp"
+#include "../coordinator/gui_coordinator.hpp"
 
 class Table : public QGraphicsView
 {
