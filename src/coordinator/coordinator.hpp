@@ -20,7 +20,7 @@
 
 #include "../gui/ui_mainwindow.h"
 #include "../gui/mainwindow.h"
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 
 #define COORD_BUFFER_SIZE 1024
@@ -85,6 +85,9 @@ private slots:
 
   void sendModuleMessage(QString msg);
 
+  void update(void);
+
+
 //private:
 protected:
   QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
@@ -107,7 +110,8 @@ public:
   //! \brief send sync message to all Robot Code Process
   void sendSyncMessages();
   
-  void update(void);
+
+  void startUpdateTimer(QTimer *);
 
 private:
   void closeRobot(Slot robot);
@@ -142,9 +146,6 @@ private:
   Coordinator(int argc, char* argv[]);
   static Coordinator* _instance;
   PhysicalCalculator _physic;
-
-  // Ne fonctionne pas encore
-  //MainWindow _gui;
 
   bool _running;
   int _sync; 

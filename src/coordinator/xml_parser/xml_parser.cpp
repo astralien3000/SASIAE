@@ -2,8 +2,8 @@
 #include <assert.h>
 #include <QDebug>
 #include <QFile>
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
+#include <QtXmlPatterns/QXmlSchema>
+#include <QtXmlPatterns/QXmlSchemaValidator>
 
 
 XMLParser::XMLParser(){}

@@ -54,18 +54,27 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
 Robot *Coordinator::getRobot(Slot robotSlot){
 }
 
+void Coordinator::startUpdateTimer(QTimer *tm){
+
+    qDebug() << "connect timerUpdate to update";
+    connect(tm, SIGNAL(timeout()), this, SLOT(update()));
+    qDebug() << "Update connected";
+    tm->start();
+}
+
+
 Coordinator::Coordinator(int argc, char* argv[]) :
     QApplication(argc,argv), _physic(this)/*, _gui()*/{
   _phy_cdn = new PhysicalCoordinator(&_physic);
   _bot_cdn = new RobotCoordinator;
   _mod_cdn = new ModuleCoordinator;
   _sch_cdn = new ScheduleCoordinator;
-  //_gui_cdn = new GuiCoordinator;
+  _gui_cdn = new GuiCoordinator;
 
   _sch_cdn->addCoordinator(_phy_cdn);
   _sch_cdn->addCoordinator(_bot_cdn);
   _sch_cdn->addCoordinator(_mod_cdn);
- // _sch_cdn->addCoordinator(_gui_cdn);
+  _sch_cdn->addCoordinator(_gui_cdn);
 
   // Device -> Module communication
   connect(
@@ -92,9 +101,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
 	  );
 
   std::cout << "Creation de la fenetre principale..." << std::endl;
-  /*_gui_cdn->getMainWindow()->show();
+  _gui_cdn->getMainWindow()->show();
   _gui_cdn->getMainWindow()->getTimer()->start();
-*/
+
 
 
 }
