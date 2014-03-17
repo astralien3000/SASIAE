@@ -9,10 +9,12 @@ INCLUDEPATH += . \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
 /usr/local/include/bullet \
-/home/hugo/Qt/5.2.0/gcc_64/lib
+
 
 QT += widgets
 QT += xml
+QT += xmlpatterns
+
 QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
 
