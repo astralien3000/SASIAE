@@ -6,7 +6,7 @@
 #include <QVector>
 
 #include "position_data.hpp"
-
+#include "mesh.hpp"
 /*
 Alternative
 struct PositionData {
@@ -23,7 +23,7 @@ private:
 private:
   QString _name;
   //struct position_data * _pos;
-    PositionData * _pos;
+    PositionData _pos;
 protected:
 	btRigidBody *_body;
 public:
@@ -31,7 +31,7 @@ public:
   ~PrintableMobileObject();
   static const QVector<const PrintableMobileObject*>& getObjectsList();
   PrintableMobileObject(btRigidBody *body);
-  const PositionData * getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+  const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
 };
 
 #endif

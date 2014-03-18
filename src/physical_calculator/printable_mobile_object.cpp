@@ -3,9 +3,9 @@
 QVector<const PrintableMobileObject*> PrintableMobileObject::objects;
 
 
-  const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
-  	return PrintableMobileObject::objects;
-  }
+const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
+  return PrintableMobileObject::objects;
+}
 
 
 PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
@@ -14,6 +14,7 @@ PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
     _pos=new PositionData();
     objects.append(this);
 }
+
 PrintableMobileObject::~PrintableMobileObject() {
 	int objectPosition = objects.indexOf(this);
 	objects.remove(objectPosition);
@@ -22,13 +23,13 @@ PrintableMobileObject::~PrintableMobileObject() {
 PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
     _name("unknown") /*_pos(new struct position_data)*/,_body(body)
 {
-    _pos=new PositionData();
+    //_pos=new PositionData();
     objects.append(this);
 }
 
 
 
-const PositionData *PrintableMobileObject::getPosition() const {
+const PositionData & PrintableMobileObject::getPosition() const {
   	btTransform trans;
   	_body->getMotionState()->getWorldTransform(trans);
     _pos->setPosition(trans.getOrigin());

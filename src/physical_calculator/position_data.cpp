@@ -1,7 +1,7 @@
 #include "position_data.hpp"
 
 PositionData::PositionData():
-    _QPosition(3),_QRotation(),_btPosition(),_btRotation()
+    _QPosition(3),_QRotation(3),_btPosition(),_btRotation()
 {
 }
 
@@ -15,16 +15,20 @@ void PositionData::setPosition(const btVector3 & vec){
 
 void PositionData::setRotation(btQuaternion quat){
     _btRotation=quat;
-    btVector3 vec=quat.getAxis();
-    float ang=quat.getAngle();
-    float x=vec.getX(),y=vec.getY(),z=vec.getZ();
-    _QRotation=QQuaternion(ang,x,y,z);
+    float x,y,z;
+    btMatrix3x3 m(quat);
+    m.getEulerYPR(z,y,x);
+    _QRotation.replace(0,x)
+    _QRotation.replace(1,y)
+    _QRotation.replace(2,z)
 }
 
 const QVector<float> & PositionData::getQtPosition(void)const{
     return _QPosition;
 }
-const QQuaternion &PositionData::getQtRotation(void)const{
-    return _QRotation;
+const QQuaternion &PositionData::getQtRotation(unsigned int axe)const{
+    if(axe <0 || axe > 3)
+      return _QRotation[1];
+    return _QRotation[axe];
 }
 
