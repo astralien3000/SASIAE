@@ -19,7 +19,7 @@ QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
 
 # Input
-HEADERS += mainwindow.h ui_mainwindow.h \
+HEADERS += mainwindow.h \
     table.h \
     item_robot.h \ 
     ../coordinator/config_robot_coordinator.hpp \
