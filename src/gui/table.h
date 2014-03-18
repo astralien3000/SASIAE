@@ -20,13 +20,9 @@ signals:
 
 public slots:
     void moveRobot(qreal x, qreal y);
-    void moveRobot();
 
 private:
-    //QRectF robot;
     ItemRobot * robot;
-    //QPropertyAnimation * anim;
-    //int duration;
 };
 
 #endif // TABLE_H

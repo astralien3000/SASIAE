@@ -10,15 +10,6 @@ GuiCoordinator::GuiCoordinator(void){
     qDebug() << "GuiCoordinator constructor";
 
     _mainWindow=new MainWindow();
-
-/*
-    QTimer *timer2 = new QTimer(this);
-    qDebug() << "connect timer2 to moveRobot";
-    connect(timer2, SIGNAL(timeout()), & Coordinator::getInstance(), SLOT(Coordinator::update()));
-    qDebug() << "timer2 connected to moveRobot";
-    timer2->start(1000/60);
-*/
-
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{
@@ -39,7 +30,6 @@ void GuiCoordinator::update(){
     }
  else{
      qDebug() << "GuiCoordinator objectList is empty";
-     _mainWindow->animateRobot(0,0);
     }
 
 }
