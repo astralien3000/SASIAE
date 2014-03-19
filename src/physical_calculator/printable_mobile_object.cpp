@@ -8,8 +8,8 @@ const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsLi
 }
 
 
-PrintableMobileObject::PrintableMobileObject(QString name, btRigidBody *body) :
-    _name(name) /*_pos(new struct position_data)*/,_body(body)
+PrintableMobileObject::PrintableMobileObject(QString name, const Mesh & mesh) :
+    Mesh(mesh), _name(name) /*_pos(new struct position_data)*/
 {
     _pos=new PositionData();
     objects.append(this);
@@ -20,8 +20,8 @@ PrintableMobileObject::~PrintableMobileObject() {
 	objects.remove(objectPosition);
 }
 
-PrintableMobileObject::PrintableMobileObject(btRigidBody *body):
-    _name("unknown") /*_pos(new struct position_data)*/,_body(body)
+PrintableMobileObject::PrintableMobileObject(const Mesh & mesh):
+    Mesh(mesh), _name("unknown") /*_pos(new struct position_data)*/
 {
     //_pos=new PositionData();
     objects.append(this);
