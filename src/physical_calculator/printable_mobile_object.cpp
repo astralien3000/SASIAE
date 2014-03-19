@@ -1,6 +1,8 @@
 #include "printable_mobile_object.hpp"
 
 QVector<const PrintableMobileObject*> PrintableMobileObject::objects;
+const QString PrintableMobileObject::_img_path("./");
+
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
 
@@ -12,14 +14,13 @@ const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsLi
 PrintableMobileObject::PrintableMobileObject(QString name, const Mesh & mesh) :
     Mesh(mesh), _name(name) /*_pos(new struct position_data)*/
 {
-    _pos=new PositionData();
     objects.append(this);
 	//si image est dans tableau, ++, sinon ajouter image dans tableau.
     auto it = images.find(name);
     if(it!=images.end()) {//found
     	(*it)->second++;
     } else { //add the pixmap in the map !
-        images.insert(name,new QPair<QPixmap*,int>(new QPixmap(""+name),0));
+        images.insert(name,new QPair<QPixmap*,int>(new QPixmap(_img_path+name),0));
     }
 
 }
@@ -46,13 +47,6 @@ PrintableMobileObject::PrintableMobileObject(const Mesh & mesh):
 
 
 
-const PositionData & PrintableMobileObject::getPosition() const {
-  	btTransform trans;
-  	_body->getMotionState()->getWorldTransform(trans);
-    _pos->setPosition(trans.getOrigin());
-    _pos->setRotation(trans.getRotation());
-return _pos;
-}
 /*
 struct position_data * PrintableMobileObject::getPosition() {
 	btTransform trans;

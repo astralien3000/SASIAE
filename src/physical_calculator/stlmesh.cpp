@@ -1,33 +1,33 @@
-#include "mesh.hpp"
+#include "stlmesh.hpp"
 #include <QList>
 #include <QVector>
-#include <QDebgu>
+#include <QDebug>
 
-Mesh::Mesh(World& world, QString stlpath, double mass, bool movable) : _path(stlpath) {
-  init(world, stlpath, mass, movable);
+STLMesh::STLMesh(QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
+  init(stlpath, mass, start_pos);
 }
 
-Mesh::Mesh() {}
-
-Mesh::Mesh(const Mesh & source) {
+STLMesh::STLMesh(const STLMesh & source) {
   //TODO copier la shape d'un smart pointer
-  this._shape = source._shape;
   this._path = source._path;
   _stlshapes[this._path].second++;
-  buildRigidBody();
-
-}
-Mesh::~Mesh() {
-
+  Mesh::Mesh(source);
 }
 
-void Mesh::init(World& world, QString stlpath, double mass, bool movable) {
-  _world = &world;
-  _mass  = mass;
-  _mov = movable;
-  //TODO stocker la shape body dans un smart pointer
+STLMesh::~STLMesh() {
+  _stlshapes[this._path].second--;
+}
+
+void Mesh::init(QString stlpath, float mass, PositionData pos) {
+  if(mass == 0) {
+    //TODO
+  }
+  else if(s_stlshapes.constains(stlpath)) {
+    s_stlshapes[stlpath].second++;
+    buildRigidBody(s_stlshapes[stlpath].first, mass, pos);
+  }
+  else {
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
-  if(movable) {
     //séparation points et faces
     std::vector< HACD::Vec3<HACD::Real> > points;
 		std::vector< HACD::Vec3<long> > triangles;
@@ -127,23 +127,7 @@ void Mesh::init(World& world, QString stlpath, double mass, bool movable) {
 				//trans.setIdentity();
 				compound->addChildShape(trans,convexShape);
 			}
-     _shape = compound; 
+      buildRigidBody(compound, mass, pos);
+      s_stlshapes.insert(stlpath, QPair<btCollisionShape*,unsigned int>(compound,1)); 
   }
-  else
-  {
-  }
-  buildRigidBody();
-}
-
-void Mesh::buildRigidBody() {
-  btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
-        btQuaternion(btVector3(0,0,1),0),
-        btVector3(0,100,0)));
-      btScalar mass = _mass;
-      btVector3 bodyInertia(0,0,0);
-      _shape->calculateLocalInertia(mass,bodyInertia);
-        btRigidBody::btRigidBodyConstructionInfo
-                bodyRigidBodyCI(0,bodyMotionState,_shape,bodyInertia);
-        _body = new btRigidBody(bodyRigidBodyCI);
-        _world->getScene()->addRigidBody(_body);
 }

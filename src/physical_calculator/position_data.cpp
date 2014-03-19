@@ -1,16 +1,21 @@
 #include "position_data.hpp"
 
 PositionData::PositionData():
-    _QPosition(3),_QRotation(3),_btPosition(),_btRotation()
+    _QPosition(),_QRotation(),_btPosition(),_btRotation()
 {
 }
-
+PositionData::PositionData(const PositionData& posdata) {
+  this->_QPosition = posdata._QPosition;
+  this->_QRotation = posdata._QRotation;
+  this->_btPosition = posdata._btPosition;
+  this->_btRotation = posdata._btRotation;
+}
 void PositionData::setPosition(const btVector3 & vec){
     _btPosition=vec;
     float x=vec.getX(),y=vec.getY(),z=vec.getZ();
-    _QPosition.replace(0,x);
-    _QPosition.replace(1,y);
-    _QPosition.replace(2,z);
+    _QPosition.setX(x);
+    _QPosition.setY(y);
+    _QPosition.setZ(z);
 }
 
 void PositionData::setRotation(btQuaternion quat){
@@ -18,17 +23,33 @@ void PositionData::setRotation(btQuaternion quat){
     float x,y,z;
     btMatrix3x3 m(quat);
     m.getEulerYPR(z,y,x);
-    _QRotation.replace(0,x)
-    _QRotation.replace(1,y)
-    _QRotation.replace(2,z)
+    _QRotation.setX(x);
+    _QRotation.setY(y);
+    _QRotation.setZ(z);
 }
 
-const QVector<float> & PositionData::getQtPosition(void)const{
+const QVector3D & PositionData::getPosition(void)const{
     return _QPosition;
 }
-const QQuaternion &PositionData::getQtRotation(unsigned int axe)const{
-    if(axe <0 || axe > 3)
-      return _QRotation[1];
-    return _QRotation[axe];
+const QVector3D & PositionData::getRotation(void)const{
+    return _QRotation;
+}
+float PositionData::getRotation(unsigned int axe)const{
+    if(axe == 0)
+      return _QRotation.x();
+    if(axe == 1)
+      return _QRotation.y();
+    if(axe == 2)
+      return _QRotation.z();
+    return _QRotation.y();
 }
 
+PositionData PositionData::operator+(const PositionData& pos)
+{
+  PositionData p(*this); 
+  p._QPosition += pos._QPosition;
+  p._QRotation += pos._QRotation;
+  p._btPosition += pos._btPosition;
+  p._btRotation += pos._btRotation;
+  return p;
+}

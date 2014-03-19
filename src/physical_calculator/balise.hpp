@@ -3,6 +3,9 @@
 
 #include "robot.hpp"
 #include "physical_calculator.hpp"
+#include "position_data.hpp"
+#include "world.hpp"
+#include "mesh.hpp"
 
 #include <QObject>
 #include <QString>
@@ -12,22 +15,12 @@
 
 class Balise {
 public:
-	Balise(btDynamicsWorld* world, btRigidBody* chassis);
-	//done
-	btVector3 get_position();
-
-
-	// public slots:
-	// virtual void simulStep(); //TODO
-	// not needed : la position est calculée à chaque appel.
-
-
+  Balise(World* world, Robot* chassis);
+  PositionData getPosition();
 
 private:
-  btRigidBody* _chassis; //ok
-	btRigidBody* _sensor_box; //ok
-	QStandardItem* _dataRoot; //ok
-  btDynamicsWorld* _world; // ok
+  Robot* _chassis;
+	Mesh* _sensor_box;
 };
 
 

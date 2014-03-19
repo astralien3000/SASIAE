@@ -2,35 +2,32 @@
 
 int DistSensor::MAX_DIST = 100000;
 
-DistSensor::DistSensor(btDynamicsWorld* world, btRigidBody* chassis) : _chassis(chassis), _world(world) {}
+DistSensor::DistSensor(World* world, Robot* chassis) : _chassis(chassis), _world(world) {}
 
-DistSensor::DistSensor(btDynamicsWorld* world, btRigidBody* chassis, const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass) : _chassis(chassis), _world(world)  {
+DistSensor::DistSensor(World* world, Robot* chassis, const PositionData &pos, const PositionData &direction, const QVector3D& boxSize, float mass) : _chassis(chassis), _world(world) 
+{
   init(pos,direction,boxSize,mass);  
 }
 
-void DistSensor::init(const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass){
- //NOTE: boxsize vu de face, X profondeur, Y hauteur, Z largeur
- //NOTE: boxsize en halfextents i.e. dimension d'un quart de boite
-  _box_depth = boxSize.getZ();
+void DistSensor::init(const PositionData &pos_data, const PositonData &direction, const QVector3D& boxSize, float mass){
+  
+  _box_depth = boxSize.z()/2;
  //creation de la boite
- btCollisionShape* boxShape = new btBoxShape(boxSize);
- btTransform trans;
- _chassis->getMotionState()->getWorldTransform(trans);
- btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(_chassis->getOrientation(),trans.getOrigin()+pos));
- btVector3 boxInertial(0,0,0);
- boxShape->calculateLocalInertia(mass, boxInertial);
- btRigidBody::btRigidBodyConstructionInfo boxBodyCi(mass, boxMotionState, boxShape, boxInertial);
- _sensor_box = new btRigidBody(boxBodyCi);
- _world->addRigidBody(_sensor_box);
+ _sensor_box = Mesh::buildBox(boxSize, mass, _chassis->getPosition()+pos_data);
  //creation de la contrainte
  //lx = -z y x
- btVector3 normal = direction;
+ btVector3 normal(direstion.getPosition().x(),
+              direstion.getPosition().y(),
+              direstion.getPosition().z());
+ btVector3 pos(pos_data.getPosition().x(),
+              pos_data.getPosition().y(),
+              pos_data.getPosition().z());
  normal.normalize();
  btVector3 relativeVec(-1*normal.getZ(), normal.getY(), normal.getX());
- btVector3 pivotInChassis1 = pos + relativeVec*btScalar(boxSize.getX()*4./3.); 
- btVector3 pivotInChassis2 = pos + relativeVec*btScalar(boxSize.getX()*-4./3.); 
- btVector3 pivotInBox1(boxSize.getX()*btScalar(-4./3.),0,-boxSize.getZ());
- btVector3 pivotInBox2(boxSize.getX()*btScalar(4./3.),0,-boxSize.getZ());
+ btVector3 pivotInChassis1 = pos + relativeVec*btScalar(boxSize.x()*4./3.); 
+ btVector3 pivotInChassis2 = pos + relativeVec*btScalar(boxSize.x()*-4./3.); 
+ btVector3 pivotInBox1(boxSize.x()*btScalar(-4./3.),0,-boxSize.z());
+ btVector3 pivotInBox2(boxSize.x()*btScalar(4./3.),0,-boxSize.z());
  btTypedConstraint* p2pL = new btPoint2PointConstraint(*_chassis,*_sensor_box, pivotInChassis1,pivotInBox1);
  btTypedConstraint* p2pR = new btPoint2PointConstraint(*_chassis,*_sensor_box, pivotInChassis2,pivotInBox2);
  

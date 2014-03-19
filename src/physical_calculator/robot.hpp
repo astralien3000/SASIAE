@@ -3,14 +3,16 @@
 
 #include <btBulletDynamicsCommon.h>
 #include "printable_mobile_object.hpp"
+#include "world.hpp"
+#include "mesh.hpp"
 
-class Robot : public btRaycastVehicle, public PrintableMobileObject {
+class Robot :  public PrintableMobileObject, public btRaycastVehicle{
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
   //rajouter la balise
 public:
-  Robot(btRigidBody* chassis, btDynamicsWorld *world);
-  Robot(btRigidBody* chassis, btDynamicsWorld *world, QString name); 
+  Robot(const Mesh& mesh, World *world);
+  Robot(const Mesh& mesh, World *world, QString name); 
   ~Robot();
 
   /* This function is called in Wheel::init().
