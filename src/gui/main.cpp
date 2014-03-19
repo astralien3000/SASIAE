@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 */
 
   std::cout << "Chargement des robots et de la table..." << std::endl;
-  //cdn->openTable("coucou");
+  cdn->openTable("coucou");
   cdn->openRobot("",Coordinator::MAIN_ROBOT1);
 
   QTimer *timerUpdate = new QTimer(cdn);

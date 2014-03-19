@@ -135,9 +135,12 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   (void) slot;
 
   //! \todo remove... only here for tests
-  _phy_cdn->loadTable("dummy");
+ // _phy_cdn->loadTable("dummy");
 
   btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
+
+  //Mesh * robotMesh=new Mesh(...);
+
   //////////////////////////
   // Design robot's shape
   btCollisionShape* boxA = new btBoxShape(btVector3(1,0.25,1));

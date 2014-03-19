@@ -2,6 +2,8 @@
 #define PHYSICAL_COORDINATOR_HPP
 
 #include "base_coordinator.hpp"
+#include "xml_parser/xml_parser.hpp"
+#include "../stl/STLReader.hpp"
 
 //! \brief PhysicalCalculator declaration (avoid include)
 class PhysicalCalculator;

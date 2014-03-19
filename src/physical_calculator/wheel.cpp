@@ -7,7 +7,7 @@ Wheel::Wheel(Robot * robot){
   _wheel_number = -1;
 }
 
-Wheel::Wheel(Robot* robot, const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized) {
+Wheel::Wheel(Robot* robot, const QVector3D &pos, const QVector3D &direction, float radius, bool motorized) {
   _robot = robot;
   init(pos, direction, radius, motorized);
 }
@@ -15,10 +15,18 @@ Wheel::Wheel(Robot* robot, const btVector3 &pos, const btVector3 &direction, btS
 
 //direction de la suspension donc = btVector3(0,-1,0);
 //pos ne doit pas etre en dehors de l'objet
-void Wheel::init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized) {
+void Wheel::init(const QVector3D &pos, const QVector3D &direction, float radius, bool motorized) {
+/*
+ * Change QVector3D into btVector3, float into btScalar
+*/
+
+btVector3 bpos(pos.x(),pos.y(),pos.z());
+btVector3 bdirection(direction.x(),direction.y(),direction.z());
+btScalar bradius(radius);
+
 //pour avancer sur l'axe Z, il faut que l'axe de la roue IE le vecteur du moment soit
 //sur X
-  btWheelInfo& wheel = _robot->addWheel(pos,direction, btVector3(-1,0,0),radius,motorized);
+  btWheelInfo& wheel = _robot->addWheel(bpos,bdirection, btVector3(-1,0,0),bradius,motorized);
       wheel.m_suspensionStiffness = 20.f;//suspensionStiffness;
       wheel.m_wheelsDampingRelaxation = 2.3f;//suspensionDamping;
       wheel.m_wheelsDampingCompression = 4.4f;//suspensionCompression;  

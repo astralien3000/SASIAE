@@ -33,11 +33,11 @@ Module* ConfigRobotCoordinator::loadModule(const QString& name) {
   Module* ret = 0;
 
   if(name == "motor") {
-    Wheel* w = new Wheel(_robot_mesh[name], btVector3(16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
+    Wheel* w = new Wheel(_robot_mesh[name], QVector3D(16,-17.5+3-0.00,0),QVector3D(0,-1,0),3,true);
     ret = new MotorWheel(w, "", this);
   }
   else if(name == "encoder") {
-    Wheel* w = new Wheel(_robot_mesh[name], btVector3(19,-17.5+3-0.00,0),btVector3(0,-1,0),3,false);
+    Wheel* w = new Wheel(_robot_mesh[name], QVector3D(19,-17.5+3-0.00,0),QVector3D(0,-1,0),3,false);
     ret = new Encoder(w, "", this);
   }
 

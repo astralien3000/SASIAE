@@ -9,19 +9,24 @@ INCLUDEPATH += . \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
 /usr/local/include/bullet \
-/home/hugo/Qt/5.2.0/gcc_64/lib
+
 
 QT += widgets
 QT += xml
+QT += xmlpatterns
+
 QMAKE_CXXFLAGS = -std=c++11
 LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
 
 # Input
-HEADERS += mainwindow.h ui_mainwindow.h \
+HEADERS += mainwindow.h \
     table.h \
     item_robot.h \ 
     ../coordinator/config_robot_coordinator.hpp \
-    ../coordinator/xml_parser/xml_parser.hpp
+    ../coordinator/xml_parser/xml_parser.hpp \
+    ../physical_calculator/dist_sensor.hpp \
+    ../physical_calculator/balise.hpp \
+    ../stl/STLReader.hpp
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -47,7 +52,10 @@ SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
     item_robot.cpp \
     ../coordinator/config_robot_coordinator.cpp \
-    ../coordinator/xml_parser/xml_parser.cpp
+    ../coordinator/xml_parser/xml_parser.cpp \
+    ../physical_calculator/dist_sensor.cpp \
+    ../physical_calculator/balise.cpp \
+    ../stl/STLReader.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \

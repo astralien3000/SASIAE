@@ -389,7 +389,7 @@
      <x>0</x>
      <y>0</y>
      <width>860</width>
-     <height>20</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSimulateur">
@@ -400,6 +400,8 @@
     <addaction name="actionOuvrir"/>
     <addaction name="actionEnregistrer_sous"/>
     <addaction name="actionEnregistrer"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuEditer">
     <property name="title">
@@ -594,6 +596,11 @@
     <string>Qui sommes-nous ?</string>
    </property>
   </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -603,5 +610,22 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionQuitter</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

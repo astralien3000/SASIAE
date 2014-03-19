@@ -3,15 +3,16 @@
 
 #include "robot.hpp"
 #include <btBulletDynamicsCommon.h>
+#include <QVector3D>
 
 class Wheel {
 public: 
   Wheel(Robot *robot = NULL);
-  Wheel(Robot* robot, const btVector3 &pos,const btVector3 &direction, btScalar radius, bool motorized);
+  Wheel(Robot* robot, const QVector3D &pos,const QVector3D &direction, float radius, bool motorized);
   /* init is called in the constructor right above. 
    * But not in the first one. 
    */
-  void init(const btVector3 &pos, const btVector3 &direction, btScalar radius, bool motorized);
+  void init(const QVector3D &pos, const QVector3D &direction, float radius, bool motorized);
   double getRotation();
   double getTorque();
   void setTorque(double f);

@@ -20,6 +20,7 @@ GuiCoordinator::~GuiCoordinator(void){
 }
 
 void GuiCoordinator::update(){
+
  const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
  if(!objectsList.isEmpty()){
     qDebug() << "GC update  objectList" << objectsList ;
@@ -32,18 +33,41 @@ void GuiCoordinator::update(){
      qDebug() << "GuiCoordinator objectList is empty";
     }
 
+// const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+// if(!objectsList.isEmpty()){
+
+//    //QVector<float> curPosition;
+//    //qDebug() << "GC update  objectList" << objectsList ;
+//    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it) {
+// /*       curPosition = ((*it)->getPosition())->getQtPosition();
+//        qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
+//        _mainWindow->animateRobot(curPosition.at(0),curPosition.at(2));
+//    */    }
+//    }
+// else{
+//     qDebug() << "GuiCoordinator objectList is empty";
+//     _mainWindow->animateRobot(0,0);
+//    }
+
 }
+
+
+//QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
+
+//    const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+//    QVector<float> & curPosition;
+//    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
+//    {
+//        curPosition = ((*it)->getPosition())->getQtPosition();
+//        _mainWindow->animateRobot(curPosition->at(0),curPosition->at(2));
+//        //not tested yet because of compiling problems !!
+//    }
+//    return result;
+//    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
+//}
+
+
 QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
-	const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-    QVector<const PositionData*> *result = new QVector<const PositionData*>;
-    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
-	{
-        result->append((*it)->getPosition());
-	}
-    return result;
-    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
-}
-/*const QVector<const PrintableMobileObject*>& GuiCoordinator::getAllPositions() const {
      const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
      QVector<const PositionData*> *result = new QVector<const PositionData*>;
      for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
@@ -52,6 +76,6 @@ QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
      }
      return result;
      //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
-    return PrintableMobileObject::getObjectsList();
+    //return PrintableMobileObject::getObjectsList();
 }
-*/
+

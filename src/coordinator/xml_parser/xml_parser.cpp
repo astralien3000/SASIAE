@@ -2,8 +2,7 @@
 #include <assert.h>
 #include <QDebug>
 #include <QFile>
-#include <QtXmlPatterns/QXmlSchema>
-#include <QtXmlPatterns/QXmlSchemaValidator>
+#include <QtXmlPatterns>
 
 
 XMLParser::XMLParser(){}
@@ -144,23 +143,23 @@ const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) 
   }
   QDomElement t = doc->elementsByTagName("table").item(0).toElement();
   tableConfig* data = new tableConfig();
-  
+
   data->mesh_path = t.firstChildElement("mesh").attribute("src");
-  
+
   QDomNodeList toys = t.elementsByTagName("toy");
   for(int i = 0; i < toys.length(); i++) {
     if(!toys.item(i).isElement()) {
       continue;
     }
-    
+
     QDomElement toyElem = toys.item(i).toElement();
-    
+
     toyConfig* toy = new toyConfig();
     toy->name = toyElem.attribute("name");
     toy->weight = toyElem.attribute("weight").toInt();
-    
+
     toy->mesh_path = toyElem.firstChildElement("mesh").attribute("src");
-    
+
     QDomElement loc = toyElem.firstChildElement("location");
     toy->position.x = loc.attribute("X").toInt();
     toy->position.y = loc.attribute("Y").toInt();
@@ -168,10 +167,10 @@ const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) 
     toy->position.alpha = loc.attribute("alpha").toInt();
     toy->position.beta = loc.attribute("beta").toInt();
     toy->position.gamma = loc.attribute("gamma").toInt();
-    
+
     data->toys.push_front(toy);
   }
-  
+
   delete doc;
   return data;
 }

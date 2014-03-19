@@ -18,7 +18,7 @@
 //#include <cstring>
 //#include <iostream>
 
-#include "../gui/ui_mainwindow.h"
+
 #include "../gui/mainwindow.h"
 #include <QApplication>
 
