@@ -21,33 +21,35 @@ GuiCoordinator::~GuiCoordinator(void){
 
 void GuiCoordinator::update(){
 
+/*
+ * Hugo : ancient version...
+        const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+        if(!objectsList.isEmpty()){
+           qDebug() << "GC update  objectList" << objectsList ;
+           const PositionData * posRot=objectsList.first()->getPosition();
+           QVector<float> pos=posRot->getQtPosition();
+           qDebug() << "GuiCoordinator update pos.x=" << pos.at(0) << "pos.y =" << pos.at(2) ;
+           _mainWindow->animateRobot(pos.at(0),pos.at(2));
+           }
+        else{
+            qDebug() << "GuiCoordinator objectList is empty";
+           }
+*/
+
  const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
- if(!objectsList.isEmpty()){
+     if(!objectsList.isEmpty()){
+    QVector<float> curPosition;
     qDebug() << "GC update  objectList" << objectsList ;
-    const PositionData * posRot=objectsList.first()->getPosition();
-    QVector<float> pos=posRot->getQtPosition();
-    qDebug() << "GuiCoordinator update pos.x=" << pos.at(0) << "pos.y =" << pos.at(2) ;
-    _mainWindow->animateRobot(pos.at(0),pos.at(2));
+    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it) {
+        curPosition = ((*it)->getPosition())->getQtPosition();
+        qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
+        _mainWindow->animateRobot(curPosition.at(0),curPosition.at(2));
+        }
     }
  else{
      qDebug() << "GuiCoordinator objectList is empty";
+     _mainWindow->animateRobot(0,0);
     }
-
-// const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-// if(!objectsList.isEmpty()){
-
-//    //QVector<float> curPosition;
-//    //qDebug() << "GC update  objectList" << objectsList ;
-//    for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it) {
-// /*       curPosition = ((*it)->getPosition())->getQtPosition();
-//        qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
-//        _mainWindow->animateRobot(curPosition.at(0),curPosition.at(2));
-//    */    }
-//    }
-// else{
-//     qDebug() << "GuiCoordinator objectList is empty";
-//     _mainWindow->animateRobot(0,0);
-//    }
 
 }
 
@@ -66,16 +68,4 @@ void GuiCoordinator::update(){
 //    //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
 //}
 
-
-QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
-     const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-     QVector<const PositionData*> *result = new QVector<const PositionData*>;
-     for (auto it = objectsList.cbegin(); it < objectsList.cend(); ++it)
-     {
-        result->append((*it)->getPosition());
-     }
-     return result;
-     //TO COPY THAT INTO THE GUI TO SHOW POSITIONS ON THE LIST !!
-    //return PrintableMobileObject::getObjectsList();
-}
 

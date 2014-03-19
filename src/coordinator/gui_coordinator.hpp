@@ -16,7 +16,7 @@ class GuiCoordinator: public BaseCoordinator {
 signals:
 
 public slots:
-  QVector<const PositionData*>* getAllPositions()const;
+  //QVector<const PositionData*>* getAllPositions()const;
   void update(void);
 
 public:

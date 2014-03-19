@@ -1,0 +1,149 @@
+#include "mesh.hpp"
+#include <QList>
+#include <QVector>
+#include <QDebgu>
+
+Mesh::Mesh(World& world, QString stlpath, double mass, bool movable) : _path(stlpath) {
+  init(world, stlpath, mass, movable);
+}
+
+Mesh::Mesh() {}
+
+Mesh::Mesh(const Mesh & source) {
+  //TODO copier la shape d'un smart pointer
+  this._shape = source._shape;
+  this._path = source._path;
+  _stlshapes[this._path].second++;
+  buildRigidBody();
+
+}
+Mesh::~Mesh() {
+
+}
+
+void Mesh::init(World& world, QString stlpath, double mass, bool movable) {
+  _world = &world;
+  _mass  = mass;
+  _mov = movable;
+  //TODO stocker la shape body dans un smart pointer
+    QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
+  if(movable) {
+    //séparation points et faces
+    std::vector< HACD::Vec3<HACD::Real> > points;
+		std::vector< HACD::Vec3<long> > triangles;
+    for(int i=0; i<retour.size(); i++ ) 
+		{
+      int index = points.size();
+      int ii[3] = {-1,-1,-1};
+      for(int j=0; j<retour.at(i).size(); j+=3)
+      {
+			  HACD::Vec3<HACD::Real> vertex(retour.at(i).at(j), retour.at(i).at(j+1),retour.at(i).at(j+2));
+        //recherche du point dans la list des points deja crée
+        for(int h=0; h < points.size();h++) {
+          if(points[h].X() == vertex.X()
+            && points[h].Y() == vertex.Y() 
+            && points[h].Z() == vertex.Z())
+            ii[j/3] = h; 
+        }
+        if(ii[j/3] == -1) {
+          ii[j/3] = points.size();
+			    points.push_back(vertex);
+        }
+      }
+			HACD::Vec3<long> triangle(ii[0], ii[1], ii[2]);
+			triangles.push_back(triangle);
+		}
+    qDebug() << "Importation de " << points.size()<<" points pour " << triangles.size() <<  "faces.";
+
+    HACD::HACD myHACD;
+		myHACD.SetPoints(&points[0]);
+		myHACD.SetNPoints(points.size());
+		myHACD.SetTriangles(&triangles[0]);
+		myHACD.SetNTriangles(triangles.size());
+		myHACD.SetCompacityWeight(0.1);
+		myHACD.SetVolumeWeight(0.0);
+
+		// HACD parameters
+		// Recommended parameters: 2 100 0 0 0 0
+		size_t nClusters = 1;
+		double concavity = 100;
+		bool invert = false;
+		bool addExtraDistPoints = false;
+		bool addNeighboursDistPoints = false;
+		bool addFacesPoints = false;       
+
+		myHACD.SetNClusters(nClusters);                     // minimum number of clusters
+		myHACD.SetNVerticesPerCH(200);                      // max of 100 vertices per convex-hull
+		myHACD.SetConcavity(concavity);                     // maximum concavity
+		myHACD.SetAddExtraDistPoints(addExtraDistPoints);   
+		myHACD.SetAddNeighboursDistPoints(addNeighboursDistPoints);   
+		myHACD.SetAddFacesPoints(addFacesPoints); 
+
+		myHACD.Compute();
+		nClusters = myHACD.GetNClusters();	
+    qDebug() << "nbcluster trouve " << nClusters;
+		//myHACD.Save("output.wrl", false);
+
+    /*******Création de la forme composé *******/
+    btCompoundShape* compound = new btCompoundShape();
+			btTransform trans;
+			trans.setIdentity();
+
+			for (unsigned int c=0;c<nClusters;c++)
+			{
+				//generate convex result
+				size_t nPoints = myHACD.GetNPointsCH(c);
+				size_t nTriangles = myHACD.GetNTrianglesCH(c);
+
+				float* vertices = new float[nPoints*3];
+				float* vertices2 = new float[nTriangles*9];
+				
+        HACD::Vec3<HACD::Real> * pointsCH = new HACD::Vec3<HACD::Real>[nPoints];
+				HACD::Vec3<long> * trianglesCH = new HACD::Vec3<long>[nTriangles];
+				myHACD.GetCH(c, pointsCH, trianglesCH);
+
+				// points
+				for(size_t v = 0; v < nPoints; v++)
+				{
+					vertices[3*v] = pointsCH[v].X();
+					vertices[3*v+1] = pointsCH[v].Y();
+					vertices[3*v+2] = pointsCH[v].Z();
+				}
+				// triangles
+				for(size_t f = 0; f < nTriangles; f++)
+				{
+          memcpy(&vertices2[9*f], &vertices[3*trianglesCH[f].X()], sizeof(float)*3);
+          memcpy(&vertices2[9*f+3], &vertices[3*trianglesCH[f].Y()], sizeof(float)*3);
+          memcpy(&vertices2[9*f+6], &vertices[3*trianglesCH[f].Z()], sizeof(float)*3);
+				}
+
+				delete [] pointsCH;
+				delete [] trianglesCH;
+      btConvexHullShape* convexShape = new btConvexHullShape();
+      for(int k=0; k < nTriangles*9 ; k+=3) {
+          convexShape->addPoint(btVector3(vertices2[k],vertices2[k+1],vertices2[k+2]),true);
+          //std::cout << vertices2[k] << " " << vertices2[k+1]<< " " << vertices2[k+2] << std::endl;
+        }
+				//trans.setIdentity();
+				compound->addChildShape(trans,convexShape);
+			}
+     _shape = compound; 
+  }
+  else
+  {
+  }
+  buildRigidBody();
+}
+
+void Mesh::buildRigidBody() {
+  btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
+        btQuaternion(btVector3(0,0,1),0),
+        btVector3(0,100,0)));
+      btScalar mass = _mass;
+      btVector3 bodyInertia(0,0,0);
+      _shape->calculateLocalInertia(mass,bodyInertia);
+        btRigidBody::btRigidBodyConstructionInfo
+                bodyRigidBodyCI(0,bodyMotionState,_shape,bodyInertia);
+        _body = new btRigidBody(bodyRigidBodyCI);
+        _world->getScene()->addRigidBody(_body);
+}
