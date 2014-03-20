@@ -9,7 +9,11 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   _collisionConfiguration = new btDefaultCollisionConfiguration();
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
   _solver = new btSequentialImpulseConstraintSolver;
+
   _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
+  World w(_scene);
+  Mesh::setWorld(w);
+
   btContactSolverInfo& info = _scene->getSolverInfo();
   info.m_numIterations = 20;
   _clock= new btClock();

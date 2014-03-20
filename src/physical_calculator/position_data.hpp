@@ -5,7 +5,6 @@
 #include <QString>
 #include <QVector3D>
 //#include <QQuaternion>
-// #include Mesh
 //used as a list in the gui coordinateur to be printed on Qt
 
 class PositionData

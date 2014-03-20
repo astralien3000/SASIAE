@@ -7,26 +7,26 @@ Mesh::Mesh(btCollisionShape* shape, double mass, PositionData start_pos) : _shap
 Mesh::Mesh() {}
 
 Mesh::Mesh(const Mesh & source) {
-  this._shape = source._shape;
+  this->_shape = source._shape;
   PositionData pos_data;
   btTransform trans;
-  source.getMotionState()->getWorldTransform(trans);
-  pos_data.setPositin(trans.getOrigin());
+  source._body->getMotionState()->getWorldTransform(trans);
+  pos_data.setPosition(trans.getOrigin());
   pos_data.setRotation(trans.getRotation());
-  buildRigidBody(_shape, 1.f/ source._body.getInvMass(), pos_data);
+  buildRigidBody(_shape, 1.f/ source._body->getInvMass(), pos_data);
 }
 
 Mesh::~Mesh()
 {
- _world->removeRigidBody(_body); 
+ ((btDiscreteDynamicsWorld *)_world)->removeRigidBody(_body);
 }
 
-Mesh::operator btRigidBody *()
+Mesh::operator btRigidBody*()
 {
   return _body;
 }
 
-Mesh::operator const btRigidBody *() {
+Mesh::operator const btRigidBody *() const{
   return _body;
 }
 void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
@@ -41,22 +41,22 @@ const QVector3D v = start_pos.getPosition();
         btRigidBody::btRigidBodyConstructionInfo
                 bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
         _body = new btRigidBody(bodyRigidBodyCI);
-        if(world != NULL)
+        if(_world != NULL)
           _world->getScene()->addRigidBody(_body);
         else
           qDebug() << "Ajout d'un corps sans avoir défini de scene";
 }
 
-Mesh* Mesh::buildCylinder(unsigned int axis, float high, float radius, float mass, PositionData start_pos)
+Mesh* Mesh::buildCylinder(unsigned int axis, float high, float r, float mass, PositionData start_pos)
 {
   btCollisionShape* shape;
   //find cylinderaxis
   if(axis == 0)
-    shape = new btCylinderShapeX(btVector3(high/2., r, r);
+    shape = new btCylinderShapeX(btVector3(high/2., r, r));
   else if(axis == 2)
-    shape = new btCylinderShapeZ(btVector3(r,r.,high/2.);
+    shape = new btCylinderShapeZ(btVector3(r,r,high/2.));
   else 
-    shape = new btCylinderShape(btVector3(r,high/2., r);
+    shape = new btCylinderShape(btVector3(r,high/2., r));
   return new Mesh(shape, mass, start_pos);
 }
 
@@ -75,10 +75,11 @@ void Mesh::setWorld(World& world)
   _world = &world;
 }
 
-PositionData Mesh::getPosition() {
+PositionData Mesh::getPosition() const {
   PositionData pos;
   btTransform trans;
 	_body->getMotionState()->getWorldTransform(trans);
   pos.setRotation(trans.getRotation());
   pos.setPosition(trans.getOrigin());
+  return pos;
 }

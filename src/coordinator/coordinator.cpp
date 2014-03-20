@@ -140,13 +140,13 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   //! \todo remove... only here for tests
  // _phy_cdn->loadTable("dummy");
 
-  btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
+  //btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
 
   //Mesh * robotMesh=new Mesh(...);
 
   //////////////////////////
   // Design robot's shape
-  btCollisionShape* boxA = new btBoxShape(btVector3(1,0.25,1));
+ /* btCollisionShape* boxA = new btBoxShape(btVector3(1,0.25,1));
   btCollisionShape* boxB = new btBoxShape(btVector3(15,17.25,15));
   //btCollisionShape* boxB = new btBoxShape(btVector3(15,17.5,15));
   btCompoundShape* cyl0 = new btCompoundShape();
@@ -175,20 +175,22 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   _physic.getScene()->addVehicle(robot);
 
   _robotObject.insert(MAIN_ROBOT1,robot);
-
+*/
   ///////////////////////
   // Load Modules
-
+/*
   Wheel*     _MD = new Wheel(robot, btVector3(16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
   Wheel*     _MG = new Wheel(robot, btVector3(-16,-17.5+3-0.00,0),btVector3(0,-1,0),3,true);
   Wheel*     _ED = new Wheel(robot, btVector3(19,-17.5+3-0.00,0),btVector3(0,-1,0),3,false);
   Wheel*     _EG = new Wheel(robot, btVector3(-19,-17.5+3-0.00,0),btVector3(0,-1,0),3,false);
 
   (_physic.getScene())->addVehicle(robot);
-  /* End of robot construction */  
+  */
+  /* End of robot construction */
 
   /*needed for communication tests*/
   // Only the module Servo is tested right now
+  /*
   QString code=XMLPath;
   Module* encd = new Encoder(_ED, "", this);
   _mod_cdn->addModule("bot", "right_encoder", encd);
@@ -201,7 +203,7 @@ void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
   
   Module* motg = new MotorWheel(_MG, "", this);
   _mod_cdn->addModule("bot", "left_motor", motg);
-  
+  */
   //! \todo really read the file  
 
   _bot_cdn->loadRobot("bot", "./client");

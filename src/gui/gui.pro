@@ -22,7 +22,6 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPat
 HEADERS += mainwindow.h \
     table.h \
     item_robot.h \ 
-    ../physical_calculator/mesh.hpp
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -40,6 +39,7 @@ HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/printable_mobile_object.hpp \
     ../physical_calculator/position_data.hpp \
     ../physical_calculator/stlmesh.hpp \
+    ../physical_calculator/mesh.hpp \
     ../physical_calculator/dist_sensor.hpp \
     ../physical_calculator/balise.hpp \
     ../physical_calculator/world.hpp
@@ -57,7 +57,6 @@ FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
     item_robot.cpp \
-    ../physical_calculator/mesh.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \
@@ -73,6 +72,7 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/wheel.cpp \
     ../physical_calculator/printable_mobile_object.cpp \
     ../physical_calculator/stlmesh.cpp \
+    ../physical_calculator/mesh.cpp \
     ../physical_calculator/world.cpp \
     ../physical_calculator/dist_sensor.cpp \
     ../physical_calculator/balise.cpp \
