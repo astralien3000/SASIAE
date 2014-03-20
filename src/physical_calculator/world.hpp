@@ -9,6 +9,7 @@ class World {
   public:
     World(btDiscreteDynamicsWorld* world);
     btDiscreteDynamicsWorld* getScene();
+    operator btDiscreteDynamicsWorld* ();
 };
 
 #endif // WORLD_HPP

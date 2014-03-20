@@ -1,26 +1,28 @@
 #include "robot.hpp"
 
-Robot::Robot(btRigidBody* chassis, btDynamicsWorld *world) 
-  : btRaycastVehicle(	_tuning,
-			chassis, 
-			new btDefaultVehicleRaycaster(world)),
-    PrintableMobileObject(chassis){
+Robot::Robot(const Mesh & chassis, World *world) 
+  :  PrintableMobileObject(chassis),
+   btRaycastVehicle(	_tuning,
+			_body, 
+			new btDefaultVehicleRaycaster(*world))
+    {
   setCoordinateSystem(0,1,2);
-  chassis->setDamping(0.5,0.6);  
-  chassis->setFriction(0.00001);
-  chassis->setRollingFriction(1);
+  _body->setDamping(0.5,0.6);  
+  _body->setFriction(0.00001);
+  _body->setRollingFriction(1);
 }
 
 
-Robot::Robot(btRigidBody* chassis, btDynamicsWorld *world, QString name) 
-  : btRaycastVehicle(	_tuning,
-			chassis, 
-			new btDefaultVehicleRaycaster(world)),
-    PrintableMobileObject(name,chassis){
+Robot::Robot(const Mesh & chassis, World *world, QString name) 
+  : PrintableMobileObject(name,chassis),
+  btRaycastVehicle(	_tuning,
+			_body, 
+			new btDefaultVehicleRaycaster(*world))
+    {
   setCoordinateSystem(0,1,2);
-  chassis->setDamping(0.5,0.6);  
-  chassis->setFriction(0.00001);
-  chassis->setRollingFriction(1);
+  _body->setDamping(0.5,0.6);  
+  _body->setFriction(0.00001);
+  _body->setRollingFriction(1);
 }
 
 Robot::~Robot() {

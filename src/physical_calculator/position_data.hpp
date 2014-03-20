@@ -3,7 +3,7 @@
 
 #include <btBulletDynamicsCommon.h>
 #include <QString>
-#include <QVector>
+#include <QVector3D>
 //#include <QQuaternion>
 // #include Mesh
 //used as a list in the gui coordinateur to be printed on Qt
@@ -12,13 +12,16 @@ class PositionData
 {
 public:
     PositionData();
+    PositionData(const PositionData& posdata);
     void setPosition(const btVector3 &);
     void setRotation(btQuaternion);
-    const QVector<float> & getQtPosition(void)const;
-    const QQuaternion &getQtRotation(unsigned int axe = 1)const;
+    const QVector3D & getPosition(void)const;
+    const QVector3D & getRotation(void)const;
+    float getRotation(unsigned int axe = 1)const;
+    PositionData operator+(const PositionData& pos);
 private:
-    QVector<float> _QPosition;
-    QVector<float> _QRotation;
+    QVector3D _QPosition;
+    QVector3D _QRotation;
     btVector3 _btPosition;
     btQuaternion _btRotation;
 };

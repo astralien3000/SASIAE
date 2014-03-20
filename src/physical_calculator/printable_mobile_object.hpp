@@ -3,7 +3,7 @@
 
 #include <btBulletDynamicsCommon.h>
 #include <QString>
-#include <QVector>
+#include <QVector3D>
 #include <QPair>
 #include <QPixmap>
 #include <QMap>
@@ -26,32 +26,21 @@ struct PositionData {
 
 class PrintableMobileObject : public Mesh {
 private:
+  static const QString _img_path;
 	static QVector<const PrintableMobileObject*> objects;
 	static QMap<QString,QPair<QPixmap*,int>*> images; //changer QPixmap en Qgraphic Item ou mettre une liste PMO/QgraphicItem dans guiCoordinator
 //destructeur -> enlever les objets qui n'existent plus.
 private:
 	QString _name; //nom de l'image inclue pour le Pixmap !!!!!! 
   //struct position_data * _pos;
-<<<<<<< HEAD
-    PositionData _pos;
 public:
   PrintableMobileObject(QString name, const Mesh& mesh);
   ~PrintableMobileObject();
   static const QVector<const PrintableMobileObject*>& getObjectsList();
   PrintableMobileObject(const Mesh& mesh);
-  const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
-=======
-	PositionData * _pos;
+  // Déplacé dans Mesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+  
 
-protected:
-	btRigidBody *_body;
-public:
-	PrintableMobileObject(QString name, btRigidBody *body);
-	~PrintableMobileObject();
-	static const QVector<const PrintableMobileObject*>& getObjectsList();
-	PrintableMobileObject(btRigidBody *body);
-  const PositionData * getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
->>>>>>> ffa4c2ea4520fa5e60fd3769bec0ecde733c9d09
 };
 
 #endif

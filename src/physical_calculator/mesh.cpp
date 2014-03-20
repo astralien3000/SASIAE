@@ -1,0 +1,84 @@
+#include "mesh.hpp"
+
+Mesh::Mesh(btCollisionShape* shape, double mass, PositionData start_pos) : _shape(shape) {
+  buildRigidBody(shape, mass, start_pos);
+}
+
+Mesh::Mesh() {}
+
+Mesh::Mesh(const Mesh & source) {
+  this._shape = source._shape;
+  PositionData pos_data;
+  btTransform trans;
+  source.getMotionState()->getWorldTransform(trans);
+  pos_data.setPositin(trans.getOrigin());
+  pos_data.setRotation(trans.getRotation());
+  buildRigidBody(_shape, 1.f/ source._body.getInvMass(), pos_data);
+}
+
+Mesh::~Mesh()
+{
+ _world->removeRigidBody(_body); 
+}
+
+Mesh::operator btRigidBody *()
+{
+  return _body;
+}
+
+Mesh::operator const btRigidBody *() {
+  return _body;
+}
+void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
+const QVector3D v = start_pos.getPosition();
+
+  btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
+        btQuaternion(start_pos.getRotation(2),start_pos.getRotation(1), start_pos.getRotation(0)),
+        btVector3(v.x(),v.y(),v.z())));
+      btScalar Mass = mass;
+      btVector3 bodyInertia(0,0,0);
+      _shape->calculateLocalInertia(Mass,bodyInertia);
+        btRigidBody::btRigidBodyConstructionInfo
+                bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
+        _body = new btRigidBody(bodyRigidBodyCI);
+        if(world != NULL)
+          _world->getScene()->addRigidBody(_body);
+        else
+          qDebug() << "Ajout d'un corps sans avoir défini de scene";
+}
+
+Mesh* Mesh::buildCylinder(unsigned int axis, float high, float radius, float mass, PositionData start_pos)
+{
+  btCollisionShape* shape;
+  //find cylinderaxis
+  if(axis == 0)
+    shape = new btCylinderShapeX(btVector3(high/2., r, r);
+  else if(axis == 2)
+    shape = new btCylinderShapeZ(btVector3(r,r.,high/2.);
+  else 
+    shape = new btCylinderShape(btVector3(r,high/2., r);
+  return new Mesh(shape, mass, start_pos);
+}
+
+Mesh* Mesh::buildBox(QVector3D size, float mass, PositionData start_pos)
+{
+  return new Mesh(new btBoxShape(btVector3(size.x()/2.,size.y()/2., size.z()/2)), mass, start_pos);
+}
+
+Mesh* Mesh::buildSphere(float radius, float mass, PositionData start_pos)
+{
+  return new Mesh(new btSphereShape(radius), mass, start_pos);
+}
+
+void Mesh::setWorld(World& world)
+{
+  _world = &world;
+}
+
+PositionData Mesh::getPosition() {
+  PositionData pos;
+  btTransform trans;
+	_body->getMotionState()->getWorldTransform(trans);
+  pos.setRotation(trans.getRotation());
+  pos.setPosition(trans.getOrigin());
+}

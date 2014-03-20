@@ -22,6 +22,7 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPat
 HEADERS += mainwindow.h \
     table.h \
     item_robot.h \ 
+    ../physical_calculator/mesh.hpp
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -56,6 +57,7 @@ FORMS += mainwindow.ui
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
     item_robot.cpp \
+    ../physical_calculator/mesh.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \

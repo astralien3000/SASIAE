@@ -5,19 +5,21 @@
 
 class DistSensor {
   static int MAX_DIST;
+
 public:
-  DistSensor(btDynamicsWorld* world, btRigidBody* chassis = NULL);
-  DistSensor(btDynamicsWorld* world, btRigidBody* chassis, const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass = btScalar(0.001));
-  void init(const btVector3 &pos, const btVector3 &direction, const btVector3 &boxSize, const btScalar &mass = btScalar(0.001));
+  DistSensor(World* world, Robot* chassis);
+  DistSensor(World* world, Robot* chassis, const PositionData &pos, const PositionData &direction, const QVector3D & box, float mass = 0.001);
+  void init(const PositionData &pos, const PositionData &direction, const QVector3D& boxSize, float mass = .001);
   double getCachedDist();
   double getDist();
   void calcDist();
+
 private:
-  btRigidBody* _chassis;
-  btRigidBody* _sensor_box;
-  btScalar _box_depth;
+  Robot* _chassis;
+  Mesh* _sensor_box;
+  float _box_depth;
   double _cache;
-  btDynamicsWorld* _world;
+  World* _world;
 
 };
 #endif
