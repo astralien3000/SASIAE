@@ -30,7 +30,6 @@ PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data->running = false;
   _data->timeStep = 1./120.;
   _data->maxSubStep = 20;
-
   connect(
 	  this, 
 	  SIGNAL(calcNextStep(double,int)), 
@@ -52,21 +51,17 @@ void PhysicalCoordinator::pause() {
 }
 
 void PhysicalCoordinator::loadTable(const QString& path) {
-  //! \warning default table loaded instead
-  //! \todo really load the file
-  XMLParser::tableConfig * tableConfig=XMLParser::parseTable(path);
+  const XMLParser::tableConfig * tableConfig=XMLParser::parseTable(path);
   //STLReader stl_reader();
   //QList<QVector<float> > tablePointsList=stl_reader.readSTLTextFile(tableConfig->mesh_path);
-  Mesh::setWorld();
-  Mesh * tableMesh =new Mesh(tableConfig->mesh_path, 0/*mass*/);
+
+  //Initialize the Table PrintableMobileObject
+  new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(),"table");
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
   foreach (XMLParser::toyConfig it, tableConfig->toys) {
-    new PrintableMobileObject(it.mesh_path,it.weight);
+    new PrintableMobileObject(it.mesh_path,it.weight,PositionData(it.position),(const)it.name);
   }
-
-  }
-
   //_data->physic->simple_scene_walls(300);
 }
 

@@ -3,7 +3,7 @@
 #include <QVector>
 #include <QDebug>
 
-STLMesh::STLMesh(QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
+STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
   init(stlpath, mass, start_pos);
 }
 
@@ -18,7 +18,7 @@ STLMesh::~STLMesh() {
   _stlshapes[this._path].second--;
 }
 
-void STLMesh::init(QString stlpath, float mass, PositionData pos) {
+void STLMesh::init(const QString stlpath, float mass, PositionData pos) {
   if(mass == 0) {
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
     btTriangleMesh* trimesh = new btTriangleMesh();

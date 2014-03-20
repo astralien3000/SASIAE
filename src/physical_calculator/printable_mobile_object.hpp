@@ -15,16 +15,7 @@
 //reset PMO dans gui coordinator doit etre implémentée pour virer tous les PMO déjà mis, dans update de gui coord, il itère et appelle update sur chaque PMO qui lui meme fait un truc du style (graphicsitem->setposition) objet, puis table.update pour rafraichir.
 
 
-/*
-Alternative
-struct PositionData {
-	QVector<int> positionTest;
-	btQuaternion angle;
-};
-*/
-
-
-class PrintableMobileObject : public Mesh {
+class PrintableMobileObject : public STLMesh {
 private:
   static const QString _img_path;
 	static QVector<const PrintableMobileObject*> objects;
@@ -34,11 +25,12 @@ private:
 	QString _name; //nom de l'image inclue pour le Pixmap !!!!!! 
   //struct position_data * _pos;
 public:
-  PrintableMobileObject(QString name, const Mesh& mesh);
+  PrintableMobileObject(const QString name, const STLMesh & mesh);
+  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
   ~PrintableMobileObject();
   static const QVector<const PrintableMobileObject*>& getObjectsList();
-  PrintableMobileObject(const Mesh& mesh);
-  // Déplacé dans Mesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+  PrintableMobileObject(const STLMesh& mesh);
+  // Déplacé dans STLMesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
   
 
 };

@@ -8,8 +8,16 @@
 
 GuiCoordinator::GuiCoordinator(void){
     qDebug() << "GuiCoordinator constructor";
-
     _mainWindow=new MainWindow();
+
+    // MainWindow -> GuiCoordinator : load the Table
+    connect(
+         _mainWindow,
+         SIGNAL(tableFileStl(QString)),
+         _gui_cdn,
+         SLOT(forwardTbleFStl(QString))
+          );
+
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{
@@ -53,6 +61,9 @@ void GuiCoordinator::update(){
 
 }
 
+void GuiCoordinator::forwardTbleFStl(QString file){
+    emit forwardTbleFStl(file);
+}
 
 //QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
 

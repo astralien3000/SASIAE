@@ -14,10 +14,12 @@ class GuiCoordinator: public BaseCoordinator {
   Q_OBJECT;
 
 signals:
+    void forwardPhCTbleStl(QString);
 
 public slots:
   //QVector<const PositionData*>* getAllPositions()const;
   void update(void);
+  void forwardTbleFStl(QString);
 
 public:
   //! \brief Default Constructor

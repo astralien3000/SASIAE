@@ -11,8 +11,8 @@ const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsLi
 }
 
 
-PrintableMobileObject::PrintableMobileObject(QString name, const Mesh & mesh) :
-    Mesh(mesh), _name(name) /*_pos(new struct position_data)*/
+PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh & mesh) :
+    STLMesh(mesh), _name(name) /*_pos(new struct position_data)*/
 {
     objects.append(this);
 	//si image est dans tableau, ++, sinon ajouter image dans tableau.
@@ -24,6 +24,21 @@ PrintableMobileObject::PrintableMobileObject(QString name, const Mesh & mesh) :
     }
 
 }
+
+PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
+    STLMesh(path,mass,start_pos),_name(name)
+{
+    objects.append(this);
+    //si image est dans tableau, ++, sinon ajouter image dans tableau.
+    auto it = images.find(name);
+    if(it!=images.end()) {//found
+        (*it)->second++;
+    } else { //add the pixmap in the map !
+        images.insert(name,new QPair<QPixmap*,int>(new QPixmap(_img_path+name),0));
+    }
+
+}
+
 
 PrintableMobileObject::~PrintableMobileObject() {
     auto it = images.find(this->_name);
@@ -38,8 +53,8 @@ PrintableMobileObject::~PrintableMobileObject() {
 	objects.remove(objectPosition);
 }
 
-PrintableMobileObject::PrintableMobileObject(const Mesh & mesh):
-    Mesh(mesh), _name("unknown") /*_pos(new struct position_data)*/
+PrintableMobileObject::PrintableMobileObject(const STLMesh & mesh):
+    STLMesh(mesh), _name("unknown") /*_pos(new struct position_data)*/
 {
     //_pos=new PositionData();
     objects.append(this);

@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget* parent):
 {
     qDebug() << "MainWindow constructor";
     ui->setupUi(this);
-    connect(this,ui->actionChoisir,this,openDirForTable());
+    connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   //Ui_MainWindow::setupUi(this);
 //        QObject::connect(button_robot1, SIGNAL(clicked()), qApp, SLOT(quit()));
   
@@ -45,8 +45,8 @@ void MainWindow::CReceived(QString message){
   qDebug() << "Message received from Coordinator to GUI : " << message ;
 }
 
-  void openDirForTable(){
+  void MainWindow::openDirForTable(){
       QString fileName = QFileDialog::getOpenFileName(this,
-          tr("Open Stl file"), "/home", tr("Image Files (*.stl)"));
+          "Open Stl file", "/home", "Image Files (*.stl)");
       emit tableFileStl(fileName);
      }

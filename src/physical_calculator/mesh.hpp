@@ -5,6 +5,8 @@
 #include "world.hpp"
 #include "position_data.hpp"
 
+#include <QDebug>
+
 class Mesh {
 private:
   static World* _world;
@@ -21,10 +23,10 @@ protected:
 
 public:
   operator const btRigidBody*() const;
-  static Mesh* buildCylinder(unsigned int axis, float high, float radius, float mass, PositionData start_pos);
+  static Mesh* buildCylinder(unsigned int axis, float high, float r, float mass, PositionData start_pos);
   static Mesh* buildBox(QVector3D size, float mass, PositionData start_pos);
   static Mesh* buildSphere(float radius, float mass, PositionData start_pos);
   static void setWorld(World& world);
-  PositionData getPosition();
+  PositionData getPosition()const;
 };
 #endif //ROBOT_HPP
