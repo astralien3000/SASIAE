@@ -76,6 +76,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   _sch_cdn->addCoordinator(_mod_cdn);
   _sch_cdn->addCoordinator(_gui_cdn);
 
+  // GuiCoordinator -> PhysicalCoordinator : load the Table
+  connect(this,SIGNAL(forwardPhCTbleStl(QString)),_phy_cdn,SLOT(loadTable(QString)));
+
   // Device -> Module communication
   connect(
 	  _bot_cdn, 

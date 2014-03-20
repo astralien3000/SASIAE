@@ -19,7 +19,7 @@ public:
     ~MainWindow();
 
 signals:
-
+    void tableFileStl(QString);
 
 private:
     Ui::MainWindow *ui;
