@@ -7,6 +7,8 @@
 #include <QPair>
 #include <QPixmap>
 #include <QMap>
+#include <QGraphicsItem>
+
 
 #include "position_data.hpp"
 #include "stlmesh.hpp"
@@ -18,18 +20,21 @@
 class PrintableMobileObject : public STLMesh {
 private:
   static const QString _img_path;
-	static QVector<const PrintableMobileObject*> objects;
+	static QVector<PrintableMobileObject*> objects;
 	static QMap<QString,QPair<QPixmap*,int>*> images; //changer QPixmap en Qgraphic Item ou mettre une liste PMO/QgraphicItem dans guiCoordinator
 //destructeur -> enlever les objets qui n'existent plus.
 private:
 	QString _name; //nom de l'image inclue pour le Pixmap !!!!!! 
-  //struct position_data * _pos;
+	QGraphicsItem* _item; //permet d'update l'affichage.
+  // struct position_data * _pos;contenu dans le Mesh mtn
 public:
-  PrintableMobileObject(const QString name, const STLMesh & mesh);
-  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
+ // PrintableMobileObject(const QString name, const STLMesh & mesh);
+  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name, QGraphicsItem* item);
+ // PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
   ~PrintableMobileObject();
-  static const QVector<const PrintableMobileObject*>& getObjectsList();
+  static const QVector<PrintableMobileObject*>& getObjectsList();
   PrintableMobileObject(const STLMesh& mesh);
+  void update();
   // Déplacé dans STLMesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
   
 

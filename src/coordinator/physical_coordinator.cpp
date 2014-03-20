@@ -59,8 +59,9 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(),"table");
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
-  foreach (XMLParser::toyConfig it, tableConfig->toys) {
-    new PrintableMobileObject(it.mesh_path,it.weight,PositionData(it.position),(const)it.name);
+  foreach (const XMLParser::toyConfig* it, tableConfig->toys) {
+      //create a new QGraphicsItem and use the other constructor ...!!!
+    //new PrintableMobileObject(it->mesh_path,it->weight,new PositionData(it->position),(const)it->name); TO BE FIXED
   }
   //_data->physic->simple_scene_walls(300);
 }
