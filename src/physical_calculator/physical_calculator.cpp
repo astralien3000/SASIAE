@@ -48,8 +48,8 @@ void PhysicalCalculator::empty_scene(){
   this->init();
 }
 
-btDiscreteDynamicsWorld* PhysicalCalculator::getScene(){
-  return _scene ;
+World PhysicalCalculator::getScene(){
+  return World(_scene) ;
 }
 
 void PhysicalCalculator::simple_scene(btScalar size){

@@ -2,7 +2,7 @@
 #define MESH_HPP
 
 #include <btBulletDynamicsCommon.h>
-#include "../../stl/STLReader.hpp"
+#include "../stl/STLReader.hpp"
 #include "world.hpp"
 #include <QString>
 #include <QMap>
@@ -15,7 +15,7 @@ private:
   bool _mov;
   btCollisionShape* _shape;
   QString _path;
-  static QMap<QString, QPair<btCollisionShape*, unsigned int>> _stlshapes;
+  static QMap<QString, QPair<btCollisionShape*, unsigned int> > _stlshapes;
 public:
   Mesh(World& world, QString stlpath, double mass, bool movable = true);
   Mesh();

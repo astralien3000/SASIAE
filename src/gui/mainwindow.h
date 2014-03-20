@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtCore/QDebug>
 #include <QtGui>
-
+#include <QFileDialog>
 //#include "ui_mainwindow.h"
 namespace Ui {
 class MainWindow;
@@ -18,15 +18,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+
+
 private:
     Ui::MainWindow *ui;
 
 public slots:
-  void do_sth();
-  void CReceived(QString message);
-  //void animate();
-  void animateRobot(qreal x,qreal y);
-  QTimeLine *getTimer()const;
+    void openDirForTable();
+    void do_sth();
+    void CReceived(QString message);
+    //void animate();
+    void animateRobot(qreal x,qreal y);
+    QTimeLine *getTimer()const;
 };
 
 #endif // MAINWINDOW_H

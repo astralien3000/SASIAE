@@ -3,7 +3,9 @@
 #include <btBulletDynamicsCommon.h>
 #include <QtCore/QObject>
 #include <QVector>
+
 #include "printable_mobile_object.hpp"
+#include "world.hpp"
 //#include <aversive.hpp>
 //#include "wheel.hpp"
 //#include "robot.hpp"
@@ -32,7 +34,7 @@ public:
   void simple_scene(btScalar size);
   //! \brief it returns a DiscreteDynamicsWorld
   //! which is the scene
-  btDiscreteDynamicsWorld* getScene();
+  World* getScene();
 
   //! it creates a scene with a ground, and 4 walls.
   void simple_scene_walls(btScalar size);

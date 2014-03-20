@@ -9,7 +9,7 @@
 #include <QMap>
 
 #include "position_data.hpp"
-#include "mesh.hpp"
+#include "stlmesh.hpp"
 
 //PMO contient un pointeur sur QGraphicsItem, le coordinateur doit appeler addPMO(scene) à chaque création de PMO (à coderdans gui coordinator)
 //reset PMO dans gui coordinator doit etre implémentée pour virer tous les PMO déjà mis, dans update de gui coord, il itère et appelle update sur chaque PMO qui lui meme fait un truc du style (graphicsitem->setposition) objet, puis table.update pour rafraichir.

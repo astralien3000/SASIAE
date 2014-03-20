@@ -55,12 +55,18 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   //! \warning default table loaded instead
   //! \todo really load the file
   XMLParser::tableConfig * tableConfig=XMLParser::parseTable(path);
-  STLReader stl_reader();
-  stl_reader.readSTLTextFile(tableConfig->mesh_path);
-  for(/*it = tableConfig->toys.iterator();*/){
+  //STLReader stl_reader();
+  //QList<QVector<float> > tablePointsList=stl_reader.readSTLTextFile(tableConfig->mesh_path);
+  Mesh::setWorld();
+  Mesh * tableMesh =new Mesh(tableConfig->mesh_path, 0/*mass*/);
 
+  //QList<Mesh*> toysMeshList = new QList<Mesh *>;
+  foreach (XMLParser::toyConfig it, tableConfig->toys) {
+    new PrintableMobileObject(it.mesh_path,it.weight);
+  }
 
   }
+
   //_data->physic->simple_scene_walls(300);
 }
 

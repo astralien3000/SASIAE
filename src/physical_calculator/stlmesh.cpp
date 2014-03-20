@@ -1,7 +1,7 @@
-#include "mesh.hpp"
+#include "stlmesh.hpp"
 #include <QList>
 #include <QVector>
-#include <QDebgu>
+#include <QDebug>
 
 Mesh::Mesh(World& world, QString stlpath, double mass, bool movable) : _path(stlpath) {
   init(world, stlpath, mass, movable);
