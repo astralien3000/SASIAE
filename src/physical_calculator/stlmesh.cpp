@@ -18,7 +18,7 @@ STLMesh::~STLMesh() {
   _stlshapes[this._path].second--;
 }
 
-void Mesh::init(QString stlpath, float mass, PositionData pos) {
+void STLMesh::init(QString stlpath, float mass, PositionData pos) {
   if(mass == 0) {
     //TODO
   }

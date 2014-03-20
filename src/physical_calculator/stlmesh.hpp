@@ -16,7 +16,7 @@ private:
   static QMap<QString, QPair<btCollisionShape*, unsigned int>> s_stlshapes;
 
 protected:
-  init(QString path, float mass, PositionData pos);
+  void init(QString path, float mass, PositionData pos);
 public:
   STLMesh(QString path, float mass, PositionData start_pos);
   STLMesh(const STLMesh & mesh);
