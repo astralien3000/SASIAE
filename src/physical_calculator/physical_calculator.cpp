@@ -99,10 +99,9 @@ void PhysicalCalculator::init() {
 
 }
 
-  const QVector<const PrintableMobileObject*>& PhysicalCalculator::getObjectsList() {
-    return PrintableMobileObject::getObjectsList();
-  }
-
+const QVector<const PrintableMobileObject*>& PhysicalCalculator::getObjectsList() {
+  return PrintableMobileObject::getObjectsList();
+}
 
 /*
 void PhysicalCalculator::addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg){
