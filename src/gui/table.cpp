@@ -8,21 +8,29 @@ Table::Table(QWidget*parent) :
 
     /*Create the scene, fill it with a background */
     setScene(new QGraphicsScene(this));
-    scene()->setBackgroundBrush(QBrush(QColor(Qt::green)));
+
+    /* TODO : faire en sorte que le background soit remplie
+     * lors du load de la table.
+     * scene()->setBackgroundBrush(QBrush(QColor(Qt::green)));
+    */
+
 
     /*
      * Create a QBrush, passing it in argument of the ItemRobot
      * for filling the robot-item background
     */
-    QPixmap robotImg("petitrobot.png");
-    QBrush robotBackground(robotImg);
-    robot=new ItemRobot(robotBackground);
+    /* TODO : faire ça dans loadRobot
+     *
+     * QPixmap robotImg("petitrobot.png");
+       QBrush robotBackground(robotImg);
+       robot=new ItemRobot(robotBackground);
+    */
 
     /*
      * Add the robot-item to the scene built
      * in the central widget graphicsView ( Table )
      */
-    scene()->addItem(robot);
+    //scene()->addItem(robot);
 
  /*
  * This timer is no longer implemented.
@@ -45,6 +53,6 @@ Table::Table(QWidget*parent) :
 
 }
 
-void Table::moveRobot(qreal x, qreal y) {
-    robot->setPos(x,y);
+const QGraphicsScene & Table::getScene()const{
+    return *scene();
 }

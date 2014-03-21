@@ -129,6 +129,7 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
   tableConfig* data = new tableConfig();
 
   data->mesh_path = t.firstChildElement("mesh").attribute("src");
+  data->img_path = t.firstChildElement("img").attribute("src");
 
   QDomNodeList toys = t.elementsByTagName("toy");
   for(int i = 0; i < toys.length(); i++) {

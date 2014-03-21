@@ -13,6 +13,20 @@ Robot::Robot(const Mesh & chassis, World *world)
 }
 
 
+Robot::Robot(const QString path, float mass, PositionData start_pos, const QString name, World *world)
+  :  PrintableMobileObject(path,mass,start_pos,name),
+   btRaycastVehicle(	_tuning,
+            _body,
+            new btDefaultVehicleRaycaster(*world))
+    {
+  setCoordinateSystem(0,1,2);
+  _body->setDamping(0.5,0.6);
+  _body->setFriction(0.00001);
+  _body->setRollingFriction(1);
+}
+
+
+
 Robot::Robot(const Mesh & chassis, World *world, QString name) 
   : PrintableMobileObject(name,chassis),
   btRaycastVehicle(	_tuning,

@@ -2,7 +2,6 @@
 #define GUI_COORDINATOR_HPP
 
 #include <QtCore/QVector>
-#include <QQuaternion>
 #include <QTimer>
 
 #include "../physical_calculator/printable_mobile_object.hpp"
@@ -14,12 +13,13 @@ class GuiCoordinator: public BaseCoordinator {
   Q_OBJECT;
 
 signals:
-    void forwardPhCTbleStl(QString);
+    //void forwardTableFileStl(QString);
+    void forwardRobotFileStl(const QString&, const QString&);
 
 public slots:
-  //QVector<const PositionData*>* getAllPositions()const;
   void update(void);
-  void forwardTbleFStl(QString);
+  void updateTable(void);
+  void forwardRobotNameFStl(const QString&);
 
 public:
   //! \brief Default Constructor

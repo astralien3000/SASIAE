@@ -1,11 +1,35 @@
 #include "position_data.hpp"
 #include <math.h>
 
+
+PositionData::PositionData():
+    _QPosition(),_QRotation(),_btPosition(),_btRotation()
+{
+}
+PositionData::PositionData(const PositionData& posdata) {
+  this->_QPosition = posdata._QPosition;
+  this->_QRotation = posdata._QRotation;
+  this->_btPosition = posdata._btPosition;
+  this->_btRotation = posdata._btRotation;
+}
+
+PositionData::PositionData(float x, float y, float z,, float alpha, float beta, float gamma):
+    _QPosition(x,y,z),_QRotation(alpha,beta,gamma)
+{}
+
+void PositionData::setPosition(const btVector3 & vec){
+    _btPosition=vec;
+    float x=vec.getX(),y=vec.getY(),z=vec.getZ();
+    _QPosition.setX(x);
+    _QPosition.setY(y);
+    _QPosition.setZ(z);
+
 operator PositionData(const btVector3 & vec){
     PositionData p(0,0,0,0,0,0);
     p.x=vec.getX();
     p.y=vec.getY();
     p.z=vec.getZ();
+
 }
 
 operator PositionData(const btQuaternion & quat){

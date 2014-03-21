@@ -47,6 +47,18 @@ void MainWindow::CReceived(QString message){
 
   void MainWindow::openDirForTable(){
       QString fileName = QFileDialog::getOpenFileName(this,
-          "Open Stl file", "/home", "Image Files (*.stl)");
+          "Open Xml file", "/home", "Config Files (*.xml)");
       emit tableFileStl(fileName);
      }
+
+
+  void MainWindow::openDirForRobot(){
+      QString fileName = QFileDialog::getOpenFileName(this,
+          "Open Xml file", "/home", "Config Files (*.xml)");
+      QString("Robotname"); // todo : ask user
+      emit robotFileStl(name,fileName);
+     }
+
+  const QGraphicsScene& MainWindow::getScene(void)const{
+    return ui->graphicsView->getScene();
+  }

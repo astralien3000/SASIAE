@@ -12,14 +12,23 @@ GuiCoordinator::GuiCoordinator(void){
   _mainWindow=new MainWindow();
 
     // MainWindow -> GuiCoordinator : load the Table
-  connect(
-   _mainWindow,
-   SIGNAL(tableFileStl(QString)),
-   _gui_cdn,
-   SLOT(forwardTbleFStl(QString))
-   );
 
+    connect(
+           _mainWindow,
+           SIGNAL(robotFileStl(const QString&,const QString&),
+            this,
+            SLOT(forwardRFStl(const QString&,const QString&))
+           );
 
+/*
+   //to be tested when the connect above is solved.
+connect(
+       _mainWindow, //how do i link this ?
+       SIGNAL(updateTable()),
+       this,
+       SLOT(updateTable())
+       );
+*/
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{
@@ -27,6 +36,18 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 }
 
 GuiCoordinator::~GuiCoordinator(void){
+}
+
+void GuiCoordinator::forwardRFStl(const QString&name , const QString&path){
+    emit forwardRobotFileStl(name, path);
+}
+
+void GuiCoordinator::updateTable(){
+    foreach(PrintableMobileObject it,PrintableMobileObject::getObjectsList()){
+        if(it.getItem().scene()==NULL){
+            _mainWindow->getScene().addItem(it);
+        }
+    }
 }
 
 void GuiCoordinator::update(){
@@ -64,7 +85,7 @@ void GuiCoordinator::update(){
        }
 
        void GuiCoordinator::forwardTbleFStl(QString file){
-        emit forwardTbleFStl(file);
+        emit forwardTableFileStl(file);
       }
 
 //QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
