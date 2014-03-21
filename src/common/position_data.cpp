@@ -1,5 +1,6 @@
 #include "position_data.hpp"
 
+/* TODO debug
 operator QVector3D(const PositionData& pos)
 {
   retrun QVector3D(pos.x, pos.y,pos.z);
@@ -52,4 +53,4 @@ PositionData& operator-=(PoistionData& pos1, const PositionData& pos2)
   return pos1;
 }
 
-
+*/

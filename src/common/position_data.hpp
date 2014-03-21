@@ -24,10 +24,11 @@ union PositionData
   inline const float& operator[](int index) const {
     return val[index];
   }
-  PositionData(float[6] value);
+  PositionData(float value[6]);
   PositionData(float x, float y, float z, float alpha, float beta, float gamma);
 };
 
+/* TODO : DEbug
   operator QVector3D(const PositionData& pos);
   //operator QQuaternion(const PositionData& pos);
   operator PositionData(const QVector3D& vec);
@@ -36,5 +37,6 @@ union PositionData
   PositionData operator-(const PoistionData& pos1, const PositionData& pos2);
   PositionData& operator+=(PoistionData& pos1, const PositionData& pos2);
   PositionData& operator-=(PoistionData& pos1, const PositionData& pos2);
+*/
 
 #endif // POSITION_DATA_HPP
