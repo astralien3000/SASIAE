@@ -39,7 +39,7 @@ HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/robot.hpp \
     ../physical_calculator/wheel.hpp \
     ../physical_calculator/printable_mobile_object.hpp \
-    ../physical_calculator/position_data.hpp \
+    ../physical_calculator/position_data_bullet.hpp \
     ../physical_calculator/stlmesh.hpp \
     ../physical_calculator/mesh.hpp \
     ../physical_calculator/dist_sensor.hpp \
@@ -80,7 +80,7 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/world.cpp \
     ../physical_calculator/dist_sensor.cpp \
     ../physical_calculator/balise.cpp \
-    ../physical_calculator/position_data.cpp
+    ../physical_calculator/position_data_bullet.cpp
 
 SOURCES += ../modules/motor_wheel.cpp \
     ../modules/servo.cpp \

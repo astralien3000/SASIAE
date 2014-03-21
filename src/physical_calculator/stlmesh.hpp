@@ -5,7 +5,7 @@
 //#include "../stl/STLReader.hpp"
 #include "world.hpp"
 #include "mesh.hpp"
-#include "position_data.hpp"
+#include "position_data_bullet.hpp"
 #include <QString>
 #include <QMap>
 #include <QPair>

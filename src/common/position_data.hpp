@@ -24,9 +24,10 @@ union PositionData
   inline const float& operator[](int index) const {
     return val[index];
   }
+  PositionData();
   PositionData(float value[6]);
   PositionData(float x, float y, float z, float alpha, float beta, float gamma);
-
+  PositionData(const QVector3D& vec);
   operator QVector3D(void)const;
   //operator QQuaternion(const PositionData& pos);
   //operator PositionData(const QVector3D& vec);

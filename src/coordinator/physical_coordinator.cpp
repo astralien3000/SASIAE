@@ -2,6 +2,7 @@
 
 #include "../physical_calculator/physical_calculator.hpp"
 #include "../common/position_data.hpp"
+#include "../common/object_config.hpp"
 
 #include <QDebug>
 
@@ -52,7 +53,7 @@ void PhysicalCoordinator::pause() {
 }
 
 void PhysicalCoordinator::loadTable(const QString& path) {
-  const XMLParser::tableConfig * tableConfig=XMLParser::parseTable(path);
+  const ObjectConfig::tableConfig * tableConfig=XMLParser::parseTable(path);
   //STLReader stl_reader();
   //QList<QVector<float> > tablePointsList=stl_reader.readSTLTextFile(tableConfig->mesh_path);
 
@@ -60,7 +61,7 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(),QString("table"));
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
-  foreach (const XMLParser::toyConfig* it, tableConfig->toys) {
+  foreach (const ObjectConfig::toyConfig* it, tableConfig->toys) {
     //Creates a new PMO foreach toy on the table
     /*PrintableMobileObject pmo =*/new PrintableMobileObject(it->mesh_path,(float)it->weight,
                               PositionData(it->position[0], it->position[1], it->position[2],
