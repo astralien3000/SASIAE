@@ -14,10 +14,16 @@ GuiCoordinator::GuiCoordinator(void){
     connect(
          _mainWindow,
          SIGNAL(tableFileStl(QString)),
-         _gui_cdn,
-         SLOT(forwardTbleFStl(QString))
+         this,
+         SIGNAL(forwardTableFileStl(const QString&,const QString&))
           );
 
+    connect(
+           _mainWindow,
+           SIGNAL(robotFileStl(const QString&,const QString&),
+            this,
+            SIGNAL(forwardRobotFileStl(const QString&,const QString&))
+           );
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{

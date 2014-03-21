@@ -76,8 +76,19 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   _sch_cdn->addCoordinator(_mod_cdn);
   _sch_cdn->addCoordinator(_gui_cdn);
 
-  // GuiCoordinator -> PhysicalCoordinator : load the Table
-  connect(this,SIGNAL(forwardPhCTbleStl(QString)),_phy_cdn,SLOT(loadTable(QString)));
+  // GuiCoordinator.MainWindow -> PhysicalCoordinator : load the Table
+  connect(
+        _gui_cdn->getMainWindow(),
+        SIGNAL(TableFileStl(const QString&)),
+        _phy_cdn,SLOT(loadTable(const QString&))
+        );
+
+  //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
+  connect(
+         _gui_cdn,
+         SIGNAL(forwardRobotFileStl),
+
+              )
 
   // Device -> Module communication
   connect(
@@ -133,14 +144,10 @@ void Coordinator::stepDone() {
 void Coordinator::openTable(const QString& XMLPath) {
   _phy_cdn->loadTable(XMLPath);
 }
+
 void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
   (void) slot;
-
-  //! \todo remove... only here for tests
- // _phy_cdn->loadTable("dummy");
-
-  //btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
 
   //Mesh * robotMesh=new Mesh(...);
 

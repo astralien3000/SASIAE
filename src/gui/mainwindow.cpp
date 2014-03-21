@@ -51,6 +51,6 @@ void MainWindow::CReceived(QString message){
       emit tableFileStl(fileName);
      }
 
-  QGraphicsScene& MainWindow::getScene(void)const{
+  const QGraphicsScene& MainWindow::getScene(void)const{
     return ui->graphicsView->getScene();
   }

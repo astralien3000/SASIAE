@@ -39,9 +39,6 @@ public slots:
   //! \brief Load a Table from XML file
   virtual void loadTable(const QString&);
 
-  //! \brief Load a STL file in the PhysicalCalculator
-  Mesh* loadMesh(const QString&);
-
   //! \brief Launch physical calculator's computation
   void update(void);
 

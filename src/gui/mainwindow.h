@@ -18,10 +18,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QGraphicsScene& getScene(void)const;
+    const QGraphicsScene& getScene(void)const;
 
 signals:
     void tableFileStl(QString);
+    void robotFileStl(const QString& name,const QString& path);
 
 private:
     Ui::MainWindow *ui;
