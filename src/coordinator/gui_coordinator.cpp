@@ -19,13 +19,7 @@ GuiCoordinator::GuiCoordinator(void){
    SLOT(forwardTbleFStl(QString))
    );
 
-   //to be tested when the connect above is solved.
-connect(
-       _mainWindow, //how do i link this ?
-       SIGNAL(updateTable()),
-       this,
-       SLOT(updateTable())
-       );
+
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{
