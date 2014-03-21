@@ -16,7 +16,7 @@ public:
     void setRotation(btQuaternion);
     const QVector3D & getPosition(void)const;
     const QVector3D & getRotation(void)const;
-    float getRotation(unsigned int axe = 1)const;
+    float getRotation(unsigned int axe)const;
     PositionData operator+(const PositionData& pos);
 private:
     QVector3D _QPosition;
