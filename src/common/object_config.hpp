@@ -15,6 +15,7 @@ namespace ObjectConfig {
 
 		struct moduleConfig {
 			QString name;
+			QString type;
 			PositionData position;
 			QList<const parameter*> parameters;
 			~moduleConfig();
