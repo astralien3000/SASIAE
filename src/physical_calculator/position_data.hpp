@@ -12,6 +12,7 @@ class PositionData
 public:
     PositionData();
     PositionData(const PositionData& posdata);
+    PositionData(float x, float y, float z, float alpha, float beta, float gamma);
     void setPosition(const btVector3 &);
     void setRotation(btQuaternion);
     const QVector3D & getPosition(void)const;

@@ -15,6 +15,7 @@ class Table : public QGraphicsView
 public:
     explicit Table(QWidget *parent = 0);
     QTimeLine *timer;
+    QGraphicsScene & getScene()const;
 
 signals:
 

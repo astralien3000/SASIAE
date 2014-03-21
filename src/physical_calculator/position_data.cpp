@@ -10,6 +10,11 @@ PositionData::PositionData(const PositionData& posdata) {
   this->_btPosition = posdata._btPosition;
   this->_btRotation = posdata._btRotation;
 }
+
+PositionData::PositionData(float x, float y, float z,, float alpha, float beta, float gamma):
+    _QPosition(x,y,z),_QRotation(alpha,beta,gamma)
+{}
+
 void PositionData::setPosition(const btVector3 & vec){
     _btPosition=vec;
     float x=vec.getX(),y=vec.getY(),z=vec.getZ();

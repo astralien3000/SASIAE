@@ -27,6 +27,14 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
+void GuiCoordinator::updateTable(){
+    foreach(PrintableMobileObject it,PrintableMobileObject::getObjectsList()){
+        if(it.getItem().scene()==NULL){
+            _mainWindow->getScene().addItem(it);
+        }
+    }
+}
+
 void GuiCoordinator::update(){
 
 /*

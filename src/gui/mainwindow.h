@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
 #include <QtCore/QDebug>
 #include <QtGui>
 #include <QFileDialog>
@@ -17,6 +18,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QGraphicsScene& getScene(void)const;
 
 signals:
     void tableFileStl(QString);

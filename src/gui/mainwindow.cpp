@@ -50,3 +50,7 @@ void MainWindow::CReceived(QString message){
           "Open Stl file", "/home", "Image Files (*.stl)");
       emit tableFileStl(fileName);
      }
+
+  QGraphicsScene& MainWindow::getScene(void)const{
+    return ui->graphicsView->getScene();
+  }

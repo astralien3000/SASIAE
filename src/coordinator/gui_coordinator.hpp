@@ -17,8 +17,8 @@ signals:
     void forwardPhCTbleStl(QString);
 
 public slots:
-  //QVector<const PositionData*>* getAllPositions()const;
   void update(void);
+  void updateTable(void);
   void forwardTbleFStl(QString);
 
 public:

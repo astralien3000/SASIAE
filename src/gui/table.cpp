@@ -45,6 +45,10 @@ Table::Table(QWidget*parent) :
 
 }
 
+QGraphicsScene & Table::getScene()const{
+    return scene;
+}
+
 void Table::moveRobot(qreal x, qreal y) {
     robot->setPos(x,y);
 }
