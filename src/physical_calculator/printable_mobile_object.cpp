@@ -1,7 +1,7 @@
 #include "printable_mobile_object.hpp"
 
 QVector<PrintableMobileObject*> PrintableMobileObject::objects;
-const QString PrintableMobileObject::_img_path("./");
+const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED !
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
@@ -75,6 +75,7 @@ PrintableMobileObject::~PrintableMobileObject() {
           delete(tobedeleted);
       }
   }
+  delete(_item);
   int objectPosition = objects.indexOf(this);
   objects.remove(objectPosition);
 }
