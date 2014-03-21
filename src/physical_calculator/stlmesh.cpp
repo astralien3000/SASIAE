@@ -8,7 +8,7 @@ STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _
 }
 
 STLMesh::STLMesh(const STLMesh & source) {
-  //TODO copier la shape d'un smart pointer
+  // copie la shape d'un smart pointer
   this._path = source._path;
   _stlshapes[this._path].second++;
   Mesh::Mesh(source);

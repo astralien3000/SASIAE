@@ -29,12 +29,12 @@ private:
 	QGraphicsPixmapItem* _item; //permet d'update l'affichage.
   // struct position_data * _pos;contenu dans le Mesh mtn
 public:
+  PrintableMobileObject(const STLMesh& mesh);
   PrintableMobileObject(const QString name, const STLMesh & mesh);
 //  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
   PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
   ~PrintableMobileObject();
   static const QVector<PrintableMobileObject*>& getObjectsList();
-  PrintableMobileObject(const STLMesh& mesh);
   void update();
   QGraphicsPixmapItem* getItem();
   // Déplacé dans STLMesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation

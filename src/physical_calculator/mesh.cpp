@@ -8,11 +8,11 @@ Mesh::Mesh() {}
 
 Mesh::Mesh(const Mesh & source) {
   this->_shape = source._shape;
-  PositionData pos_data;
   btTransform trans;
   source._body->getMotionState()->getWorldTransform(trans);
-  pos_data.setPosition(trans.getOrigin());
-  pos_data.setRotation(trans.getRotation());
+  PositionData pos_data;
+  pos_data += trans.getOrigin();
+  pos_data += trans.getRotation();
   buildRigidBody(_shape, 1.f/ source._body->getInvMass(), pos_data);
 }
 
@@ -79,7 +79,7 @@ PositionData Mesh::getPosition() const {
   PositionData pos;
   btTransform trans;
 	_body->getMotionState()->getWorldTransform(trans);
-  pos.setRotation(trans.getRotation());
-  pos.setPosition(trans.getOrigin());
+  pos += trans.getRotation();
+  pos += trans.getOrigin();
   return pos;
 }

@@ -8,9 +8,8 @@ Balise::Balise(World* world, Robot* chassis)
 
 	//masse très faible pour ne pas empecher les mouvements du robot.
 	float mass(0.00001);
-  PositionData pos;
-  pos.setPosition(btVector3(0,17.5 + 8/2., 0));
-  pos = pos+robot->getPosition();
+  PositionData pos = btVector3(0,17.5 + 8/2., 0);
+  pos += robot->getPosition();
   _sensor_box = Mesh::buildCylinder(1, 8,4, mass, pos);
 
 	_sensor_box->setDamping(0,100000);
