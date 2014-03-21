@@ -47,7 +47,7 @@ void MainWindow::CReceived(QString message){
 
   void MainWindow::openDirForTable(){
       QString fileName = QFileDialog::getOpenFileName(this,
-          "Open Stl file", "/home", "Image Files (*.stl)");
+          "Open Xml file", "/home", "Config Files (*.xml)");
       emit tableFileStl(fileName);
      }
 

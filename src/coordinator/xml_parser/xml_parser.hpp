@@ -61,7 +61,7 @@ class XMLParser {
 			int weight;
 		};
 
-		struct tableConfig {
+        struct tableConfig {
 			QString mesh_path;
 			QList<const toyConfig*> toys;
 			~tableConfig();

@@ -9,6 +9,11 @@
 	    <xs:attribute name="src" type="xs:string"/>
 	  </xs:complexType>
 	</xs:element>
+	<xs:element name="img">
+	  <xs:complexType>
+	    <xs:attribute name="src" type="xs:string"/>
+	  </xs:complexType>
+	</xs:element>
 	<xs:element name="toys">
 	  <xs:complexType>
 	    <xs:sequence>
@@ -51,7 +56,11 @@
 			<xs:attribute name="src" type="xs:string"/>
 		      </xs:complexType>
 		    </xs:element>
-		  </xs:sequence>
+		    <xs:element name="img">
+		      <xs:complexType>
+			<xs:attribute name="src" type="xs:string"/>
+		      </xs:complexType>
+		    </xs:element>		  </xs:sequence>
 		  <xs:attribute name="weight" type="xs:integer"/>
 		  <xs:attribute name="name" type="xs:string"/>
 		</xs:complexType>
