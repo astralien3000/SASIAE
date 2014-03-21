@@ -1,28 +1,13 @@
-#ifndef POSITION_DATA_HPP
-#define POSITION_DATA_HPP
+#ifndef POSITION_DATA_BULLET_HPP
+#define POSITION_DATA_BULLET_HPP
 
 #include <btBulletDynamicsCommon.h>
-#include <QString>
-#include <QVector3D>
-//#include <QQuaternion>
-//used as a list in the gui coordinateur to be printed on Qt
+#include <../common/position_data.hpp>
 
-class PositionData
-{
-public:
-    PositionData();
-    PositionData(const PositionData& posdata);
-    void setPosition(const btVector3 &);
-    void setRotation(btQuaternion);
-    const QVector3D & getPosition(void)const;
-    const QVector3D & getRotation(void)const;
-    float getRotation(unsigned int axe = 1)const;
-    PositionData operator+(const PositionData& pos);
-private:
-    QVector3D _QPosition;
-    QVector3D _QRotation;
-    btVector3 _btPosition;
-    btQuaternion _btRotation;
-};
+PositionData operator(const btVector3& vec, const btQuaternion& quad);
+operator btVector3(const PositionData& pos);
+operator btQuaternion(const PositionData& pos);
+operator PositionData(const btVector3& pos);
+operator PositionData(const btQuaternion& quad);
 
-#endif // POSITION_DATA_HPP
+#endif // POSITION_DATA_BULLET_HPP
