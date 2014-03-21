@@ -81,3 +81,7 @@ void PhysicalCoordinator::update(void) {
   emit nextStep();
   //emit nextStepAnimation(); 
 }
+
+PhysicalCalculator* PhysicalCoordinator::getPhysicalCalculator(void) {
+  return _data->physic;
+}
