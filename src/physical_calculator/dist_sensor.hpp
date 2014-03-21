@@ -8,8 +8,8 @@ class DistSensor {
 
 public:
   DistSensor(World* world, Robot* chassis);
-  DistSensor(World* world, Robot* chassis, const PositionData &pos, const PositionData &direction, const QVector3D & box, float mass = 0.001);
-  void init(const PositionData &pos, const PositionData &direction, const QVector3D& boxSize, float mass = .001);
+  DistSensor(World* world, Robot* chassis, const PositionData pos, const PositionData direction, const QVector3D & box, float mass = 0.001);
+  void init(const PositionData pos, const PositionData direction, const QVector3D& boxSize, float mass = .001);
   double getCachedDist();
   double getDist();
   void calcDist();

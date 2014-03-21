@@ -5,14 +5,23 @@ const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED 
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
+/*
+   //to be tested when the connect above is solved.
+connect(
+       _mainWindow, //how do i link this ?
+       SIGNAL(updateTable()),
+       this,
+       SLOT(updateTable())
+       );
+*/
 
 const QVector<PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
   return PrintableMobileObject::objects;
 }
 void PrintableMobileObject::update() {
   PositionData pos = getPosition();
-  _item->setRotation(pos.getRotation(1));
-  _item->setPos(pos.getPosition().x(), pos.getPosition().y());
+  _item->setRotation(pos.beta);
+  _item->setPos(pos.x, pos.y);
 }
 
 

@@ -21,7 +21,7 @@ truc du style (graphicsitem->setposition) objet, puis !!! PEUT ETRE(si nécessai
 
 class PrintableMobileObject : public STLMesh {
 signals:
-    void updateTable(); //si on veut faire un truc génial on pourra utiliser ce signal pendant la cration du PMO pour le rajouter directement à la table !! 
+    static void updateTable(); //si on veut faire un truc génial on pourra utiliser ce signal pendant la cration du PMO pour le rajouter directement à la table !! 
 private:
 	static const QString _img_path;
 	static QVector<PrintableMobileObject*> objects;
@@ -32,15 +32,16 @@ private:
 	QGraphicsPixmapItem* _item; //permet d'update l'affichage.
   // struct position_data * _pos;contenu dans le Mesh mtn
 public:
-	PrintableMobileObject(const QString name, const STLMesh & mesh);
-//  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name); peut être remise si besoin
-	PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
-	~PrintableMobileObject();
-	static const QVector<PrintableMobileObject*>& getObjectsList();
-	PrintableMobileObject(const STLMesh& mesh);
-	void update();
-	QGraphicsPixmapItem* getItem();
-  // Déplacé dans STLMesh const PositionData & getPosition() const; 
+  PrintableMobileObject(const STLMesh& mesh);
+  PrintableMobileObject(const QString name, const STLMesh & mesh);
+//  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
+  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
+  ~PrintableMobileObject();
+  static const QVector<PrintableMobileObject*>& getObjectsList();
+  void update();
+  QGraphicsPixmapItem* getItem();
+  // Déplacé dans STLMesh const PositionData & getPosition() const; //renvoie 4 entiers dans une structure (un vecteur 3 dimension et un angle) au lieu du btVector3 : x y z orientation
+  
 
 };
 
