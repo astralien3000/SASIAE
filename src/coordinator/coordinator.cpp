@@ -77,7 +77,7 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   // GuiCoordinator.MainWindow -> PhysicalCoordinator : load the Table
   connect(
         _gui_cdn->getMainWindow(),
-        SIGNAL(TableFileStl(const QString&)),
+        SIGNAL(tableFileStl(const QString&)),
         _phy_cdn,SLOT(loadTable(const QString&))
         );
 

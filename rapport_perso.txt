@@ -1,0 +1,20 @@
+Rapport concernant le lien entre le coordinateur, les objets physiques de bullet et l'interface graphique : 
+
+
+Problème rencontré : voir le schéma UML du truc, comment fait-on pour mettre à jour les objets physique dans l'interface graphique : quand, comment, qui ?
+
+
+-> faire des tests pour savoir si les ordinateurs utilisé peuvent rafraîchir l'affichage à chaque pas de simulation en conservant une bonne fréquence de rafraîchissement (affichage fluide), donc à chaque pas c'est un  signal Qt qui sera envoyé à un nouveau coordinateur qui permettra de rafraîchir l'affichage du GUI.
+
+Second problème comment passe-t-on l'information de la position au GUI, comment garder un pointeur sur TOUS les objets affichables dans l'interface graphique, la première idée était de faire une listes de différents objets (robots et items) mais celà n'était pas très modulable, nous avons donc créer une nouvelle classe PMO (faire un schéma UML ici) : tous les objets dynamiques qui voudront être affichés dans l'interface graphique devront hériter de cet objet, pour mettre à jour la position nous êtions partis sur une méthode virtuelle "getPosition" implémentée par la sous-classe, mais nous nous sommes rendu compte que tous ce genre d'objets obtiennent leur position dans bullet par un btRigidBody, la classe PMO (printable mobile object) a donc une méthode générale getPosition et c'est le rigidBody qui est renseigné par la sous-classe/l'objet à afficher.
+Le coordinateur itère donc sur une liste de PMO statique, dans laquelle les PMO se rajoutent (dans le constructeur) 
+
+
+Troisième problème, l'affichage de Qt crée un objet par objet à afficher != PMO, comment se rappelle-t-on de quel PMO correspond à quel objet QtGraphic  sachant qu'il n'y a pas de lien entre la QtGraphicsView (affichage) et Les PMO
+
+L'architecture a donc du être modifiée, le QGraphicsItem de l'affichage graphique est maintenant construite dans le PMO puis le coordinateur doit rajouter ces objets au GUI.
+
+
+Optimisation avec les Pixmaps.
+
+-> Afin d'optimiser au maximum les images pour éviter que l'interface graphique ne se rafraîchisse pas assez rapidement, les PixMap (images) communes entre différentes objets, elles sont donc placées dans un tableau, et si deux PMO utilisent la même, elle ne se rajoute pas dans le tableau.

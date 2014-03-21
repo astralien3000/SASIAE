@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <QDebug>
 #include <QFile>
+#include <QString>
 #include <QtXmlPatterns>
 
 
@@ -44,13 +45,13 @@ const QDomDocument* XMLParser::open(const QString& xml_path, const QString& xsd_
 	return doc;
 }
 
-const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
+const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& path){
 	/* Ouverture d'un fichier xml */
 	const QDomDocument* doc = open(path,QString("./robot.xsd"));
 	QDomNode r = doc->elementsByTagName("robot").item(0);
 
 	/* Ouverture de la première structure */
-	XMLParser::robotConfig *data = new XMLParser::robotConfig();
+	ObjectConfig::robotConfig *data = new ObjectConfig::robotConfig();
 
 	/* Noeud Courants de chaque niveau */
 	QDomNode tmp1, tmp2, tmp3;
@@ -61,9 +62,9 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	QDomNodeList params;
 
 	/* Pointeurs de sauvegardes des instances courantes */
-	XMLParser::microCConfig *currMC;
-	XMLParser::moduleConfig *currMod;
-	XMLParser::parameter* currParam;
+	ObjectConfig::microCConfig *currMC;
+	ObjectConfig::moduleConfig *currMod;
+	ObjectConfig::parameter* currParam;
 
 	/* Ajout du lien vers le mesh du robot */
 	data->mesh_path=r.firstChildElement("mesh").attribute("src");
@@ -72,7 +73,7 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	/* Parcours des µC */
 	for(int i=0; i<mcs.length(); i++) {
 		/* Ajout d'une structure µC */
-		currMC = new XMLParser::microCConfig();
+		currMC = new ObjectConfig::microCConfig();
 
 		/*Sauvegarde du noeud courrant*/
 		tmp1 = mcs.item(i);
@@ -83,7 +84,7 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 		/* Parcours des modules */
 		for(int j=0 ; j<mods.length() ; j++){
 			/* Ajout d'une structure module */
-			currMod = new XMLParser::moduleConfig();
+			currMod = new ObjectConfig::moduleConfig();
 			tmp2=mods.item(j);
 
 			tmp3=tmp2.toElement().elementsByTagName("location").item(0);
@@ -101,7 +102,7 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 
 			for(int k=0;k<params.length();k++){
 				/* Ajout d'une structure parameter */
-				currParam = new XMLParser::parameter();
+				currParam = new ObjectConfig::parameter();
 
 				/* Sauvegarde du noeud */
 				tmp3 = params.item(k);
@@ -119,24 +120,7 @@ const struct XMLParser::robotConfig* XMLParser::parseRobot(const QString& path){
 	return data;
 }
 
-XMLParser::moduleConfig::~moduleConfig() {
-	for(int i=0; i<parameters.length(); i++)
-		delete parameters.at(i);
-}
-XMLParser::microCConfig::~microCConfig() {
-	for(int i=0; i<modules.length(); i++)
-		delete modules.at(i);
-}
-XMLParser::robotConfig::~robotConfig() {
-	for(int i=0; i<microcontrollers.length(); i++)
-		delete microcontrollers.at(i);
-}
-XMLParser::tableConfig::~tableConfig() {
-	for(int i=0; i<toys.length(); i++)
-		delete toys.at(i);
-}
-
-const struct XMLParser::tableConfig* XMLParser::parseTable(const QString& path) {
+const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& path) {
   const QDomDocument* doc = open(path, QString("table.xsd"));
   if(doc == NULL) {
     return NULL;

@@ -6,31 +6,39 @@
 
 #include "coordinator.hpp"
 
+
 GuiCoordinator::GuiCoordinator(void){
-    qDebug() << "GuiCoordinator constructor";
-    _mainWindow=new MainWindow();
+  qDebug() << "GuiCoordinator constructor";
+  _mainWindow=new MainWindow();
 
     // MainWindow -> GuiCoordinator : load the Table
-    connect(
-         _mainWindow,
-         SIGNAL(tableFileStl(QString)),
-         this,
-         SIGNAL(forwardTableFileStl(const QString&,const QString&))
-          );
 
     connect(
            _mainWindow,
            SIGNAL(robotFileStl(const QString&,const QString&),
             this,
-            SIGNAL(forwardRobotFileStl(const QString&,const QString&))
+            SLOT(forwardRFStl(const QString&,const QString&))
            );
+
+   //to be tested when the connect above is solved.
+connect(
+       _mainWindow, //how do i link this ?
+       SIGNAL(updateTable()),
+       this,
+       SLOT(updateTable())
+       );
+
 }
 
 MainWindow* GuiCoordinator::getMainWindow(void)const{
-    return _mainWindow;
+  return _mainWindow;
 }
 
 GuiCoordinator::~GuiCoordinator(void){
+}
+
+void GuiCoordinator::forwardRFStl(const QString&name , const QString&path){
+    emit forwardRobotFileStl(name, path);
 }
 
 void GuiCoordinator::updateTable(){
@@ -58,26 +66,26 @@ void GuiCoordinator::update(){
            }
 */
 
- const QVector<PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-     if(!objectsList.isEmpty()){
-    QVector<float> curPosition;
-    qDebug() << "GC update  objectList" << objectsList ;
-    for (auto it = objectsList.begin(); it < objectsList.end(); ++it) {
-        (*it)->update();
+           const QVector<PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+           if(!objectsList.isEmpty()){
+            QVector<float> curPosition;
+            qDebug() << "GC update  objectList" << objectsList ;
+            for (auto it = objectsList.begin(); it < objectsList.end(); ++it) {
+              (*it)->update();
         //qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
         //mainWindow->animateRobot(curPosition.at(0),curPosition.at(2));
-        }
-    }
- else{
-     qDebug() << "GuiCoordinator objectList is empty";
-     _mainWindow->animateRobot(0,0);
-    }
+            }
+          }
+          else{
+           qDebug() << "GuiCoordinator objectList is empty";
+           _mainWindow->animateRobot(0,0);
+         }
 
-}
+       }
 
-void GuiCoordinator::forwardTbleFStl(QString file){
-    emit forwardTbleFStl(file);
-}
+       void GuiCoordinator::forwardTbleFStl(QString file){
+        emit forwardTableFileStl(file);
+      }
 
 //QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
 

@@ -1,4 +1,6 @@
 #include "position_data.hpp"
+#include <math.h>
+
 
 PositionData::PositionData():
     _QPosition(),_QRotation(),_btPosition(),_btRotation()
@@ -21,40 +23,34 @@ void PositionData::setPosition(const btVector3 & vec){
     _QPosition.setX(x);
     _QPosition.setY(y);
     _QPosition.setZ(z);
+
+operator PositionData(const btVector3 & vec){
+    PositionData p(0,0,0,0,0,0);
+    p.x=vec.getX();
+    p.y=vec.getY();
+    p.z=vec.getZ();
+
 }
 
-void PositionData::setRotation(btQuaternion quat){
-    _btRotation=quat;
-    float x,y,z;
+operator PositionData(const btQuaternion & quat){
+    PositionData p(0,0,0,0,0,0);
+    float xx,yy,zz;
     btMatrix3x3 m(quat);
     m.getEulerYPR(z,y,x);
-    _QRotation.setX(x);
-    _QRotation.setY(y);
-    _QRotation.setZ(z);
+    p.alpha = ((x *360 ) / M_PI + 360) % 360;
+    p.beta =  ((y *360 ) / M_PI + 360) % 360;
+    p.gamma = ((z *360 ) / M_PI + 360) % 360;
 }
 
-const QVector3D & PositionData::getPosition(void)const{
-    return _QPosition;
+operator btVector3(const PositionData& pos) {
+  return btVector3(pos.x,pos.y,pos.z);
 }
-const QVector3D & PositionData::getRotation(void)const{
-    return _QRotation;
+operator btQuaternion(const PositionData& pos) {
+  return btQuaternion(pos.alpha, pos.beta, pos.gamma);  
 }
-float PositionData::getRotation(unsigned int axe)const{
-    if(axe == 0)
-      return _QRotation.x();
-    if(axe == 1)
-      return _QRotation.y();
-    if(axe == 2)
-      return _QRotation.z();
-    return _QRotation.y();
-}
-
-PositionData PositionData::operator+(const PositionData& pos)
-{
-  PositionData p(*this); 
-  p._QPosition += pos._QPosition;
-  p._QRotation += pos._QRotation;
-  p._btPosition += pos._btPosition;
-  p._btRotation += pos._btRotation;
-  return p;
+PositionData operator(const btVector3& vec, const btQuaternion& quad) {
+  PositionData p;
+  p += vec;
+  p += quad;
+  return p; 
 }

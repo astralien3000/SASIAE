@@ -17,7 +17,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   auto robot_cfg = XMLParser::parseRobot(path);
 
   // Loading mesh
-  _robot_mesh[name] = new Robot(/**_phy_cdn.loadMesh(robot_cfg->mesh_path)*/, _phy_cdn.getPhysicalCalculator()->getScene());
+  _robot_mesh[name] = new Robot(path,robot_cfg/**_phy_cdn.loadMesh(robot_cfg->mesh_path)*/, _phy_cdn.getPhysicalCalculator()->getScene());
   
   // Loading microcontrollers
   for(auto mi = robot_cfg->microcontrollers.begin() ; mi != robot_cfg->microcontrollers.end() ; ++mi) {

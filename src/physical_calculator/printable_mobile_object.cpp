@@ -15,20 +15,6 @@ void PrintableMobileObject::update() {
   _item->setPos(pos.getPosition().x(), pos.getPosition().y());
 }
 
-/*
-PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name, QGraphicsPixmapItem* item):
-STLMesh(path,mass,start_pos),_name(name)
-{
-    objects.append(this);
-    //si image est dans tableau, ++, sinon ajouter image dans tableau.
-    auto it = images.find(name);
-    if(it!=images.end()) {//found
-        (*it)->second++;
-    } else { //add the pixmap in the map !
-        images.insert(name,new QPair<QPixmap*,int>(new QPixmap(_img_path+name),0));
-    }
-
-}*/
 
 PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh & mesh) :
     STLMesh(mesh), _name(name) //to test
@@ -44,7 +30,9 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
+    //Connect the signal and then emit it.
 
+    emit updateTable();
 }
 
 PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
@@ -62,14 +50,14 @@ STLMesh(path,mass,start_pos),_name(name)
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
-
+    emit updateTable();
 }
 
 
 PrintableMobileObject::~PrintableMobileObject() {
     auto it = images.find(this->_name);
     if(it!=images.end()) {//found
-    	(*it)->second--;
+        (*it)->second--;
         if((*it)->second==0) {
           QPair<QPixmap*,int>* tobedeleted = (images.take(this->_name));
           delete(tobedeleted);
@@ -87,6 +75,22 @@ PrintableMobileObject::PrintableMobileObject(const STLMesh & mesh):
     objects.append(this);
 }
 
-  QGraphicsPixmapItem* PrintableMobileObject::getItem() {
+QGraphicsPixmapItem* PrintableMobileObject::getItem() {
     return _item;
-  }
+}
+
+
+/*
+PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name, QGraphicsPixmapItem* item):
+STLMesh(path,mass,start_pos),_name(name)
+{
+    objects.append(this);
+    //si image est dans tableau, ++, sinon ajouter image dans tableau.
+    auto it = images.find(name);
+    if(it!=images.end()) {//found
+        (*it)->second++;
+    } else { //add the pixmap in the map !
+        images.insert(name,new QPair<QPixmap*,int>(new QPixmap(_img_path+name),0));
+    }
+
+}*/
