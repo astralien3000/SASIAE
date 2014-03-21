@@ -52,9 +52,6 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
-Robot *Coordinator::getRobot(Slot robotSlot){
-}
-
 void Coordinator::startUpdateTimer(QTimer *tm){
 
     qDebug() << "connect timerUpdate to update";
@@ -88,8 +85,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   connect(
          _gui_cdn,
          SIGNAL(forwardRobotFileStl),
-
-              )
+         _bot_cdn,
+         SLOT(loadRobotConfig(const QString&, const QString&))
+          );
 
   // Device -> Module communication
   connect(
@@ -146,9 +144,10 @@ void Coordinator::openTable(const QString& XMLPath) {
   _phy_cdn->loadTable(XMLPath);
 }
 
-void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
+void Coordinator::openRobot(const QString& XMLPath) {
 
-  (void) slot;
+    QString name("name");
+    _bot_cdn->loadRobotConfig(name,XMLPath);
 
   //Mesh * robotMesh=new Mesh(...);
 
@@ -222,8 +221,8 @@ void Coordinator::CTReceived() {
 }
 
 
-void Coordinator::MReceived(QString message) {
-}
+/*void Coordinator::MReceived(QString message) {
+}*/
 
 void Coordinator::gotoNextStep() {
 }
@@ -245,27 +244,27 @@ void Coordinator::sendMessages(QString msg, QProcess* p) {
 }
 
  
-void Coordinator::closeRobot(Slot robot){
+/*void Coordinator::closeRobot(Slot robot){
 }
 
 void Coordinator::closeRobot(QProcess *robot){
-}
+}*/
 
 
 QString Coordinator::readMessage(QProcess * proc)const{
 }
 
-bool Coordinator::addToRobotCode(QString name, QProcess * proc){
+/*bool Coordinator::addToRobotCode(QString name, QProcess * proc){
 }
 
 bool Coordinator::addModuleAndCodeName(Modules * key, QString code, QString module ){
   return false;
-}
+}*/
 
 
-bool Coordinator::addModule(QString name, Modules * mod){  
+/*bool Coordinator::addModule(QString name, Modules * mod){
   return false;
-}
+}*/
 
 void Coordinator::sendSyncMessages() {
 }

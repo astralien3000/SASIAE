@@ -61,17 +61,12 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
   foreach (const XMLParser::toyConfig* it, tableConfig->toys) {
     //Creates a new PMO foreach toy on the table
-    t =new PrintableMobileObject(it->mesh_path,it->weight,
-                              new PositionData(it->position[0], it->position[1], it->position[2],
-                                                it->position[3], it->position[4], it->position[5]));
+    /*PrintableMobileObject pmo =*/new PrintableMobileObject(it->mesh_path,(float)it->weight,
+                              PositionData(it->position[0], it->position[1], it->position[2],
+                                                it->position[3], it->position[4], it->position[5]),/*name*/"mesh");
   //t.getQGraphicsItem();
   }
   //_data->physic->simple_scene_walls(300);
-}
-
-Mesh* PhysicalCoordinator::loadMesh(const QString& path) {
-  //! \todo call STL parser
-  return 0;
 }
 
 void PhysicalCoordinator::update(void) {
