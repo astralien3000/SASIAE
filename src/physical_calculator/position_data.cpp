@@ -23,16 +23,16 @@ void PositionData::setPosition(const btVector3 & vec){
     _QPosition.setX(x);
     _QPosition.setY(y);
     _QPosition.setZ(z);
+}
 
-operator PositionData(const btVector3 & vec){
+PositionData castbtVectToPos(const btVector3 & pos){
     PositionData p(0,0,0,0,0,0);
     p.x=vec.getX();
     p.y=vec.getY();
     p.z=vec.getZ();
-
 }
 
-operator PositionData(const btQuaternion & quat){
+PositionData castbtQuaToPos(const btQuaternion & quat){
     PositionData p(0,0,0,0,0,0);
     float xx,yy,zz;
     btMatrix3x3 m(quat);
@@ -42,15 +42,10 @@ operator PositionData(const btQuaternion & quat){
     p.gamma = ((z *360 ) / M_PI + 360) % 360;
 }
 
-operator btVector3(const PositionData& pos) {
+btVector3 castPosTobtVect(const PositionData& pos) {
   return btVector3(pos.x,pos.y,pos.z);
 }
-operator btQuaternion(const PositionData& pos) {
+
+btQuaternion castPosTobtQua(const PositionData& pos) {
   return btQuaternion(pos.alpha, pos.beta, pos.gamma);  
-}
-PositionData operator(const btVector3& vec, const btQuaternion& quad) {
-  PositionData p;
-  p += vec;
-  p += quad;
-  return p; 
 }

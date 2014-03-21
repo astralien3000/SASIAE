@@ -26,17 +26,17 @@ union PositionData
   }
   PositionData(float value[6]);
   PositionData(float x, float y, float z, float alpha, float beta, float gamma);
+
+  operator QVector3D(void)const;
+  //operator QQuaternion(const PositionData& pos);
+  //operator PositionData(const QVector3D& vec);
+  //operator PositionData(const QQuaternion qua);
+  PositionData operator+(const PositionData& pos);
+  PositionData operator-(const PositionData& pos);
+  PositionData& operator+=(const PositionData& pos);
+  PositionData& operator-=(const PositionData& pos);
 };
 
-/* TODO : DEbug
-  operator QVector3D(const PositionData& pos);
-  //operator QQuaternion(const PositionData& pos);
-  operator PositionData(const QVector3D& vec);
-  //operator PositionData(const QQuaternion qua);
-  PositionData operator+(const PoistionData& pos1, const PositionData& pos2);
-  PositionData operator-(const PoistionData& pos1, const PositionData& pos2);
-  PositionData& operator+=(PoistionData& pos1, const PositionData& pos2);
-  PositionData& operator-=(PoistionData& pos1, const PositionData& pos2);
-*/
+PositionData castQVectToPos(const QVector3D& vec);
 
 #endif // POSITION_DATA_HPP

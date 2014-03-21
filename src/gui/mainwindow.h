@@ -29,6 +29,7 @@ private:
 
 public slots:
     void openDirForTable();
+    void openDirForRobot();
     void do_sth();
     void CReceived(QString message);
     //void animate();
