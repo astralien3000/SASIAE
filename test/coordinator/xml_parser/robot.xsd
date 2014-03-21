@@ -81,6 +81,7 @@
 	  </xs:complexType>
 	</xs:element>
       </xs:sequence>
+      <xs:attribute name="weight" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

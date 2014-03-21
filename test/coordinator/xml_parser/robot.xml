@@ -1,4 +1,4 @@
-<robot>
+<robot weight="20">
 	<mesh src="~/mesh/robots/robot1A1314.stl"/>
 	<microcontrollers>
 	<microcontroller name="UNIOC">

@@ -55,7 +55,7 @@ void MainWindow::CReceived(QString message){
   void MainWindow::openDirForRobot(){
       QString fileName = QFileDialog::getOpenFileName(this,
           "Open Xml file", "/home", "Config Files (*.xml)");
-      QString("Robotname"); // todo : ask user
+      QString name=("Robotname"); // todo : ask user
       emit robotFileStl(name,fileName);
      }
 

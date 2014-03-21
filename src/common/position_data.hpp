@@ -24,6 +24,7 @@ union PositionData
   inline const float& operator[](int index) const {
     return val[index];
   }
+  PositionData(const PositionData& );
   PositionData(float value[6]);
   PositionData(float x, float y, float z, float alpha, float beta, float gamma);
 
