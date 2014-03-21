@@ -6,6 +6,7 @@
 #include "../modules/encoder.hpp"
 
 #include "../physical_calculator/robot.hpp"
+#include "../physical_calculator/physical_calculator.hpp"
 
 ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, ModuleCoordinator& mod_cdn)
   : _phy_cdn(phy_cdn), _mod_cdn(mod_cdn) {
@@ -16,8 +17,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   auto robot_cfg = XMLParser::parseRobot(path);
 
   // Loading mesh
-  // TODO : get the scene
-  _robot_mesh[name] = new Robot((btRigidBody*)0, (btDynamicsWorld*)0); //new Robot(_phy_cdn.loadMesh(robot_cfg->mesh_path), (btDynamicsWorld*)0);
+  _robot_mesh[name] = new Robot(*_phy_cdn.loadMesh(robot_cfg->mesh_path), _phy_cdn.getPhysicalCalculator()->getScene());
   
   // Loading microcontrollers
   for(auto mi = robot_cfg->microcontrollers.begin() ; mi != robot_cfg->microcontrollers.end() ; ++mi) {

@@ -11,12 +11,13 @@
 
 #include "physical_coordinator.hpp"
 #include "robot_coordinator.hpp"
+#include "config_robot_coordinator.hpp"
 #include "module_coordinator.hpp"
 #include "schedule_coordinator.hpp"
 #include "gui_coordinator.hpp"
 
 PhysicalCoordinator* _phy_cdn;
-RobotCoordinator* _bot_cdn;
+ConfigRobotCoordinator* _bot_cdn;
 ModuleCoordinator* _mod_cdn;
 ScheduleCoordinator* _sch_cdn;
 GuiCoordinator* _gui_cdn;
@@ -66,8 +67,8 @@ void Coordinator::startUpdateTimer(QTimer *tm){
 Coordinator::Coordinator(int argc, char* argv[]) :
     QApplication(argc,argv), _physic(this)/*, _gui()*/{
   _phy_cdn = new PhysicalCoordinator(&_physic);
-  _bot_cdn = new RobotCoordinator;
   _mod_cdn = new ModuleCoordinator;
+  _bot_cdn = new ConfigRobotCoordinator(*_phy_cdn, *_mod_cdn);
   _sch_cdn = new ScheduleCoordinator;
   _gui_cdn = new GuiCoordinator;
 

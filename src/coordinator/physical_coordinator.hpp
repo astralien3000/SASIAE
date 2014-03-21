@@ -55,6 +55,9 @@ public:
   //! \brief Destructor
   ~PhysicalCoordinator();
 
+  //! \brief Return the physical calculator
+  PhysicalCalculator* getPhysicalCalculator(void);
+
 private:
   //! \brief Private data, to avoid includes
   struct PrivateData;
