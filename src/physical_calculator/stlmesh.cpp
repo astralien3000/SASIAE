@@ -2,23 +2,23 @@
 #include <QList>
 #include <QVector>
 #include <QDebug>
+#include "../stl/STLReader.hpp"
 
 STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
   init(stlpath, mass, start_pos);
 }
 
-STLMesh::STLMesh(const STLMesh & source) {
+STLMesh::STLMesh(const STLMesh & source) : Mesh(source) {
   // copie la shape d'un smart pointer
-  this._path = source._path;
-  _stlshapes[this._path].second++;
-  Mesh::Mesh(source);
+  this->_path = source._path;
+  s_stlshapes[this->_path].second++;
 }
 
 STLMesh::~STLMesh() {
-  _stlshapes[this._path].second--;
+  s_stlshapes[this->_path].second--;
 }
 
-void STLMesh::init(const QString stlpath, float mass, PositionData pos) {
+void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
   if(mass == 0) {
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
     btTriangleMesh* trimesh = new btTriangleMesh();

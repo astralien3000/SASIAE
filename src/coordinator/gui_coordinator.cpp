@@ -15,9 +15,9 @@ GuiCoordinator::GuiCoordinator(void){
 
     connect(
            _mainWindow,
-           SIGNAL(robotFileStl(const QString&,const QString&),
+           SIGNAL(robotFileStl(const QString&,const QString&)),
             this,
-            SLOT(forwardRFStl(const QString&,const QString&))
+            SLOT(forwardRobotNameStl(const QString&,const QString&))
            );
 
 /*
@@ -38,14 +38,14 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-void GuiCoordinator::forwardRFStl(const QString&name , const QString&path){
+void GuiCoordinator::forwardRobotNameStl(const QString&name , const QString&path){
     emit forwardRobotFileStl(name, path);
 }
 
 void GuiCoordinator::updateTable(){
-    foreach(PrintableMobileObject it,PrintableMobileObject::getObjectsList()){
-        if(it.getItem().scene()==NULL){
-            _mainWindow->getScene().addItem(it);
+    foreach(const PrintableMobileObject* it,PrintableMobileObject::getObjectsList()){
+        if(it->getItem()->scene()==NULL){
+            _mainWindow->getScene()->addItem(it->getItem());
         }
     }
 }
@@ -67,12 +67,11 @@ void GuiCoordinator::update(){
            }
 */
 
-           const QVector<PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
+           const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
            if(!objectsList.isEmpty()){
-            QVector<float> curPosition;
             qDebug() << "GC update  objectList" << objectsList ;
-            for (auto it = objectsList.begin(); it < objectsList.end(); ++it) {
-              (*it)->update();
+            foreach (const PrintableMobileObject* it, objectsList) {
+              it->update();
         //qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
         //mainWindow->animateRobot(curPosition.at(0),curPosition.at(2));
             }
@@ -84,10 +83,10 @@ void GuiCoordinator::update(){
 
        }
 
-       void GuiCoordinator::forwardTbleFStl(QString file){
+/*       void GuiCoordinator::forwardTbleFStl(QString file){
         emit forwardTableFileStl(file);
       }
-
+*/
 //QVector<const PositionData*>* GuiCoordinator::getAllPositions() const {
 
 //    const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();

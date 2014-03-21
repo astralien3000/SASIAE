@@ -1,6 +1,6 @@
 #include "printable_mobile_object.hpp"
 
-QVector<PrintableMobileObject*> PrintableMobileObject::objects;
+QVector< const PrintableMobileObject*> PrintableMobileObject::objects;
 const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED !
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
@@ -15,10 +15,10 @@ connect(
        );
 */
 
-const QVector<PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
+const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
   return PrintableMobileObject::objects;
 }
-void PrintableMobileObject::update() {
+void PrintableMobileObject::update() const {
   PositionData pos = getPosition();
   _item->setRotation(pos.beta);
   _item->setPos(pos.x, pos.y);
@@ -84,7 +84,7 @@ PrintableMobileObject::PrintableMobileObject(const STLMesh & mesh):
     objects.append(this);
 }
 
-QGraphicsPixmapItem* PrintableMobileObject::getItem() {
+QGraphicsPixmapItem* PrintableMobileObject::getItem() const {
     return _item;
 }
 
