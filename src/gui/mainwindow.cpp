@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::animateRobot(qreal x,qreal y){
     qDebug() << "MainWindow::animateRobot";
-    ui->graphicsView->moveRobot(x,y);
+    //ui->graphicsView->moveRobot(x,y);
     //ui->graphicsView->moveRobot();
 }
 

@@ -3,28 +3,28 @@
 
 //cylindre de masse 0.1
 
-Balise::Balise(World* world, Robot* chassis)
+Balise::Balise(World world, Robot* chassis)
 : _chassis(chassis)  {
 
 	//masse très faible pour ne pas empecher les mouvements du robot.
 	float mass(0.00001);
-  PositionData pos = btVector3(0,17.5 + 8/2., 0);
-  pos += robot->getPosition();
+  PositionData pos(0,17.5 + 8/2., 0,0,0,0);
+  pos += chassis->getPosition();
   _sensor_box = Mesh::buildCylinder(1, 8,4, mass, pos);
 
-	_sensor_box->setDamping(0,100000);
+	((btRigidBody*) _sensor_box)->setDamping(0,100000);
 
   // ajout des contraintes de points
   btVector3 pivotInChassis(0, 17.5, 0); 
   btVector3 pivotInBox(0,-8/2,0);
-  btTypedConstraint* p2pL = new btPoint2PointConstraint(*_chassis,*_sensor_box, pivotInChassis,pivotInBox);
+  btTypedConstraint* p2pL = new btPoint2PointConstraint(*((btRigidBody*)*_chassis),*((btRigidBody*)*_sensor_box),pivotInChassis,pivotInBox);
 
   // add constraint to world
-  world->addConstraint(p2pL);
+  ((btDiscreteDynamicsWorld*)world)->addConstraint(p2pL);
 
 }
 
-PositionData Balise::get_position() {
+PositionData Balise::getPosition() {
   return _sensor_box->getPosition();
 }
 

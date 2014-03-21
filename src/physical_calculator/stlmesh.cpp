@@ -3,6 +3,14 @@
 #include <QVector>
 #include <QDebug>
 #include "../stl/STLReader.hpp"
+#include <HACD/hacdCircularList.h>
+#include <HACD/hacdVector.h>
+#include <HACD/hacdICHull.h>
+#include <HACD/hacdGraph.h>
+#include <HACD/hacdHACD.h>
+
+
+QMap<QString, QPair<btCollisionShape*, unsigned int>> STLMesh::s_stlshapes;
 
 STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
   init(stlpath, mass, start_pos);
@@ -11,11 +19,11 @@ STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _
 STLMesh::STLMesh(const STLMesh & source) : Mesh(source) {
   // copie la shape d'un smart pointer
   this->_path = source._path;
-  s_stlshapes[this->_path].second++;
+  STLMesh::s_stlshapes[this->_path].second++;
 }
 
 STLMesh::~STLMesh() {
-  s_stlshapes[this->_path].second--;
+  STLMesh::s_stlshapes[this->_path].second--;
 }
 
 void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
@@ -24,15 +32,15 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
     btTriangleMesh* trimesh = new btTriangleMesh();
     for(int i=0; i<retour.size(); i++ ) 
 		{
-      QVector<float> & s = retour.at(i);
+      QVector<float> s = retour.at(i);
       trimesh->addTriangle(btVector3(s[0],s[1],s[2]),
                             btVector3(s[3],s[4],s[5]), 
                             btVector3(s[6],s[7],s[8]));
 		}
-    buildRigidBody(new btBshTriangleMeshShape(trimesh, true), mass, pos);
+    buildRigidBody(new btBvhTriangleMeshShape(trimesh, true), mass, pos);
     
   }
-  else if(s_stlshapes.constains(stlpath)) {
+  else if(s_stlshapes.contains(stlpath)) {
     s_stlshapes[stlpath].second++;
     buildRigidBody(s_stlshapes[stlpath].first, mass, pos);
   }

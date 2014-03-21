@@ -41,7 +41,7 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
     }
     //Connect the signal and then emit it.
 
-    emit updateTable();
+    //emit updateTable();
 }
 
 PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
@@ -59,7 +59,7 @@ STLMesh(path,mass,start_pos),_name(name)
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
-    emit updateTable();
+    //emit updateTable();
 }
 
 
