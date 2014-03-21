@@ -20,6 +20,15 @@ PositionData::PositionData(const QVector3D& vec)
   beta =0;
   gamma = 0;
 }
+PositionData::PositionData(float xx, float yy, float zz, float aalpha, float bbeta, float ggamma)
+{
+  x=xx;
+  y=yy;
+  z=zz;
+  alpha =aalpha;
+  beta =bbeta;
+  gamma = ggamma;
+}
 //operator PositionData(const QQuaternion qua);
 PositionData PositionData::operator+(const PositionData& pos)
 {

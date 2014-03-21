@@ -128,7 +128,7 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
     return NULL;
   }
   QDomElement t = doc->elementsByTagName("table").item(0).toElement();
-  tableConfig* data = new tableConfig();
+  ObjectConfig::tableConfig* data = new ObjectConfig::tableConfig();
 
   data->mesh_path = t.firstChildElement("mesh").attribute("src");
   data->img_path = t.firstChildElement("img").attribute("src");
@@ -141,7 +141,7 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
 
     QDomElement toyElem = toys.item(i).toElement();
 
-    toyConfig* toy = new toyConfig();
+    ObjectConfig::toyConfig* toy = new ObjectConfig::toyConfig();
     toy->name = toyElem.attribute("name");
     toy->weight = toyElem.attribute("weight").toInt();
 

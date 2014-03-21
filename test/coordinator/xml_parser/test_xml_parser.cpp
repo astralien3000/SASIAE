@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <assert.h>
 #include "../../../src/coordinator/xml_parser/xml_parser.hpp"
+#include "../../../src/common/object_config.hpp"
 #include <QString>
 #include <QCoreApplication>
 
@@ -9,7 +10,7 @@ int main(int argc, char **argv) {
 	QCoreApplication app(argc, argv);	
 	/* Ouverture du fichier test */
 	std::cout<<"Ouverture du fichier de configuration d'un robot"<<std::endl;
-	const XMLParser::robotConfig* robot = XMLParser::parseRobot(QString("./robot.xml"));
+	const ObjectConfig::robotConfig* robot = XMLParser::parseRobot(QString("./robot.xml"));
 	assert(robot!=NULL);
 
 	/* Vérification des données */
@@ -37,10 +38,11 @@ int main(int argc, char **argv) {
 	std::cout<<"Fin de l'analyse"<<std::endl;
 	
 	std::cout<<"Ouverture du fichier de configuration d'une table"<<std::endl;
-	const XMLParser::tableConfig* table = XMLParser::parseTable(QString("./table.xml"));
+	const ObjectConfig::tableConfig* table = XMLParser::parseTable(QString("./table.xml"));
 	assert(table!=NULL);
 	std::cout<<"Fichier de configuration ouvert\nAnalyse des données"<<std::endl;
-	assert(table->mesh_path=="~/mesh/table/t1314.stl");
+	assert(table->mesh_path=="../../../src/stl/table_static_cdr2014.stl");
+	assert(table->img_path=="../../../img/table_2014.png");
 	assert(!table->toys.isEmpty());
 	assert((*table->toys.begin())->name=="triangle1");
 	assert((*table->toys.begin())->weight==170);
