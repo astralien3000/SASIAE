@@ -1,6 +1,7 @@
 #include "physical_coordinator.hpp"
 
 #include "../physical_calculator/physical_calculator.hpp"
+#include "../common/position_data.hpp"
 
 #include <QDebug>
 
@@ -9,7 +10,7 @@
 
 struct PhysicalCoordinator::PrivateData {
   PhysicalCalculator* physic;
-  bool running; // Useful ?
+  bool running; // Use for pause button & don't keep updata signal
   double timeStep;
   int maxSubStep;
 };

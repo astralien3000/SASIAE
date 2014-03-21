@@ -4,12 +4,12 @@ int DistSensor::MAX_DIST = 100000;
 
 DistSensor::DistSensor(World* world, Robot* chassis) : _chassis(chassis), _world(world) {}
 
-DistSensor::DistSensor(World* world, Robot* chassis, const PositionData &pos, const PositionData &direction, const QVector3D& boxSize, float mass) : _chassis(chassis), _world(world) 
+DistSensor::DistSensor(World* world, Robot* chassis, const PositionData pos, const PositionData direction, const QVector3D& boxSize, float mass) : _chassis(chassis), _world(world) 
 {
   init(pos,direction,boxSize,mass);  
 }
 
-void DistSensor::init(const PositionData &pos_data, const PositonData &direction, const QVector3D& boxSize, float mass){
+void DistSensor::init(const PositionData pos_data, const PositonData &direction, const QVector3D& boxSize, float mass){
   
   _box_depth = boxSize.z()/2;
  //creation de la boite

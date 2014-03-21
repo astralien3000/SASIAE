@@ -20,8 +20,8 @@ const QVector<PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
 }
 void PrintableMobileObject::update() {
   PositionData pos = getPosition();
-  _item->setRotation(pos.getRotation(1));
-  _item->setPos(pos.getPosition().x(), pos.getPosition().y());
+  _item->setRotation(pos.beta);
+  _item->setPos(pos.x, pos.y);
 }
 
 
