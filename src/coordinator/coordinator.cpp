@@ -52,9 +52,6 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
-Robot *Coordinator::getRobot(Slot robotSlot){
-}
-
 void Coordinator::startUpdateTimer(QTimer *tm){
 
     qDebug() << "connect timerUpdate to update";
@@ -77,8 +74,20 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   _sch_cdn->addCoordinator(_mod_cdn);
   _sch_cdn->addCoordinator(_gui_cdn);
 
-  // GuiCoordinator -> PhysicalCoordinator : load the Table
-  connect(this,SIGNAL(forwardPhCTbleStl(QString)),_phy_cdn,SLOT(loadTable(QString)));
+  // GuiCoordinator.MainWindow -> PhysicalCoordinator : load the Table
+  connect(
+        _gui_cdn->getMainWindow(),
+        SIGNAL(tableFileStl(const QString&)),
+        _phy_cdn,SLOT(loadTable(const QString&))
+        );
+
+  //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
+  connect(
+         _gui_cdn,
+         SIGNAL(forwardRobotFileStl),
+         _bot_cdn,
+         SLOT(loadRobotConfig(const QString&, const QString&))
+          );
 
   // Device -> Module communication
   connect(
@@ -134,14 +143,11 @@ void Coordinator::stepDone() {
 void Coordinator::openTable(const QString& XMLPath) {
   _phy_cdn->loadTable(XMLPath);
 }
-void Coordinator::openRobot(const QString& XMLPath, Coordinator::Slot slot) {
 
-  (void) slot;
+void Coordinator::openRobot(const QString& XMLPath) {
 
-  //! \todo remove... only here for tests
- // _phy_cdn->loadTable("dummy");
-
-  //btDynamicsWorld* m_dynamicsWorld = _physic.getScene();
+    QString name("name");
+    _bot_cdn->loadRobotConfig(name,XMLPath);
 
   //Mesh * robotMesh=new Mesh(...);
 
@@ -215,8 +221,8 @@ void Coordinator::CTReceived() {
 }
 
 
-void Coordinator::MReceived(QString message) {
-}
+/*void Coordinator::MReceived(QString message) {
+}*/
 
 void Coordinator::gotoNextStep() {
 }
@@ -238,27 +244,27 @@ void Coordinator::sendMessages(QString msg, QProcess* p) {
 }
 
  
-void Coordinator::closeRobot(Slot robot){
+/*void Coordinator::closeRobot(Slot robot){
 }
 
 void Coordinator::closeRobot(QProcess *robot){
-}
+}*/
 
 
 QString Coordinator::readMessage(QProcess * proc)const{
 }
 
-bool Coordinator::addToRobotCode(QString name, QProcess * proc){
+/*bool Coordinator::addToRobotCode(QString name, QProcess * proc){
 }
 
 bool Coordinator::addModuleAndCodeName(Modules * key, QString code, QString module ){
   return false;
-}
+}*/
 
 
-bool Coordinator::addModule(QString name, Modules * mod){  
+/*bool Coordinator::addModule(QString name, Modules * mod){
   return false;
-}
+}*/
 
 void Coordinator::sendSyncMessages() {
 }

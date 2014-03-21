@@ -1,9 +1,11 @@
 <table>
-    <mesh src="~/mesh/table/t1314.stl"/>
+    <mesh src="../../../src/stl/table_static_cdr2014.stl">
+    <img src="../../../img/table_2014.png"/>
 	<toys>
 	    <toy name="triangle1" weight="170">
 		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
 		<mesh src="~/mesh/jouets/triangle1314.stl"/>
+		<img src="~/mesh/jouets/triangle1314.stl"/>
 	    </toy>
 	</toys>
 </table>

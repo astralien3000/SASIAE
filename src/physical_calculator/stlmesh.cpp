@@ -8,7 +8,7 @@ STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _
 }
 
 STLMesh::STLMesh(const STLMesh & source) {
-  //TODO copier la shape d'un smart pointer
+  // copie la shape d'un smart pointer
   this._path = source._path;
   _stlshapes[this._path].second++;
   Mesh::Mesh(source);
@@ -20,7 +20,17 @@ STLMesh::~STLMesh() {
 
 void STLMesh::init(const QString stlpath, float mass, PositionData pos) {
   if(mass == 0) {
-    //TODO
+    QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
+    btTriangleMesh* trimesh = new btTriangleMesh();
+    for(int i=0; i<retour.size(); i++ ) 
+		{
+      QVector<float> & s = retour.at(i);
+      trimesh->addTriangle(btVector3(s[0],s[1],s[2]),
+                            btVector3(s[3],s[4],s[5]), 
+                            btVector3(s[6],s[7],s[8]));
+		}
+    buildRigidBody(new btBshTriangleMeshShape(trimesh, true), mass, pos);
+    
   }
   else if(s_stlshapes.constains(stlpath)) {
     s_stlshapes[stlpath].second++;

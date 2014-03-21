@@ -55,8 +55,6 @@ public slots:
   //! \brief coordinator is unique, so we need to get is instance (and create one if it doesn't existe)
   static Coordinator& getInstance();
 
-  Robot * getRobot(Slot theRobot);
-
   //! \brief start the simulation
   void play();
   //! \brief pause the simulation
@@ -65,7 +63,7 @@ public slots:
   //! \brief Trigger by Calculator, when a step is finished
   void stepDone();
   void openTable(const QString& XMLPath);
-  void openRobot(const QString& XMLPath, Slot slot);
+  void openRobot(const QString& XMLPath);
   //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
   
 						  
@@ -81,7 +79,7 @@ private slots:
     This methode HAS to be called from the signal send(QString)
     otherwise sender()==NULL;
   */
-  void MReceived(QString);
+  //void MReceived(QString);
 
   void sendModuleMessage(QString msg);
 
@@ -90,8 +88,8 @@ private slots:
 
 //private:
 protected:
-  QMap<enum Slot /*robot_name*/, Robot* /*robotObject*/> _robotObject;
-  QHash<enum Slot/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
+  QMap<QString /*robot_name*/, Robot* /*robotObject*/> _robotObject;
+  QHash<QString/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
   /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
   QHash<QString/*module_name*/, Modules* /*modules*/> _moduleFromName;
   QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;

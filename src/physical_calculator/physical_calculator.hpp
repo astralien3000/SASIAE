@@ -34,12 +34,10 @@ public:
   void simple_scene(btScalar size);
   //! \brief it returns a DiscreteDynamicsWorld
   //! which is the scene
-  World* getScene();
+  World getScene();
 
   //! it creates a scene with a ground, and 4 walls.
   void simple_scene_walls(btScalar size);
-  //! \brief it adds a box in the world
-  btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
 
 public slots:
   //! it calculates the next step
@@ -63,6 +61,8 @@ public:
 private:
   //! \brief The init method set the gravity
   void init();
+  //! \brief it adds a box in the world
+  btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
   btDiscreteDynamicsWorld* _scene;
   btBroadphaseInterface* _broadphase;
   btDefaultCollisionConfiguration* _collisionConfiguration;

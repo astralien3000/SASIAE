@@ -49,10 +49,12 @@ bool ModuleCoordinator::addModule(QString rname, QString mname, Module* mod) {
 }
 
 bool ModuleCoordinator::delModule(QString rname, QString mname) {
-  return false;
+    /*TODO*/
+    return false;
 }
 
 bool ModuleCoordinator::delRobotModules(QString rname) {
+  /*TODO*/
   return false;
 }
 
