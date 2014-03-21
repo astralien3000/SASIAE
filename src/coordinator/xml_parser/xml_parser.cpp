@@ -69,6 +69,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	/* Ajout du lien vers le mesh du robot */
 	data->mesh_path=r.firstChildElement("mesh").attribute("src");
 	mcs=r.toElement().elementsByTagName("microcontroller");
+    data->weight=r.toElement().attribute("weight").toInt();
 
 	/* Parcours des µC */
 	for(int i=0; i<mcs.length(); i++) {
@@ -96,8 +97,8 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 			currMod->position.alpha = tmp3.toElement().attribute("alpha").toInt();
 			currMod->position.beta = tmp3.toElement().attribute("beta").toInt();
 			currMod->position.gamma = tmp3.toElement().attribute("gamma").toInt();
-			currMod->name=tmp2.toElement().attribute("name");
-			currMod->type = tmp2.toElement().attribute("type");
+            currMod->name=tmp2.toElement().attribute("name");
+            currMod->type = tmp2.toElement().attribute("type");
 
 			params=tmp2.toElement().elementsByTagName("parameter");
 

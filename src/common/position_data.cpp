@@ -1,54 +1,64 @@
 #include "position_data.hpp"
+#include <cmath>
 
-
-operator QVector3D()const
+PositionData::operator QVector3D()const
 {
   return QVector3D(this->x, this->y,this->z);
 }
 //operator QQuaternion(const PositionData& pos);
-operator PositionData(const QVector3D& vec)
+PositionData::PositionData()
 {
-  return PositionData(vec.x(),vec.y(),vec.z(),0,0,0);
+  for(int i = 0; i < 6; i++)
+    val[i] = 0;
+}
+PositionData::PositionData(const QVector3D& vec)
+{
+  x= vec.x();
+  y=vec.y();
+  z=vec.z();
+  alpha =0;
+  beta =0;
+  gamma = 0;
 }
 //operator PositionData(const QQuaternion qua);
-PositionData operator+(const PoistionData& pos)
+PositionData PositionData::operator+(const PositionData& pos)
 {
   return PositionData(pos.x + x,
                       pos.y + y,
                       pos.z + z,
-                      (pos.alpha + alpha +360) %360,
-                      (pos.beta + beta +360) %360,
-                      (pos.gamma + gamma +360) %360);
+                      fmod((pos.alpha + alpha +360),360.f),
+                      fmod((pos.beta + beta +360),360.f),
+                      fmod((pos.gamma + gamma +360),360.f));
 }
 
-PositionData operator-(const PoistionData& pos)
+PositionData PositionData::operator-(const PositionData& pos)
 {
   return PositionData(x - pos.x,
                       y - pos.y,
                       z - pos.z,
-                      (alpha - pos.alpha +720) %360,
-                      (beta - pos.beta +720) %360,
-                      (gamma - pos.gamma +720) %360);
+                      fmod((alpha - pos.alpha +720),360.f),
+                      fmod((beta - pos.beta +720),360.f),
+                      fmod((gamma - pos.gamma +720),360.f));
 }
 
-PositionData& operator+=(const PositionData& pos)
+PositionData& PositionData::operator+=(const PositionData& pos)
 {
   x += pos.x;
   y += pos.y;
   z += pos.z;
-  alpha = (alpha + pos.alpha +720) %360;
-  beta = (beta + pos.beta +720) %360;
-  gamma = (gamma + pos.gamma +720) %360;
+  alpha = fmod((alpha + pos.alpha +720),360.f);
+  beta = fmod((beta + pos.beta +720),360.f);
+  gamma = fmod((gamma + pos.gamma +720),360.f);
   return *this;
 }
 
-PositionData& operator-=(const PositionData& pos)
+PositionData& PositionData::operator-=(const PositionData& pos)
 {
   x -= pos.x;
   y -= pos.y;
   z -= pos.z;
-  alpha = (alpha - pos.alpha +720) %360;
-  beta = (beta - pos.beta +720) %360;
-  gamma = (gamma - pos.gamma +720) %360;
+  alpha = fmod((alpha - pos.alpha +720),360.f);
+  beta = fmod((beta - pos.beta +720),360.f);
+  gamma = fmod((gamma - pos.gamma +720),360.f);
   return *this;
 }

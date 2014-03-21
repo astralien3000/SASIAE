@@ -5,7 +5,7 @@
 #include <QTimer>
 
 #include "../physical_calculator/printable_mobile_object.hpp"
-#include "../physical_calculator/position_data.hpp"
+#include "../common/position_data.hpp"
 #include "../gui/mainwindow.h"
 #include "base_coordinator.hpp"
 

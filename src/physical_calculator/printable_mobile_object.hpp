@@ -8,9 +8,9 @@
 #include <QPixmap>
 #include <QMap>
 #include <QGraphicsPixmapItem>
-#include "position_data.hpp"
+#include "position_data_bullet.hpp"
 #include "stlmesh.hpp"
-#include "../coordinator/gui_coordinator.hpp"
+//#include "../coordinator/gui_coordinator.hpp"
 
 /*PMO contient un pointeur sur QGraphicsPixmapItem, le coordinateur doit appeler addPMO(scene) 
 à chaque création de PMO (à coderdans gui coordinator)
