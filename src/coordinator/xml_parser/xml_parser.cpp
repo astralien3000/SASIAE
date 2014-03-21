@@ -97,6 +97,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 			currMod->position.beta = tmp3.toElement().attribute("beta").toInt();
 			currMod->position.gamma = tmp3.toElement().attribute("gamma").toInt();
 			currMod->name=tmp2.toElement().attribute("name");
+			currMod->type = tmp2.toElement().attribute("type");
 
 			params=tmp2.toElement().elementsByTagName("parameter");
 

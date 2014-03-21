@@ -55,26 +55,9 @@ void	BasicDemo::exitPhysics() {}
 
 void BasicDemo::clientMoveAndDisplay() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  //float ms = getDeltaTimeMicroseconds();
-  /*if(pc) {
-    if(_MD)
-    _MD->setTorque(20);
-    else
-    printf("Pas de roue droite\n");
-    if(_MG)
-    _MG->setTorque(20);
-    else
-    printf("Pas de roue gauche\n");
-  */
-  //cdn->calcNextStep(1/80.f,20);
-  //cdn->sendSyncMessages();
+
   cdn->update();
-  //cdn->play();
-  //cdn->pause();
-  //emit cdn->modulesNextStep();
   _app->processEvents();
-  /* the function getPhysicalCalculatorInstance is static. Is it wrong ?*/
-  //printf("%lu            \r", (cdn->getPhysicalCalculatorInstance()).getTime());
 
   renderme();
   glFlush();
