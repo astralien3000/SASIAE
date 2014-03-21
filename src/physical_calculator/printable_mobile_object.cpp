@@ -5,6 +5,15 @@ const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED 
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
+/*
+   //to be tested when the connect above is solved.
+connect(
+       _mainWindow, //how do i link this ?
+       SIGNAL(updateTable()),
+       this,
+       SLOT(updateTable())
+       );
+*/
 
 const QVector<PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
   return PrintableMobileObject::objects;
