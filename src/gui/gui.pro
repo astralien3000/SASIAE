@@ -5,11 +5,11 @@
 TEMPLATE = app
 TARGET = gui
 INCLUDEPATH += . \
-/usr/include/bullet/HACD \
+/usr/local/include/bullet \
+/usr/local/lib \
 /usr/include/bullet \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
-/usr/local/include/bullet \
 ../ \
 
 
@@ -18,13 +18,12 @@ QT += xml
 QT += xmlpatterns
 
 QMAKE_CXXFLAGS = -std=c++11
-LIBS += -lHACD -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
+LIBS += -L/usr/local/include/bullet/HACD -lHACD -L/usr/local/lib -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
 
 #LIBPATH += ../../../bullet-2.81-rev2613/Extras/HACD/
 
 # Input
-HEADERS += /home/hugo/SASIAE/bullet-2.81-rev2613/Extras/HACD/hacdCircularList.h \
- mainwindow.h \
+HEADERS += mainwindow.h \
     table.h \
 #    item_robot.h \ 
     ../common/object_config.hpp \
