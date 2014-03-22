@@ -1,7 +1,7 @@
 //#include "physical_calculator.hpp"
 #include "../modules/module.hpp"
 #include "../physical_calculator/physical_calculator.hpp"
-#include "../modules/modules.hpp"
+#include "../modules/module.hpp"
 #include "../physical_calculator/robot.hpp"
 //#include "../gui/mainwindow.h"
 
@@ -92,7 +92,7 @@ protected:
   QMap<QString /*robot_name*/, Robot* /*robotObject*/> _robotObject;
   QHash<QString/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
   /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
-  QHash<QString/*module_name*/, Modules* /*modules*/> _moduleFromName;
+  QHash<QString/*module_name*/, Module* /*modules*/> _moduleFromName;
   QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
   QHash<QObject* /* modules*/, 
 	QPair<QString/*robot_code_name*/, QString /*module_name*/> > 
@@ -132,13 +132,13 @@ private:
    * add to _moduleFromName a Pair
    * (key: module's name, value : module)
    */
-  bool addModule(QString name, Modules * mod);  
+  bool addModule(QString name, Module * mod);  
 
   /*
    * add to _moduleInfo a pair
    * (key : module, value : pair(codeName, moduleName))
    */
-  bool addModuleAndCodeName(Modules * key, QString code, QString module );
+  bool addModuleAndCodeName(Module * key, QString code, QString module );
    
 
 private:

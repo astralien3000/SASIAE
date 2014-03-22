@@ -25,6 +25,7 @@ PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data = new PrivateData;
 
   //! \todo Check phy not NULL
+    qDebug() << "bullet_ptr = " << phy->getScene().getScene(); 
   _data->physic = phy;
 
   _data->timeStep = 1./120.;

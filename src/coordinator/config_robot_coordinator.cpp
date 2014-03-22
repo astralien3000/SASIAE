@@ -39,6 +39,8 @@ Module* ConfigRobotCoordinator::loadModule(const ObjectConfig::moduleConfig* mod
   
   
 
+  //connect(_mod_cdn, SIGNAL(updateModules()), mod, SLOT(update()));
+  //connect(mod, SIGNAL(send(QString)), _mod_cdn, SLOT(forwardModuleMessage(QString)));
   return ret;
 }
 

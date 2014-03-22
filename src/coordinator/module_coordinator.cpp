@@ -43,8 +43,6 @@ void ModuleCoordinator::forwardModuleMessage(QString msg) {
 bool ModuleCoordinator::addModule(QString rname, QString mname, Module* mod) {
   _modules.insert(QPair<QString,QString>(rname, mname), mod);
 
-  connect(this, SIGNAL(updateModules()), mod, SLOT(update()));
-  connect(mod, SIGNAL(send(QString)), this, SLOT(forwardModuleMessage(QString)));
   return true;
 }
 

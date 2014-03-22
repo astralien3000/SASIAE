@@ -54,10 +54,10 @@ HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/balise.hpp \
     ../physical_calculator/world.hpp
 
-HEADERS += ../modules/servo.hpp \
-    ../modules/module.hpp \
-    ../modules/encoder.hpp \
-    ../modules/motor_wheel.hpp
+HEADERS += ../modules/module.hpp \
+#    ../modules/servo.hpp \
+#    ../modules/encoder.hpp \
+#    ../modules/motor_wheel.hpp
 
 HEADERS += ../stl/STLReader.hpp
 
@@ -90,9 +90,9 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/balise.cpp \
     ../physical_calculator/position_data_bullet.cpp
 
-SOURCES += ../modules/motor_wheel.cpp \
-    ../modules/servo.cpp \
-    ../modules/encoder.cpp
+#SOURCES += ../modules/motor_wheel.cpp \
+#    ../modules/servo.cpp \
+#    ../modules/encoder.cpp
 
 SOURCES +=   ../stl/STLReader.cpp
 
