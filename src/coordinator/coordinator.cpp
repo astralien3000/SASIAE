@@ -56,7 +56,6 @@ void Coordinator::startUpdateTimer(QTimer *tm){
 
     qDebug() << "connect timerUpdate to update";
     connect(tm, SIGNAL(timeout()), this, SLOT(update()));
-    qDebug() << "Update connected";
     tm->start();
 }
 
@@ -74,6 +73,8 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   _sch_cdn->addCoordinator(_mod_cdn);
   _sch_cdn->addCoordinator(_gui_cdn);
 
+  qDebug() << "Ajout de tous les Coordinators au Coordinator via le SchCoord";
+
   // GuiCoordinator.MainWindow -> PhysicalCoordinator : load the Table
   connect(
         _gui_cdn->getMainWindow(),
@@ -81,10 +82,11 @@ Coordinator::Coordinator(int argc, char* argv[]) :
         _phy_cdn,SLOT(loadTable(const QString&))
         );
 
+
   //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
   connect(
          _gui_cdn,
-         SIGNAL(forwardRobotFileStl),
+         SIGNAL(forwardRobotFileStl(const QString&, const QString&)),
          _bot_cdn,
          SLOT(loadRobotConfig(const QString&, const QString&))
           );
@@ -141,11 +143,12 @@ void Coordinator::stepDone() {
 }
 
 void Coordinator::openTable(const QString& XMLPath) {
-  _phy_cdn->loadTable(XMLPath);
+    qDebug()<< "Chargement de la Table : Coordinator.openTable()";
+    _phy_cdn->loadTable(XMLPath);
 }
 
 void Coordinator::openRobot(const QString& XMLPath) {
-
+    qDebug() << "Chargement des robots : Coordinator.openRobot()";
     QString name("name");
     _bot_cdn->loadRobotConfig(name,XMLPath);
 

@@ -71,11 +71,10 @@ void PhysicalCoordinator::loadTable(const QString& path) {
 }
 
 void PhysicalCoordinator::update(void) {
-  //qDebug() << "Bullet\n";
+  qDebug() << "PhysicalCoordinator emit nextStep";
   _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
   emit timestamp(_data->physic->getTime());
   emit nextStep();
-  //emit nextStepAnimation(); 
 }
 
 PhysicalCalculator* PhysicalCoordinator::getPhysicalCalculator(void) {

@@ -3,6 +3,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <QtCore/QObject>
 #include <QVector>
+#include <QDebug>
 
 #include "printable_mobile_object.hpp"
 #include "world.hpp"

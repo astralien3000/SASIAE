@@ -17,7 +17,7 @@ void ScheduleCoordinator::addCoordinator(BaseCoordinator* coor) {
 }
 
 void ScheduleCoordinator::update(void) {
-  //qDebug() << "Schedule\n" << endl;
+  qDebug() << "ScheduleCoordinator emit nextStep " << endl;
   emit nextStep();
 }
 

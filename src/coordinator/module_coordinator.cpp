@@ -60,8 +60,7 @@ bool ModuleCoordinator::delRobotModules(QString rname) {
 
 void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
-  //qDebug() << "Modules\n";
   emit updateModules();
-  qDebug() << "module emit nextStep()";
+  qDebug() << "ModuleCoordinator emit nextStep";
   emit nextStep();
 }
