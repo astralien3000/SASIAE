@@ -12,6 +12,7 @@ INCLUDEPATH += . \
 ../../../aversive--/include/sasiae \
 ../ \
 
+QMAKE_CXXFLAGS_WARN_OFF = -Wno-unused-parameter
 
 QT += widgets
 QT += xml

@@ -82,8 +82,9 @@ private slots:
   */
   //void MReceived(QString);
 
-  void sendModuleMessage(QString msg);
-
+  /* unused ?
+   * void sendModuleMessage(QString msg);
+    */
 
 
 //private:

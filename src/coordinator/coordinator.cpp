@@ -252,7 +252,8 @@ void Coordinator::update(void) {
   _sch_cdn->update();
 }
 
-void Coordinator::sendModuleMessage(QString msg) {
+/* Unused ?
+ void Coordinator::sendModuleMessage(QString msg) {
 }
 
 void Coordinator::sendDeviceMessage(QString name, QString msg, QString code) {
@@ -265,28 +266,29 @@ void Coordinator::sendMessages(QString msg, QProcess* p) {
 }
 
  
-/*void Coordinator::closeRobot(Slot robot){
+void Coordinator::closeRobot(Slot robot){
 }
 
 void Coordinator::closeRobot(QProcess *robot){
-}*/
+}
 
 
 QString Coordinator::readMessage(QProcess * proc)const{
 }
 
-/*bool Coordinator::addToRobotCode(QString name, QProcess * proc){
+bool Coordinator::addToRobotCode(QString name, QProcess * proc){
 }
 
 bool Coordinator::addModuleAndCodeName(Modules * key, QString code, QString module ){
   return false;
-}*/
+}
 
 
-/*bool Coordinator::addModule(QString name, Modules * mod){
+bool Coordinator::addModule(QString name, Modules * mod){
   return false;
-}*/
+}
 
 void Coordinator::sendSyncMessages() {
 }
 
+*/
