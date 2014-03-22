@@ -9,7 +9,7 @@
 
 class Mesh {
 private:
-  static World* _world;
+  static World _world;
   btCollisionShape* _shape;
 protected:
   btRigidBody* _body;

@@ -1,6 +1,7 @@
 #include "mesh.hpp"
 
-World* Mesh::_world;
+World Mesh::_world(NULL);
+
 Mesh::Mesh(btCollisionShape* shape, double mass, PositionData start_pos) : _shape(shape) {
   buildRigidBody(shape, mass, start_pos);
 }
@@ -38,22 +39,23 @@ void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData sta
         btVector3(v.x(),v.y(),v.z())));
       btScalar Mass = mass;
       btVector3 bodyInertia(0,0,0);
-      qDebug()<< "1BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
-              << " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia;
-      _shape->calculateLocalInertia(Mass,bodyInertia);
-      qDebug()<< "2BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+      qDebug()<< "1BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
+              << " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia << " shape" << _shape;
+      if(mass != 0)
+        _shape->calculateLocalInertia(Mass,bodyInertia);
+      qDebug()<< "2BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
               << " _body ="<< _body;
         btRigidBody::btRigidBodyConstructionInfo
                 bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
-        qDebug()<< "3BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+        qDebug()<< "3BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
                 << " _body ="<< _body;
         _body = new btRigidBody(bodyRigidBodyCI);
-        qDebug()<< "4BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+        qDebug()<< "4BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
                 << " _body ="<< _body;
         if(_world != NULL){
-          qDebug()<< "BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+          qDebug()<< "BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
                   << " _body ="<< _body;
-          _world->getScene()->addRigidBody(_body);
+          _world.getScene()->addRigidBody(_body);
         }
         else
           qDebug() << "Ajout d'un corps sans avoir défini de scene";
@@ -84,7 +86,7 @@ Mesh* Mesh::buildSphere(float radius, float mass, PositionData start_pos)
 
 void Mesh::setWorld(World& world)
 {
-  _world = &world;
+  _world = world;
 }
 
 PositionData Mesh::getPosition() const {
