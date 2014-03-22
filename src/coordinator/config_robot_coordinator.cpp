@@ -17,7 +17,9 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   auto robot_cfg = XMLParser::parseRobot(path);
 
   // Loading mesh
-  _robot_mesh[name] = new Robot(path,robot_cfg->mass, name, _phy_cdn.getPhysicalCalculator()->getScene());
+  /*A float or an int for the weight ? See bullet*/
+  World w(_phy_cdn.getPhysicalCalculator()->getScene());
+  _robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
 
   // Loading microcontrollers
   for(auto mi = robot_cfg->microcontrollers.begin() ; mi != robot_cfg->microcontrollers.end() ; ++mi) {

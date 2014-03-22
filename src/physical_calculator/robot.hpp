@@ -11,7 +11,7 @@ private:
   btRaycastVehicle::btVehicleTuning _tuning;
   //rajouter la balise
 public:
-  Robot(const QString path, float mass, PositionData start_pos, const QString name, World *world);
+  Robot(const QString path, float mass, PositionData start_pos, const QString name, World& world);
   Robot(const Mesh& mesh, World *world, QString name); 
   ~Robot();
 
