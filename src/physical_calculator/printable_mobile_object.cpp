@@ -48,6 +48,7 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
 PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
 STLMesh(path,mass,start_pos),_name(name)
 {
+    qDebug()<< "PMO Constructor path="<<path;
     _item = new QGraphicsPixmapItem();
     objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.

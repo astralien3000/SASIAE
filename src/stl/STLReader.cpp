@@ -5,10 +5,11 @@
 
 QList<QVector<float>> STLReader::readSTLTextFile(QString path) {
   QList<QVector<float>> triangles;
-  
   QFile file(path);
-  if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+  if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+    qDebug()<<"STLReader failed open file" ;
     return triangles;
+    }
   while(!file.atEnd()) {
     QByteArray ba = file.readLine();
     QStringList lineWord = QString(ba).simplified().split(" ");
@@ -20,9 +21,9 @@ QList<QVector<float>> STLReader::readSTLTextFile(QString path) {
       triangles.last().append(lineWord.at(2).toFloat());
       triangles.last().append(lineWord.at(3).toFloat());
     }
-    
+
   }
-    qDebug() << triangles;
+    qDebug() << "STLReader triangles="<< triangles << " size ="<< triangles.size();
   return triangles;/*
   quint32 triangles_nb;
   QByteArray size = file.read(4);
