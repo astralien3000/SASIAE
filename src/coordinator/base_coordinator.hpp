@@ -2,6 +2,7 @@
 #define BASE_COORDINATOR_HPP
 
 #include <QObject>
+#include <QDebug>
 
 //! \brief Defines ending signal and update slot.
 /*!

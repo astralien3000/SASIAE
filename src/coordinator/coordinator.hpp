@@ -62,7 +62,7 @@ public slots:
 
   //! \brief Trigger by Calculator, when a step is finished
   void stepDone();
-  void openTable(const QString& XMLPath);
+  //void openTable(const QString& XMLPath);
   void openRobot(const QString& XMLPath);
   //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
   

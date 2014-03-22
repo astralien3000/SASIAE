@@ -78,7 +78,7 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   // GuiCoordinator.MainWindow -> PhysicalCoordinator : load the Table
   connect(
         _gui_cdn->getMainWindow(),
-        SIGNAL(tableFileStl(const QString&)),
+        SIGNAL(tableFileXml(QString)),
         _phy_cdn,SLOT(loadTable(const QString&))
         );
 
@@ -129,7 +129,6 @@ connect(
 
 
 
-
   // Time management
   connect(
 	  _phy_cdn,
@@ -160,10 +159,12 @@ void Coordinator::pause() {
 void Coordinator::stepDone() {
 }
 
+/*
 void Coordinator::openTable(const QString& XMLPath) {
     qDebug()<< "Chargement de la Table : Coordinator.openTable()";
     _phy_cdn->loadTable(XMLPath);
 }
+*/
 
 void Coordinator::openRobot(const QString& XMLPath) {
     qDebug() << "Chargement des robots : Coordinator.openRobot()";
