@@ -24,6 +24,9 @@ public:
 signals:
     void tableFileStl(QString);
     void robotFileStl(const QString& name,const QString& path);
+    void uiPlay();
+    void uiPause();
+    void close();
 
 private:
     Ui::MainWindow *ui;
@@ -33,6 +36,9 @@ public slots:
     void openDirForRobot();
     void do_sth();
     void CReceived(QString message);
+    void slotPlay();
+    void slotPause();
+    void wantClose();
     /*
      * Ancient version
     void animateRobot(qreal x,qreal y);

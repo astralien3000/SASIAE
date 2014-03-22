@@ -35,7 +35,7 @@ class Coordinator:public QApplication{
   void calcNextStep(double, int); 
   void log(QString); 
   //! \brief time for UI sync in ms
-  void timer(unsigned long int);
+  //void timer(unsigned long int);
 
   void modulesNextStep(void);
 
@@ -68,6 +68,7 @@ public slots:
   
 						  
 						   
+  void update(void);
 
 private slots:
   //! \brief read the message received from the Client Thread
@@ -83,7 +84,6 @@ private slots:
 
   void sendModuleMessage(QString msg);
 
-  void update(void);
 
 
 //private:

@@ -52,13 +52,13 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
-void Coordinator::startUpdateTimer(QTimer *tm){
+/*void Coordinator::startUpdateTimer(QTimer *tm){
 
     qDebug() << "connect timerUpdate to update";
     connect(tm, SIGNAL(timeout()), this, SLOT(update()));
     qDebug() << "Update connected";
     tm->start();
-}
+}*/
 
 
 Coordinator::Coordinator(int argc, char* argv[]) :
@@ -84,7 +84,7 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
   connect(
          _gui_cdn,
-         SIGNAL(forwardRobotFileStl),
+         SIGNAL(forwardRobotFileStl(const QString&, const QString&)),
          _bot_cdn,
          SLOT(loadRobotConfig(const QString&, const QString&))
           );
@@ -104,6 +104,29 @@ Coordinator::Coordinator(int argc, char* argv[]) :
 	  _bot_cdn,
 	  SLOT(sendModuleMessage(QString, QString))
 	  );
+  // GUI -> schedule play pause
+  connect(
+	  _gui_cdn,
+	  SIGNAL(uiPlay()),
+	  _sch_cdn,
+	  SLOT(play())
+	  );
+  connect(
+	  _gui_cdn,
+	  SIGNAL(uiPause()),
+	  _sch_cdn,
+	  SLOT(pause())
+	  );
+  // GUI close -> this close
+connect(
+	  _gui_cdn,
+	  SIGNAL(close()),
+	  this,
+	  SLOT(quit())
+	  );
+
+
+
 
   // Time management
   connect(
@@ -126,17 +149,12 @@ Coordinator::~Coordinator(){
   delete _bot_cdn;
 }
 
-
 void Coordinator::play() {
-  //_running = true;
-  _phy_cdn->play();
+  _sch_cdn->play();
 }
-
 void Coordinator::pause() {
-  //_running = false;
-  _phy_cdn->pause();
+  _sch_cdn->pause();
 }
-
 void Coordinator::stepDone() {
 }
 

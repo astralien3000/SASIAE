@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget* parent):
     qDebug() << "MainWindow constructor";
     ui->setupUi(this);
     connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
+    connect(ui->button_play,SIGNAL(clicked()),this,SLOT(slotPlay()));
+    connect(ui->button_pause,SIGNAL(clicked()),this,SLOT(slotPause()));
   //Ui_MainWindow::setupUi(this);
 //        QObject::connect(button_robot1, SIGNAL(clicked()), qApp, SLOT(quit()));
   
@@ -16,6 +18,7 @@ MainWindow::MainWindow(QWidget* parent):
 
 MainWindow::~MainWindow()
 {
+    emit uiPause();
     delete ui;
 }
 
@@ -39,7 +42,17 @@ void MainWindow::do_sth()
     /*plainTextEdit->setPlainText(QApplication::translate("MainWindow", "lol", 0, QApplication::UnicodeUTF8)); */
 }
 
+void MainWindow::slotPlay() {
+    emit uiPlay();
+}
+void MainWindow::slotPause() {
+    emit uiPause();
+}
 
+void MainWindow::wantClose() {
+    emit uiPause();
+    emit close();
+}
 /* 
    Function for integration's tests
  */

@@ -30,13 +30,7 @@ signals:
   void timestamp(int);
 
 public slots:
-  //! \brief start the simulation
-  void play();
-
-  //! \brief pause the simulation
-  void pause();
-
-  //! \brief Load a Table from XML file
+    //! \brief Load a Table from XML file
   virtual void loadTable(const QString&);
 
   //! \brief Launch physical calculator's computation

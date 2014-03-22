@@ -20,9 +20,7 @@ int main(int argc, char* argv[])
    * calls the update methods in Coordinators
    * during each idle time in the gui application
    */
-  QTimer *timerUpdate = new QTimer(cdn);
-  qDebug() << "connect and start timer";
-  cdn->startUpdateTimer(timerUpdate);
+  cdn->update();
 
   std::cout << "Boucle principale..." << std::endl;
   cdn->exec();

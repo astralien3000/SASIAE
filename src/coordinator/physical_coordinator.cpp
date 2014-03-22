@@ -20,7 +20,7 @@ struct PhysicalCoordinator::PrivateData {
 
 PhysicalCoordinator::PhysicalCoordinator(void) : 
   PhysicalCoordinator(new PhysicalCalculator(this))
-{}
+{ _data->running = false;}
 
 PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data = new PrivateData;
@@ -43,13 +43,7 @@ PhysicalCoordinator::~PhysicalCoordinator() {
   delete _data->physic;
 }
 
-void PhysicalCoordinator::play() {
-  _data->running = true;
-}
 
-void PhysicalCoordinator::pause() {
-  _data->running = false;
-}
 
 void PhysicalCoordinator::loadTable(const QString& path) {
   const ObjectConfig::tableConfig * tableConfig=XMLParser::parseTable(path);
@@ -71,10 +65,14 @@ void PhysicalCoordinator::loadTable(const QString& path) {
 }
 
 void PhysicalCoordinator::update(void) {
-  //qDebug() << "Bullet\n";
-  _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
-  emit timestamp(_data->physic->getTime());
-  emit nextStep();
+  qDebug() << "PhysicalCoord\n";
+  if(_data->running == true) {
+    qDebug() << " Running \n";
+    _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
+    emit timestamp(_data->physic->getTime());
+    emit nextStep();
+  }
+
   //emit nextStepAnimation(); 
 }
 

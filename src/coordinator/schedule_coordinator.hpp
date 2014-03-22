@@ -11,6 +11,8 @@ class ScheduleCoordinator : public BaseCoordinator {
 public slots:
   //! \brief Needed to be instantiated
   void update(void);
+  void play(void);
+  void pause(void);
 
 public:
   //!\brief Constructor
@@ -24,6 +26,7 @@ public:
 
 private:
   QList<BaseCoordinator*> _coords;
+  bool _running;
 };
 
 #endif//SCHEDULE_COORDINATOR_HPP

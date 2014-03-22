@@ -15,12 +15,18 @@ class GuiCoordinator: public BaseCoordinator {
 signals:
     //void forwardTableFileStl(QString);
     void forwardRobotFileStl(const QString&, const QString&);
+    void uiPlay();
+    void uiPause();
+    void nextStep();
+    void close();
 
 public slots:
   void update(void);
   void updateTable(void);
   void forwardRobotNameStl(const QString&, const QString& = QString());
-
+  void slotPause();
+  void slotPlay();
+  void slotClose();
 public:
   //! \brief Default Constructor
   GuiCoordinator(void);

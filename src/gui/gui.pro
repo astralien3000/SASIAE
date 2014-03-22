@@ -21,6 +21,7 @@ QMAKE_CXXFLAGS = -std=c++11
 LIBS += -L/usr/local/include/bullet/HACD -lHACD -L/usr/local/lib -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
 
 #LIBPATH += ../../../bullet-2.81-rev2613/Extras/HACD/
+LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \

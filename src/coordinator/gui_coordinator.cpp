@@ -19,7 +19,19 @@ GuiCoordinator::GuiCoordinator(void){
             this,
             SLOT(forwardRobotNameStl(const QString&,const QString&))
            );
+    connect(_mainWindow,
+           SIGNAL(uiPlay()),
+           this,
+           SLOT(slotPlay()));
 
+    connect(_mainWindow,
+           SIGNAL(uiPause()),
+           this,
+           SLOT(slotPause()));
+    connect(_mainWindow,
+           SIGNAL(close()),
+           this,
+           SLOT(slotClose()));
 /*
    //to be tested when the connect above is solved.
 connect(
@@ -30,7 +42,15 @@ connect(
        );
 */
 }
-
+void GuiCoordinator::slotPlay() {
+  emit uiPlay();
+}
+void GuiCoordinator::slotPause() {
+  emit uiPause();
+}
+void GuiCoordinator::slotClose() {
+  emit close();
+}
 MainWindow* GuiCoordinator::getMainWindow(void)const{
   return _mainWindow;
 }
@@ -79,7 +99,7 @@ void GuiCoordinator::update(){
           else{
            qDebug() << "GuiCoordinator objectList is empty";
            }
-
+          emit nextStep();
        }
 
 /*       void GuiCoordinator::forwardTbleFStl(QString file){
