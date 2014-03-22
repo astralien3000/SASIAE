@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
    * calls the update methods in Coordinators
    * during each idle time in the gui application
    */
-  cdn->update();
+  //cdn->update();
 
   std::cout << "Boucle principale..." << std::endl;
   cdn->exec();
