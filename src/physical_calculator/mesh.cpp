@@ -1,5 +1,6 @@
 #include "mesh.hpp"
 
+World* Mesh::_world;
 Mesh::Mesh(btCollisionShape* shape, double mass, PositionData start_pos) : _shape(shape) {
   buildRigidBody(shape, mass, start_pos);
 }
@@ -11,8 +12,7 @@ Mesh::Mesh(const Mesh & source) {
   btTransform trans;
   source._body->getMotionState()->getWorldTransform(trans);
   PositionData pos_data;
-  pos_data += trans.getOrigin();
-  pos_data += trans.getRotation();
+  pos_data += castbtVectToPos(trans.getOrigin())+castbtQuaToPos(trans.getRotation());
   buildRigidBody(_shape, 1.f/ source._body->getInvMass(), pos_data);
 }
 
@@ -30,10 +30,10 @@ Mesh::operator const btRigidBody *() const{
   return _body;
 }
 void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
-const QVector3D v = start_pos.getPosition();
+const QVector3D v = start_pos;
 
   btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
-        btQuaternion(start_pos.getRotation(2),start_pos.getRotation(1), start_pos.getRotation(0)),
+        btQuaternion(start_pos.alpha,start_pos.beta, start_pos.gamma),
         btVector3(v.x(),v.y(),v.z())));
       btScalar Mass = mass;
       btVector3 bodyInertia(0,0,0);
@@ -79,7 +79,6 @@ PositionData Mesh::getPosition() const {
   PositionData pos;
   btTransform trans;
 	_body->getMotionState()->getWorldTransform(trans);
-  pos += trans.getRotation();
-  pos += trans.getOrigin();
+  pos += castbtQuaToPos(trans.getRotation())+castbtVectToPos(trans.getOrigin());
   return pos;
 }

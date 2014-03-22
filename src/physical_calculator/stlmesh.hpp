@@ -2,7 +2,6 @@
 #define STLMESH_HPP
 
 #include <btBulletDynamicsCommon.h>
-//#include "../stl/STLReader.hpp"
 #include "world.hpp"
 #include "mesh.hpp"
 #include "position_data_bullet.hpp"
@@ -16,9 +15,9 @@ private:
   static QMap<QString, QPair<btCollisionShape*, unsigned int>> s_stlshapes;
 
 protected:
-  void init(const QString path, float mass, PositionData pos);
+  void init(const QString path, double mass, PositionData pos);
 public:
-  STLMesh(const QString path, float mass, PositionData start_pos);
+  STLMesh(const QString path, double mass, PositionData start_pos);
   STLMesh(const STLMesh & mesh);
   ~STLMesh();
 };

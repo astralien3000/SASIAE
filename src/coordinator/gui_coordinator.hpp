@@ -19,7 +19,7 @@ signals:
 public slots:
   void update(void);
   void updateTable(void);
-  void forwardRobotNameFStl(const QString&);
+  void forwardRobotNameStl(const QString&, const QString& = QString());
 
 public:
   //! \brief Default Constructor

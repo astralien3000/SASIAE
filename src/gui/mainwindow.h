@@ -18,7 +18,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    const QGraphicsScene& getScene(void)const;
+    const QGraphicsScene* getScene(void)const;
+    QGraphicsScene* getScene(void);
 
 signals:
     void tableFileStl(QString);

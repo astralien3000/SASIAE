@@ -9,19 +9,20 @@ INCLUDEPATH += . \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
 /usr/local/include/bullet \
-
+../ 
 
 QT += widgets
 QT += xml
 QT += xmlpatterns
 
 QMAKE_CXXFLAGS = -std=c++11
-LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
+LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns -lHACD
+LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
     table.h \
-    item_robot.h \ 
+#    item_robot.h \ 
     ../common/object_config.hpp \
     ../common/position_data.hpp
 
@@ -58,7 +59,7 @@ FORMS += mainwindow.ui
 
 SOURCES += main.cpp mainwindow.cpp \
     table.cpp \
-    item_robot.cpp \
+#    item_robot.cpp \
     ../common/object_config.cpp \
     ../common/position_data.cpp
 
@@ -88,6 +89,6 @@ SOURCES += ../modules/motor_wheel.cpp \
 
 SOURCES +=   ../stl/STLReader.cpp
 
-OTHER_FILES += \
-    ../coordinator/xml_parser/Makefile
+#OTHER_FILES += \
+#    ../coordinator/xml_parser/Makefile
 

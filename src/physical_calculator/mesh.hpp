@@ -19,9 +19,9 @@ protected:
   Mesh(const Mesh & source);
   ~Mesh();
   void buildRigidBody(btCollisionShape* shape, double mass, PositionData pos);
-   operator btRigidBody*();
 
 public:
+   operator btRigidBody*();
   operator const btRigidBody*() const;
   static Mesh* buildCylinder(unsigned int axis, float high, float r, float mass, PositionData start_pos);
   static Mesh* buildBox(QVector3D size, float mass, PositionData start_pos);

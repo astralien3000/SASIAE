@@ -28,7 +28,7 @@ namespace ObjectConfig {
 		};
 
 		struct robotConfig {
-            int weight;
+            float weight;
 			QString mesh_path;
 			QList<const microCConfig*> microcontrollers;
 			~robotConfig();

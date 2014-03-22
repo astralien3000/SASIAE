@@ -3,7 +3,7 @@
 
 #include "robot.hpp"
 #include "physical_calculator.hpp"
-#include "position_data.hpp"
+#include "position_data_bullet.hpp"
 #include "world.hpp"
 #include "mesh.hpp"
 
@@ -15,7 +15,7 @@
 
 class Balise {
 public:
-  Balise(World* world, Robot* chassis);
+  Balise(World world, Robot* chassis);
   PositionData getPosition();
 
 private:

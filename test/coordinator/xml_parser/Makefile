@@ -3,7 +3,7 @@ CFLAGS= -W -Wall -Wextra -std=c++11 -g -O0
 INCLUDE= -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtXml -I/usr/include/qt5/QtXmlPatterns -I/usr/include/qt5/QtGui -fPIC
 LDFLAGS= -lQt5Core -lQt5Xml -lQt5XmlPatterns
 
-SRC= ../../../src/coordinator/xml_parser/xml_parser.cpp test_xml_parser.cpp
+SRC= ../../../src/coordinator/xml_parser/xml_parser.cpp test_xml_parser.cpp ../../../src/common/object_config.cpp ../../../src/common/position_data.cpp
 OBJ= $(SRC:.cpp=.o)
 EXEC= test_xml_parser
 

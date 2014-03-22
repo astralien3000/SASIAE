@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::animateRobot(qreal x,qreal y){
     qDebug() << "MainWindow::animateRobot";
-    ui->graphicsView->moveRobot(x,y);
+    //ui->graphicsView->moveRobot(x,y);
     //ui->graphicsView->moveRobot();
 }
 
@@ -60,6 +60,10 @@ void MainWindow::CReceived(QString message){
       emit robotFileStl(name,fileName);
      }
 
-  const QGraphicsScene& MainWindow::getScene(void)const{
-    return ui->graphicsView->getScene();
+  const QGraphicsScene* MainWindow::getScene(void)const{
+    return ui->graphicsView->scene();
+  }
+  QGraphicsScene* MainWindow::getScene(void)
+  {
+    return ui->graphicsView->scene();
   }

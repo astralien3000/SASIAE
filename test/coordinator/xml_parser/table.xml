@@ -1,5 +1,5 @@
 <table>
-    <mesh src="../../../src/stl/table_static_cdr2014.stl">
+    <mesh src="../../../src/stl/table_static_cdr2014.stl"/>
     <img src="../../../img/table_2014.png"/>
 	<toys>
 	    <toy name="triangle1" weight="170">
@@ -9,4 +9,3 @@
 	    </toy>
 	</toys>
 </table>
-

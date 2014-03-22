@@ -20,7 +20,7 @@ public:
 signals:
 
 public slots:
-    void moveRobot(qreal x, qreal y);
+//    void moveRobot(qreal x, qreal y);
 
 private:
     ItemRobot * robot;
