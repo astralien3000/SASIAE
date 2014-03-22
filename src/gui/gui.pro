@@ -12,8 +12,9 @@ INCLUDEPATH += . \
 ../../../aversive--/include/sasiae \
 ../ \
 
-QMAKE_CXXFLAGS_WARN_OFF += -Wno-unused-variable
-QMAKE_CXXFLAGS_WARN_OFF += -Wno-ignored-qualifiers
+QMAKE_CFLAGS = -Wno-unused-parameter
+QMAKE_CFLAGS = -Wno-ignored-qualifiers
+QMAKE_CFLAGS = -Wno-unused-variable
 
 QT += widgets
 QT += xml
@@ -97,4 +98,8 @@ SOURCES +=   ../stl/STLReader.cpp
 
 #OTHER_FILES += \
 #    ../coordinator/xml_parser/Makefile
+
+OTHER_FILES += \
+    ../xsd/robot.xsd \
+    ../xsd/table.xsd
 

@@ -47,7 +47,7 @@ const QDomDocument* XMLParser::open(const QString& xml_path, const QString& xsd_
 
 const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& path){
 	/* Ouverture d'un fichier xml */
-	const QDomDocument* doc = open(path,QString("./robot.xsd"));
+    const QDomDocument* doc = open(path,QString("../xsd/robot.xsd"));
 	QDomNode r = doc->elementsByTagName("robot").item(0);
 
 	/* Ouverture de la première structure */
@@ -123,11 +123,13 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 }
 
 const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& path) {
-    qDebug() << "parseTable";
-  const QDomDocument* doc = open(path, QString("table.xsd"));
+    qDebug() << "parseTable : " << path;
+  const QDomDocument* doc = open(path, QString("../xsd/table.xsd"));
   if(doc == NULL) {
+    qDebug()<< "doc Null";
     return NULL;
   }
+
   QDomElement t = doc->elementsByTagName("table").item(0).toElement();
   ObjectConfig::tableConfig* data = new ObjectConfig::tableConfig();
 
@@ -139,7 +141,6 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
     if(!toys.item(i).isElement()) {
       continue;
     }
-
     QDomElement toyElem = toys.item(i).toElement();
 
     ObjectConfig::toyConfig* toy = new ObjectConfig::toyConfig();
