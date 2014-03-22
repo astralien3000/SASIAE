@@ -19,12 +19,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*
+ * Ancient version
 void MainWindow::animateRobot(qreal x,qreal y){
     qDebug() << "MainWindow::animateRobot";
-    //ui->graphicsView->moveRobot(x,y);
-    //ui->graphicsView->moveRobot();
+    ui->graphicsView->moveRobot(x,y);
+    ui->graphicsView->moveRobot();
 }
-
+*/
 
 QTimeLine *MainWindow::getTimer()const{
  return   ui->graphicsView->timer;

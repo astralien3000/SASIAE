@@ -33,8 +33,10 @@ public slots:
     void openDirForRobot();
     void do_sth();
     void CReceived(QString message);
-    //void animate();
+    /*
+     * Ancient version
     void animateRobot(qreal x,qreal y);
+    */
     QTimeLine *getTimer()const;
 };
 

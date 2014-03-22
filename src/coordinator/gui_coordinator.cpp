@@ -78,8 +78,7 @@ void GuiCoordinator::update(){
           }
           else{
            qDebug() << "GuiCoordinator objectList is empty";
-           _mainWindow->animateRobot(0,0);
-         }
+           }
 
        }
 

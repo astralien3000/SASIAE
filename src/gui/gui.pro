@@ -5,19 +5,22 @@
 TEMPLATE = app
 TARGET = gui
 INCLUDEPATH += . \
+/usr/local/include/bullet \
+/usr/local/lib \
 /usr/include/bullet \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
-/usr/local/include/bullet \
-../ 
+../ \
+
 
 QT += widgets
 QT += xml
 QT += xmlpatterns
 
 QMAKE_CXXFLAGS = -std=c++11
-LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns -lHACD
-LIBPATH += ../HACD/
+LIBS += -L/usr/local/include/bullet/HACD -lHACD -L/usr/local/lib -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -lQt5XmlPatterns
+
+#LIBPATH += ../../../bullet-2.81-rev2613/Extras/HACD/
 
 # Input
 HEADERS += mainwindow.h \

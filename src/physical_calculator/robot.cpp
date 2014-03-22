@@ -1,5 +1,8 @@
 #include "robot.hpp"
 
+
+//Robot::Robot(const QString path, float mass, PositionData start_pos, const QString name, World &world)
+
 Robot::Robot(const QString path, float mass, PositionData start_pos, const QString name, World world)
   :  PrintableMobileObject(path,mass,start_pos,name),
    btRaycastVehicle(	_tuning,
