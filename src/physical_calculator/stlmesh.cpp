@@ -3,7 +3,7 @@
 #include <QVector>
 #include <QDebug>
 #include "../stl/STLReader.hpp"
-#include <HACD/hacdCircularList.h>
+#include "HACD/hacdCircularList.h"
 #include <HACD/hacdVector.h>
 #include <HACD/hacdICHull.h>
 #include <HACD/hacdGraph.h>
