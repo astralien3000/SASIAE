@@ -30,19 +30,31 @@ Mesh::operator const btRigidBody *() const{
   return _body;
 }
 void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
-const QVector3D v = start_pos;
+    qDebug()<< "Mesh buildRigidBody() shape=" << shape << " mass=" << mass << "start position ="<< start_pos;
+    const QVector3D v = start_pos;
 
   btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
         btQuaternion(start_pos.alpha,start_pos.beta, start_pos.gamma),
         btVector3(v.x(),v.y(),v.z())));
       btScalar Mass = mass;
       btVector3 bodyInertia(0,0,0);
+      qDebug()<< "1BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+              << " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia;
       _shape->calculateLocalInertia(Mass,bodyInertia);
+      qDebug()<< "2BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+              << " _body ="<< _body;
         btRigidBody::btRigidBodyConstructionInfo
                 bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
+        qDebug()<< "3BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+                << " _body ="<< _body;
         _body = new btRigidBody(bodyRigidBodyCI);
-        if(_world != NULL)
+        qDebug()<< "4BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+                << " _body ="<< _body;
+        if(_world != NULL){
+          qDebug()<< "BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world->getScene()
+                  << " _body ="<< _body;
           _world->getScene()->addRigidBody(_body);
+        }
         else
           qDebug() << "Ajout d'un corps sans avoir défini de scene";
 }

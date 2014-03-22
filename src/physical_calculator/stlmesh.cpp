@@ -13,6 +13,7 @@
 QMap<QString, QPair<btCollisionShape*, unsigned int>> STLMesh::s_stlshapes;
 
 STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
+    qDebug()<<"STLMesh Constructor stlpath="<<stlpath;
   init(stlpath, mass, start_pos);
 }
 
@@ -28,7 +29,11 @@ STLMesh::~STLMesh() {
 
 void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
   if(mass == 0) {
+   qDebug()<<"STLMesh init mass= 0 stlpath="<<stlpath;
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
+
+    qDebug()<< "retour=" << retour;
+
     btTriangleMesh* trimesh = new btTriangleMesh();
     for(int i=0; i<retour.size(); i++ ) 
 		{
@@ -37,6 +42,7 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
                             btVector3(s[3],s[4],s[5]), 
                             btVector3(s[6],s[7],s[8]));
 		}
+        qDebug()<< "STLMesh init mass= 0 END OF LOOP trimesh="<<trimesh;
     buildRigidBody(new btBvhTriangleMeshShape(trimesh, true), mass, pos);
     
   }
