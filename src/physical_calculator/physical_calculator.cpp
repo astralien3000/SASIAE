@@ -5,6 +5,7 @@
 
 
 PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
+ qDebug() << "Contruction Calculateur Physique";
   _broadphase = new btDbvtBroadphase();
   _collisionConfiguration = new btDefaultCollisionConfiguration();
   _dispatcher = new btCollisionDispatcher(_collisionConfiguration);

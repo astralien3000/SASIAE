@@ -10,7 +10,6 @@
 
 struct PhysicalCoordinator::PrivateData {
   PhysicalCalculator* physic;
-  bool running; // Use for pause button & don't keep updata signal
   double timeStep;
   int maxSubStep;
 };
@@ -20,7 +19,7 @@ struct PhysicalCoordinator::PrivateData {
 
 PhysicalCoordinator::PhysicalCoordinator(void) : 
   PhysicalCoordinator(new PhysicalCalculator(this))
-{ _data->running = false;}
+{ }
 
 PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data = new PrivateData;
@@ -28,7 +27,6 @@ PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   //! \todo Check phy not NULL
   _data->physic = phy;
 
-  _data->running = false;
   _data->timeStep = 1./120.;
   _data->maxSubStep = 20;
   connect(
@@ -65,15 +63,11 @@ void PhysicalCoordinator::loadTable(const QString& path) {
 }
 
 void PhysicalCoordinator::update(void) {
-  qDebug() << "PhysicalCoord\n";
-  if(_data->running == true) {
+  qDebug() << "PhysicalCoordinator emit nextStep";
     qDebug() << " Running \n";
     _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
     emit timestamp(_data->physic->getTime());
     emit nextStep();
-  }
-
-  //emit nextStepAnimation(); 
 }
 
 PhysicalCalculator* PhysicalCoordinator::getPhysicalCalculator(void) {

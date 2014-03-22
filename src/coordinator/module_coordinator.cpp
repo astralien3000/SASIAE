@@ -62,6 +62,6 @@ void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
   //qDebug() << "Modules\n";
   //TODO call them manually, les signaux slots ne garantice pas d'etre executé avant le prochain pas emit updateModules();
-  qDebug() << "module emit nextStep()";
+  qDebug() << "ModuleCoordinator emit nextStep";
   emit nextStep();
 }

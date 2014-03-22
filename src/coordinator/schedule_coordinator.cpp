@@ -21,7 +21,7 @@ void ScheduleCoordinator::addCoordinator(BaseCoordinator* coor) {
 }
 
 void ScheduleCoordinator::update(void) {
-  qDebug() << "Schedule loop\n" << endl;
+  qDebug() << "ScheduleCoordinator loop" << endl;
   //emit nextStep();
   while(_running) {
     foreach(BaseCoordinator* bc, _coords) {

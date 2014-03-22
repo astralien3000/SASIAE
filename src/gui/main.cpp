@@ -5,7 +5,7 @@
 */
 #include <iostream>
 #include <QDebug>
-
+/*TAG22*/
 #include "../coordinator/coordinator.hpp"
 
 
@@ -14,13 +14,12 @@ int main(int argc, char* argv[])
     std::cout << "Creation de l'application..." << std::endl;
     Coordinator * cdn=& Coordinator::getInstance(argc, argv);
 
-    std::cout << "Chargement des robots et de la table..." << std::endl;
+   // std::cout << "Chargement des robots et de la table..." << std::endl;
 
   /* Initialize the UpdateTimer which
    * calls the update methods in Coordinators
    * during each idle time in the gui application
    */
-  //cdn->update();
 
   std::cout << "Boucle principale..." << std::endl;
   cdn->exec();

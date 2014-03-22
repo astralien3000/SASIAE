@@ -119,11 +119,11 @@ void RobotCoordinator::setTimestamp(int t) {
 }
 
 void RobotCoordinator::update(void) {
-  //qDebug() << "Robots\n";
   if(_robots.size()) {
     sendSyncMessage(_time * 1000); // ms to us
   }
   else {
+      qDebug()<< "RobotCoordinator emit nextStep" ;
     emit nextStep();
   }
 }
