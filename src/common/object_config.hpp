@@ -21,16 +21,16 @@ namespace ObjectConfig {
 			~moduleConfig();
 		};
 
-		struct microCConfig {
+		struct microConfig {
 			QString name;
 			QList<const moduleConfig*> modules;
-			~microCConfig();
+			~microConfig();
 		};
 
 		struct robotConfig {
             float weight;
 			QString mesh_path;
-			QList<const microCConfig*> microcontrollers;
+			QList<const microConfig*> microcontrollers;
 			~robotConfig();
 		};
 

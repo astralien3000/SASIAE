@@ -5,6 +5,8 @@
 #include "physical_coordinator.hpp"
 #include "module_coordinator.hpp"
 
+#include "../common/object_config.hpp"
+
 class Module;
 class Robot;
 
@@ -29,7 +31,7 @@ public slots:
 private:
   //! \brief Load a module
   //! \param name : The name that identify the module to be loaded
-  Module* loadModule(const QString& name);
+  Module* loadModule(const ObjectConfig::moduleConfig* moduleConf);
 
 public:
   //! \brief Constructor

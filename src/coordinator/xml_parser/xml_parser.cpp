@@ -62,7 +62,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	QDomNodeList params;
 
 	/* Pointeurs de sauvegardes des instances courantes */
-	ObjectConfig::microCConfig *currMC;
+	ObjectConfig::microConfig *currMC;
 	ObjectConfig::moduleConfig *currMod;
 	ObjectConfig::parameter* currParam;
 
@@ -74,7 +74,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	/* Parcours des µC */
 	for(int i=0; i<mcs.length(); i++) {
 		/* Ajout d'une structure µC */
-		currMC = new ObjectConfig::microCConfig();
+		currMC = new ObjectConfig::microConfig();
 
 		/*Sauvegarde du noeud courrant*/
 		tmp1 = mcs.item(i);

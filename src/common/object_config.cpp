@@ -4,7 +4,7 @@ ObjectConfig::moduleConfig::~moduleConfig() {
 	for(int i=0; i<parameters.length(); i++)
 		delete parameters.at(i);
 }
-ObjectConfig::microCConfig::~microCConfig() {
+ObjectConfig::microConfig::~microConfig() {
 	for(int i=0; i<modules.length(); i++)
 		delete modules.at(i);
 }

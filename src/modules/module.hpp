@@ -3,9 +3,10 @@
 
 #include <QObject>
 #include <QStandardItemModel>
+#include "../common/object_config.hpp"
+#define Modules_iid "modules.sasiae.eirbot"
 
-class Module : public QObject {
-  Q_OBJECT;
+class Module {
 
 signals:
   //! \brief Send a message to the device
@@ -20,10 +21,11 @@ public slots:
 
 public:
   //! \brief Constructor
-  inline Module(QObject* parent = 0) : QObject(parent) {}
-
+  //inline Module(QObject* parent = 0) : QObject(parent) {}
+  virtual Module* buildModule(const ObjectConfig::moduleConfig* conf);
   //! \brief Return an item to show on the QTreeView
   virtual QStandardItem* getGuiItem(void) = 0;
 };
+Q_DECLARE_INTERFACE(Module, Modules_iid);
 
 #endif//MODULE_HPP

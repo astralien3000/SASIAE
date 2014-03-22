@@ -42,6 +42,10 @@ QStandardItem* MotorWheel::getGuiItem() {
   return _dataRoot;
 }
 
+Module* MotorWheel::buildModule(const ObjectConfig::moduleConfig* conf) {
+
+}
+
 void MotorWheel::received(QString message) {
   QStringList list = message.split(" ");
   if(list.at(0) == "value") {

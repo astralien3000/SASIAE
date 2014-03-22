@@ -14,7 +14,7 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 }
 
 bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path) {
-  auto robot_cfg = XMLParser::parseRobot(path);
+  const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
 
   // Loading mesh
 //Merge
@@ -24,27 +24,20 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   _robot_mesh[name] = new Robot(path,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
 
   // Loading microcontrollers
-  for(auto mi = robot_cfg->microcontrollers.begin() ; mi != robot_cfg->microcontrollers.end() ; ++mi) {
+  foreach (const ObjectConfig::microConfig* mi,robot_cfg->microcontrollers) {
     // Loading modules
-    for(auto mo = (*mi)->modules.begin() ; mo != (*mi)->modules.end() ; ++mo) {
-      Module* mod = loadModule((*mo)->name);
-      _mod_cdn.addModule(name, (*mo)->name, mod);
+    foreach (const ObjectConfig::moduleConfig* mo,mi->modules) {
+      Module* mod = loadModule(mo);
+      _mod_cdn.addModule(name, mo->name, mod);
     }
   }
   return true;
 }
 
-Module* ConfigRobotCoordinator::loadModule(const QString& name) {
+Module* ConfigRobotCoordinator::loadModule(const ObjectConfig::moduleConfig* moduleConf) {
   Module* ret = 0;
-
-  if(name == "motor") {
-    Wheel* w = new Wheel(_robot_mesh[name], QVector3D(16,-17.5+3-0.00,0),QVector3D(0,-1,0),3,true);
-    ret = new MotorWheel(w, "", this);
-  }
-  else if(name == "encoder") {
-    Wheel* w = new Wheel(_robot_mesh[name], QVector3D(19,-17.5+3-0.00,0),QVector3D(0,-1,0),3,false);
-    ret = new Encoder(w, "", this);
-  }
+  
+  
 
   return ret;
 }
