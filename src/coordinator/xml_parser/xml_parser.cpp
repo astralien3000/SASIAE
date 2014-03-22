@@ -123,6 +123,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 }
 
 const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& path) {
+    qDebug() << "parseTable";
   const QDomDocument* doc = open(path, QString("table.xsd"));
   if(doc == NULL) {
     return NULL;

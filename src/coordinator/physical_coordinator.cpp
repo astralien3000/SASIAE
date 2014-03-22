@@ -44,11 +44,14 @@ PhysicalCoordinator::~PhysicalCoordinator() {
 
 
 void PhysicalCoordinator::loadTable(const QString& path) {
+  qDebug() << "PhysCoor loadTable path="<< path;
   const ObjectConfig::tableConfig * tableConfig=XMLParser::parseTable(path);
-  //STLReader stl_reader();
-  //QList<QVector<float> > tablePointsList=stl_reader.readSTLTextFile(tableConfig->mesh_path);
 
-  //Initialize the Table PrintableMobileObject
+  qDebug()<<"tableConfig : img path ="<< tableConfig->img_path
+         << "  mesh_path ="<<tableConfig->mesh_path << " toys=" << tableConfig->toys ;
+
+
+  qDebug()<<"Initialize the Table PrintableMobileObject";
   new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(0,0,0,0,0,0),QString("table"));
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;

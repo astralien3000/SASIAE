@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 	std::cout<<"Fin de l'analyse"<<std::endl;
 	
 	std::cout<<"Ouverture du fichier de configuration d'une table"<<std::endl;
-	const ObjectConfig::tableConfig* table = XMLParser::parseTable(QString("./table.xml"));
+	const ObjectConfig::tableConfig* table = XMLParser::parseTable(QString("/home/hugo/SASIAE/SASIAE/test/coordinator/xml_parser/table.xml"));
 	assert(table!=NULL);
 	std::cout<<"Fichier de configuration ouvert\nAnalyse des données"<<std::endl;
 	assert(table->mesh_path=="../../../src/stl/table_static_cdr2014.stl");

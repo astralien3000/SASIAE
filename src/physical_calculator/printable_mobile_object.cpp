@@ -28,6 +28,7 @@ void PrintableMobileObject::update() const {
 PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh & mesh) :
     STLMesh(mesh), _name(name) //to test
     {
+        qDebug()<< "PMO Constructor : " << name;
         objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.
         auto it = images.find(name);

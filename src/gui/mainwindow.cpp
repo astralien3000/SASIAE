@@ -61,9 +61,10 @@ void MainWindow::CReceived(QString message){
 }
 
   void MainWindow::openDirForTable(){
-      QString fileName = QFileDialog::getOpenFileName(this,
+      const QString fileName = QFileDialog::getOpenFileName(this,
           "Open Xml file", "/home", "Config Files (*.xml)");
-      emit tableFileStl(fileName);
+      qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to ";
+      emit tableFileXml(fileName);
      }
 
 

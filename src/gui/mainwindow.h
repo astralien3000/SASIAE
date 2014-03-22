@@ -22,7 +22,7 @@ public:
     QGraphicsScene* getScene(void);
 
 signals:
-    void tableFileStl(QString);
+    void tableFileXml(const QString&);
     void robotFileStl(const QString& name,const QString& path);
     void uiPlay();
     void uiPause();
