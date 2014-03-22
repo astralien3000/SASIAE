@@ -19,6 +19,7 @@ GuiCoordinator::GuiCoordinator(void){
             this,
             SLOT(forwardRobotNameStl(const QString&,const QString&))
            );
+
     connect(_mainWindow,
            SIGNAL(uiPlay()),
            this,
@@ -61,6 +62,7 @@ GuiCoordinator::~GuiCoordinator(void){
 void GuiCoordinator::forwardRobotNameStl(const QString&name , const QString&path){
     emit forwardRobotFileStl(name, path);
 }
+
 
 void GuiCoordinator::updateTable(){
     foreach(const PrintableMobileObject* it,PrintableMobileObject::getObjectsList()){

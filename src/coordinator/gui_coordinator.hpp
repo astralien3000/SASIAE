@@ -13,7 +13,7 @@ class GuiCoordinator: public BaseCoordinator {
   Q_OBJECT;
 
 signals:
-    //void forwardTableFileStl(QString);
+
     void forwardRobotFileStl(const QString&, const QString&);
     void uiPlay();
     void uiPause();
