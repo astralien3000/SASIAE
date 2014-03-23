@@ -19,29 +19,6 @@ Table::Table(QWidget*parent) :
      * Create a QBrush, passing it in argument of the ItemRobot
      * for filling the robot-item background
     */
-    /* TODO : faire ça dans loadRobot
-     *
-     * QPixmap robotImg("petitrobot.png");
-       QBrush robotBackground(robotImg);
-       robot=new ItemRobot(robotBackground);
-    */
-
-    /*
-     * Add the robot-item to the scene built
-     * in the central widget graphicsView ( Table )
-     */
-    //scene()->addItem(robot);
-
- /*
- * This timer is no longer implemented.
- * Instead, the method moveRobot() is called
- * whenever the method GuiCoordinator::update()
- * is called.
-*/
-    //QTimer *timer2 = new QTimer(this);
-    //connect(timer2, SIGNAL(timeout()), this, SLOT(moveRobot()));
-    //timer2->start(1000/60);
-
 
     /*
      * Without the time line the application

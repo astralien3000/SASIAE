@@ -43,18 +43,10 @@ void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData sta
               << " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia << " shape" << _shape;
      // if(Mass != 0)
         _shape->calculateLocalInertia(Mass,bodyInertia);
-      qDebug()<< "2BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
-              << " _body ="<< _body;
         btRigidBody::btRigidBodyConstructionInfo
                 bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
-        qDebug()<< "3BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
-                << " _body ="<< _body;
         _body = new btRigidBody(bodyRigidBodyCI);
-        qDebug()<< "4BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
-                << " _body ="<< _body;
         if(_world != NULL){
-          qDebug()<< "BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
-                  << " _body ="<< _body;
           _world.getScene()->addRigidBody(_body);
         }
         else

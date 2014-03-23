@@ -76,6 +76,10 @@ void MainWindow::CReceived(QString message){
       emit robotFileStl(name,fileName);
      }
 
+  void MainWindow::setTableBackground(QPixmap pixmap){
+      ui->graphicsView->scene()->setBackgroundBrush(QBrush(pixmap));
+  }
+
   const QGraphicsScene* MainWindow::getScene(void)const{
     return ui->graphicsView->scene();
   }

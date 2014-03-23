@@ -32,6 +32,7 @@ private:
     Ui::MainWindow *ui;
 
 public slots:
+    void setTableBackground(QPixmap pixmap);
     void openDirForTable();
     void openDirForRobot();
     void do_sth();
