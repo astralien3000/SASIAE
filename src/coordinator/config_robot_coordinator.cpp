@@ -16,7 +16,10 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 }
 
 bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path) {
+  qDebug() << "config_robot_coordinator loadRobotConfig path="<< path;
   const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
+
+
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
 //Merge
@@ -25,6 +28,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   //_robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
   _robot_mesh[name] = new Robot(robot_cfg->mesh_path,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
+   // Here the PMO is also created.
   // Loading microcontrollers
   foreach (const ObjectConfig::microConfig* mi,robot_cfg->microcontrollers) {
     qDebug() << "Micro " << mi->name;

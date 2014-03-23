@@ -22,7 +22,7 @@ public:
     const QGraphicsScene* getScene(void)const;
     QGraphicsScene* getScene(void);
     void addRobot(QStandardItem* item);
-   
+
 signals:
     void tableFileXml(const QString&);
     void robotFileXml(const QString& name,const QString& path);
