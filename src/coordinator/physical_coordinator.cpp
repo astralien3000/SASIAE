@@ -54,7 +54,7 @@ void PhysicalCoordinator::loadTable(const QString& path) {
 
   qDebug()<<"PC.loadTable : Initialize the Table PrintableMobileObject";
   new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(0,0,0,0,0,0),QString("table"));
-    emit tableImg(QPixmap(tableConfig->img_path));
+    emit tableImg(QPixmap(tableConfig->img_path,"png"));
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
   foreach (const ObjectConfig::toyConfig* it, tableConfig->toys) {

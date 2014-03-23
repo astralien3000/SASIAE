@@ -63,9 +63,13 @@ void MainWindow::CReceived(QString message){
   void MainWindow::openDirForTable(){
       const QString fileName = QFileDialog::getOpenFileName(this,
           "Open Xml file", "./", "Config Files (*.xml)");
-      qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to ";
-      emit tableFileXml(fileName);
-     }
+      if(fileName!=NULL){
+          emit tableFileXml(fileName);
+          qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
+        }
+          else
+          qDebug() << "MainWindow file NULL";
+  }
 
 
   void MainWindow::openDirForRobot(){

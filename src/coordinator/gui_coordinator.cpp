@@ -34,13 +34,6 @@ GuiCoordinator::GuiCoordinator(void){
            this,
            SLOT(slotClose()));
 
-   //to be tested when the connect above is solved.
-connect(
-       _mainWindow,
-       SIGNAL(updateTable()),
-       this,
-       SLOT(updateTable())
-       );
   }
 
 void GuiCoordinator::slotPlay() {

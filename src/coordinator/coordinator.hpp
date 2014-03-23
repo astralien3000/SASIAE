@@ -1,9 +1,7 @@
-//#include "physical_calculator.hpp"
 #include "../modules/module.hpp"
 #include "../physical_calculator/physical_calculator.hpp"
 #include "../modules/module.hpp"
 #include "../physical_calculator/robot.hpp"
-//#include "../gui/mainwindow.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QProcess>
@@ -14,10 +12,6 @@
 #include <QtCore/QPair>
 #include <QtCore/QDebug>
 #include <QtCore/QCoreApplication>
-
-//#include <cstring>
-//#include <iostream>
-
 
 #include "../gui/mainwindow.h"
 #include <QApplication>
@@ -87,16 +81,17 @@ private slots:
     */
 
 
-//private:
-protected:
-  QMap<QString /*robot_name*/, Robot* /*robotObject*/> _robotObject;
-  QHash<QString/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
-  /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
-  QHash<QString/*module_name*/, Module* /*modules*/> _moduleFromName;
-  QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
-  QHash<QObject* /* modules*/, 
-	QPair<QString/*robot_code_name*/, QString /*module_name*/> > 
-  _moduleInfo;
+
+// INUTILE à PRIORI
+//protected:
+//  QMap<QString /*robot_name*/, Robot* /*robotObject*/> _robotObject;
+//  QHash<QString/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
+//  /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
+//  QHash<QString/*module_name*/, Module* /*modules*/> _moduleFromName;
+//  QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
+//  QHash<QObject* /* modules*/,
+//	QPair<QString/*robot_code_name*/, QString /*module_name*/> >
+//  _moduleInfo;
 
 private slots:
   void gotoNextStep(); 
@@ -145,13 +140,14 @@ private:
   Coordinator(int argc, char* argv[]);
   static Coordinator* _instance;
   PhysicalCalculator _physic;
-
+/*
+ * INUTILES à PRIORI
   bool _running;
   int _sync; 
   int _codeFactor;
   double _timeStep;
   int _maxSubStep;
-
+*/
 };
 
 
