@@ -6,6 +6,7 @@
 #include "module_coordinator.hpp"
 
 #include "../common/object_config.hpp"
+#include <QStandardItem>
 
 class Module;
 class Robot;
@@ -19,6 +20,10 @@ class Robot;
 class ConfigRobotCoordinator : public RobotCoordinator {
   Q_OBJECT;
 
+signals:
+  //! \brief Inform that a new module has been created
+  void newRobot(QStandardItem* m);
+
 public slots:
   //! \brief Load a robot
   //! \param name : the name of the robot
@@ -31,7 +36,7 @@ public slots:
 private:
   //! \brief Load a module
   //! \param name : The name that identify the module to be loaded
-  Module* loadModule(const ObjectConfig::moduleConfig* moduleConf);
+  Module* loadModule(Robot* robot, const ObjectConfig::moduleConfig* moduleConf);
 
 public:
   //! \brief Constructor

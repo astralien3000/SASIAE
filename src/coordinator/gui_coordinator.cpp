@@ -3,7 +3,7 @@
 
 #include "../physical_calculator/physical_calculator.hpp"
 #include "../physical_calculator/printable_mobile_object.hpp"
-
+#include "../modules/module.hpp"
 #include "coordinator.hpp"
 
 
@@ -15,9 +15,9 @@ GuiCoordinator::GuiCoordinator(void){
 
     connect(
            _mainWindow,
-           SIGNAL(robotFileStl(const QString&,const QString&)),
+           SIGNAL(robotFileXml(const QString&,const QString&)),
             this,
-            SLOT(forwardRobotNameStl(const QString&,const QString&))
+            SLOT(forwardRobotNameXml(const QString&,const QString&))
            );
 
     connect(_mainWindow,
@@ -52,6 +52,9 @@ void GuiCoordinator::slotPause() {
 void GuiCoordinator::slotClose() {
   emit close();
 }
+void GuiCoordinator::addRobotToList(QStandardItem* item ) {
+  _mainWindow->addRobot(item);
+}
 MainWindow* GuiCoordinator::getMainWindow(void)const{
   return _mainWindow;
 }
@@ -59,8 +62,8 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-void GuiCoordinator::forwardRobotNameStl(const QString&name , const QString&path){
-    emit forwardRobotFileStl(name, path);
+void GuiCoordinator::forwardRobotNameXml(const QString&name , const QString&path){
+    emit forwardRobotFileXml(name, path);
 }
 
 

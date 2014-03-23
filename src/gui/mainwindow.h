@@ -6,7 +6,8 @@
 #include <QtCore/QDebug>
 #include <QtGui>
 #include <QFileDialog>
-//#include "ui_mainwindow.h"
+#include <QStandardItemModel>
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,16 +21,18 @@ public:
     ~MainWindow();
     const QGraphicsScene* getScene(void)const;
     QGraphicsScene* getScene(void);
-
+    void addRobot(QStandardItem* item);
+   
 signals:
     void tableFileXml(const QString&);
-    void robotFileStl(const QString& name,const QString& path);
+    void robotFileXml(const QString& name,const QString& path);
     void uiPlay();
     void uiPause();
     void close();
 
 private:
     Ui::MainWindow *ui;
+    QStandardItemModel* _model;
 
 public slots:
     void openDirForTable();

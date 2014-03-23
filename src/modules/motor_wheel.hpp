@@ -1,20 +1,24 @@
 //#include "wheel.hpp"
 #include "../physical_calculator/wheel.hpp"
 #include "../common/object_config.hpp"
+#include "../common/position_data.hpp"
+#include <QVector3D>
 #include "module.hpp"
 #include <QStandardItem>
 #include <QObject>
 #include <QString>
 #include <QRegExp>
 
-class MotorWheel : public QObject, public Module {
+class MotorWheel : public Module {
 Q_OBJECT
 Q_INTERFACES(Module)
 Q_PLUGIN_METADATA(IID Modules_iid FILE "motor_wheel.json")
 
 public:
-  MotorWheel(Wheel* wheel, QString params, QObject* parent = 0);
-  virtual Module* buildModule(const ObjectConfig::moduleConfig* conf);
+  MotorWheel();
+  MotorWheel(Wheel* wheel, QString params);
+  MotorWheel(Wheel* wheel, double maxTorque, double gearRatio, QString name = "Motor Wheel");
+  virtual Module* buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf);
   static const QString xmlGearName;
   static const QString xmlTorqueName;
   virtual QStandardItem* getGuiItem(void); 

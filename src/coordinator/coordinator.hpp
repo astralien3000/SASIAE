@@ -26,10 +26,10 @@
 #define COORD_BUFFER_SIZE 1024
 
 
-class Coordinator:public QApplication{
+class Coordinator: public QApplication{
   Q_OBJECT
   
-  signals:
+signals:
   //! \brief Send user message to UI and log file
   void GUISend(QString message);
   void calcNextStep(double, int); 

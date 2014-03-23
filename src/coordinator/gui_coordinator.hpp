@@ -8,25 +8,28 @@
 #include "../common/position_data.hpp"
 #include "../gui/mainwindow.h"
 #include "base_coordinator.hpp"
+class Module;
 
 class GuiCoordinator: public BaseCoordinator {
   Q_OBJECT;
 
 signals:
 
-    void forwardRobotFileStl(const QString&, const QString&);
+    void forwardRobotFileXml(const QString&, const QString&);
     void uiPlay();
     void uiPause();
     void nextStep();
     void close();
-
+  
 public slots:
   void update(void);
   void updateTable(void);
-  void forwardRobotNameStl(const QString&, const QString& = QString());
+  void forwardRobotNameXml(const QString&, const QString& = QString());
   void slotPause();
   void slotPlay();
   void slotClose();
+  void addRobotToList(QStandardItem* item);
+
 public:
   //! \brief Default Constructor
   GuiCoordinator(void);

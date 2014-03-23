@@ -1,9 +1,9 @@
 #include "coordinator.hpp"
-#include "../modules/servo.hpp"
+//#include "../modules/servo.hpp"
 #include "../physical_calculator/robot.hpp"
 #include "../physical_calculator/wheel.hpp"
-#include "../modules/encoder.hpp"
-#include "../modules/motor_wheel.hpp"
+//#include "../modules/encoder.hpp"
+//#include "../modules/motor_wheel.hpp"
 
 #include <cstdio>
 #include <iostream>
@@ -85,11 +85,17 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
   connect(
          _gui_cdn,
-         SIGNAL(forwardRobotFileStl(const QString&, const QString&)),
+         SIGNAL(forwardRobotFileXml(const QString&, const QString&)),
          _bot_cdn,
          SLOT(loadRobotConfig(const QString&, const QString&))
           );
-
+  //ConfigRobotCoord -> GuiCoord
+  connect(
+         _bot_cdn,
+         SIGNAL(newRobot(QStandardItem*)),
+         _gui_cdn,
+         SLOT(addRobotToList(QStandardItem*))
+         );
   // Device -> Module communication
   connect(
 	  _bot_cdn, 

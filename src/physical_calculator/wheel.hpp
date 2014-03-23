@@ -7,6 +7,7 @@
 
 class Wheel {
 public: 
+  static const QString xmlRadiusName;
   Wheel(Robot *robot = NULL);
   Wheel(Robot* robot, const QVector3D &pos,const QVector3D &direction, float radius, bool motorized);
   /* init is called in the constructor right above. 

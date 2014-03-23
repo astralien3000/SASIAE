@@ -27,6 +27,7 @@ public:
   static Mesh* buildBox(QVector3D size, float mass, PositionData start_pos);
   static Mesh* buildSphere(float radius, float mass, PositionData start_pos);
   static void setWorld(World& world);
+  World getWorld();
   PositionData getPosition()const;
 };
 #endif //ROBOT_HPP

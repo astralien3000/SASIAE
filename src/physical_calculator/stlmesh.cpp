@@ -31,7 +31,8 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
   if(mass == 0) {
    qDebug()<<"STLMesh init mass= 0 stlpath="<<stlpath;
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
-
+    if(retour.size() == 0)
+      return;
     qDebug()<< "retour=" << retour;
 
     btTriangleMesh* trimesh = new btTriangleMesh();
@@ -44,7 +45,7 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 		}
         qDebug()<< "STLMesh init mass= 0 END OF LOOP trimesh="<<trimesh;
     buildRigidBody(new btBvhTriangleMeshShape(trimesh, true), mass, pos);
-    
+     
   }
   else if(s_stlshapes.contains(stlpath)) {
     s_stlshapes[stlpath].second++;
@@ -52,6 +53,8 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
   }
   else {
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
+    if(retour.size() == 0)
+      return;
     //séparation points et faces
     std::vector< HACD::Vec3<HACD::Real> > points;
 		std::vector< HACD::Vec3<long> > triangles;

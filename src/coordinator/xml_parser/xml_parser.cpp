@@ -4,7 +4,7 @@
 #include <QFile>
 #include <QString>
 #include <QtXmlPatterns>
-
+#include <QHash>
 
 XMLParser::XMLParser(){}
 XMLParser::~XMLParser(){}
@@ -64,7 +64,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	/* Pointeurs de sauvegardes des instances courantes */
 	ObjectConfig::microConfig *currMC;
 	ObjectConfig::moduleConfig *currMod;
-	ObjectConfig::parameter* currParam;
+	//ObjectConfig::parameter* currParam;
 
 	/* Ajout du lien vers le mesh du robot */
 	data->mesh_path=r.firstChildElement("mesh").attribute("src");
@@ -104,16 +104,17 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 
 			for(int k=0;k<params.length();k++){
 				/* Ajout d'une structure parameter */
-				currParam = new ObjectConfig::parameter();
+				//currParam = new ObjectConfig::parameter();
 
 				/* Sauvegarde du noeud */
 				tmp3 = params.item(k);
 
 				/* Récupération des valeurs des paramêtres */
-				currParam->name = tmp3.toElement().attribute("name");
-				currParam->type = tmp3.toElement().attribute("type");
-				currParam->value = tmp3.toElement().attribute("value");
-				currMod->parameters.push_front(currParam);
+				//currParam->name = tmp3.toElement().attribute("name");
+				//currParam->type = tmp3.toElement().attribute("type");
+				//currParam->value = tmp3.toElement().attribute("value");
+				//currMod->parameters.push_front(currParam);
+        currMod->parameters.insert(tmp3.toElement().attribute("name"),tmp3.toElement().attribute("value"));
 			}
 			currMC->modules.push_front(currMod);
 		}

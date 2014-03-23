@@ -74,7 +74,7 @@ void RobotCoordinator::sendSyncMessage(int timestamp) {
   }
 }
 
-bool RobotCoordinator::loadRobot(QString name, QString path) {
+bool RobotCoordinator::loadRobot(const QString& name, const QString& path) {
   qDebug() << "loading robot " << name << "\n";
 
   QProcess* bot = new QProcess(this);

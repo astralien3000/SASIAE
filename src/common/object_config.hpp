@@ -4,20 +4,22 @@
 #include "position_data.hpp"
 #include <QList>
 #include <QString>
+#include <QHash>
 
 namespace ObjectConfig {
 
-    struct parameter {
+    /*struct parameter {
 			QString type;
 			QString name;
 			QString value;
-		};
+		};*/
 
 		struct moduleConfig {
 			QString name;
 			QString type;
 			PositionData position;
-			QList<const parameter*> parameters;
+			//QList<const parameter*> parameters;
+      QHash<QString /*name*/,QString /*value*/> parameters;
 			~moduleConfig();
 		};
 

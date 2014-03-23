@@ -31,6 +31,7 @@ Mesh::operator const btRigidBody *() const{
   return _body;
 }
 void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
+    _shape = shape;
     qDebug()<< "Mesh buildRigidBody() shape=" << shape << " mass=" << mass << "start position ="<< start_pos;
     const QVector3D v = start_pos;
 
@@ -88,7 +89,9 @@ void Mesh::setWorld(World& world)
 {
   _world = world;
 }
-
+World Mesh::getWorld() {
+  return _world;
+}
 PositionData Mesh::getPosition() const {
   PositionData pos;
   btTransform trans;

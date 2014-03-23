@@ -42,7 +42,8 @@ void ModuleCoordinator::forwardModuleMessage(QString msg) {
 
 bool ModuleCoordinator::addModule(QString rname, QString mname, Module* mod) {
   _modules.insert(QPair<QString,QString>(rname, mname), mod);
-
+      connect(this, SIGNAL(updateModules()), mod, SLOT(update()));
+      connect(mod, SIGNAL(send(QString)), this, SLOT(forwardModuleMessage(QString)));
   return true;
 }
 
@@ -59,7 +60,7 @@ bool ModuleCoordinator::delRobotModules(QString rname) {
 void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
   //qDebug() << "Modules\n";
-  //TODO call them manually, les signaux slots ne garantice pas d'etre executé avant le prochain pas emit updateModules();
+  emit updateModules();
   qDebug() << "ModuleCoordinator emit nextStep";
   emit nextStep();
 }

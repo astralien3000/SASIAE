@@ -1,12 +1,14 @@
 <robot weight="20">
-	<mesh src="~/mesh/robots/robot1A1314.stl"/>
+	<mesh src="../../ressources/stl/robottext.stl"/>
 	<microcontrollers>
 	<microcontroller name="UNIOC">
 		<modules>
-			<module name="GP2">
+			<module name="roue droite" type="MotorWheel">
 				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
 				<parameters>
-					<parameter name="bell" type="int" value="20"/>
+					<parameter name="wheel_radius" type="float" value="3"/>
+					<parameter name="max_torque" type="double" value="1000."/>
+					<parameter name="gear_ratio" type="double" value="1."/>
 				</parameters>
 			</module>
 		</modules>

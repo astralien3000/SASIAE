@@ -1,6 +1,8 @@
 #include"wheel.hpp"
 #include <iostream>
 
+const QString Wheel::xmlRadiusName("wheel_radius");
+
 //Wheel::Wheel(btDynamicWorld* world, btRigidBody* robot) {}
 Wheel::Wheel(Robot * robot){
   _robot = robot;

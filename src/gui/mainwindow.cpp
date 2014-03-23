@@ -6,8 +6,11 @@ MainWindow::MainWindow(QWidget* parent):
   QMainWindow(parent), ui(new Ui::MainWindow)
 {
     qDebug() << "MainWindow constructor";
+    _model = new QStandardItemModel(0,2,this);
     ui->setupUi(this);
+    ui->treeView->setModel(_model);
     connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
+    connect(ui->actionRobot_new_1,SIGNAL(triggered()),this,SLOT(openDirForRobot()));
     connect(ui->button_play,SIGNAL(clicked()),this,SLOT(slotPlay()));
     connect(ui->button_pause,SIGNAL(clicked()),this,SLOT(slotPause()));
   //Ui_MainWindow::setupUi(this);
@@ -21,7 +24,9 @@ MainWindow::~MainWindow()
     emit uiPause();
     delete ui;
 }
-
+void MainWindow::addRobot(QStandardItem* item) {
+  _model->appendRow(item);
+}
 /*
  * Ancient version
 void MainWindow::animateRobot(qreal x,qreal y){
@@ -73,7 +78,7 @@ void MainWindow::CReceived(QString message){
           "Open Xml file", "./", "Config Files (*.xml)");
 
       QString name=("Robotname"); // todo : ask user
-      emit robotFileStl(name,fileName);
+      emit robotFileXml(name,fileName);
      }
 
   const QGraphicsScene* MainWindow::getScene(void)const{

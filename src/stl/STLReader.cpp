@@ -45,10 +45,10 @@ QList<QVector<float>> STLReader::readSTLBinaryFile(QString path) {
   if(!file.open(QIODevice::ReadOnly))
     return triangles;
   file.seek(0);
-  quint32 triangles_nb;
+  quint32 triangles_nb=0;
   file.seek(80);
   QByteArray size = file.read(4);
-  //memcpy(&triangles_nb, size.constData(), 4);
+  memcpy(&triangles_nb, size.constData(), 4);
   qDebug() << "nombre de mesh" << triangles_nb;
   for(quint32 i =0; triangles_nb > i; i++)
   {
