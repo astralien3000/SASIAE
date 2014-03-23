@@ -32,7 +32,7 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
    qDebug()<<"STLMesh init mass= 0 stlpath="<<stlpath;
     QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
 
-    qDebug()<< "retour=" << retour;
+    qDebug()<< "return list of size=" << retour.size();
 
     btTriangleMesh* trimesh = new btTriangleMesh();
     for(int i=0; i<retour.size(); i++ ) 
@@ -42,7 +42,7 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
                             btVector3(s[3],s[4],s[5]), 
                             btVector3(s[6],s[7],s[8]));
 		}
-        qDebug()<< "STLMesh init mass= 0 END OF LOOP trimesh="<<trimesh;
+        qDebug()<< "STLMesh init mass= 0 END OF LOOP trimesh "<<trimesh;
     buildRigidBody(new btBvhTriangleMeshShape(trimesh, true), mass, pos);
     
   }

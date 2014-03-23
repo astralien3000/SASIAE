@@ -31,9 +31,9 @@ Mesh::operator const btRigidBody *() const{
   return _body;
 }
 void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData start_pos) {
-    qDebug()<< "Mesh buildRigidBody() shape=" << shape << " mass=" << mass << "start position ="<< start_pos;
-    const QVector3D v = start_pos;
 
+    const QVector3D v = start_pos;
+    _shape=shape;
   btDefaultMotionState* bodyMotionState = new btDefaultMotionState(btTransform(
         btQuaternion(start_pos.alpha,start_pos.beta, start_pos.gamma),
         btVector3(v.x(),v.y(),v.z())));
@@ -41,7 +41,7 @@ void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData sta
       btVector3 bodyInertia(0,0,0);
       qDebug()<< "1BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
               << " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia << " shape" << _shape;
-      if(mass != 0)
+     // if(Mass != 0)
         _shape->calculateLocalInertia(Mass,bodyInertia);
       qDebug()<< "2BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
               << " _body ="<< _body;

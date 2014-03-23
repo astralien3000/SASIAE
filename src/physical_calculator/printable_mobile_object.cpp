@@ -1,7 +1,7 @@
 #include "printable_mobile_object.hpp"
 
 QVector< const PrintableMobileObject*> PrintableMobileObject::objects;
-const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED !
+const QString PrintableMobileObject::_img_path("../../ressources/img"); // TO BE FIXED IF CHANGED !
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
