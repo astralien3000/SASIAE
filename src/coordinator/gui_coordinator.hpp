@@ -23,7 +23,8 @@ signals:
   
 public slots:
   void update(void);
-  void updateTable(void);
+  //void updateTable(void);
+  void updateTable(QGraphicsPixmapItem*);
   void forwardRobotNameXml(const QString&, const QString& = QString());
   void slotPause();
   void slotPlay();

@@ -33,16 +33,9 @@ GuiCoordinator::GuiCoordinator(void){
            SIGNAL(close()),
            this,
            SLOT(slotClose()));
-/*
-   //to be tested when the connect above is solved.
-connect(
-       _mainWindow, //how do i link this ?
-       SIGNAL(updateTable()),
-       this,
-       SLOT(updateTable())
-       );
-*/
-}
+
+  }
+
 void GuiCoordinator::slotPlay() {
   emit uiPlay();
 }
@@ -67,6 +60,11 @@ void GuiCoordinator::forwardRobotNameXml(const QString&name , const QString&path
 }
 
 
+void GuiCoordinator::updateTable(QGraphicsPixmapItem * it){
+    _mainWindow->getScene()->addItem(it);
+}
+
+/* Ancient version
 void GuiCoordinator::updateTable(){
     foreach(const PrintableMobileObject* it,PrintableMobileObject::getObjectsList()){
         if(it->getItem()->scene()==NULL){
@@ -74,23 +72,10 @@ void GuiCoordinator::updateTable(){
         }
     }
 }
+*/
+
 
 void GuiCoordinator::update(){
-
-/*
- * Hugo : ancient version...
-        const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
-        if(!objectsList.isEmpty()){
-           qDebug() << "GC update  objectList" << objectsList ;
-           const PositionData * posRot=objectsList.first()->getPosition();
-           QVector<float> pos=posRot->getQtPosition();
-           qDebug() << "GuiCoordinator update pos.x=" << pos.at(0) << "pos.y =" << pos.at(2) ;
-           _mainWindow->animateRobot(pos.at(0),pos.at(2));
-           }
-        else{
-            qDebug() << "GuiCoordinator objectList is empty";
-           }
-*/
 
            const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
            if(!objectsList.isEmpty()){

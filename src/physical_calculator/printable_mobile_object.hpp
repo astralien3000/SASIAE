@@ -20,8 +20,9 @@ truc du style (graphicsitem->setposition) objet, puis !!! PEUT ETRE(si nécessai
 */
 
 class PrintableMobileObject : public STLMesh {
-signals:
-    //static void updateTable(); //si on veut faire un truc génial on pourra utiliser ce signal pendant la cration du PMO pour le rajouter directement à la table !! 
+public:
+    signals:
+    /*static pourquoi Static ? (hugo)*/ void updateTable(); //si on veut faire un truc génial on pourra utiliser ce signal pendant la cration du PMO pour le rajouter directement à la table !!
 private:
 	static const QString _img_path;
 	static QVector<const PrintableMobileObject*> objects;

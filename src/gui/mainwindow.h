@@ -35,6 +35,7 @@ private:
     QStandardItemModel* _model;
 
 public slots:
+    void setTableBackground(QPixmap pixmap);
     void openDirForTable();
     void openDirForRobot();
     void do_sth();

@@ -78,9 +78,24 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   connect(
         _gui_cdn->getMainWindow(),
         SIGNAL(tableFileXml(QString)),
-        _phy_cdn,SLOT(loadTable(const QString&))
+        _phy_cdn,
+        SLOT(loadTable(const QString&))
         );
 
+   //PhysicalCoordinator.tableItem -> GuiCoordinator.updateTable
+  connect(
+          _phy_cdn,
+          SIGNAL(tableItem(QGraphicsPixmapItem*)),
+          _gui_cdn,
+          SLOT(updateTable(QGraphicsPixmapItem*))
+          );
+  //PhysicalCoordinator.tableImg -> GuiCoordinator._mainWindox.setTableBackground
+ connect(
+         _phy_cdn,
+         SIGNAL(tableImg(QPixmap)),
+         _gui_cdn->getMainWindow(),
+         SLOT(setTableBackground(QPixmap))
+         );
 
   //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
   connect(

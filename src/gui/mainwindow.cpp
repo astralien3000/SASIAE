@@ -68,9 +68,13 @@ void MainWindow::CReceived(QString message){
   void MainWindow::openDirForTable(){
       const QString fileName = QFileDialog::getOpenFileName(this,
           "Open Xml file", "./", "Config Files (*.xml)");
-      qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to ";
-      emit tableFileXml(fileName);
-     }
+      if(fileName!=NULL){
+          emit tableFileXml(fileName);
+          qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
+        }
+          else
+          qDebug() << "MainWindow file NULL";
+  }
 
 
   void MainWindow::openDirForRobot(){
@@ -80,6 +84,13 @@ void MainWindow::CReceived(QString message){
       QString name=("Robotname"); // todo : ask user
       emit robotFileXml(name,fileName);
      }
+
+  void MainWindow::setTableBackground(QPixmap pixmap){
+      QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
+      //make it backgroud
+      item->setZValue(-1000);
+      ui->graphicsView->scene()->addItem(item);
+  }
 
   const QGraphicsScene* MainWindow::getScene(void)const{
     return ui->graphicsView->scene();

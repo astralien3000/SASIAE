@@ -4,6 +4,7 @@
 #include "base_coordinator.hpp"
 #include "xml_parser/xml_parser.hpp"
 #include "../stl/STLReader.hpp"
+#include <QGraphicsPixmapItem>
 
 //! \brief PhysicalCalculator declaration (avoid include)
 class PhysicalCalculator;
@@ -28,6 +29,12 @@ signals:
   
   //! \brief Send timestamp
   void timestamp(int);
+
+  //! \brief Send the table-s item
+  void tableItem(QGraphicsPixmapItem*);
+
+  //! \brief Send the table's image
+  void tableImg(QPixmap);
 
 public slots:
     //! \brief Load a Table from XML file

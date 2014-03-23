@@ -1,19 +1,10 @@
 #include "printable_mobile_object.hpp"
 
 QVector< const PrintableMobileObject*> PrintableMobileObject::objects;
-const QString PrintableMobileObject::_img_path("./"); // TO BE FIXED IF CHANGED !
+const QString PrintableMobileObject::_img_path("../../ressources/img"); // TO BE FIXED IF CHANGED !
 
 QMap<QString,QPair<QPixmap*,int>*> PrintableMobileObject::images;
 
-/*
-   //to be tested when the connect above is solved.
-connect(
-       _mainWindow, //how do i link this ?
-       SIGNAL(updateTable()),
-       this,
-       SLOT(updateTable())
-       );
-*/
 
 const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsList() {
   return PrintableMobileObject::objects;
@@ -40,9 +31,6 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
-    //Connect the signal and then emit it.
-
-    //emit updateTable();
 }
 
 PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
@@ -61,7 +49,6 @@ STLMesh(path,mass,start_pos),_name(name)
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
-    //emit updateTable();
 }
 
 

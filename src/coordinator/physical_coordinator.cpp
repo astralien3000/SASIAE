@@ -54,14 +54,15 @@ void PhysicalCoordinator::loadTable(const QString& path) {
 
   qDebug()<<"PC.loadTable : Initialize the Table PrintableMobileObject";
   new PrintableMobileObject(tableConfig->mesh_path, 0, PositionData(0,0,0,0,0,0),QString("table"));
+    emit tableImg(QPixmap(tableConfig->img_path,"png"));
 
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
   foreach (const ObjectConfig::toyConfig* it, tableConfig->toys) {
     //Creates a new PMO foreach toy on the table
-    /*PrintableMobileObject pmo =*/new PrintableMobileObject(it->mesh_path,(float)it->weight,
+    PrintableMobileObject *pmo =new PrintableMobileObject(it->mesh_path,(float)it->weight,
                               PositionData(it->position[0], it->position[1], it->position[2],
                                                 it->position[3], it->position[4], it->position[5]),/*name*/"mesh");
-  //t.getQGraphicsItem();
+  emit(tableItem(pmo->getItem()));
   }
   //_data->physic->simple_scene_walls(300);
 }

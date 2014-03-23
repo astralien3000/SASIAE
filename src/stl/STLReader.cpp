@@ -23,7 +23,7 @@ QList<QVector<float>> STLReader::readSTLTextFile(QString path) {
     }
 
   }
-    qDebug() << "STLReader triangles="<< triangles << " size ="<< triangles.size();
+    qDebug() << "STLReader return QListtriangles of size ="<< triangles.size();
   return triangles;/*
   quint32 triangles_nb;
   QByteArray size = file.read(4);
