@@ -12,7 +12,7 @@
 
 ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, ModuleCoordinator& mod_cdn)
   : _phy_cdn(phy_cdn), _mod_cdn(mod_cdn) {
-  
+
 }
 
 bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path) {
@@ -36,14 +36,14 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
       item->setChild(i++,mod->getGuiItem());
     }
   }
-  emit newRobot(item);
+  emit newRobot(item); // add the robot to the gui list of robots.
   return true;
 }
 
 Module* ConfigRobotCoordinator::loadModule(Robot* robot, const ObjectConfig::moduleConfig* moduleConf) {
   Module* ret = 0;
-  
-  QDir plugDir = QDir("../modules/"); 
+
+  QDir plugDir = QDir("../modules/");
   QString file = QString("lib")+moduleConf->type+".so";
   qDebug() << file << plugDir.exists(file);
   if(plugDir.exists(file)) {

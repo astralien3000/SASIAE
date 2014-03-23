@@ -17,7 +17,7 @@ struct PhysicalCoordinator::PrivateData {
 ////////////////////////////////////////
 // Methods
 
-PhysicalCoordinator::PhysicalCoordinator(void) : 
+PhysicalCoordinator::PhysicalCoordinator(void) :
   PhysicalCoordinator(new PhysicalCalculator(this))
 { }
 
@@ -25,15 +25,15 @@ PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data = new PrivateData;
 
   //! \todo Check phy not NULL
-    qDebug() << "bullet_ptr = " << phy->getScene().getScene(); 
+    qDebug() << "bullet_ptr = " << phy->getScene().getScene();
   _data->physic = phy;
 
   _data->timeStep = 1./120.;
   _data->maxSubStep = 20;
   connect(
-	  this, 
-	  SIGNAL(calcNextStep(double,int)), 
-	  _data->physic, 
+	  this,
+	  SIGNAL(calcNextStep(double,int)),
+	  _data->physic,
 	  SLOT(nextStep(double,int))
 	  );
 }

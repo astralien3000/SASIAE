@@ -3,26 +3,26 @@
 #include <iostream>
 #include <QDebug>
 MainWindow::MainWindow(QWidget* parent):
-  QMainWindow(parent), ui(new Ui::MainWindow)
+QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    qDebug() << "MainWindow constructor";
-    _model = new QStandardItemModel(0,2,this);
-    ui->setupUi(this);
-    ui->treeView->setModel(_model);
-    connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
-    connect(ui->actionRobot_new_1,SIGNAL(triggered()),this,SLOT(openDirForRobot()));
-    connect(ui->button_play,SIGNAL(clicked()),this,SLOT(slotPlay()));
-    connect(ui->button_pause,SIGNAL(clicked()),this,SLOT(slotPause()));
+  qDebug() << "MainWindow constructor";
+  _model = new QStandardItemModel(0,2,this);
+  ui->setupUi(this);
+  ui->treeView->setModel(_model);
+  connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
+  connect(ui->actionRobot_new_1,SIGNAL(triggered()),this,SLOT(openDirForRobot()));
+  connect(ui->button_play,SIGNAL(clicked()),this,SLOT(slotPlay()));
+  connect(ui->button_pause,SIGNAL(clicked()),this,SLOT(slotPause()));
   //Ui_MainWindow::setupUi(this);
 //        QObject::connect(button_robot1, SIGNAL(clicked()), qApp, SLOT(quit()));
-  
+
   //QObject::connect(button_robot1, SIGNAL(clicked()), this, SLOT(do_sth()));
 }
 
 MainWindow::~MainWindow()
 {
-    emit uiPause();
-    delete ui;
+  emit uiPause();
+  delete ui;
 }
 void MainWindow::addRobot(QStandardItem* item) {
   _model->appendRow(item);
@@ -42,60 +42,69 @@ QTimeLine *MainWindow::getTimer()const{
 
 void MainWindow::do_sth()
 {
-    std::cout<<"signal envoyé"<< std::endl;
+  std::cout<<"signal envoyé"<< std::endl;
 
     /*plainTextEdit->setPlainText(QApplication::translate("MainWindow", "lol", 0, QApplication::UnicodeUTF8)); */
 }
 
 void MainWindow::slotPlay() {
-    emit uiPlay();
+  emit uiPlay();
 }
 void MainWindow::slotPause() {
-    emit uiPause();
+  emit uiPause();
 }
 
 void MainWindow::wantClose() {
-    emit uiPause();
-    emit close();
+  emit uiPause();
+  emit close();
 }
-/* 
+/*
    Function for integration's tests
  */
-void MainWindow::CReceived(QString message){
-  qDebug() << "Message received from Coordinator to GUI : " << message ;
-}
+   void MainWindow::CReceived(QString message){
+    qDebug() << "Message received from Coordinator to GUI : " << message ;
+  }
 
   void MainWindow::openDirForTable(){
-      const QString fileName = QFileDialog::getOpenFileName(this,
-          "Open Xml file", "./", "Config Files (*.xml)");
-      if(fileName!=NULL){
-          emit tableFileXml(fileName);
-          qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
-        }
-          else
-          qDebug() << "MainWindow file NULL";
+    const QString fileName = QFileDialog::getOpenFileName(this,
+      "Open Xml file", "./", "Config Files (*.xml)");
+    if(fileName!=NULL){
+      emit tableFileXml(fileName);
+      qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
+    }
+    else
+      qDebug() << "MainWindow file NULL";
   }
 
 
   void MainWindow::openDirForRobot(){
-      QString fileName = QFileDialog::getOpenFileName(this,
-          "Open Xml file", "./", "Config Files (*.xml)");
+    const QString fileName = QFileDialog::getOpenFileName(this,
+      "Open Xml file", "./", "Config Files (*.xml)");
 
-      QString name=("Robotname"); // todo : ask user
-      emit robotFileXml(name,fileName);
-     }
+    if(fileName!=NULL){
+          QString name=("Robotname"); // todo : ask user
+          emit robotFileXml(name,fileName);
+          qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
+        }
+        else
+          qDebug() << "MainWindow file NULL";
 
-  void MainWindow::setTableBackground(QPixmap pixmap){
-      QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
+
+
+
+      }
+
+      void MainWindow::setTableBackground(QPixmap pixmap){
+        QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
       //make it backgroud
-      item->setZValue(-1000);
-      ui->graphicsView->scene()->addItem(item);
-  }
+        item->setZValue(-1000);
+        ui->graphicsView->scene()->addItem(item);
+      }
 
-  const QGraphicsScene* MainWindow::getScene(void)const{
-    return ui->graphicsView->scene();
-  }
-  QGraphicsScene* MainWindow::getScene(void)
-  {
-    return ui->graphicsView->scene();
-  }
+      const QGraphicsScene* MainWindow::getScene(void)const{
+        return ui->graphicsView->scene();
+      }
+      QGraphicsScene* MainWindow::getScene(void)
+      {
+        return ui->graphicsView->scene();
+      }
