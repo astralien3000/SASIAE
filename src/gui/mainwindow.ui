@@ -300,62 +300,62 @@
   </action>
   <action name="actionRobot_new_1">
    <property name="text">
-    <string>Robot n°1</string>
+    <string>Robot 1</string>
    </property>
   </action>
   <action name="actionRobot_new_2">
    <property name="text">
-    <string>Robot n°2</string>
+    <string>Robot 2</string>
    </property>
   </action>
   <action name="actionRobot_new_3">
    <property name="text">
-    <string>Robot n°3</string>
+    <string>Robot 3</string>
    </property>
   </action>
   <action name="actionRobot_new_4">
    <property name="text">
-    <string>Robot n°4</string>
+    <string>Robot 4</string>
    </property>
   </action>
   <action name="actionRobot_n_5">
    <property name="text">
-    <string>Robot n°1</string>
+    <string>Robot 5</string>
    </property>
   </action>
   <action name="actionRobot_n_6">
    <property name="text">
-    <string>Robot n°2</string>
+    <string>Robot 6</string>
    </property>
   </action>
   <action name="actionRobot_n_7">
    <property name="text">
-    <string>Robot n°3</string>
+    <string>Robot 7</string>
    </property>
   </action>
   <action name="actionRobot_n_8">
    <property name="text">
-    <string>Robot n°4</string>
+    <string>Robot 8</string>
    </property>
   </action>
   <action name="actionRobot_suppr_1">
    <property name="text">
-    <string>Robot n°1</string>
+    <string>Robot 1</string>
    </property>
   </action>
   <action name="actionRobot_suppr_2">
    <property name="text">
-    <string>Robot n°2</string>
+    <string>Robot 2</string>
    </property>
   </action>
   <action name="actionRobot_suppr_3">
    <property name="text">
-    <string>Robot n°3</string>
+    <string>Robot 3</string>
    </property>
   </action>
   <action name="actionRobot_suppr_4">
    <property name="text">
-    <string>Robot n°4</string>
+    <string>Robot 4</string>
    </property>
   </action>
   <action name="actionGuide_d_utilisation">

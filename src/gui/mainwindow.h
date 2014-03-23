@@ -37,12 +37,13 @@ private:
 public slots:
     void setTableBackground(QPixmap pixmap);
     void openDirForTable();
-    void openDirForRobot();
+    void openDirForRobot(int robotNumber);
     void do_sth();
     void CReceived(QString message);
     void slotPlay();
     void slotPause();
     void wantClose();
+    void robotButtonClicked();
     /*
      * Ancient version
     void animateRobot(qreal x,qreal y);
