@@ -78,6 +78,8 @@ void MotorWheel::received(QString message) {
       qDebug() << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nCommande des moteur en dehors de la plage de fonctionenement [0-1]\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " << _inputRatio;
     qDebug() << "Motor's value !!! ==> " << _inputRatio;
   }
+  _dataRoot->child(2,1)->setText(QString::number(_inputRatio));
+  _dataRoot->child(3,1)->setText(QString::number(_motorMaxTorque*_gearRatio*_inputRatio));
 }
 void MotorWheel::update(void) {
   qDebug() << "Mise a jour de motoWheel";

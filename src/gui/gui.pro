@@ -4,12 +4,14 @@
 
 TEMPLATE = app
 TARGET = gui
+DESTDIR = ../../build/
 INCLUDEPATH += . \
 /usr/local/include/bullet \
 /usr/include/bullet \
 /usr/include/bullet/Glut/GL \
 ../../../aversive--/include/sasiae \
 ../ \
+
 
 QMAKE_CFLAGS = -Wno-unused-parameter
 QMAKE_CFLAGS = -Wno-ignored-qualifiers

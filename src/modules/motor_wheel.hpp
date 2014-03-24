@@ -19,9 +19,10 @@ public:
   MotorWheel(Wheel* wheel, QString params);
   MotorWheel(Wheel* wheel, double maxTorque, double gearRatio, QString name = "Motor Wheel");
   virtual Module* buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf);
+  virtual QStandardItem* getGuiItem(void); 
+  
   static const QString xmlGearName;
   static const QString xmlTorqueName;
-  virtual QStandardItem* getGuiItem(void); 
 
 public slots:
   virtual void received(QString message);  

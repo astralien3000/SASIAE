@@ -1,11 +1,11 @@
 <table>
-    <mesh src="../../ressources/stl/table_static_cdr2014.stl"/>
-    <img src="../../ressources/img/table_2014_rognee.png"/>
+    <mesh src="../ressources/stl/table_static_cdr2014.stl"/>
+    <img src="../ressources/img/table_2014_rognee.png"/>
 	<toys>
 	    <toy name="triangle1" weight="170">
 		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
-		<mesh src="../../ressources/stl/feutext.stl"/>
-		<img src="../../ressources/stl/feu.img"/>
+		<mesh src="../ressources/stl/feutext.stl"/>
+		<img src="../ressources/stl/feu.img"/>
 	    </toy>
 	</toys>
 </table>

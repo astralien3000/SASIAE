@@ -1,5 +1,5 @@
 <robot weight="20">
-	<mesh src="../../ressources/stl/robottext.stl"/>
+	<mesh src="../ressources/stl/robot1.stl"/>
 	<microcontrollers>
 	<microcontroller name="UNIOC">
 		<modules>
@@ -11,7 +11,14 @@
 					<parameter name="gear_ratio" type="double" value="1."/>
 				</parameters>
 			</module>
-		</modules>
+      <module name="encodeur droite" type="Encoder">
+				<location X="11" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
+				<parameters>
+					<parameter name="wheel_radius" type="float" value="3"/>
+					<parameter name="accuracy" type="int" value="2048"/>
+				</parameters>
+			</module>
+    </modules>
 	</microcontroller>
 	</microcontrollers>
 </robot>

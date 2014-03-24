@@ -25,6 +25,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
 //Merge
  /*A float or an int for the weight ? See bullet*/
   //World w(_phy_cdn.getPhysicalCalculator()->getScene());
+  qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh_path;
   //_robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
   _robot_mesh[name] = new Robot(robot_cfg->mesh_path,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
@@ -47,7 +48,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
 Module* ConfigRobotCoordinator::loadModule(Robot* robot, const ObjectConfig::moduleConfig* moduleConf) {
   Module* ret = 0;
 
-  QDir plugDir = QDir("../modules/");
+  QDir plugDir = QDir("./");
   QString file = QString("lib")+moduleConf->type+".so";
   qDebug() << file << plugDir.exists(file);
   if(plugDir.exists(file)) {
