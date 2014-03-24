@@ -16,10 +16,10 @@
 	<xs:element name="toys">
 	  <xs:complexType>
 	    <xs:sequence>
-	      <xs:element name="toy">
+	      <xs:element name="toy" minOccurs="0" maxOccurs="unbounded">
 		<xs:complexType>
 		  <xs:sequence>
-		    <xs:element name="location" minOccurs="1" maxOccurs="unbounded">
+		    <xs:element name="location">
 		      <xs:complexType>
 			<xs:attribute name="X" type="xs:integer"/>
 			<xs:attribute name="Y" type="xs:integer"/>
@@ -59,7 +59,8 @@
 		      <xs:complexType>
 			<xs:attribute name="src" type="xs:string"/>
 		      </xs:complexType>
-		    </xs:element>		  </xs:sequence>
+		    </xs:element>
+		  </xs:sequence>
 		  <xs:attribute name="weight" type="xs:integer"/>
 		  <xs:attribute name="name" type="xs:string"/>
 		</xs:complexType>
