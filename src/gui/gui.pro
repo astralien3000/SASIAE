@@ -30,7 +30,6 @@ LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
-    table.h \
 #    item_robot.h \ 
     ../common/object_config.hpp \
     ../common/position_data.hpp
@@ -68,7 +67,6 @@ HEADERS += ../stl/STLReader.hpp
 FORMS += mainwindow.ui
 
 SOURCES += main.cpp mainwindow.cpp \
-    table.cpp \
 #    item_robot.cpp \
     ../common/object_config.cpp \
     ../common/position_data.cpp
