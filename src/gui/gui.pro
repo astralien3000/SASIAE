@@ -43,7 +43,8 @@ HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/base_coordinator.hpp \
     ../coordinator/gui_coordinator.hpp \
     ../coordinator/config_robot_coordinator.hpp \
-    ../coordinator/xml_parser/xml_parser.hpp \
+
+HEADERS +=   ../xml_parser/xml_parser.hpp
 
 HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/robot.hpp \
@@ -78,8 +79,9 @@ SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/module_coordinator.cpp \
     ../coordinator/schedule_coordinator.cpp \
     ../coordinator/config_robot_coordinator.cpp \
-    ../coordinator/xml_parser/xml_parser.cpp \
     ../coordinator/gui_coordinator.cpp
+
+SOURCES +=   ../xml_parser/xml_parser.cpp
 
 SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/robot.cpp \
@@ -101,7 +103,10 @@ SOURCES +=   ../stl/STLReader.cpp
 #OTHER_FILES += \
 #    ../coordinator/xml_parser/Makefile
 
-OTHER_FILES += \
-    ../xsd/robot.xsd \
-    ../xsd/table.xsd
+RESOURCES += ../../ressources/xsd.qrc
 
+# The following keeps the generated files at least somewhat separate 
+# from the source files.
+UI_DIR = uics
+MOC_DIR = mocs
+OBJECTS_DIR = objs

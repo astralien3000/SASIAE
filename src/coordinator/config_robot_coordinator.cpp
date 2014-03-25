@@ -1,6 +1,6 @@
 #include "config_robot_coordinator.hpp"
 
-#include "xml_parser/xml_parser.hpp"
+#include "../xml_parser/xml_parser.hpp"
 #include "../modules/module.hpp"
 //#include "../modules/motor_wheel.hpp"
 //#include "../modules/encoder.hpp"

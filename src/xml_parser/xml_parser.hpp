@@ -1,7 +1,7 @@
 #ifndef XML_PARSER_HPP
 #define XML_PARSER_HPP
 
-#include "../../common/object_config.hpp"
+#include "../common/object_config.hpp"
 #include <QtXml>
 
 class XMLParser {

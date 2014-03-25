@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+  <file>xsd/robot.xsd</file>
+  <file>xsd/table.xsd</file>
+</qresource>
+</RCC>

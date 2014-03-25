@@ -47,9 +47,9 @@ const QDomDocument* XMLParser::open(const QString& xml_path, const QString& xsd_
 
 const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& path){
 	/* Ouverture d'un fichier xml */
-    const QDomDocument* doc = open(path,QString("../ressources/xsd/robot.xsd"));
+    const QDomDocument* doc = open(path,QString(":/xsd/robot.xsd"));
   if(doc == NULL) {
-    qDebug()<< "Impossible de charger le document, chemin invalide pour le XML ou le XSD";
+    qDebug()<< "Impossible de charger le document";
     return NULL;
   }
 	QDomNode r = doc->elementsByTagName("robot").item(0);
@@ -129,9 +129,9 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 
 const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& path) {
     qDebug() << "parseTable : " << path;
-  const QDomDocument* doc = open(path, QString("../ressources/xsd/table.xsd"));
+  const QDomDocument* doc = open(path, QString(":/xsd/table.xsd"));
   if(doc == NULL) {
-    qDebug()<< "Impossible de charger le document, chemin invalide pour le XML ou le XSD";
+    qDebug()<< "Impossible de charger le document";
     return NULL;
   }
 

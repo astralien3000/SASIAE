@@ -2,7 +2,7 @@
 #define PHYSICAL_COORDINATOR_HPP
 
 #include "base_coordinator.hpp"
-#include "xml_parser/xml_parser.hpp"
+#include "../xml_parser/xml_parser.hpp"
 #include "../stl/STLReader.hpp"
 #include <QGraphicsPixmapItem>
 
