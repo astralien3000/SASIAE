@@ -2,10 +2,10 @@
 #define BASIC_DEMO_H
 
 #ifdef _WINDOWS
-#include <Win32DemoApplication.h>
+#include "bullets3D/Win32DemoApplication.h"
 #define PlatformDemoApplication Win32DemoApplication
 #else
-#include "GlutDemoApplication.h"
+#include "bullets3D/GlutDemoApplication.h"
 #define PlatformDemoApplication GlutDemoApplication
 #endif
 

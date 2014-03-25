@@ -5,13 +5,15 @@
 TEMPLATE = app
 TARGET = vue3d
 DEPENDPATH += .
-INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/ /home/hugo/Qt/5.2.0/gcc_64/include/QtXmlPatterns
+INCLUDEPATH += . /usr/include/bullet /usr/include/bullet/Glut/GL /usr/local/include/bullet /usr/local/lib ../../src/coordinator/  ../../../aversive--/include/sasiae ../../src/physical_calculator/  ../../src
+
 CONFIG += debug
-QT += widgets xml
+QT += widgets xml xmlpatterns
 
 QMAKE_CXXFLAGS = -std=c++11
-LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU
+LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -L/usr/local/include/bullet/HACD -lHACD
 
+LIBPATH += ../../src/HACD/
 FORMS += ../../src/gui/mainwindow.ui
 
 # Input
@@ -19,65 +21,80 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/physical_calculator/robot.hpp \
  ../../src/physical_calculator/physical_calculator.hpp \
    ../../src/physical_calculator/printable_mobile_object.hpp \
-   ../../src/physical_calculator/position_data.hpp \
+../../src/physical_calculator/position_data_bullet.hpp \
+../../src/physical_calculator/mesh.hpp \
+../../src/physical_calculator/stlmesh.hpp \
+../../src/physical_calculator/world.hpp \
  ../../src/coordinator/coordinator.hpp \
  ../../src/coordinator/physical_coordinator.hpp \
  ../../src/coordinator/robot_coordinator.hpp \
+ ../../src/coordinator/gui_coordinator.hpp \
  ../../src/coordinator/module_coordinator.hpp \
  ../../src/coordinator/schedule_coordinator.hpp \
  ../../src/coordinator/base_coordinator.hpp \
  ../../src/coordinator/config_robot_coordinator.hpp \
- ../../src/coordinator/xml_parser/xml_parser.hpp \
- ../../src/modules/servo.hpp \
- ../../src/modules/modules.hpp \
+ ../../src/xml_parser/xml_parser.hpp \
+ ../../src/gui/mainwindow.h \
+../../src/common/position_data.hpp \
+../../src/stl/STLReader.hpp \
+ #../../src/modules/servo.hpp \
  ../../src/modules/module.hpp \
- ../../src/modules/encoder.hpp \
- ../../src/modules/motor_wheel.hpp \
- CommandLineArguments.h \
- DebugCastResult.h \
- DemoApplication.h \
- GLDebugDrawer.h \
- GLDebugFont.h \
- GL_DialogDynamicsWorld.h \
- GL_DialogWindow.h \
- GL_ShapeDrawer.h \
- GL_Simplex1to4.h \
- GlutDemoApplication.h \
- GlutStuff.h \
- RenderTexture.h \
- stb_image.h \
- Win32DemoApplication.h \
+ #../../src/modules/encoder.hpp \
+ #../../src/modules/motor_wheel.hpp \
+  bullets3D/CommandLineArguments.h \
+ bullets3D/DebugCastResult.h \
+ bullets3D/DemoApplication.h \
+ bullets3D/GLDebugDrawer.h \
+ bullets3D/GLDebugFont.h \
+ bullets3D/GL_DialogDynamicsWorld.h \
+ bullets3D/GL_DialogWindow.h \
+ bullets3D/GL_ShapeDrawer.h \
+ bullets3D/GL_Simplex1to4.h \
+ bullets3D/GlutDemoApplication.h \
+ bullets3D/GlutStuff.h \
+ bullets3D/RenderTexture.h \
+ bullets3D/stb_image.h \
+ bullets3D/Win32DemoApplication.h \
  test3dCoordinator.hpp \
 
 SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/physical_calculator/robot.cpp \
  ../../src/physical_calculator/physical_calculator.cpp \
    ../../src/physical_calculator/printable_mobile_object.cpp \
-   ../../src/physical_calculator/position_data.cpp \
+../../src/physical_calculator/position_data_bullet.cpp \
+../../src/physical_calculator/mesh.cpp \
+../../src/physical_calculator/stlmesh.cpp \
+../../src/physical_calculator/world.cpp \
+../../src/common/position_data.cpp \
+../../src/stl/STLReader.cpp \
  ../../src/coordinator/coordinator.cpp \
  ../../src/coordinator/physical_coordinator.cpp \
  ../../src/coordinator/robot_coordinator.cpp \
+ ../../src/coordinator/gui_coordinator.cpp \
  ../../src/coordinator/module_coordinator.cpp \
  ../../src/coordinator/schedule_coordinator.cpp \
  ../../src/coordinator/config_robot_coordinator.cpp \
- ../../src/coordinator/xml_parser/xml_parser.cpp \
- ../../src/modules/modules.cpp \
- ../../src/modules/servo.cpp \
- ../../src/modules/encoder.cpp \
- ../../src/modules/motor_wheel.cpp \
- main.cpp \
- DemoApplication.cpp \
- GLDebugDrawer.cpp \
- GLDebugFont.cpp \
- GL_DialogDynamicsWorld.cpp \
- GL_DialogWindow.cpp \
- GL_ShapeDrawer.cpp \
- GL_Simplex1to4.cpp \
- GlutDemoApplication.cpp \
- GlutStuff.cpp \
- RenderTexture.cpp \
- stb_image.cpp \
- Win32AppMain.cpp \
- Win32DemoApplication.cpp \
+ ../../src/xml_parser/xml_parser.cpp \
+ ../../src/gui/mainwindow.cpp \
+# ../../src/modules/servo.cpp \
+# ../../src/modules/encoder.cpp \
+# ../../src/modules/motor_wheel.cpp \
+ bullets3D/DemoApplication.cpp \
+ bullets3D/GLDebugDrawer.cpp \
+ bullets3D/GLDebugFont.cpp \
+ bullets3D/GL_DialogDynamicsWorld.cpp \
+ bullets3D/GL_DialogWindow.cpp \
+ bullets3D/GL_ShapeDrawer.cpp \
+ bullets3D/GL_Simplex1to4.cpp \
+ bullets3D/GlutDemoApplication.cpp \
+ bullets3D/GlutStuff.cpp \
+ bullets3D/RenderTexture.cpp \
+ bullets3D/stb_image.cpp \
+ bullets3D/Win32AppMain.cpp \
+ bullets3D/Win32DemoApplication.cpp \
+ mainCoord.cpp \
  test3dCoordinator.cpp \
+
+
+RESOURCES += ../../ressources/xsd.qrc
 

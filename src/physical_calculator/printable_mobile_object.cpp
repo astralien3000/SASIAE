@@ -1,4 +1,5 @@
 #include "printable_mobile_object.hpp"
+#include <QFile>
 
 QVector< const PrintableMobileObject*> PrintableMobileObject::objects;
 const QString PrintableMobileObject::_img_path("../../ressources/img"); // TO BE FIXED IF CHANGED !
@@ -36,7 +37,7 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
 PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
 STLMesh(path,mass,start_pos),_name(name)
 {
-    qDebug()<< "PMO Constructor path="<<path;
+    qDebug()<< "PMO Constructor path="<<path << " name=" << name;
     _item = new QGraphicsPixmapItem();
     objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.
@@ -45,7 +46,10 @@ STLMesh(path,mass,start_pos),_name(name)
         (*it)->second++;
         _item = new QGraphicsPixmapItem(*((*it)->first));
     } else { //add the pixmap in the map !
-        QPixmap *pixmap = new QPixmap(_img_path+name);
+        QFile img(_img_path+"/"+name);
+        if(!img.exists())
+          qDebug() << "img not found with path="<<_img_path+"/"+name;
+        QPixmap *pixmap = new QPixmap(img.fileName());
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }

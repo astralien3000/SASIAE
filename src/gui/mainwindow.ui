@@ -16,7 +16,7 @@
   <property name="windowTitle">
    <string>Simulateur</string>
   </property>
-  <widget class="Table" name="graphicsView"/>
+  <widget class="QGraphicsView" name="graphicsView"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -393,13 +393,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>Table</class>
-   <extends>QGraphicsView</extends>
-   <header>table.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

@@ -48,7 +48,7 @@ public slots:
      * Ancient version
     void animateRobot(qreal x,qreal y);
     */
-    QTimeLine *getTimer()const;
+//    QTimeLine *getTimer()const;
 };
 
 #endif // MAINWINDOW_H

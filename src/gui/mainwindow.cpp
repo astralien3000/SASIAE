@@ -2,12 +2,16 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <QDebug>
+#include <QGraphicsPixmapItem>
+
 MainWindow::MainWindow(QWidget* parent):
 QMainWindow(parent), ui(new Ui::MainWindow)
 {
   qDebug() << "MainWindow constructor";
   _model = new QStandardItemModel(0,2,this);
   ui->setupUi(this);
+  ui->graphicsView->setScene(new QGraphicsScene());
+  
   ui->treeView->setModel(_model);
   connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   connect(ui->button_table,SIGNAL(clicked()),ui->actionChoisir,SIGNAL(triggered()));
@@ -60,11 +64,11 @@ void MainWindow::animateRobot(qreal x,qreal y){
     ui->graphicsView->moveRobot();
 }
 */
-
+/*
 QTimeLine *MainWindow::getTimer()const{
  return   ui->graphicsView->timer;
 }
-
+*/
 void MainWindow::do_sth()
 {
   std::cout<<"signal envoyé"<< std::endl;

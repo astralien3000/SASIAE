@@ -14,8 +14,8 @@ subject to the following restrictions:
 */
 
 
-//#include "test3dCoordinator.hpp"
-#include "test3d.hpp"
+#include "test3dCoordinator.hpp"
+//#include "test3d.hpp"
 #include "bullets3D/GlutStuff.h"
 #include <btBulletDynamicsCommon.h>
 #include <LinearMath/btHashMap.h>

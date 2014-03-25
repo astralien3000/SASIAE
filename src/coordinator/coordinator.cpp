@@ -159,7 +159,6 @@ connect(
 
   std::cout << "Creation de la fenetre principale..." << std::endl;
   _gui_cdn->getMainWindow()->show();
-  _gui_cdn->getMainWindow()->getTimer()->start();
 
 
 
