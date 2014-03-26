@@ -121,19 +121,11 @@ void MainWindow::wantClose() {
         }
         else
           qDebug() << "MainWindow file NULL";
+  }
 
-
-
-
-      }
-/*
-      void MainWindow::setTableBackground(QPixmap pixmap){
-        QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
-      //make it backgroud
-        item->setZValue(-1000);
-        ui->graphicsView->scene()->addItem(item);
-      }
-*/
+  void MainWindow::newLog(QString msg){
+        ui->plainTextEdit->appendPlainText(msg+"\n");
+  }
       const QGraphicsScene* MainWindow::getScene(void)const{
         return ui->graphicsView->scene();
       }
