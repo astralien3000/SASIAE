@@ -165,6 +165,13 @@ connect(
 	  _bot_cdn,
 	  SLOT(setTimestamp(int))
 	  );
+  connect(
+	  _phy_cdn,
+	  SIGNAL(timestamp(int)),
+	  _gui_cdn,
+	  SLOT(setTimestamp(int))
+	  );
+
 
   std::cout << "Creation de la fenetre principale..." << std::endl;
   _gui_cdn->getMainWindow()->show();
