@@ -148,7 +148,7 @@ connect(
   connect(
 	  _phy_cdn,
 	  SIGNAL(timestamp(int)),
-	  _gui_cdn,
+	  _gui_cdn->getMainWindow(),
 	  SLOT(setTimestamp(int))
 	  );
 

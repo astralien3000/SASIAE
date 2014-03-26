@@ -13,6 +13,7 @@ public slots:
   void update(void);
   void play(void);
   void pause(void);
+  void capSpeed();
 
 public:
   //!\brief Constructor
@@ -27,6 +28,7 @@ public:
 private:
   QList<BaseCoordinator*> _coords;
   bool _running;
+  int _step;
 };
 
 #endif//SCHEDULE_COORDINATOR_HPP

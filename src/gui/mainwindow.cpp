@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <QDebug>
+#include <QTime>
 #include <QGraphicsPixmapItem>
 
 MainWindow::MainWindow(QWidget* parent):
@@ -86,6 +87,13 @@ void MainWindow::slotPause() {
 void MainWindow::wantClose() {
   emit uiPause();
   emit close();
+}
+
+void MainWindow::setTimestamp(int t) {
+  QTime time(0,0,0,0);
+  time = time.addSecs(t/1000);
+  qDebug() << "le temps est de "<< t;
+  ui->time->setTime(time);
 }
 /*
    Function for integration's tests

@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>995</width>
+    <width>1070</width>
     <height>513</height>
    </rect>
   </property>
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>995</width>
-     <height>19</height>
+     <width>1070</width>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSimulateur">
@@ -210,7 +210,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="timeEdit">
+      <widget class="QTimeEdit" name="time">
        <property name="font">
         <font>
          <pointsize>10</pointsize>

@@ -36,6 +36,7 @@ private:
 
 public slots:
     //void setTableBackground(QPixmap pixmap);
+    void setTimestamp(int);
     void openDirForTable();
     void openDirForRobot(int robotNumber);
     void do_sth();
