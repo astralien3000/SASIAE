@@ -126,14 +126,14 @@ void MainWindow::wantClose() {
 
 
       }
-
+/*
       void MainWindow::setTableBackground(QPixmap pixmap){
         QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
       //make it backgroud
         item->setZValue(-1000);
         ui->graphicsView->scene()->addItem(item);
       }
-
+*/
       const QGraphicsScene* MainWindow::getScene(void)const{
         return ui->graphicsView->scene();
       }

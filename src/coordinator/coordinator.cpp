@@ -90,20 +90,29 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
   //PhysicalCoordinator.tableImg -> GuiCoordinator._mainWindox.setTableBackground
- connect(
+ /*connect(
          _phy_cdn,
          SIGNAL(tableImg(QPixmap)),
          _gui_cdn->getMainWindow(),
          SLOT(setTableBackground(QPixmap))
          );
-
+*/
   //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
-  connect(
+  /*connect(
          _gui_cdn,
          SIGNAL(forwardRobotFileXml(const QString&, const QString&)),
          _bot_cdn,
          SLOT(loadRobotConfig(const QString&, const QString&))
           );
+*/
+
+  connect(
+           _gui_cdn->getMainWindow(),
+           SIGNAL(robotFileXml(QString,QString)),
+           _bot_cdn,
+           SLOT(loadRobotConfig(const QString&, const QString&))
+            );
+
   //ConfigRobotCoord -> GuiCoord
   connect(
          _bot_cdn,

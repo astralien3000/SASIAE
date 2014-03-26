@@ -55,6 +55,30 @@ STLMesh(path,mass,start_pos),_name(name)
     }
 }
 
+PrintableMobileObject::PrintableMobileObject(const QString stl_path,
+                                             float mass,
+                                             PositionData start_pos,
+                                             const QString name,
+                                             const QString img_path):
+STLMesh(stl_path,mass,start_pos),_name(name)
+{
+    qDebug()<< "PMO Constructor path="<<stl_path << " name=" << name << " image path=" << img_path;
+    _item = new QGraphicsPixmapItem();
+    objects.append(this);
+    //si image est dans tableau, ++, sinon ajouter image dans tableau.
+    auto it = images.find(name);
+    if(it!=images.end()) {//found
+        (*it)->second++;
+        _item = new QGraphicsPixmapItem(*((*it)->first));
+    } else { //add the pixmap in the map !
+        QFile img(img_path);
+        if(!img.exists())
+          qDebug() << "img not found with path="<<img_path;
+        QPixmap *pixmap = new QPixmap(img.fileName());
+        images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
+        _item = new QGraphicsPixmapItem(*pixmap);
+    }
+}
 
 PrintableMobileObject::~PrintableMobileObject() {
     auto it = images.find(this->_name);

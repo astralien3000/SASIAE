@@ -15,7 +15,6 @@ class GuiCoordinator: public BaseCoordinator {
 
 signals:
 
-    void forwardRobotFileXml(const QString&, const QString&);
     void uiPlay();
     void uiPause();
     void nextStep();
@@ -25,7 +24,6 @@ public slots:
   void update(void);
   //void updateTable(void);
   void updateTable(QGraphicsPixmapItem*);
-  void forwardRobotNameXml(const QString&, const QString& = QString());
   void slotPause();
   void slotPlay();
   void slotClose();
