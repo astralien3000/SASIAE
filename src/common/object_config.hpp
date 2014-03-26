@@ -25,6 +25,7 @@ namespace ObjectConfig {
 
 		struct microConfig {
 			QString name;
+			QString bin;
 			QList<const moduleConfig*> modules;
 			~microConfig();
 		};

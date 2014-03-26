@@ -84,6 +84,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 		tmp1 = mcs.item(i);
 
 		currMC->name = tmp1.toElement().attribute("name");
+		currMC->bin = tmp1.toElement().attribute("bin");
 		mods = tmp1.toElement().elementsByTagName("module");
 
 		/* Parcours des modules */

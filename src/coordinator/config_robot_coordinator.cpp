@@ -37,9 +37,11 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
     foreach (const ObjectConfig::moduleConfig* mo,mi->modules) {
       qDebug() << "Nouveau module "<< mo->name;
       Module* mod = loadModule(_robot_mesh[name], mo);
-      _mod_cdn.addModule(name, mo->name, mod);
+      _mod_cdn.addModule(mi->name, mo->name, mod);
       item->setChild(i++,mod->getGuiItem());
     }
+    // Loading bin
+    loadRobot(mi->name, mi->bin);
   }
   emit newRobot(item); // add the robot to the gui list of robots.
   return true;

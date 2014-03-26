@@ -148,7 +148,7 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 				delete [] trianglesCH;
       btConvexHullShape* convexShape = new btConvexHullShape();
       for(int k=0; k < nTriangles*9 ; k+=3) {
-          convexShape->addPoint(btVector3(vertices2[k],vertices2[k+1],vertices2[k+2]),true);
+          convexShape->addPoint(btVector3(vertices2[k],vertices2[k+1],vertices2[k+2]));
           //std::cout << vertices2[k] << " " << vertices2[k+1]<< " " << vertices2[k+2] << std::endl;
         }
 				//trans.setIdentity();

@@ -64,7 +64,13 @@ void RobotCoordinator::handleRecv(void) {
 
 void RobotCoordinator::sendModuleMessage(QString rname, QString msg) {
   //qDebug() << "sending to " << rname << " : " << msg << "\n";
-  sendMessage(_robots.value(rname), msg);
+  QProcess* p = _robots.value(rname);
+  if(p) {
+    sendMessage(p, msg);
+  }
+  else {
+    qDebug() << "ERROR : QProcess not found";
+  }
 }
 
 void RobotCoordinator::sendSyncMessage(int timestamp) {

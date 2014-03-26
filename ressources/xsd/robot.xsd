@@ -75,6 +75,7 @@
 		    </xs:element>
 		  </xs:sequence>
 		  <xs:attribute name="name" type="xs:string"/>
+		  <xs:attribute name="bin" type="xs:string"/>
 		</xs:complexType>
 	      </xs:element>
 	    </xs:sequence>

@@ -1,7 +1,7 @@
 <robot weight="20">
 	<mesh src="../ressources/stl/robot1.stl"/>
 	<microcontrollers>
-	<microcontroller name="UNIOC">
+	<microcontroller name="UNIOC" bin="../test/robot/robot_sasiae.elf">
 		<modules>
 			<module name="left_motor" type="MotorWheel">
 				<location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
