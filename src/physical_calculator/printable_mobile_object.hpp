@@ -35,8 +35,8 @@ private:
 public:
   PrintableMobileObject(const STLMesh& mesh);
   PrintableMobileObject(const QString name, const STLMesh & mesh);
-  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
-  PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name, const QString imgpath);
+  //PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name);
+  PrintableMobileObject(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, const QString imgpath="");
   ~PrintableMobileObject();
   static const QVector<const PrintableMobileObject*>& getObjectsList();
   void update() const;

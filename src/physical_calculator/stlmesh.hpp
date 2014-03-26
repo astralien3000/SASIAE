@@ -6,6 +6,7 @@
 #include "mesh.hpp"
 #include "position_data_bullet.hpp"
 #include <QString>
+#include"../common/object_config.hpp"
 #include <QMap>
 #include <QPair>
 
@@ -15,9 +16,9 @@ private:
   static QMap<QString, QPair<btCollisionShape*, unsigned int>> s_stlshapes;
 
 protected:
-  void init(const QString path, double mass, PositionData pos);
+  void init(const ObjectConfig::meshConfig& cfg, double mass, PositionData pos);
 public:
-  STLMesh(const QString path, double mass, PositionData start_pos);
+  STLMesh(const ObjectConfig::meshConfig& cfg, double mass, PositionData start_pos);
   STLMesh(const STLMesh & mesh);
   ~STLMesh();
 };

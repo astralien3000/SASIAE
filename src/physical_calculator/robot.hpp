@@ -14,7 +14,7 @@ public:
   //merge
   //Robot(const QString path, float mass, PositionData start_pos, const QString name, World& world);
 
-  Robot(const QString path, float mass, PositionData start_pos, const QString name, World world);
+  Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, World world);
   Robot(const STLMesh& mesh, World world, QString name); 
 
   ~Robot();

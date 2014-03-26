@@ -12,9 +12,9 @@
 
 QMap<QString, QPair<btCollisionShape*, unsigned int>> STLMesh::s_stlshapes;
 
-STLMesh::STLMesh(const QString stlpath, double mass, PositionData start_pos) : _path(stlpath) {
-    qDebug()<<"STLMesh Constructor stlpath="<<stlpath;
-  init(stlpath, mass, start_pos);
+STLMesh::STLMesh(const ObjectConfig::meshConfig &cfg, double mass, PositionData start_pos) : _path(cfg.path) {
+    qDebug()<<"STLMesh Constructor stlpath="<<cfg.path;
+  init(cfg, mass, start_pos);
 }
 
 STLMesh::STLMesh(const STLMesh & source) : Mesh(source) {
@@ -27,10 +27,11 @@ STLMesh::~STLMesh() {
   STLMesh::s_stlshapes[this->_path].second--;
 }
 
-void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
+void STLMesh::init(const ObjectConfig::meshConfig& cfg, double mass, PositionData pos) {
+  QList<QVector<float>> retour = STLReader::readSTLTextFile(cfg.path);
+  qDebug() << "Construction du mesh path=" << cfg.path<< "scale =" << cfg.scale;
   if(mass == 0) {
-   qDebug()<<"STLMesh init mass= 0 stlpath="<<stlpath;
-    QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
+   qDebug()<<"STLMesh init mass= 0 stlpath="<<cfg.path;
     if(retour.size() == 0)
       return;
     qDebug()<< "return list of size=" << retour.size();
@@ -39,6 +40,10 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
     for(int i=0; i<retour.size(); i++ ) 
 		{
       QVector<float> s = retour.at(i);
+      for(int i=0;i<9;i++){
+        s[i]=s[i]*cfg.scale;
+        s[i]=s[i]+cfg.offset[i%3];
+      }
       trimesh->addTriangle(btVector3(s[0],s[1],s[2]),
                             btVector3(s[3],s[4],s[5]), 
                             btVector3(s[6],s[7],s[8]));
@@ -47,12 +52,11 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
     buildRigidBody(new btBvhTriangleMeshShape(trimesh, true), mass, pos);
      
   }
-  else if(s_stlshapes.contains(stlpath)) {
-    s_stlshapes[stlpath].second++;
-    buildRigidBody(s_stlshapes[stlpath].first, mass, pos);
+  else if(s_stlshapes.contains(cfg.path)) {
+    s_stlshapes[cfg.path].second++;
+    buildRigidBody(s_stlshapes[cfg.path].first, mass, pos);
   }
   else {
-    QList<QVector<float>> retour = STLReader::readSTLTextFile(stlpath);
     if(retour.size() == 0)
       return;
     //séparation points et faces
@@ -60,7 +64,6 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 		std::vector< HACD::Vec3<long> > triangles;
     for(int i=0; i<retour.size(); i++ ) 
 		{
-      int index = points.size();
       int ii[3] = {-1,-1,-1};
       for(int j=0; j<retour.at(i).size(); j+=3)
       {
@@ -80,6 +83,18 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 			HACD::Vec3<long> triangle(ii[0], ii[1], ii[2]);
 			triangles.push_back(triangle);
 		}
+    /*Rescale and offset on points*/
+    for(int i=0;i<points.size();i++){
+          points[i].X()*=cfg.scale;
+          points[i].X()+=cfg.offset[0];
+          points[i].Y()*=cfg.scale;
+          points[i].Y()+=cfg.offset[1];
+          points[i].Z()*=cfg.scale;
+          points[i].Z()+=cfg.offset[2];
+        }
+
+
+
     qDebug() << "Importation de " << points.size()<<" points pour " << triangles.size() <<  "faces.";
 
     HACD::HACD myHACD;
@@ -94,7 +109,6 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 		// Recommended parameters: 2 100 0 0 0 0
 		size_t nClusters = 1;
 		double concavity = 100;
-		bool invert = false;
 		bool addExtraDistPoints = false;
 		bool addNeighboursDistPoints = false;
 		bool addFacesPoints = false;       
@@ -155,6 +169,6 @@ void STLMesh::init(const QString stlpath, double mass, PositionData pos) {
 				compound->addChildShape(trans,convexShape);
 			}
       buildRigidBody(compound, mass, pos);
-      s_stlshapes.insert(stlpath, QPair<btCollisionShape*,unsigned int>(compound,1)); 
+      s_stlshapes.insert(cfg.path, QPair<btCollisionShape*,unsigned int>(compound,1));
   }
 }
