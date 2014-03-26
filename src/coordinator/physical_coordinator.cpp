@@ -49,11 +49,11 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   const ObjectConfig::tableConfig * tableConfig=XMLParser::parseTable(path);
 
   qDebug()<<"tableConfig : img path ="<< tableConfig->img_path
-         << "  mesh_path ="<<tableConfig->mesh_path << " toys=" << tableConfig->toys ;
+         << "  mesh_path ="<<tableConfig->mesh.path << " toys=" << tableConfig->toys ;
 
 
   qDebug()<<"PC.loadTable : Initialize the Table PrintableMobileObject";
-  PrintableMobileObject* pmo=new PrintableMobileObject(tableConfig->mesh_path, 0,
+  PrintableMobileObject* pmo=new PrintableMobileObject(tableConfig->mesh.path, 0,
                             PositionData(0,0,0,0,0,0),QString("table"),tableConfig->img_path);
   pmo->getItem()->setZValue(-1000);
   emit(tableItem(pmo->getItem()));
@@ -63,7 +63,7 @@ void PhysicalCoordinator::loadTable(const QString& path) {
   //QList<Mesh*> toysMeshList = new QList<Mesh *>;
   foreach (const ObjectConfig::toyConfig* it, tableConfig->toys) {
     //Creates a new PMO foreach toy on the table
-    PrintableMobileObject *pmo =new PrintableMobileObject(it->mesh_path,(float)it->weight,
+    PrintableMobileObject *pmo =new PrintableMobileObject(it->mesh.path,(float)it->weight,
                               PositionData(it->position[0], it->position[1], it->position[2],
                                                 it->position[3], it->position[4], it->position[5]),
                                             "mesh");
