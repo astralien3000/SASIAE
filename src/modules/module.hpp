@@ -26,7 +26,7 @@ public:
   virtual ~Module() {}
   //! \brief Constructor
   //inline Module(QObject* parent = 0) : QObject(parent) {}
-  virtual Module* buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf) = 0;
+
   //! \brief Return an item to show on the QTreeView
   virtual QStandardItem* getGuiItem(void) = 0;
 };

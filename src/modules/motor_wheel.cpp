@@ -56,19 +56,7 @@ QStandardItem* MotorWheel::getGuiItem() {
   return _dataRoot;
 }
 
-Module* MotorWheel::buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf) {
-  qDebug() << "creation d'u  nouveau motorwheel en " << conf->position;
-  if(!conf->parameters.contains(Wheel::xmlRadiusName) && 
-     !conf->parameters.contains(xmlTorqueName) && 
-     !conf->parameters.contains(xmlGearName)) {
-    qDebug() <<"Impossible de cree une roue motrice, des parametres sont manquant";
-    return NULL;
-  }
-  Wheel* w = new Wheel(robot, conf->position, PositionData(0,-1,0,0,0,0), conf->parameters.value(Wheel::xmlRadiusName).toFloat(), true);
-  return new MotorWheel(w,conf->parameters.value(xmlTorqueName).toDouble(),
-                          conf->parameters.value(xmlGearName).toDouble(),
-                          conf->name);
-}
+
 
 void MotorWheel::received(QString message) {
   QStringList list = message.split(" ");

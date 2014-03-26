@@ -4,19 +4,6 @@
 
 const QString Encoder::xmlAccuracyName = "accuracy";
 
-Module* Encoder::buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf) {
-    qDebug() << "creation d'une nouvelle Encoder en " << conf->position;
-  if(!conf->parameters.contains(Wheel::xmlRadiusName) && 
-     !conf->parameters.contains(xmlAccuracyName)) {
-    qDebug() <<"Impossible de cree une roue codeuse, des parametres sont manquant";
-    return NULL;
-  }
-  Wheel* w = new Wheel(robot, conf->position, PositionData(0,-1,0,0,0,0), conf->parameters.value(Wheel::xmlRadiusName).toFloat(), true);
-  return new Encoder(w,conf->parameters.value(xmlAccuracyName).toInt(),
-                          conf->name);
-
-}
-
 Encoder::Encoder() {};
 Encoder::Encoder(Wheel* wheel, int accuracy, QString name) 
   : Module(), _wheel(wheel), _accuracy(accuracy) {

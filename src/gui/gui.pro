@@ -30,8 +30,6 @@ LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
-    table.h \
-#    item_robot.h \ 
     ../common/object_config.hpp \
     ../common/position_data.hpp
 
@@ -58,7 +56,7 @@ HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/world.hpp
 
 HEADERS += ../modules/module.hpp \
-#    ../modules/servo.hpp \
+    ../modules/factory.hpp \
 #    ../modules/encoder.hpp \
 #    ../modules/motor_wheel.hpp
 
@@ -68,8 +66,6 @@ HEADERS += ../stl/STLReader.hpp
 FORMS += mainwindow.ui
 
 SOURCES += main.cpp mainwindow.cpp \
-    table.cpp \
-#    item_robot.cpp \
     ../common/object_config.cpp \
     ../common/position_data.cpp
 
@@ -94,7 +90,7 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/balise.cpp \
     ../physical_calculator/position_data_bullet.cpp
 
-#SOURCES += ../modules/motor_wheel.cpp \
+#SOURCES += ../modules/factory.hpp \
 #    ../modules/servo.cpp \
 #    ../modules/encoder.cpp
 

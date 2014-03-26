@@ -33,6 +33,15 @@
 					<parameter name="accuracy" type="int" value="2048"/>
 				</parameters>
 			</module>
+      <module name="mon_gp2" type="GP2">
+				<location X="-11" Y="20" Z="20" alpha="0" beta="0" gamma="0"/>
+				<parameters>
+					<parameter name="max_dist" type="int" value="30"/>
+					<parameter name="width" type="float" value="2"/>
+					<parameter name="height" type="float" value="2"/>
+					<parameter name="depth" type="float" value="2"/>
+				</parameters>
+			</module>
     </modules>
 	</microcontroller>
 	</microcontrollers>
