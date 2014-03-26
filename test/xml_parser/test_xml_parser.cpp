@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <assert.h>
-#include "../../../src/coordinator/xml_parser/xml_parser.hpp"
-#include "../../../src/common/object_config.hpp"
+#include "../../src/xml_parser/xml_parser.hpp"
+#include "../../src/common/object_config.hpp"
 #include <QString>
 #include <QCoreApplication>
 
@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
 	/* Vérification des données */
 	std::cout<<"Fichier de configuration ouvert\nAnalyse des données"<<std::endl;
 
-	assert(robot->mesh_path=="~/mesh/robots/robot1A1314.stl");
+	assert(robot->mesh.path=="~/mesh/robots/robot1A1314.stl");
 	assert(!robot->microcontrollers.empty());
 	assert((*robot->microcontrollers.begin())->name=="UNIOC");
 
@@ -41,12 +41,12 @@ int main(int argc, char **argv) {
 	const ObjectConfig::tableConfig* table = XMLParser::parseTable(QString("/home/hugo/SASIAE/SASIAE/test/coordinator/xml_parser/table.xml"));
 	assert(table!=NULL);
 	std::cout<<"Fichier de configuration ouvert\nAnalyse des données"<<std::endl;
-	assert(table->mesh_path=="../../../src/stl/table_static_cdr2014.stl");
+	assert(table->mesh.path=="../../../src/stl/table_static_cdr2014.stl");
 	assert(table->img_path=="../../../img/table_2014.png");
 	assert(!table->toys.isEmpty());
 	assert((*table->toys.begin())->name=="triangle1");
 	assert((*table->toys.begin())->weight==170);
-	assert((*table->toys.begin())->mesh_path=="~/mesh/jouets/triangle1314.stl");
+	assert((*table->toys.begin())->mesh.path=="~/mesh/jouets/triangle1314.stl");
 	assert((*table->toys.begin())->position.x==10);
 	assert((*table->toys.begin())->position.y==10);
 	assert((*table->toys.begin())->position.z==10);

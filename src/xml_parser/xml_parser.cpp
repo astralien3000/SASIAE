@@ -45,6 +45,37 @@ const QDomDocument* XMLParser::open(const QString& xml_path, const QString& xsd_
 	return doc;
 }
 
+void parseMesh(const QDomElement& mesh, ObjectConfig::meshConfig& cfg) {
+  cfg.path = mesh.attribute("src");
+  if(mesh.hasAttribute("scale")) {
+    cfg.scale = mesh.attribute("scale").toFloat();
+  }
+  else {
+    cfg.scale = 1;
+  }
+  
+  if(mesh.hasAttribute("xOffset")) {
+    cfg.offset.x = mesh.attribute("xOffset").toFloat();
+  }
+  else {
+    cfg.offset.x = 0.f;
+  }
+	
+  if(mesh.hasAttribute("yOffset")) {
+    cfg.offset.y = mesh.attribute("yOffset").toFloat();
+  }
+  else {
+    cfg.offset.y = 0.f;
+  }
+  
+  if(mesh.hasAttribute("zOffset")) {
+    cfg.offset.z = mesh.attribute("zOffset").toFloat();
+  }
+  else {
+    cfg.offset.z = 0.f;
+  }
+}
+
 const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& path){
 	/* Ouverture d'un fichier xml */
     const QDomDocument* doc = open(path,QString(":/xsd/robot.xsd"));
@@ -71,7 +102,9 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	//ObjectConfig::parameter* currParam;
 
 	/* Ajout du lien vers le mesh du robot */
-	data->mesh_path=r.firstChildElement("mesh").attribute("src");
+	QDomElement mesh = r.firstChildElement("mesh");
+	parseMesh(mesh, data->mesh);
+	
 	mcs=r.toElement().elementsByTagName("microcontroller");
     data->weight=r.toElement().attribute("weight").toInt();
 
@@ -139,7 +172,9 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
   QDomElement t = doc->elementsByTagName("table").item(0).toElement();
   ObjectConfig::tableConfig* data = new ObjectConfig::tableConfig();
 
-  data->mesh_path = t.firstChildElement("mesh").attribute("src");
+  QDomElement mesh = t.firstChildElement("mesh");
+  parseMesh(mesh, data->mesh);
+  
   data->img_path = t.firstChildElement("img").attribute("src");
 
   QDomNodeList toys = t.elementsByTagName("toy");
@@ -153,7 +188,8 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
     toy->name = toyElem.attribute("name");
     toy->weight = toyElem.attribute("weight").toInt();
 
-    toy->mesh_path = toyElem.firstChildElement("mesh").attribute("src");
+    QDomElement mesh = toyElem.firstChildElement("mesh");
+    parseMesh(mesh, toy->mesh);
 
     QDomElement loc = toyElem.firstChildElement("location");
     toy->position.x = loc.attribute("X").toInt();

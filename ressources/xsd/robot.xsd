@@ -6,7 +6,11 @@
       <xs:sequence>
 	<xs:element name="mesh">
 	  <xs:complexType>
-	    <xs:attribute name="src" type="xs:string"/>
+	    <xs:attribute name="src" type="xs:string" use="required"/>
+	    <xs:attribute name="scale" type="xs:decimal"/>
+	    <xs:attribute name="xOffset" type="xs:decimal"/>
+	    <xs:attribute name="yOffset" type="xs:decimal"/>
+	    <xs:attribute name="zOffset" type="xs:decimal"/>
 	  </xs:complexType>
 	</xs:element>
 	<xs:element name="microcontrollers">

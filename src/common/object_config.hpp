@@ -7,49 +7,47 @@
 #include <QHash>
 
 namespace ObjectConfig {
-
-    /*struct parameter {
-			QString type;
-			QString name;
-			QString value;
-		};*/
-
-		struct moduleConfig {
-			QString name;
-			QString type;
-			PositionData position;
-			//QList<const parameter*> parameters;
-      QHash<QString /*name*/,QString /*value*/> parameters;
-			~moduleConfig();
-		};
-
-		struct microConfig {
-			QString name;
-			QString bin;
-			QList<const moduleConfig*> modules;
-			~microConfig();
-		};
-
-		struct robotConfig {
-            float weight;
-			QString mesh_path;
-			QList<const microConfig*> microcontrollers;
-			~robotConfig();
-		};
-
-		struct toyConfig {
-			PositionData position;	
-			QString mesh_path;
-			QString name;
-			int weight;
-		};
-
-		struct tableConfig {
-			QString mesh_path;
-			QString img_path;
-			QList<const toyConfig*> toys;
-			~tableConfig();
-		};
+  struct moduleConfig {
+    QString name;
+    QString type;
+    PositionData position;
+    QHash<QString /*name*/,QString /*value*/> parameters;
+    ~moduleConfig();
+  };
+  
+  struct microConfig {
+    QString name;
+    QString bin;
+    QList<const moduleConfig*> modules;
+    ~microConfig();
+  };
+  
+  struct meshConfig {
+    QString path;
+    float scale;
+    PositionData offset;
+  };
+  
+  struct robotConfig {
+    float weight;
+    meshConfig mesh;
+    QList<const microConfig*> microcontrollers;
+    ~robotConfig();
+  };
+  
+  struct toyConfig {
+    PositionData position;
+    meshConfig mesh;
+    QString name;
+    int weight;
+  };
+  
+  struct tableConfig {
+    meshConfig mesh;
+    QString img_path;
+    QList<const toyConfig*> toys;
+    ~tableConfig();
+  };
 };
 
 #endif
