@@ -1,10 +1,6 @@
 #include "coordinator.hpp"
-//#include "../modules/servo.hpp"
 #include "../physical_calculator/robot.hpp"
 #include "../physical_calculator/wheel.hpp"
-//#include "../modules/encoder.hpp"
-//#include "../modules/motor_wheel.hpp"
-
 #include <cstdio>
 #include <iostream>
 
@@ -51,13 +47,6 @@ PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
 
-/*void Coordinator::startUpdateTimer(QTimer *tm){
-
-    qDebug() << "connect timerUpdate to update";
-    connect(tm, SIGNAL(timeout()), this, SLOT(update()));
-    tm->start();
-}*/
-
 
 Coordinator::Coordinator(int argc, char* argv[]) :
     QApplication(argc,argv), _physic(this)/*, _gui()*/{
@@ -89,23 +78,8 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           _gui_cdn,
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
-  //PhysicalCoordinator.tableImg -> GuiCoordinator._mainWindox.setTableBackground
- /*connect(
-         _phy_cdn,
-         SIGNAL(tableImg(QPixmap)),
-         _gui_cdn->getMainWindow(),
-         SLOT(setTableBackground(QPixmap))
-         );
-*/
-  //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
-  /*connect(
-         _gui_cdn,
-         SIGNAL(forwardRobotFileXml(const QString&, const QString&)),
-         _bot_cdn,
-         SLOT(loadRobotConfig(const QString&, const QString&))
-          );
-*/
 
+  // GuiCoordinator robotFileXml -> ConfigRobotCoordinator loadRobotConfig
   connect(
            _gui_cdn->getMainWindow(),
            SIGNAL(robotFileXml(QString,QString)),
@@ -156,7 +130,13 @@ connect(
 	  SLOT(quit())
 	  );
 
-
+//
+connect(
+        _mod_cdn,
+        SIGNAL(logMessage(QString)),
+        _gui_cdn->getMainWindow(),
+        SLOT(newLog(QString))
+        );
 
   // Time management
   connect(
