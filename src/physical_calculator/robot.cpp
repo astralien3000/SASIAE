@@ -9,6 +9,10 @@ Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start
             _body,
             new btDefaultVehicleRaycaster(world))
     {
+      //emit was put in config robot coordinator.
+// cant be done because PMO has no default constructor, can be emplemented with nothing but not good solution.
+    // PrintableMObileObject* pmo = PrintableMobileObject(cfg,mass,start_pos,name,"../ressources/img/" + name + ".png");
+    //   btRaycastVehicle(  _tuning, _body, new btDefaultVehicleRaycaster(world));
       //we have to call for   emit(tableItem(pmo->getItem())); PB !!!
   setCoordinateSystem(0,1,2);
   _body->setDamping(0.5,0.6);

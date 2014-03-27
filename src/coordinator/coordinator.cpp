@@ -27,7 +27,7 @@ Coordinator& Coordinator::getInstance(int argc, char *argv[]) {
   }
   else{
     Coordinator::_instance = new Coordinator(argc,argv);
-    return *(Coordinator::_instance); 
+    return *(Coordinator::_instance);
   }
 }
 
@@ -79,6 +79,15 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
 
+    // connect(
+    //       _bot_cdn,
+    //       SIGNAL(tableItem(QGraphicsPixmapItem*)),
+    //       _gui_cdn,
+    //       SLOT(updateTable(QGraphicsPixmapItem*))
+    //       );
+  //
+
+
   // GuiCoordinator robotFileXml -> ConfigRobotCoordinator loadRobotConfig
   connect(
            _gui_cdn->getMainWindow(),
@@ -96,9 +105,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
          );
   // Device -> Module communication
   connect(
-	  _bot_cdn, 
-	  SIGNAL(recvDeviceMessage(QString, QString)), 
-	  _mod_cdn, 
+	  _bot_cdn,
+	  SIGNAL(recvDeviceMessage(QString, QString)),
+	  _mod_cdn,
 	  SLOT(forwardDeviceMessage(QString, QString))
 	  );
 
@@ -199,8 +208,8 @@ void Coordinator::openRobot(const QString& XMLPath) {
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(6,-17,-14)),boxA);
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(-6,-17,-14)),boxA);
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.5,0)),boxB);
-  
-  
+
+
   btVector3 boxSize=btVector3(15,17.5,15);
   btVector3 position=btVector3(0,17.5,0);
   btScalar mass=80;
@@ -238,17 +247,17 @@ void Coordinator::openRobot(const QString& XMLPath) {
   QString code=XMLPath;
   Module* encd = new Encoder(_ED, "", this);
   _mod_cdn->addModule("bot", "right_encoder", encd);
-  
+
   Module* encg = new Encoder(_EG, "", this);
   _mod_cdn->addModule("bot", "left_encoder", encg);
-  
+
   Module* motd = new MotorWheel(_MD, "", this);
   _mod_cdn->addModule("bot", "right_motor", motd);
-  
+
   Module* motg = new MotorWheel(_MG, "", this);
   _mod_cdn->addModule("bot", "left_motor", motg);
   */
-  //! \todo really read the file  
+  //! \todo really read the file
 
   _bot_cdn->loadRobot("bot", "./client");
 }
@@ -281,7 +290,7 @@ void Coordinator::sendDeviceMessage(QString name, QString msg, QProcess* p) {
 void Coordinator::sendMessages(QString msg, QProcess* p) {
 }
 
- 
+
 void Coordinator::closeRobot(Slot robot){
 }
 
