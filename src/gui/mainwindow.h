@@ -45,6 +45,7 @@ public slots:
     void slotPause();
     void wantClose();
     void robotButtonClicked();
+    void newLog(QString msg);
     /*
      * Ancient version
     void animateRobot(qreal x,qreal y);

@@ -12,7 +12,7 @@ QMainWindow(parent), ui(new Ui::MainWindow)
   _model = new QStandardItemModel(0,2,this);
   ui->setupUi(this);
   ui->graphicsView->setScene(new QGraphicsScene());
-  
+
   ui->treeView->setModel(_model);
   connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   connect(ui->button_table,SIGNAL(clicked()),ui->actionChoisir,SIGNAL(triggered()));
@@ -122,7 +122,7 @@ void MainWindow::setTimestamp(int t) {
     if(fileName!=NULL){
           qDebug() << robotNumber; //works just fine.
 
-          QString name = ("robot number " + QString::number(robotNumber)); // todo : ask user and signal mapping
+          QString name = ("robot" + QString::number(robotNumber)); // todo : ask user and signal mapping
           qDebug() << "robotNumber : (" << name << ") ";
           emit robotFileXml(name,fileName);
           qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
