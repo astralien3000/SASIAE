@@ -79,12 +79,12 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
 
-    // connect(
-    //       _bot_cdn,
-    //       SIGNAL(tableItem(QGraphicsPixmapItem*)),
-    //       _gui_cdn,
-    //       SLOT(updateTable(QGraphicsPixmapItem*))
-    //       );
+     connect(
+           _bot_cdn,
+           SIGNAL(tableItem(QGraphicsPixmapItem*)),
+           _gui_cdn,
+           SLOT(updateTable(QGraphicsPixmapItem*))
+           );
   //
 
 

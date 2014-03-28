@@ -66,7 +66,7 @@ void PhysicalCoordinator::loadTable(const QString& path) {
     PrintableMobileObject *pmo =new PrintableMobileObject(it->mesh,(float)it->weight,
                               PositionData(it->position[0], it->position[1], it->position[2],
                                                 it->position[3], it->position[4], it->position[5]),
-                                            "mesh");
+                                            it->name,it->img_path);
     emit(tableItem(pmo->getItem()));
   }
   //_data->physic->simple_scene_walls(300);

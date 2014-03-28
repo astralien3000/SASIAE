@@ -5,7 +5,7 @@
 	    <toy name="triangle1" weight="170" >
 		<location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
 		<mesh src="../ressources/stl/feutext.stl" scale="0.1"/>
-		<img src="../ressources/stl/feu.img"/>
+		<img src="../ressources/img/feu.png"/>
 	    </toy>
 	</toys>
 </table>

@@ -27,7 +27,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   //World w(_phy_cdn.getPhysicalCalculator()->getScene());
   qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path;
   //_robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
-  _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
+  _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, robot_cfg->img_path,  _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
    // Here the PMO is also created.
 
