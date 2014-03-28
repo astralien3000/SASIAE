@@ -30,6 +30,10 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
    // Here the PMO is also created.
+
+    emit(tableItem(_robot_mesh[name]->getItem()));
+    //doesn't seem to work right now
+
   // Loading microcontrollers
   foreach (const ObjectConfig::microConfig* mi,robot_cfg->microcontrollers) {
     qDebug() << "Micro " << mi->name;
@@ -41,7 +45,7 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
       item->setChild(i++,mod->getGuiItem());
     }
     // Loading bin
-    loadRobot(mi->name, mi->bin);
+    loadRobot(mi->name, mi->bin);//just add the robot process.
   }
   emit newRobot(item); // add the robot to the gui list of robots.
   return true;

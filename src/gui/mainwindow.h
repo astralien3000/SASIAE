@@ -35,6 +35,7 @@ private:
     QStandardItemModel* _model;
 
 public slots:
+    void setTimestamp(int);
     void openDirForTable();
     void openDirForRobot(int robotNumber);
     void do_sth();

@@ -13,7 +13,7 @@ class Robot;
 
 //! \brief Load robot from an XML Config
 /*!
-  
+
   Load all the meshs, process, modules to simulate a robot.
 
  */
@@ -23,13 +23,14 @@ class ConfigRobotCoordinator : public RobotCoordinator {
 signals:
   //! \brief Inform that a new module has been created
   void newRobot(QStandardItem* m);
+  void tableItem(QGraphicsPixmapItem*);
 
 public slots:
   //! \brief Load a robot
   //! \param name : the name of the robot
   //! \param path : the path to the XML file
   bool loadRobotConfig(const QString& name, const QString& path);
-  
+
   //! \brief Load a Robot binary, and bind it to modules
   bool bindRobot(const QString& name, const QString& path);
 

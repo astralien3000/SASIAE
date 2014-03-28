@@ -41,7 +41,12 @@ PrintableMobileObject::PrintableMobileObject(const ObjectConfig::meshConfig& cfg
                                              const QString img_path):
 STLMesh(cfg,mass,start_pos),_name(name)
 {
-    qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
+    if(img_path=="") {
+      qDebug()<< "PMO Constructor path="<<  "../ressources/img/ image path=" << name << ".png";
+      // img_path = "../ressources/img/" << name << ".png";
+    }
+    else
+      qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
     _item = new QGraphicsPixmapItem();
     objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.
@@ -53,6 +58,8 @@ STLMesh(cfg,mass,start_pos),_name(name)
         QFile img(img_path);
         if(!img.exists())
           qDebug() << "img not found with path="<<img_path;
+        else
+          qDebug() << "img found with path="<<img_path;
         QPixmap *pixmap = new QPixmap(img.fileName());
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);

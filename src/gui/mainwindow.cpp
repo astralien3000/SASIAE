@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <QDebug>
+#include <QTime>
 #include <QGraphicsPixmapItem>
 
 MainWindow::MainWindow(QWidget* parent):
@@ -11,7 +12,7 @@ QMainWindow(parent), ui(new Ui::MainWindow)
   _model = new QStandardItemModel(0,2,this);
   ui->setupUi(this);
   ui->graphicsView->setScene(new QGraphicsScene());
-  
+
   ui->treeView->setModel(_model);
   connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   connect(ui->button_table,SIGNAL(clicked()),ui->actionChoisir,SIGNAL(triggered()));
@@ -87,6 +88,13 @@ void MainWindow::wantClose() {
   emit uiPause();
   emit close();
 }
+
+void MainWindow::setTimestamp(int t) {
+  QTime time(0,0,0,0);
+  time = time.addSecs(t/1000);
+  qDebug() << "le temps est de "<< t;
+  ui->time->setTime(time);
+}
 /*
    Function for integration's tests
  */
@@ -114,7 +122,7 @@ void MainWindow::wantClose() {
     if(fileName!=NULL){
           qDebug() << robotNumber; //works just fine.
 
-          QString name = ("robot number " + QString::number(robotNumber)); // todo : ask user and signal mapping
+          QString name = ("robot" + QString::number(robotNumber)); // todo : ask user and signal mapping
           qDebug() << "robotNumber : (" << name << ") ";
           emit robotFileXml(name,fileName);
           qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
