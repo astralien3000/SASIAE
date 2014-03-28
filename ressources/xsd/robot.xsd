@@ -13,6 +13,11 @@
 	    <xs:attribute name="zOffset" type="xs:decimal"/>
 	  </xs:complexType>
 	</xs:element>
+	<xs:element name="img">
+	  <xs:complexType>
+	    <xs:attribute name="src" type="xs:string"/>
+	  </xs:complexType>
+	</xs:element>
 	<xs:element name="microcontrollers">
 	  <xs:complexType>
 	    <xs:sequence>

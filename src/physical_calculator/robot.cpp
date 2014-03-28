@@ -3,8 +3,8 @@
 
 //Robot::Robot(const QString path, float mass, PositionData start_pos, const QString name, World &world)
 
-Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, World world)
-  :  PrintableMobileObject(cfg,mass,start_pos,name,"../ressources/img/" + name + ".png"),
+Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, const QString& path, World world)
+  :  PrintableMobileObject(cfg,mass,start_pos,name, path),
    btRaycastVehicle(	_tuning,
             _body,
             new btDefaultVehicleRaycaster(world))

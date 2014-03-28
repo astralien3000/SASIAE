@@ -107,6 +107,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	
 	mcs=r.toElement().elementsByTagName("microcontroller");
     data->weight=r.toElement().attribute("weight").toInt();
+    data->img_path = r.firstChildElement("img").attribute("src");
 
 	/* Parcours des µC */
 	for(int i=0; i<mcs.length(); i++) {
@@ -186,6 +187,7 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
 
     ObjectConfig::toyConfig* toy = new ObjectConfig::toyConfig();
     toy->name = toyElem.attribute("name");
+    toy->img_path = toyElem.firstChildElement("img").attribute("src");
     toy->weight = toyElem.attribute("weight").toInt();
 
     QDomElement mesh = toyElem.firstChildElement("mesh");
