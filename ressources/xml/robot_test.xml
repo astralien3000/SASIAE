@@ -1,5 +1,5 @@
 <robot weight="20">
-	<mesh src="../ressources/stl/robot1.stl"/>
+	<mesh src="../ressources/stl/robot1.stl" scale="0.1"/>
 	<img src=""/>
 	<microcontrollers>
 	<microcontroller name="UNIOC" bin="../test/robot/robot_sasiae.elf">

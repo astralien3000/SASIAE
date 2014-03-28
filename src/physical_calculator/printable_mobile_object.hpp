@@ -7,6 +7,7 @@
 #include <QPair>
 #include <QPixmap>
 #include <QMap>
+#include <QRectF>
 #include <QGraphicsPixmapItem>
 #include "position_data_bullet.hpp"
 #include "stlmesh.hpp"

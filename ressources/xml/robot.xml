@@ -1,6 +1,6 @@
 <robot weight="20">
-	<mesh src="../ressources/stl/robot1.stl"/>
-	<img src="../ressources/img/robot.gif"/>
+	<mesh src="../ressources/stl/robot1.stl" scale="0.1"/>
+	<img src="../ressources/img/robot.png"/>
 	<microcontrollers>
 	<microcontroller name="UNIOC">
 		<modules>

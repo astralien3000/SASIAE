@@ -64,6 +64,9 @@ STLMesh(cfg,mass,start_pos),_name(name)
         images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
+    QRectF bounds = _item->boundingRect();
+    _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
+    _item->moveBy(-(bounds.width())/2,-(bounds.height())/2);
 }
 
 PrintableMobileObject::~PrintableMobileObject() {
