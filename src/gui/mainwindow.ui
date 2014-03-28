@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>995</width>
+    <width>1000</width>
     <height>513</height>
    </rect>
   </property>
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>995</width>
-     <height>19</height>
+     <width>1000</width>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSimulateur">
@@ -237,6 +237,12 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="dockWidget_5">
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QTreeView" name="treeView"/>
+  </widget>
   <widget class="QDockWidget" name="dockWidget_4">
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -246,17 +252,9 @@
      <bool>true</bool>
     </property>
     <property name="plainText">
-     <string>[LOG] Démarrage du robot n°1
-[LOG] Démarrage du robot n°2
-[WARNING] Capteur 1 non initialisé</string>
+     <string/>
     </property>
    </widget>
-  </widget>
-  <widget class="QDockWidget" name="dockWidget_5">
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QTreeView" name="treeView"/>
   </widget>
   <action name="actionNouveau">
    <property name="text">

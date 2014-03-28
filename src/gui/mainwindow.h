@@ -35,7 +35,6 @@ private:
     QStandardItemModel* _model;
 
 public slots:
-    //void setTableBackground(QPixmap pixmap);
     void openDirForTable();
     void openDirForRobot(int robotNumber);
     void do_sth();
@@ -44,11 +43,7 @@ public slots:
     void slotPause();
     void wantClose();
     void robotButtonClicked();
-    /*
-     * Ancient version
-    void animateRobot(qreal x,qreal y);
-    */
-//    QTimeLine *getTimer()const;
+    void newLog(QString msg);
 };
 
 #endif // MAINWINDOW_H
