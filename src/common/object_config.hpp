@@ -32,6 +32,7 @@ namespace ObjectConfig {
     float weight;
     meshConfig mesh;
     QList<const microConfig*> microcontrollers;
+    QString img_path;
     ~robotConfig();
   };
   
@@ -39,6 +40,7 @@ namespace ObjectConfig {
     PositionData position;
     meshConfig mesh;
     QString name;
+    QString img_path;
     int weight;
   };
   
