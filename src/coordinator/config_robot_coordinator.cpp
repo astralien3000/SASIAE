@@ -22,17 +22,11 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
 
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
-//Merge
- /*A float or an int for the weight ? See bullet*/
-  //World w(_phy_cdn.getPhysicalCalculator()->getScene());
   qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path;
-  //_robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
   _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
-   // Here the PMO is also created.
 
     emit(tableItem(_robot_mesh[name]->getItem()));
-    //doesn't seem to work right now
 
   // Loading microcontrollers
   foreach (const ObjectConfig::microConfig* mi,robot_cfg->microcontrollers) {
