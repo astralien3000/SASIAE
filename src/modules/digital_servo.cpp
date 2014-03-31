@@ -6,18 +6,18 @@
 #define DEFAULT_MAX_SPE 10
 #define DEFAULT_MAX_ACC 2
 
-DigitalServo::DigitalServo() :
+DigitalServo::DigitalServo(QString name) :
   position(0), speed(0), accel(0), 
-  cmd_pos(0), cmd_spe(0), cmd_acc(0), 
-  com_mode(POSITION), true_mode(POSITION),
   max_pos(DEFAULT_MAX_POS), 
   max_spe(DEFAULT_MAX_SPE), 
-  max_acc(DEFAULT_MAX_ACC)
+  max_acc(DEFAULT_MAX_ACC), 
+  cmd_pos(0), cmd_spe(0), cmd_acc(0), 
+  com_mode(POSITION), true_mode(POSITION)
 {
-  _dataRoot = new QStandardItem("DigitalServo");
-  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString()+ position));
-  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Speed") << new QStandardItem(QString()+ speed));
-  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Torque") << new QStandardItem(QString()+ accel));
+  _dataRoot = new QStandardItem(name);
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Position") << new QStandardItem(QString::number( position)));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Speed") << new QStandardItem(QString::number(speed)));
+  _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Torque") << new QStandardItem(QString::number(accel)));
 }
 
 void DigitalServo::received(QString message) {
@@ -78,7 +78,7 @@ void DigitalServo::received(QString message) {
   }
 }
 
-void DigitalServo::simulStep() {
+void DigitalServo::update() {
   // Physics
   if(true_mode == POSITION) {
     position = cmd_pos;
@@ -99,15 +99,15 @@ void DigitalServo::simulStep() {
     emit(send(QString("value speed ") + speed));
   }
   else if(com_mode == TORQUE) {
-    emit(send(QString("value torque ") + torque));
+    emit(send(QString("value torque ") + accel));
   }
 
   // GUI
-  _dataRoot->child(1,1)->setText(QString() + position);
-  _dataRoot->child(2,1)->setText(QString() + speed);
-  _dataRoot->child(3,1)->setText(QString() + accel);
+  _dataRoot->child(1,1)->setText(QString::number(position));
+  _dataRoot->child(2,1)->setText(QString::number(speed));
+  _dataRoot->child(3,1)->setText(QString::number(accel));
 }
 
-virtual QStandardItem* getData() {
+QStandardItem* DigitalServo::getGuiItem() {
   return _dataRoot;
 }

@@ -11,7 +11,7 @@ void RDS::balise_add(Balise *balise_to_add) {
 	this->balises->push_front(balise_to_add);
 	btVector3 position =balise_to_add->get_position();
 	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("RDS")
-		<< new QStandardItem(QString()+ position.getX() + position.getY() + position.getZ()));
+		<< new QStandardItem(QString::number(position.getX() + position.getY() + position.getZ()));
 }
 
 QStandardItem* RDS::getData() {
@@ -32,7 +32,7 @@ list<btVector3>* RDS::get_position(){
 	return result;
 }
 
-void RDS::simulStep() {
+void RDS::update() {
   list<btVector3>* list_result = this->get_position();
   Qstring string_result;
   string_result->append( list_result.length().toString() );
