@@ -1,0 +1,71 @@
+\subsection{Protocoles de comunication}
+\label{convcomm}
+\begin{verbatim}
+
+From SASIAE to Robot:
+     "T xxx yyy\n" : synchronization command, xxx must be microseconds since the
+simulation started, yyy is the amount of iteration of robotLoop to execute
+     "B\n" : begin the match
+     "D xxx yyy\n" : send yyy message to xxx named device
+     "S\n" : stop the simulation
+
+From Robot to SASIAE:
+     "D xxx yyy\n" : send yyy message to xxx named
+     "M t xxx\n" : t among I(nfo), W(arning), E(rror) or D(ebug), xxx is the message
+     "T" : notify the coordinator that the robot has finished executing its step
+
+For "D xxx yyy\n" messages, yyy must be:
+    - "init v v v ..."
+    - "value v"
+    - "ivalues i:v i:v i:v ..."
+    - "values v v v ..."
+
+If v is a string, it must be surrounded by " (double-quotes), double-quotes and
+"\" (backslashes) must be escaped with a "\".
+String shouldn't contain new-line character (ASCII code 10) by any means.
+
+\end{verbatim}
+\subsection{Exemples de fichiers de description}
+\label{descXML}
+
+\begin{lstlisting}[caption=Exemple de description d'un robot, label=desctable]
+<robot weight="20">
+    <mesh src="../ressources/stl/robot1.stl" scale="0.1"/>
+    <img src="../ressources/img/robot.png"/>
+        <microcontrollers>
+            <microcontroller name="UNIOC">
+                <modules>
+                    <module name="roue droite" type="MotorWheel">
+                        <location X="10" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
+                        <parameters>
+                            <parameter name="wheel_radius" type="float" value="3"/>
+                            <parameter name="max_torque" type="double" value="1000."/>
+                            <parameter name="gear_ratio" type="double" value="1."/>
+                        </parameters>
+                    </module>
+                    <module name="encodeur droite" type="Encoder">
+                        <location X="11" Y="-2" Z="10" alpha="0" beta="0" gamma="0"/>
+                        <parameters>
+                            <parameter name="wheel_radius" type="float" value="3"/>
+                            <parameter name="accuracy" type="int" value="2048"/>
+                        </parameters>
+                    </module>
+                </modules>
+            </microcontroller>
+    </microcontrollers>
+</robot>
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Exemple de descritption d'une table, label=desctable]
+<table>
+    <mesh src="../ressources/stl/table_static_2014_2.stl" xOffset="-100" zOffset="100" />
+    <img src="../ressources/img/table_2014_rognee.png"/>
+        <toys>
+        <toy name="triangle1" weight="170" >
+            <location X="10" Y="10" Z="10" alpha="0" beta="0" gamma="0"/>
+                <mesh src="../ressources/stl/feutext.stl" scale="0.1"/>
+                <img src="../ressources/img/feu.png"/>
+        </toy>
+    </toys>
+</table>
+\end{lstlisting}

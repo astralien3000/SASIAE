@@ -1,0 +1,21 @@
+\label{lestests}
+\subsection{Client Thread et Devices}
+
+Le \texttt{client thread} est testé à l'aide d'un coordinateur fictif. On emploie donc on système de serveur/client. Le client est un code robot vide avec un faux device qui répond aux sollicitations du serveur qui vérifie leur leur cohérence. De même, le test des devices fonctionnent sur le principe client/serveur ou le serveur est un coordinateur fictif qui soit envoie des données au device et on teste la bonne utilisation de ces dernières, soit on envoie des données au serveur et on vérifie la cohérence des échanges, soit les deux. De plus, les test sont formatés de manière à pouvoir tester rapidement tous les device et ainsi vérifier la non-régression du framework.
+ 
+\subsection{Scheduler}
+
+Le scheduler aussi est testé sur le système client/serveur puisque qu'il est synchronisé avec le simulateur. On fournit donc une fausses liste tâches avec diverses priorités et diverses périodicités. Les tâches envoient des messages et on vérifie que les dates de réception de ces messages sont bien les dates prévues.
+
+
+\subsection{Interface Graphique}
+
+L'interface graphique est sans nul doute la plus difficile à tester, puisque l'on ne peut pas tout tester à la main et qu'il est compliqué d'automatiser les testes. Cependant on a testé les signaux en les redirigeant de manière à constater leur fonctionnement et de même pour leur chaînage.
+
+\subsection{Modules}
+
+Les modules interagissent avec deux choses, le coordinateur et le coordinateur physique. Ils sont donc un peu plus difficiles à tester. De plus, comme il est difficile de faire un faux simulateur physique, nous les avons testés dans des situations de simulation maîtrisée et nous avons vérifié la cohérence des messages générés en les stimulants à la main si nécessaire par un serveur prenant les messages d'entrée en ligne de commande.
+
+\subsection{Calculateur physique}
+
+Enfin, nous avons testés le fonctionnement de notre utilisation du calculateur physique. Comme il est précisé dans la partie dédiée plus haut, nous avons d'abord extrait les vecteurs positions et vitesse des robots afin de les représenter par des courbes. Les informations ainsi obtenues étant trop difficile à exploiter, nous avons ensuite affiché directement une vue 3D de la simulation pour voir ce qui se passait.
