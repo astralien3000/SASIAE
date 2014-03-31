@@ -15,6 +15,7 @@ LIBS += -lBulletDynamics -lBulletCollision -lLinearMath -lglut -lGLU -L/usr/loca
 
 LIBPATH += ../../src/HACD/
 FORMS += ../../src/gui/mainwindow.ui
+FORMS += ../../src/gui/posdialog.ui
 
 # Input
 HEADERS +=../../src/physical_calculator/wheel.hpp \
@@ -35,6 +36,7 @@ HEADERS +=../../src/physical_calculator/wheel.hpp \
  ../../src/coordinator/config_robot_coordinator.hpp \
  ../../src/xml_parser/xml_parser.hpp \
  ../../src/gui/mainwindow.h \
+ ../../src/gui/posdialog.h \
 ../../src/common/position_data.hpp \
 ../../src/stl/STLReader.hpp \
  #../../src/modules/servo.hpp \
@@ -76,6 +78,7 @@ SOURCES += ../../src/physical_calculator/wheel.cpp \
  ../../src/coordinator/config_robot_coordinator.cpp \
  ../../src/xml_parser/xml_parser.cpp \
  ../../src/gui/mainwindow.cpp \
+ ../../src/gui/posdialog.cpp \
 # ../../src/modules/servo.cpp \
 # ../../src/modules/encoder.cpp \
 # ../../src/modules/motor_wheel.cpp \

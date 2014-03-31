@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "posdialog.h"
 #include <iostream>
 #include <QDebug>
 #include <QTime>
@@ -92,7 +93,7 @@ void MainWindow::wantClose() {
 void MainWindow::setTimestamp(int t) {
   QTime time(0,0,0,0);
   time = time.addSecs(t/1000);
-  qDebug() << "le temps est de "<< t;
+  //qDebug() << "le temps est de "<< t;
   ui->time->setTime(time);
 }
 /*
@@ -103,8 +104,9 @@ void MainWindow::setTimestamp(int t) {
   }
 
   void MainWindow::openDirForTable(){
-    const QString fileName = QFileDialog::getOpenFileName(this,
-      "Open Xml file", "./", "Config Files (*.xml)");
+    QString fileName = QFileDialog::getOpenFileName(this,
+     "Open Xml file", "./", "Config Files (*.xml)");
+
     if(fileName!=NULL){
       emit tableFileXml(fileName);
       qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
@@ -124,8 +126,13 @@ void MainWindow::setTimestamp(int t) {
 
           QString name = ("robot" + QString::number(robotNumber)); // todo : ask user and signal mapping
           qDebug() << "robotNumber : (" << name << ") ";
-          emit robotFileXml(name,fileName);
-          qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
+          //positionnement du robot
+          PosDialog p(this);
+          if(p.exec()) {
+              qDebug() << "retour de position" << p._pos.x << p._pos.z;
+            emit robotFileXml(name,fileName,p._pos);
+            qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
+          }
         }
         else
           qDebug() << "MainWindow file NULL";

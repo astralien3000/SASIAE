@@ -29,7 +29,7 @@ public slots:
   //! \brief Load a robot
   //! \param name : the name of the robot
   //! \param path : the path to the XML file
-  bool loadRobotConfig(const QString& name, const QString& path);
+  bool loadRobotConfig(const QString& name, const QString& path, PositionData p);
 
   //! \brief Load a Robot binary, and bind it to modules
   bool bindRobot(const QString& name, const QString& path);

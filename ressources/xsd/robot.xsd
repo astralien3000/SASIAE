@@ -32,12 +32,12 @@
 			      <xs:sequence>
 				<xs:element name="location">
 				  <xs:complexType>
-				    <xs:attribute name="X" type="xs:integer"/>
-				    <xs:attribute name="Y" type="xs:integer"/>
-				    <xs:attribute name="Z" type="xs:integer"/>
+				    <xs:attribute name="X" type="xs:decimal"/>
+				    <xs:attribute name="Y" type="xs:decimal"/>
+				    <xs:attribute name="Z" type="xs:decimal"/>
 				    <xs:attribute name="alpha">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction> 
@@ -45,7 +45,7 @@
 				    </xs:attribute>
 				    <xs:attribute name="beta">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction>
@@ -53,7 +53,7 @@
 				    </xs:attribute>
 				    <xs:attribute name="gamma">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction>
@@ -91,7 +91,7 @@
 	  </xs:complexType>
 	</xs:element>
       </xs:sequence>
-      <xs:attribute name="weight" type="xs:integer"/>
+      <xs:attribute name="weight" type="xs:decimal"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

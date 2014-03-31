@@ -15,16 +15,16 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 
 }
 
-bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path) {
+bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path, PositionData p) {
   qDebug() << "config_robot_coordinator loadRobotConfig path="<< path;
   const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
 
 
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
-  qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path;
+  qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path << " poids= "<<robot_cfg->weight;
   //_robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
- _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, robot_cfg->img_path,  _phy_cdn.getPhysicalCalculator()->getScene());
+ _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, p, name, robot_cfg->img_path,  _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
 
     emit(tableItem(_robot_mesh[name]->getItem()));

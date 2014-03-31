@@ -66,6 +66,6 @@ void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
   //qDebug() << "Modules\n";
   emit updateModules();
-  qDebug() << "ModuleCoordinator emit nextStep";
+  //qDebug() << "ModuleCoordinator emit nextStep";
   emit nextStep();
 }

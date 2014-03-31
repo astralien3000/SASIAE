@@ -106,7 +106,7 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 	parseMesh(mesh, data->mesh);
 	
 	mcs=r.toElement().elementsByTagName("microcontroller");
-    data->weight=r.toElement().attribute("weight").toInt();
+    data->weight=r.toElement().attribute("weight").toFloat();
     data->img_path = r.firstChildElement("img").attribute("src");
 
 	/* Parcours des µC */
@@ -130,12 +130,12 @@ const struct ObjectConfig::robotConfig* XMLParser::parseRobot(const QString& pat
 			tmp3=tmp2.toElement().elementsByTagName("location").item(0);
 
 			/* Extraction des Attributs */
-			currMod->position.x = tmp3.toElement().attribute("X").toInt();
-			currMod->position.y = tmp3.toElement().attribute("Y").toInt();
-			currMod->position.z = tmp3.toElement().attribute("Z").toInt();
-			currMod->position.alpha = tmp3.toElement().attribute("alpha").toInt();
-			currMod->position.beta = tmp3.toElement().attribute("beta").toInt();
-			currMod->position.gamma = tmp3.toElement().attribute("gamma").toInt();
+			currMod->position.x = tmp3.toElement().attribute("X").toFloat();
+			currMod->position.y = tmp3.toElement().attribute("Y").toFloat();
+			currMod->position.z = tmp3.toElement().attribute("Z").toFloat();
+			currMod->position.alpha = tmp3.toElement().attribute("alpha").toFloat();
+			currMod->position.beta = tmp3.toElement().attribute("beta").toFloat();
+			currMod->position.gamma = tmp3.toElement().attribute("gamma").toFloat();
             currMod->name=tmp2.toElement().attribute("name");
             currMod->type = tmp2.toElement().attribute("type");
 
@@ -188,18 +188,18 @@ const struct ObjectConfig::tableConfig* XMLParser::parseTable(const QString& pat
     ObjectConfig::toyConfig* toy = new ObjectConfig::toyConfig();
     toy->name = toyElem.attribute("name");
     toy->img_path = toyElem.firstChildElement("img").attribute("src");
-    toy->weight = toyElem.attribute("weight").toInt();
+    toy->weight = toyElem.attribute("weight").toFloat();
 
     QDomElement mesh = toyElem.firstChildElement("mesh");
     parseMesh(mesh, toy->mesh);
 
     QDomElement loc = toyElem.firstChildElement("location");
-    toy->position.x = loc.attribute("X").toInt();
-    toy->position.y = loc.attribute("Y").toInt();
-    toy->position.z = loc.attribute("Z").toInt();
-    toy->position.alpha = loc.attribute("alpha").toInt();
-    toy->position.beta = loc.attribute("beta").toInt();
-    toy->position.gamma = loc.attribute("gamma").toInt();
+    toy->position.x = loc.attribute("X").toFloat();
+    toy->position.y = loc.attribute("Y").toFloat();
+    toy->position.z = loc.attribute("Z").toFloat();
+    toy->position.alpha = loc.attribute("alpha").toFloat();
+    toy->position.beta = loc.attribute("beta").toFloat();
+    toy->position.gamma = loc.attribute("gamma").toFloat();
 
     data->toys.push_front(toy);
   }

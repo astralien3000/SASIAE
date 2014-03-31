@@ -24,7 +24,6 @@ void ScheduleCoordinator::addCoordinator(BaseCoordinator* coor) {
 }
 
 void ScheduleCoordinator::update(void) {
-  qDebug() << "ScheduleCoordinator loop" << endl;
   //emit nextStep();
   while(_step > 0) {
     foreach(BaseCoordinator* bc, _coords) {
@@ -38,7 +37,6 @@ void ScheduleCoordinator::update(void) {
 void ScheduleCoordinator::capSpeed() {
   if(_running) {
     _step+=1;
-    qDebug() << "il reste " << _step;
     if(_step == 1) //scheduler wasn't updating
       update();
   }
