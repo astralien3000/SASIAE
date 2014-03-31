@@ -1,9 +1,12 @@
 #include "test3dCoordinator.hpp"
 #include "../../src/physical_calculator/world.hpp"
 
+int myargc;
+char** myargv;
+
 BasicDemo::BasicDemo()
 {
-  cdn = &Coordinator::getInstance();
+  cdn = &Coordinator::getInstance(myargc,myargv);
   _app = cdn;
 }
 
@@ -21,13 +24,11 @@ BasicDemo::~BasicDemo()
   exitPhysics();
 }
 
-int myargc;
-char** myargv;
 
 void	BasicDemo::initPhysics() {
   setTexturing(true);
   setShadows(false);
-  setCameraDistance(btScalar(50.));
+  setCameraDistance(btScalar(1000.));
 //  _app = new QApplication(myargc,myargv);
   /* this function ( in src/coordinator/coordinator/coorcinator.cpp )
    * creates 4 wheels, one robot's body and merges them together.
