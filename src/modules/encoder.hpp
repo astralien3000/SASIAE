@@ -13,14 +13,12 @@
 class Encoder : public Module {
 Q_OBJECT
 Q_INTERFACES(Module)
-Q_PLUGIN_METADATA(IID Modules_iid FILE "encoder.json")
 
 public:
   Encoder();
   Encoder(Wheel* wheel, int accuracy, QString name = "Encoder");
   Encoder(Wheel* wheel, QString params);
   virtual QStandardItem* getGuiItem(void); 
-  virtual Module* buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf);
 
   static const QString xmlAccuracyName;
 

@@ -30,7 +30,10 @@ LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
+<<<<<<< HEAD
+=======
 #    item_robot.h \ 
+>>>>>>> master
     ../common/object_config.hpp \
     ../common/position_data.hpp \
     posdialog.h
@@ -58,7 +61,7 @@ HEADERS += ../physical_calculator/physical_calculator.hpp \
     ../physical_calculator/world.hpp
 
 HEADERS += ../modules/module.hpp \
-#    ../modules/servo.hpp \
+    ../modules/factory.hpp \
 #    ../modules/encoder.hpp \
 #    ../modules/motor_wheel.hpp
 
@@ -95,7 +98,7 @@ SOURCES += ../physical_calculator/physical_calculator.cpp \
     ../physical_calculator/balise.cpp \
     ../physical_calculator/position_data_bullet.cpp
 
-#SOURCES += ../modules/motor_wheel.cpp \
+#SOURCES += ../modules/factory.hpp \
 #    ../modules/servo.cpp \
 #    ../modules/encoder.cpp
 

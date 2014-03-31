@@ -2,11 +2,17 @@
 #include "position_data_bullet.hpp"
 
 int DistSensor::MAX_DIST = 100000;
+const QString DistSensor::widthXmlName = "width";
+const QString DistSensor::heightXmlName = "height";
+const QString DistSensor::depthXmlName = "depth";
 
-DistSensor::DistSensor(World world, Robot* chassis) : _chassis(chassis), _world(world) {}
+DistSensor::DistSensor(Robot* chassis) : _chassis(chassis), _world(NULL) {
+  _world = Mesh::getWorld();  
+}
 
-DistSensor::DistSensor(World world, Robot* chassis, const PositionData pos, const PositionData direction, const QVector3D& boxSize, float mass) : _chassis(chassis), _world(world) 
+DistSensor::DistSensor(Robot* chassis, const PositionData pos, const PositionData direction, const QVector3D& boxSize, float mass) : _chassis(chassis), _world(NULL) 
 {
+  _world = Mesh::getWorld();  
   init(pos,direction,boxSize,mass);  
 }
 

@@ -4,7 +4,7 @@
 
 CONFIG += plugin 
 TEMPLATE = lib
-TARGET = Servo
+TARGET = RDS
 DESTDIR = ../../build/
 QT += widgets core
 QMAKE_CXXFLAGS = -std=c++11
@@ -18,8 +18,8 @@ HEADERS += ../common/object_config.hpp \
            ../common/position_data.hpp \
            module.hpp \
            factory.hpp
-HEADERS += servo.hpp \
-           servo_factory.hpp
+HEADERS += RDS.hpp \
+           RDS_factory.hpp
 
 SOURCES += ../physical_calculator/mesh.cpp \
            ../physical_calculator/dist_sensor.cpp \
@@ -29,8 +29,8 @@ SOURCES += ../physical_calculator/mesh.cpp \
 SOURCES += ../common/object_config.cpp \
            ../common/position_data.cpp \
            factory.cpp
-SOURCES += servo.cpp \
-           servo_factory.cpp
+SOURCES += RDS.cpp \
+           RDS_factory.cpp
 
 
-OTHER_FILES += servo_factory.json
+OTHER_FILES += RDS_factory.json

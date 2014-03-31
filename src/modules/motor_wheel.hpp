@@ -12,13 +12,11 @@
 class MotorWheel : public Module {
 Q_OBJECT
 Q_INTERFACES(Module)
-Q_PLUGIN_METADATA(IID Modules_iid FILE "motor_wheel.json")
 
 public:
   MotorWheel();
   MotorWheel(Wheel* wheel, QString params);
   MotorWheel(Wheel* wheel, double maxTorque, double gearRatio, QString name = "Motor Wheel");
-  virtual Module* buildModule(Robot* robot, const ObjectConfig::moduleConfig* conf);
   virtual QStandardItem* getGuiItem(void); 
   
   static const QString xmlGearName;

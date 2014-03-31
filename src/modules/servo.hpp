@@ -14,13 +14,13 @@
 class Servo : public Module {
 
 public:
-  Servo(int _position, QObject * parent = 0);
+  Servo(int _position, QString name = "Servo");
   ~Servo();
 
 public slots:
   void received(QString message);
-  void simulStep();
-  virtual QStandardItem* getData();
+  void update();
+  virtual QStandardItem* getGuiItem();
 
 signals:
   //virtual void send(QString message);
