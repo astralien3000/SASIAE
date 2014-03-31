@@ -7,6 +7,7 @@
 #include <QtGui>
 #include <QFileDialog>
 #include <QStandardItemModel>
+#include "../common/position_data.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,7 @@ public:
 
 signals:
     void tableFileXml(const QString&);
-    void robotFileXml(const QString& name,const QString& path);
+    void robotFileXml(const QString& name,const QString& path, PositionData p);
     void uiPlay();
     void uiPause();
     void close();

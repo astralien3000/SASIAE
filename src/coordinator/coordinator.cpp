@@ -92,9 +92,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
   // GuiCoordinator robotFileXml -> ConfigRobotCoordinator loadRobotConfig
   connect(
            _gui_cdn->getMainWindow(),
-           SIGNAL(robotFileXml(QString,QString)),
+           SIGNAL(robotFileXml(QString,QString,PositionData)),
            _bot_cdn,
-           SLOT(loadRobotConfig(const QString&, const QString&))
+           SLOT(loadRobotConfig(const QString&, const QString&,PositionData))
             );
 
   //ConfigRobotCoord -> GuiCoord
@@ -194,7 +194,7 @@ void Coordinator::openTable(const QString& XMLPath) {
 void Coordinator::openRobot(const QString& XMLPath) {
     qDebug() << "Chargement des robots : Coordinator.openRobot()";
     QString name("name");
-    _bot_cdn->loadRobotConfig(name,XMLPath);
+   // _bot_cdn->loadRobotConfig(name,XMLPath);
 
   //Mesh * robotMesh=new Mesh(...);
 

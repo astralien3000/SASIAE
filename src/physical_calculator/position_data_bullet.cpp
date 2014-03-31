@@ -37,7 +37,7 @@ PositionData castbtQuaToPos(const btQuaternion & quat){
     btMatrix3x3 m(quat);
     m.getEulerZYX(z,y,x);
     p.alpha = ((int)((x *180 ) / M_PI)) ;
-    p.beta =  ((int)((y *180 ) / M_PI)) ;
+    p.beta =  ((int)((-y *180 ) / M_PI)) ;
     p.gamma = ((int)((z *180 ) / M_PI)) ;
     if(p.alpha > 178 || p.alpha < -178 || p.gamma > 178 || p.gamma < -178 )
       p.beta = 180-p.beta;

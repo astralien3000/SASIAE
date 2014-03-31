@@ -2,7 +2,7 @@
 
 
 //Robot::Robot(const QString path, float mass, PositionData start_pos, const QString name, World &world)
-Robot* Robot::_toto=NULL;
+Robot* Robot::_r=NULL;
 Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, const QString& path, World world)
   :  PrintableMobileObject(cfg,mass,start_pos,name, path),
    btRaycastVehicle(	_tuning,
@@ -20,10 +20,10 @@ Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start
   _body->setRollingFriction(1);
   btDiscreteDynamicsWorld* w = world;
   w->addVehicle(this);
-  _toto = this;
+  _r = this;
 }
 
-Robot* Robot::getRobot() {return _toto;};
+Robot* Robot::getRobot() {return _r;};
 
 Robot::Robot(const STLMesh & chassis, World world, QString name)
   : PrintableMobileObject(name,chassis),

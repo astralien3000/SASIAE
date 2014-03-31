@@ -14,7 +14,7 @@ void PrintableMobileObject::update() const {
   PositionData pos = getPosition();
   _item->setRotation(pos.beta);
   QRectF bounds = _item->boundingRect();
-  _item->setPos(pos.x-(bounds.width())/2,pos.z-(bounds.height())/2);
+  _item->setPos(2*pos.x-(bounds.width())/2,2*pos.z-(bounds.height())/2);
 }
 
 
@@ -66,7 +66,7 @@ STLMesh(cfg,mass,start_pos),_name(name)
     }
     QRectF bounds = _item->boundingRect();
     _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
-    _item->setPos(-(bounds.width())/2,-(bounds.height())/2);
+    update();//_item->setPos(-(bounds.width())/2,-(bounds.height())/2);
 }
 
 PrintableMobileObject::~PrintableMobileObject() {
