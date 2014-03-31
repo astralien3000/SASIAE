@@ -13,7 +13,8 @@ const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsLi
 void PrintableMobileObject::update() const {
   PositionData pos = getPosition();
   _item->setRotation(pos.beta);
-  _item->setPos(pos.x, pos.y);
+  QRectF bounds = _item->boundingRect();
+  _item->moveBy(-(bounds.width())/2,-(bounds.height())/2);
 }
 
 
