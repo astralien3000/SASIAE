@@ -16,21 +16,20 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 
 }
 
-bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path) {
+bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path, PositionData p) {
   qDebug() << "config_robot_coordinator loadRobotConfig path="<< path;
   const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
 
 
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
-//Merge
- /*A float or an int for the weight ? See bullet*/
-  //World w(_phy_cdn.getPhysicalCalculator()->getScene());
-  qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh_path;
-  //_robot_mesh[name] = new Robot(path,(float)robot_cfg->weight, PositionData(0,0,0,0,0,0),name,w);
-  _robot_mesh[name] = new Robot(robot_cfg->mesh_path,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
+  qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path << " poids= "<<robot_cfg->weight;
+  //_robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
+ _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, p, name, robot_cfg->img_path,  _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
-   // Here the PMO is also created.
+
+    emit(tableItem(_robot_mesh[name]->getItem()));
+
   // Loading microcontrollers
   foreach (const ObjectConfig::microConfig* mi,robot_cfg->microcontrollers) {
     qDebug() << "Micro " << mi->name;
@@ -39,10 +38,12 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
       qDebug() << "Nouveau module "<< mo->name;
       Module* mod = loadModule(_robot_mesh[name], mo);
       if(mod != NULL) {
-        _mod_cdn.addModule(name, mo->name, mod);
+        _mod_cdn.addModule(mi->name, mo->name, mod);
         item->setChild(i++,mod->getGuiItem());
       }
     }
+    // Loading bin
+    loadRobot(mi->name, mi->bin);//just add the robot process.
   }
   emit newRobot(item); // add the robot to the gui list of robots.
   return true;

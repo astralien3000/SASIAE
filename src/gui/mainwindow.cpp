@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "posdialog.h"
 #include <iostream>
 #include <QDebug>
+#include <QTime>
 #include <QGraphicsPixmapItem>
 
 MainWindow::MainWindow(QWidget* parent):
@@ -11,7 +13,7 @@ QMainWindow(parent), ui(new Ui::MainWindow)
   _model = new QStandardItemModel(0,2,this);
   ui->setupUi(this);
   ui->graphicsView->setScene(new QGraphicsScene());
-  
+
   ui->treeView->setModel(_model);
   connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   connect(ui->button_table,SIGNAL(clicked()),ui->actionChoisir,SIGNAL(triggered()));
@@ -87,6 +89,13 @@ void MainWindow::wantClose() {
   emit uiPause();
   emit close();
 }
+
+void MainWindow::setTimestamp(int t) {
+  QTime time(0,0,0,0);
+  time = time.addSecs(t/1000);
+  //qDebug() << "le temps est de "<< t;
+  ui->time->setTime(time);
+}
 /*
    Function for integration's tests
  */
@@ -95,8 +104,9 @@ void MainWindow::wantClose() {
   }
 
   void MainWindow::openDirForTable(){
-    const QString fileName = QFileDialog::getOpenFileName(this,
-      "Open Xml file", "./", "Config Files (*.xml)");
+    QString fileName = QFileDialog::getOpenFileName(this,
+     "Open Xml file", "./", "Config Files (*.xml)");
+
     if(fileName!=NULL){
       emit tableFileXml(fileName);
       qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";
@@ -114,26 +124,23 @@ void MainWindow::wantClose() {
     if(fileName!=NULL){
           qDebug() << robotNumber; //works just fine.
 
-          QString name = ("robot number " + QString::number(robotNumber)); // todo : ask user and signal mapping
+          QString name = ("robot" + QString::number(robotNumber)); // todo : ask user and signal mapping
           qDebug() << "robotNumber : (" << name << ") ";
-          emit robotFileXml(name,fileName);
-          qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
+          //positionnement du robot
+          PosDialog p(this);
+          if(p.exec()) {
+              qDebug() << "retour de position" << p._pos.x << p._pos.z;
+            emit robotFileXml(name,fileName,p._pos);
+            qDebug() << "MainWindow emit robotFileXml(" <<fileName << ") to config_robot_coordinator loadRobotConfig";
+          }
         }
         else
           qDebug() << "MainWindow file NULL";
+  }
 
-
-
-
-      }
-
-      void MainWindow::setTableBackground(QPixmap pixmap){
-        QGraphicsItem* item = new QGraphicsPixmapItem(pixmap);
-      //make it backgroud
-        item->setZValue(-1000);
-        ui->graphicsView->scene()->addItem(item);
-      }
-
+  void MainWindow::newLog(QString msg){
+        ui->plainTextEdit->appendPlainText(msg+"\n");
+  }
       const QGraphicsScene* MainWindow::getScene(void)const{
         return ui->graphicsView->scene();
       }

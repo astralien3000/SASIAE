@@ -57,19 +57,16 @@ QStandardItem* MotorWheel::getGuiItem() {
 }
 
 
-
 void MotorWheel::received(QString message) {
   QStringList list = message.split(" ");
   if(list.at(0) == "value") {
     _inputRatio = list.at(1).toDouble();
-    if(_inputRatio > 1 || _inputRatio < 0)
-      qDebug() << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nCommande des moteur en dehors de la plage de fonctionenement [0-1]\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " << _inputRatio;
-    qDebug() << "Motor's value !!! ==> " << _inputRatio;
+    if(_inputRatio > 1 || _inputRatio < -1)
+      qDebug() << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nCommande des moteur en dehors de la plage de fonctionenement [-1-1]\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " << _inputRatio;
   }
   _dataRoot->child(2,1)->setText(QString::number(_inputRatio));
   _dataRoot->child(3,1)->setText(QString::number(_motorMaxTorque*_gearRatio*_inputRatio));
 }
 void MotorWheel::update(void) {
-  qDebug() << "Mise a jour de motoWheel";
   _wheel->setTorque(_motorMaxTorque*_gearRatio*_inputRatio);
 }

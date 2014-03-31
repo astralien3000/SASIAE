@@ -32,7 +32,7 @@ btScalar bradius(radius);
       wheel.m_suspensionStiffness = 20.f;//suspensionStiffness;
       wheel.m_wheelsDampingRelaxation = 2.3f;//suspensionDamping;
       wheel.m_wheelsDampingCompression = 4.4f;//suspensionCompression;  
-      wheel.m_maxSuspensionTravelCm = 0;
+      wheel.m_maxSuspensionTravelCm = 10;
       wheel.m_frictionSlip = 1000;//wheelFriction;
       wheel.m_rollInfluence = .7f;//rollInfluence;
   _wheel_number = _robot->getNumWheels() - 1;

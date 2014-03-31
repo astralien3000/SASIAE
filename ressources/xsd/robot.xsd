@@ -6,6 +6,15 @@
       <xs:sequence>
 	<xs:element name="mesh">
 	  <xs:complexType>
+	    <xs:attribute name="src" type="xs:string" use="required"/>
+	    <xs:attribute name="scale" type="xs:decimal"/>
+	    <xs:attribute name="xOffset" type="xs:decimal"/>
+	    <xs:attribute name="yOffset" type="xs:decimal"/>
+	    <xs:attribute name="zOffset" type="xs:decimal"/>
+	  </xs:complexType>
+	</xs:element>
+	<xs:element name="img">
+	  <xs:complexType>
 	    <xs:attribute name="src" type="xs:string"/>
 	  </xs:complexType>
 	</xs:element>
@@ -23,12 +32,12 @@
 			      <xs:sequence>
 				<xs:element name="location">
 				  <xs:complexType>
-				    <xs:attribute name="X" type="xs:integer"/>
-				    <xs:attribute name="Y" type="xs:integer"/>
-				    <xs:attribute name="Z" type="xs:integer"/>
+				    <xs:attribute name="X" type="xs:decimal"/>
+				    <xs:attribute name="Y" type="xs:decimal"/>
+				    <xs:attribute name="Z" type="xs:decimal"/>
 				    <xs:attribute name="alpha">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction> 
@@ -36,7 +45,7 @@
 				    </xs:attribute>
 				    <xs:attribute name="beta">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction>
@@ -44,7 +53,7 @@
 				    </xs:attribute>
 				    <xs:attribute name="gamma">
 				      <xs:simpleType>
-					<xs:restriction base="xs:integer">
+					<xs:restriction base="xs:decimal">
 					  <xs:minInclusive value="0"/>
 					  <xs:maxInclusive value="360"/>
 					</xs:restriction>
@@ -75,13 +84,14 @@
 		    </xs:element>
 		  </xs:sequence>
 		  <xs:attribute name="name" type="xs:string"/>
+		  <xs:attribute name="bin" type="xs:string"/>
 		</xs:complexType>
 	      </xs:element>
 	    </xs:sequence>
 	  </xs:complexType>
 	</xs:element>
       </xs:sequence>
-      <xs:attribute name="weight" type="xs:integer"/>
+      <xs:attribute name="weight" type="xs:decimal"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

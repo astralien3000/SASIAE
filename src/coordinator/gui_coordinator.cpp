@@ -13,13 +13,13 @@ GuiCoordinator::GuiCoordinator(void){
 
     // MainWindow -> GuiCoordinator : load the Table
 
-    connect(
+    /*connect(
            _mainWindow,
            SIGNAL(robotFileXml(const QString&,const QString&)),
             this,
             SLOT(forwardRobotNameXml(const QString&,const QString&))
            );
-
+*/
     connect(_mainWindow,
            SIGNAL(uiPlay()),
            this,
@@ -55,10 +55,10 @@ MainWindow* GuiCoordinator::getMainWindow(void)const{
 GuiCoordinator::~GuiCoordinator(void){
 }
 
-void GuiCoordinator::forwardRobotNameXml(const QString&name , const QString&path){
+/*void GuiCoordinator::forwardRobotNameXml(const QString&name , const QString&path){
     emit forwardRobotFileXml(name, path);
 }
-
+*/
 
 void GuiCoordinator::updateTable(QGraphicsPixmapItem * it){
     _mainWindow->getScene()->addItem(it);
@@ -79,7 +79,7 @@ void GuiCoordinator::update(){
 
            const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
            if(!objectsList.isEmpty()){
-            qDebug() << "GC update  objectList" << objectsList ;
+            //qDebug() << "GC update  objectList" << objectsList ;
             foreach (const PrintableMobileObject* it, objectsList) {
               it->update();
         //qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;

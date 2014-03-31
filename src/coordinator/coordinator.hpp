@@ -68,30 +68,6 @@ private slots:
   //! \brief read the message received from the Client Thread
   void CTReceived();
   //! \brief read the message received from the Modules
-  /*
-    message appearence : one QString without headers. 
-    BE AWARE ! 
-    This methode HAS to be called from the signal send(QString)
-    otherwise sender()==NULL;
-  */
-  //void MReceived(QString);
-
-  /* unused ?
-   * void sendModuleMessage(QString msg);
-    */
-
-
-
-// INUTILE à PRIORI
-//protected:
-//  QMap<QString /*robot_name*/, Robot* /*robotObject*/> _robotObject;
-//  QHash<QString/*robot_name*/, QString /*robot_code_name*/> _robotInfo;
-//  /* The _moduleInfo's key must be ROBOTCODENAMEmodulename */
-//  QHash<QString/*module_name*/, Module* /*modules*/> _moduleFromName;
-//  QHash<QString/*robot_code_name*/, QProcess* /*robot_process*/> _codeInfo;
-//  QHash<QObject* /* modules*/,
-//	QPair<QString/*robot_code_name*/, QString /*module_name*/> >
-//  _moduleInfo;
 
 private slots:
   void gotoNextStep(); 

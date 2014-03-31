@@ -42,7 +42,7 @@ void Encoder::received(QString message) {
 
 void Encoder::update(void) {
   _dataRoot->child(1,1)->setText(QString::number(_wheel->getRotation()));
-  _dataRoot->child(2,1)->setText(QString::number((int)_wheel->getRotation()*(double)_accuracy));
+  _dataRoot->child(2,1)->setText(QString::number((int)(_wheel->getRotation()*(double)_accuracy)));
   emit(send(QString("value %1").arg((int)(_wheel->getRotation()*(double)_accuracy))));
 }
 

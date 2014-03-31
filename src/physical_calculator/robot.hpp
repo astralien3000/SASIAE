@@ -9,14 +9,15 @@
 class Robot :  public PrintableMobileObject, public btRaycastVehicle{
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
+  static Robot* _r;
   //rajouter la balise
 public:
   //merge
   //Robot(const QString path, float mass, PositionData start_pos, const QString name, World& world);
 
-  Robot(const QString path, float mass, PositionData start_pos, const QString name, World world);
+  Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos, const QString name, const QString & img_path, World world);
   Robot(const STLMesh& mesh, World world, QString name); 
-
+  static Robot* getRobot();
   ~Robot();
 
   /* This function is called in Wheel::init().

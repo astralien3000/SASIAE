@@ -30,8 +30,13 @@ LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
+<<<<<<< HEAD
+=======
+#    item_robot.h \ 
+>>>>>>> master
     ../common/object_config.hpp \
-    ../common/position_data.hpp
+    ../common/position_data.hpp \
+    posdialog.h
 
 HEADERS += ../coordinator/coordinator.hpp \
     ../coordinator/physical_coordinator.hpp \
@@ -63,11 +68,14 @@ HEADERS += ../modules/module.hpp \
 HEADERS += ../stl/STLReader.hpp
 
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    posdialog.ui
 
 SOURCES += main.cpp mainwindow.cpp \
+#    item_robot.cpp \
     ../common/object_config.cpp \
-    ../common/position_data.cpp
+    ../common/position_data.cpp \
+    posdialog.cpp
 
 SOURCES += ../coordinator/coordinator.cpp \
     ../coordinator/physical_coordinator.cpp \

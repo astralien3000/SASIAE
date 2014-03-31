@@ -28,7 +28,7 @@ void RobotCoordinator::handleRecv(void) {
 
   while(client->canReadLine()) {
     QString message = client->readLine();
-    qDebug() << "message CT -> Coord : " << message;
+    //qDebug() << "message CT -> Coord : " << message;
     // Parse first letter
     switch((message.toStdString())[0]) {
       
@@ -37,12 +37,12 @@ void RobotCoordinator::handleRecv(void) {
       break;
       
     case('D'): // Device message
-      qDebug() << "Message received from " << client_name << " : " << message << "\n";
+      //qDebug() << "Message received from " << client_name << " : " << message << "\n";
       emit recvDeviceMessage(client_name, message);
       break;
 
     case('T'): // Synchronisation message
-      qDebug() << "Synchronisation signal received";
+      //qDebug() << "Synchronisation signal received";
       if(_robots.size() <= ++_sync) {
 	emit nextStep();
 	emit synchronised();
@@ -64,7 +64,13 @@ void RobotCoordinator::handleRecv(void) {
 
 void RobotCoordinator::sendModuleMessage(QString rname, QString msg) {
   //qDebug() << "sending to " << rname << " : " << msg << "\n";
-  sendMessage(_robots.value(rname), msg);
+  QProcess* p = _robots.value(rname);
+  if(p) {
+    sendMessage(p, msg);
+  }
+  else {
+    qDebug() << "ERROR : QProcess not found";
+  }
 }
 
 void RobotCoordinator::sendSyncMessage(int timestamp) {

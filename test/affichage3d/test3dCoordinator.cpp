@@ -1,9 +1,13 @@
 #include "test3dCoordinator.hpp"
 #include "../../src/physical_calculator/world.hpp"
+#include "../../src/physical_calculator/robot.hpp"
+
+int myargc;
+char** myargv;
 
 BasicDemo::BasicDemo()
 {
-  cdn = &Coordinator::getInstance();
+  cdn = &Coordinator::getInstance(myargc,myargv);
   _app = cdn;
 }
 
@@ -21,13 +25,11 @@ BasicDemo::~BasicDemo()
   exitPhysics();
 }
 
-int myargc;
-char** myargv;
 
 void	BasicDemo::initPhysics() {
   setTexturing(true);
   setShadows(false);
-  setCameraDistance(btScalar(50.));
+  setCameraDistance(btScalar(100.));
 //  _app = new QApplication(myargc,myargv);
   /* this function ( in src/coordinator/coordinator/coorcinator.cpp )
    * creates 4 wheels, one robot's body and merges them together.
@@ -36,6 +38,8 @@ void	BasicDemo::initPhysics() {
    */
   m_wheelShape = new btCylinderShapeX(btVector3(1,3,3));
   m_dynamicsWorld =(cdn->getPhysicalCalculatorInstance()).getScene();
+  //cdn->getPhysicalCalculatorInstance().simple_scene_walls(200);
+  //Mesh::buildBox(QVector3D(10,10,10), 1000, PositionData(0,30,0,0,0,0));
 
   /*
     pc->simple_scene_walls(100);
@@ -84,22 +88,23 @@ void BasicDemo::renderme() {
   btVector3 min,max,wheelColor(1,0,0);
   m_dynamicsWorld->getBroadphase()->getBroadphaseAabb(min,max);
   
-  /*
-    This is very dirty but I don't know how to
-    do otherwise.
   
-  Robot *_robot=cdn->getRobot(Coordinator::MAIN_ROBOT1);
-
+    //This is very dirty but I don't know how to
+    //do otherwise.
+  
+  Robot *_robot=Robot::getRobot();
+if(_robot != NULL) {
+  //fprintf(stderr, "il y a %d roue\n",_robot->getNumWheels());
   for(i=0; i<_robot->getNumWheels();i++) {
     
-      this step makes the wheel visible.
-      We don't want to use the pc in test3dCoordinator.
-      The work need to be done in the class PhysicalCalculator.
+  //    this step makes the wheel visible.
+   //   We don't want to use the pc in test3dCoordinator.
+   //   The work need to be done in the class PhysicalCalculator.
     
     _robot->updateWheelTransform(i, true);
     _robot->getWheelInfo(i).m_worldTransform.getOpenGLMatrix(m);
     m_shapeDrawer->drawOpenGL(m, m_wheelShape, wheelColor,false,min,max);
   }
-  */
+  }
   DemoApplication::renderme();
 }

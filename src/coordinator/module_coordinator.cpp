@@ -15,6 +15,11 @@ ModuleCoordinator::~ModuleCoordinator(void) {
 void ModuleCoordinator::forwardDeviceMessage(QString rname, QString msg) {
   QStringList args = msg.split(" ");
 
+    emit logMessage(rname+" "+msg);
+
+  /*
+   * forwardDeviceMessage to the corresponding Module
+    */
   Module* mod = _modules.value(QPair<QString, QString>(rname, args[1]));
   if(!mod) {
     qDebug() << "ERROR : No module with this name : " << args[1] << "\n";
@@ -61,6 +66,6 @@ void ModuleCoordinator::update(void) {
   //! \todo Two calls per update ? fix it
   //qDebug() << "Modules\n";
   emit updateModules();
-  qDebug() << "ModuleCoordinator emit nextStep";
+  //qDebug() << "ModuleCoordinator emit nextStep";
   emit nextStep();
 }

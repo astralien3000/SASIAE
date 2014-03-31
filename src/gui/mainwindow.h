@@ -7,6 +7,7 @@
 #include <QtGui>
 #include <QFileDialog>
 #include <QStandardItemModel>
+#include "../common/position_data.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,7 @@ public:
 
 signals:
     void tableFileXml(const QString&);
-    void robotFileXml(const QString& name,const QString& path);
+    void robotFileXml(const QString& name,const QString& path, PositionData p);
     void uiPlay();
     void uiPause();
     void close();
@@ -35,7 +36,7 @@ private:
     QStandardItemModel* _model;
 
 public slots:
-    void setTableBackground(QPixmap pixmap);
+    void setTimestamp(int);
     void openDirForTable();
     void openDirForRobot(int robotNumber);
     void do_sth();
@@ -44,11 +45,7 @@ public slots:
     void slotPause();
     void wantClose();
     void robotButtonClicked();
-    /*
-     * Ancient version
-    void animateRobot(qreal x,qreal y);
-    */
-//    QTimeLine *getTimer()const;
+    void newLog(QString msg);
 };
 
 #endif // MAINWINDOW_H

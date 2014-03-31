@@ -24,6 +24,8 @@ signals:
   //! \brief Ask the update of all modules
   void updateModules(void);
 
+  void logMessage(QString);
+
   //! \brief Ask to send a message to the named robot
   void sendModuleMessage(QString,QString);
 

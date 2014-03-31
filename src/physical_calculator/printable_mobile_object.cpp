@@ -13,7 +13,8 @@ const QVector<const PrintableMobileObject*>& PrintableMobileObject::getObjectsLi
 void PrintableMobileObject::update() const {
   PositionData pos = getPosition();
   _item->setRotation(pos.beta);
-  _item->setPos(pos.x, pos.y);
+  QRectF bounds = _item->boundingRect();
+  _item->setPos(2*pos.x-(bounds.width())/2,2*pos.z-(bounds.height())/2);
 }
 
 
@@ -34,11 +35,19 @@ PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh &
     }
 }
 
-PrintableMobileObject::PrintableMobileObject(const QString path, float mass, PositionData start_pos, const QString name):
-STLMesh(path,mass,start_pos),_name(name)
+PrintableMobileObject::PrintableMobileObject(const ObjectConfig::meshConfig& cfg,
+                                             float mass,
+                                             PositionData start_pos,
+                                             const QString name,
+                                             const QString img_path):
+STLMesh(cfg,mass,start_pos),_name(name)
 {
-    qDebug()<< "PMO Constructor path="<<path << " name=" << name;
-    _item = new QGraphicsPixmapItem();
+    if(img_path=="") {
+      qDebug()<< "PMO Constructor path="<<  "../ressources/img/ image path=" << name << ".png";
+      // img_path = "../ressources/img/" << name << ".png";
+    }
+    else
+      qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
     objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.
     auto it = images.find(name);
@@ -46,15 +55,19 @@ STLMesh(path,mass,start_pos),_name(name)
         (*it)->second++;
         _item = new QGraphicsPixmapItem(*((*it)->first));
     } else { //add the pixmap in the map !
-        QFile img(_img_path+"/"+name);
+        QFile img(img_path);
         if(!img.exists())
-          qDebug() << "img not found with path="<<_img_path+"/"+name;
+          qDebug() << "img not found with path="<<img_path;
+        else
+          qDebug() << "img found with path="<<img_path;
         QPixmap *pixmap = new QPixmap(img.fileName());
-        images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
+        images.insert(name,new QPair<QPixmap*,int>(pixmap,1));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
+    QRectF bounds = _item->boundingRect();
+    _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
+    update();//_item->setPos(-(bounds.width())/2,-(bounds.height())/2);
 }
-
 
 PrintableMobileObject::~PrintableMobileObject() {
     auto it = images.find(this->_name);

@@ -1,10 +1,6 @@
 #include "coordinator.hpp"
-//#include "../modules/servo.hpp"
 #include "../physical_calculator/robot.hpp"
 #include "../physical_calculator/wheel.hpp"
-//#include "../modules/encoder.hpp"
-//#include "../modules/motor_wheel.hpp"
-
 #include <cstdio>
 #include <iostream>
 
@@ -31,7 +27,7 @@ Coordinator& Coordinator::getInstance(int argc, char *argv[]) {
   }
   else{
     Coordinator::_instance = new Coordinator(argc,argv);
-    return *(Coordinator::_instance); 
+    return *(Coordinator::_instance);
   }
 }
 
@@ -50,13 +46,6 @@ Coordinator& Coordinator::getInstance() {
 PhysicalCalculator& Coordinator::getPhysicalCalculatorInstance(){
   return _physic;
 }
-
-/*void Coordinator::startUpdateTimer(QTimer *tm){
-
-    qDebug() << "connect timerUpdate to update";
-    connect(tm, SIGNAL(timeout()), this, SLOT(update()));
-    tm->start();
-}*/
 
 
 Coordinator::Coordinator(int argc, char* argv[]) :
@@ -89,21 +78,25 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           _gui_cdn,
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
-  //PhysicalCoordinator.tableImg -> GuiCoordinator._mainWindox.setTableBackground
- connect(
-         _phy_cdn,
-         SIGNAL(tableImg(QPixmap)),
-         _gui_cdn->getMainWindow(),
-         SLOT(setTableBackground(QPixmap))
-         );
 
-  //GuiCoordinator.MW -> ConfigRobotCoordinator : loadRobotConfig
+   
+   connect(
+           _bot_cdn,
+           SIGNAL(tableItem(QGraphicsPixmapItem*)),
+           _gui_cdn,
+           SLOT(updateTable(QGraphicsPixmapItem*))
+           );
+  
+
+
+  // GuiCoordinator robotFileXml -> ConfigRobotCoordinator loadRobotConfig
   connect(
-         _gui_cdn,
-         SIGNAL(forwardRobotFileXml(const QString&, const QString&)),
-         _bot_cdn,
-         SLOT(loadRobotConfig(const QString&, const QString&))
-          );
+           _gui_cdn->getMainWindow(),
+           SIGNAL(robotFileXml(QString,QString,PositionData)),
+           _bot_cdn,
+           SLOT(loadRobotConfig(const QString&, const QString&,PositionData))
+            );
+
   //ConfigRobotCoord -> GuiCoord
   connect(
          _bot_cdn,
@@ -113,9 +106,9 @@ Coordinator::Coordinator(int argc, char* argv[]) :
          );
   // Device -> Module communication
   connect(
-	  _bot_cdn, 
-	  SIGNAL(recvDeviceMessage(QString, QString)), 
-	  _mod_cdn, 
+	  _bot_cdn,
+	  SIGNAL(recvDeviceMessage(QString, QString)),
+	  _mod_cdn,
 	  SLOT(forwardDeviceMessage(QString, QString))
 	  );
 
@@ -147,7 +140,13 @@ connect(
 	  SLOT(quit())
 	  );
 
-
+//
+connect(
+        _mod_cdn,
+        SIGNAL(logMessage(QString)),
+        _gui_cdn->getMainWindow(),
+        SLOT(newLog(QString))
+        );
 
   // Time management
   connect(
@@ -156,6 +155,13 @@ connect(
 	  _bot_cdn,
 	  SLOT(setTimestamp(int))
 	  );
+  connect(
+	  _phy_cdn,
+	  SIGNAL(timestamp(int)),
+	  _gui_cdn->getMainWindow(),
+	  SLOT(setTimestamp(int))
+	  );
+
 
   std::cout << "Creation de la fenetre principale..." << std::endl;
   _gui_cdn->getMainWindow()->show();
@@ -188,7 +194,7 @@ void Coordinator::openTable(const QString& XMLPath) {
 void Coordinator::openRobot(const QString& XMLPath) {
     qDebug() << "Chargement des robots : Coordinator.openRobot()";
     QString name("name");
-    _bot_cdn->loadRobotConfig(name,XMLPath);
+   // _bot_cdn->loadRobotConfig(name,XMLPath);
 
   //Mesh * robotMesh=new Mesh(...);
 
@@ -203,8 +209,8 @@ void Coordinator::openRobot(const QString& XMLPath) {
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(6,-17,-14)),boxA);
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(-6,-17,-14)),boxA);
   cyl0->addChildShape(btTransform(btQuaternion(0,0,0,1),btVector3(0,0.5,0)),boxB);
-  
-  
+
+
   btVector3 boxSize=btVector3(15,17.5,15);
   btVector3 position=btVector3(0,17.5,0);
   btScalar mass=80;
@@ -242,17 +248,17 @@ void Coordinator::openRobot(const QString& XMLPath) {
   QString code=XMLPath;
   Module* encd = new Encoder(_ED, "", this);
   _mod_cdn->addModule("bot", "right_encoder", encd);
-  
+
   Module* encg = new Encoder(_EG, "", this);
   _mod_cdn->addModule("bot", "left_encoder", encg);
-  
+
   Module* motd = new MotorWheel(_MD, "", this);
   _mod_cdn->addModule("bot", "right_motor", motd);
-  
+
   Module* motg = new MotorWheel(_MG, "", this);
   _mod_cdn->addModule("bot", "left_motor", motg);
   */
-  //! \todo really read the file  
+  //! \todo really read the file
 
   _bot_cdn->loadRobot("bot", "./client");
 }
@@ -285,7 +291,7 @@ void Coordinator::sendDeviceMessage(QString name, QString msg, QProcess* p) {
 void Coordinator::sendMessages(QString msg, QProcess* p) {
 }
 
- 
+
 void Coordinator::closeRobot(Slot robot){
 }
 

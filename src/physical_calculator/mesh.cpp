@@ -45,7 +45,7 @@ void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData sta
      // if(Mass != 0)
         _shape->calculateLocalInertia(Mass,bodyInertia);
         btRigidBody::btRigidBodyConstructionInfo
-                bodyRigidBodyCI(0,bodyMotionState,shape,bodyInertia);
+                bodyRigidBodyCI(Mass,bodyMotionState,shape,bodyInertia);
         _body = new btRigidBody(bodyRigidBodyCI);
         if(_world != NULL){
           _world.getScene()->addRigidBody(_body);
