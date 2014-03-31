@@ -79,13 +79,14 @@ Coordinator::Coordinator(int argc, char* argv[]) :
           SLOT(updateTable(QGraphicsPixmapItem*))
           );
 
-     connect(
+   
+   connect(
            _bot_cdn,
            SIGNAL(tableItem(QGraphicsPixmapItem*)),
            _gui_cdn,
            SLOT(updateTable(QGraphicsPixmapItem*))
            );
-  //
+  
 
 
   // GuiCoordinator robotFileXml -> ConfigRobotCoordinator loadRobotConfig

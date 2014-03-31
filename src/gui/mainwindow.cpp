@@ -92,7 +92,7 @@ void MainWindow::wantClose() {
 void MainWindow::setTimestamp(int t) {
   QTime time(0,0,0,0);
   time = time.addSecs(t/1000);
-  qDebug() << "le temps est de "<< t;
+  //qDebug() << "le temps est de "<< t;
   ui->time->setTime(time);
 }
 /*
@@ -103,8 +103,9 @@ void MainWindow::setTimestamp(int t) {
   }
 
   void MainWindow::openDirForTable(){
-    const QString fileName = QFileDialog::getOpenFileName(this,
-      "Open Xml file", "./", "Config Files (*.xml)");
+    QString fileName = QFileDialog::getOpenFileName(this,
+     "Open Xml file", "./", "Config Files (*.xml)");
+
     if(fileName!=NULL){
       emit tableFileXml(fileName);
       qDebug() << "MainWindow emit tableFileStl(" <<fileName << ") to PhyCoord loadTable";

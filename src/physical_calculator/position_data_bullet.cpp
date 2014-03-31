@@ -1,6 +1,6 @@
 #include "position_data_bullet.hpp"
 #include <math.h>
-
+#include <QDebug>
 
 PositionData::PositionData(const PositionData& posdata) {
     int i=0;
@@ -35,10 +35,12 @@ PositionData castbtQuaToPos(const btQuaternion & quat){
     PositionData p(0,0,0,0,0,0);
     float x,y,z;
     btMatrix3x3 m(quat);
-    m.getEulerYPR(z,y,x);
-    p.alpha = ((int)((x *360 ) / M_PI + 360)) % 360;
-    p.beta =  ((int)((y *360 ) / M_PI + 360)) % 360;
-    p.gamma = ((int)((z *360 ) / M_PI + 360)) % 360;
+    m.getEulerZYX(z,y,x);
+    p.alpha = ((int)((x *180 ) / M_PI)) ;
+    p.beta =  ((int)((y *180 ) / M_PI)) ;
+    p.gamma = ((int)((z *180 ) / M_PI)) ;
+    if(p.alpha > 178 || p.alpha < -178 || p.gamma > 178 || p.gamma < -178 )
+      p.beta = 180-p.beta;
     return p;
 }
 

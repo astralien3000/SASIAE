@@ -19,6 +19,7 @@ PhysicalCalculator::PhysicalCalculator(QObject* parent):QObject(parent){
   info.m_numIterations = 20;
   _clock= new btClock();
   //_objectsList = new Qlist<printableMobileObject>;
+  init();
 }
 
 PhysicalCalculator::~PhysicalCalculator(){

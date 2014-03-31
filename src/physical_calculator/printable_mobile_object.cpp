@@ -14,7 +14,7 @@ void PrintableMobileObject::update() const {
   PositionData pos = getPosition();
   _item->setRotation(pos.beta);
   QRectF bounds = _item->boundingRect();
-  _item->moveBy(-(bounds.width())/2,-(bounds.height())/2);
+  _item->setPos(pos.x-(bounds.width())/2,pos.z-(bounds.height())/2);
 }
 
 
@@ -48,7 +48,6 @@ STLMesh(cfg,mass,start_pos),_name(name)
     }
     else
       qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
-    _item = new QGraphicsPixmapItem();
     objects.append(this);
     //si image est dans tableau, ++, sinon ajouter image dans tableau.
     auto it = images.find(name);
@@ -62,12 +61,12 @@ STLMesh(cfg,mass,start_pos),_name(name)
         else
           qDebug() << "img found with path="<<img_path;
         QPixmap *pixmap = new QPixmap(img.fileName());
-        images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
+        images.insert(name,new QPair<QPixmap*,int>(pixmap,1));
         _item = new QGraphicsPixmapItem(*pixmap);
     }
     QRectF bounds = _item->boundingRect();
     _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
-    _item->moveBy(-(bounds.width())/2,-(bounds.height())/2);
+    _item->setPos(-(bounds.width())/2,-(bounds.height())/2);
 }
 
 PrintableMobileObject::~PrintableMobileObject() {

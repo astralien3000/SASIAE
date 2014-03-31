@@ -79,7 +79,7 @@ void GuiCoordinator::update(){
 
            const QVector<const PrintableMobileObject*>& objectsList = PrintableMobileObject::getObjectsList();
            if(!objectsList.isEmpty()){
-            qDebug() << "GC update  objectList" << objectsList ;
+            //qDebug() << "GC update  objectList" << objectsList ;
             foreach (const PrintableMobileObject* it, objectsList) {
               it->update();
         //qDebug() << "GuiCoordinator update pos.x=" << curPosition.at(0) << "pos.y =" << curPosition.at(2) ;
