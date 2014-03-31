@@ -1,0 +1,11 @@
+SASIAE ne nécessite pour fonctionner que des bibliothèques dynamiques de Qt5, celles-ci sont utilisées par le simulateur pour gérer l'affichage ainsi que de nombreuses communications entre les entités du simulateur. Cependant, à moins d'être en possession d'un code robot déjà exécutable, il est nécessaire de pouvoir compiler le code écrit afin de le tester dans le simulateur. Le compilateur avr-gcc peut également être installé pour obtenir un code exécutable sur une architecture AVR, utilisée par les robots d'Eirbot. De cette manière, il devient possible de confronter la simulation à la réalité d'un robot roulant sur la table.
+
+\paragraph{}
+Pour obtenir une simulation la plus proche possible de la réalité, il est conseillé de fournir au programme des fichiers STL (format standard de représentation 3D) représentant la table et les robots le plus fidèlement possible. La table étant commune à toutes les équipes qui participent à la coupe de France de robotique, sa représentation STL peut être trouvée sur le web. Néanmoins celle du robot est propre à chaque équipe.
+
+Cependant le fichier STL ne suffit pas pour décrire la table ou les robots. Pour la table, les éléments mobiles doivent être rajouté dans le fichier XML de description. Pour les robots, les blocs particuliers tels que les encodeurs, les roues motrices, ou les capteurs de distance doivent également être rajoutés dans le fichier XML.
+
+Pour finir, il faut indiquer pour chaque robot où se trouve son code. Il s'agit donc encore une fois de renseigner cette information dans le fichier XML.
+
+\paragraph{}
+Une fois que le simulateur est en possession de toutes les informations relatives au(x) robot(s) et à la table, celui-ci est en mesure d'afficher en temps réel le déplacement des robots sur la table. À la droite de l'écran se situe un cadre qui indique en temps réel les valeurs renvoyées par les capteurs des robots ainsi que celles assignées aux actionneurs. Une première étape pour faciliter le débuggage de votre code !

@@ -1,0 +1,86 @@
+\documentclass{scrreprt}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\lstset{language=xml,frame=single, breaklines=true, basicstyle=\ttfamily,backgroundcolor=\color{white},basicstyle=\scriptsize, keywordstyle=\color{blue}, commentstyle=\color{Gray}, stringstyle=\color{red}, identifierstyle=\color{green}}
+
+%%%% debut macro %%%%
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{0pt plus 1pt}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+}\item }{\end{list}}
+%%%% fin macro %%%%
+
+\hypersetup{
+    bookmarks=false, % show bookmarks bar?
+    pdftitle={Projet SASIAE}, % title
+    pdfauthor={Raynal Jean-Raymond, Dauphin Loïc, Clément Lansmarie, Hugo Brunie, Nicolas Belin, Benoit Gilbert, Théotime Méralli-Ballou}, % author
+    pdfsubject={TeX and LaTeX}, % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true, % false: boxed links; true: colored links
+    linkcolor=blue, % color of internal links
+    citecolor=black, % color of links to bibliography
+    filecolor=black, % color of file links
+    urlcolor=purple, % color of external links
+    linktoc=page % only page is linked
+}%1 
+\def\myversion{}
+\title{
+\flushright
+\rule{16cm}{5pt}
+\vskip1cm
+{\Huge Rapport de PFA - Projet SASIAE}\\
+\vspace{9cm}
+{\small Théotime Méralli-Ballou\\ Jean-Raymond Raynal\\ Clément Lansmarie\\ Benoit Gilbert\\ Loïc Dauphin\\ Nicolas Belin\\ Hugo Brunie\\ }
+\vfill
+{\small Client: Aymeric Vincent / EIRBOT }
+\rule{16cm}{5pt}
+}
+\date{}
+\usepackage{hyperref}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Introduction}
+\input{intro.tex}
+
+\chapter{Génie logiciel et management de projet}
+\input{gl.tex}
+
+\chapter{Description générale}
+\input{general.tex}
+
+\chapter{Architecture détaillée}
+\input{detail.tex}
+
+\chapter{Bilan}
+\input{bilan.tex}
+
+\chapter{Annexe}
+
+\section{Comment utiliser SASIAE}
+\input{howto.tex}
+
+\newpage
+\section{Tests}
+\input{tests.tex}
+
+\section{Protocoles et format XML}
+\input{boutdecodes.tex}
+%\section{Cahier des charges}
+
+\end{document}
