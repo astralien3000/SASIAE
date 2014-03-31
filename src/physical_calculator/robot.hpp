@@ -9,7 +9,7 @@
 class Robot :  public PrintableMobileObject, public btRaycastVehicle{
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
-  static Robot* _toto;
+  static Robot* _r;
   //rajouter la balise
 public:
   //merge
