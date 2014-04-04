@@ -1,19 +1,20 @@
 #ifndef __DIGITAL_SERVO_
 #define __DIGITAL_SERVO_
 
-#include "modules.hpp"
+#include "module.hpp"
 #include <QObject>
+#include <QString>
 
-class DigitalServo : public Modules {
+class DigitalServo : public Module {
 Q_OBJECT
 
 public:
-  DigitalServo();
+  DigitalServo(QString name = "DigitalServo");
 
 public slots:
-  virtual QStandardItem* getData(); 
+  virtual QStandardItem* getGuiItem(); 
   virtual void received(QString message);  
-  virtual void simulStep();
+  virtual void update();
 
 signals:
   virtual void send(QString message);

@@ -128,7 +128,7 @@ void MainWindow::setTimestamp(int t) {
 
 
   void MainWindow::newLog(QString msg){
-        ui->plainTextEdit->appendPlainText(msg+"\n");
+        ui->plainTextEdit->appendPlainText(msg.trimmed());
   }
       const QGraphicsScene* MainWindow::getScene(void)const{
         return ui->graphicsView->scene();

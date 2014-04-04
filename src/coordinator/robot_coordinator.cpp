@@ -51,7 +51,7 @@ void RobotCoordinator::handleRecv(void) {
       break;
 
     case('M'): // Log messages (GUI)
-      qDebug() << "[] Log : " << message << "\n";
+      emit logMessage(QString("Log : ") + message);
       emit recvGuiMessage(message);
       break;
       
@@ -69,7 +69,7 @@ void RobotCoordinator::sendModuleMessage(QString rname, QString msg) {
     sendMessage(p, msg);
   }
   else {
-    qDebug() << "ERROR : QProcess not found";
+    qDebug() << "ERROR : QProcess not found for robot" << rname;
   }
 }
 

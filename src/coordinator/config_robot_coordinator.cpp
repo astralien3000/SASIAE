@@ -2,6 +2,7 @@
 
 #include "../xml_parser/xml_parser.hpp"
 #include "../modules/module.hpp"
+#include "../modules/factory.hpp"
 //#include "../modules/motor_wheel.hpp"
 //#include "../modules/encoder.hpp"
 
@@ -18,7 +19,7 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path, PositionData p) {
   qDebug() << "config_robot_coordinator loadRobotConfig path="<< path;
   const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
-
+  if(robot_cfg == NULL) return false;
 
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
@@ -36,8 +37,10 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
     foreach (const ObjectConfig::moduleConfig* mo,mi->modules) {
       qDebug() << "Nouveau module "<< mo->name;
       Module* mod = loadModule(_robot_mesh[name], mo);
-      _mod_cdn.addModule(mi->name, mo->name, mod);
-      item->setChild(i++,mod->getGuiItem());
+      if(mod != NULL) {
+        _mod_cdn.addModule(mi->name, mo->name, mod);
+        item->setChild(i++,mod->getGuiItem());
+      }
     }
     // Loading bin
     loadRobot(mi->name, mi->bin);//just add the robot process.
@@ -53,16 +56,14 @@ Module* ConfigRobotCoordinator::loadModule(Robot* robot, const ObjectConfig::mod
   QString file = QString("lib")+moduleConf->type+".so";
   qDebug() << file << plugDir.exists(file);
   if(plugDir.exists(file)) {
-    qDebug() << "Modules" << moduleConf->type << "trouvé";
+    qDebug() << "Factory " << moduleConf->type << "trouvé";
     QPluginLoader loader(plugDir.absoluteFilePath(file));
     QObject* plugin = loader.instance();
     qDebug() << plugin << plugDir.absoluteFilePath(file) << loader.errorString();
     if(plugin) {
-      qDebug() << plugin->metaObject()->className();
-      qDebug() << plugin->inherits("Module") << plugin->inherits("QObject");
-      Module* m = qobject_cast<Module*>(plugin);
+      Factory* m = qobject_cast<Factory*>(plugin);
+      m->setWorld(Mesh::getWorld());
       ret = m->buildModule(robot, moduleConf);
-      qDebug() << plugin << m << loader.isLoaded();
     }
   }
   return ret;

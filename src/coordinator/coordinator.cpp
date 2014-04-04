@@ -140,6 +140,12 @@ connect(
 	  SLOT(quit())
 	  );
 
+connect(
+        _bot_cdn,
+        SIGNAL(logMessage(QString)),
+        _gui_cdn->getMainWindow(),
+        SLOT(newLog(QString))
+        );
 //
 connect(
         _mod_cdn,
