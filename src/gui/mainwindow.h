@@ -29,6 +29,7 @@ signals:
     void robotFileXml(const QString& name,const QString& path, PositionData p);
     void uiPlay();
     void uiPause();
+    void uiStop();
     void close();
 
 private:
@@ -43,6 +44,7 @@ public slots:
     void CReceived(QString message);
     void slotPlay();
     void slotPause();
+    void slotStop();
     void wantClose();
     void robotButtonClicked();
     void newLog(QString msg);

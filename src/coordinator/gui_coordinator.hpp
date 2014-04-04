@@ -17,6 +17,7 @@ signals:
 
     void uiPlay();
     void uiPause();
+    void uiStop();
     void nextStep();
     void close();
   
@@ -26,6 +27,7 @@ public slots:
   void updateTable(QGraphicsPixmapItem*);
   void slotPause();
   void slotPlay();
+  void slotStop();
   void slotClose();
   void addRobotToList(QStandardItem* item);
 

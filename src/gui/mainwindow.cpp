@@ -17,9 +17,7 @@ QMainWindow(parent), ui(new Ui::MainWindow)
   ui->treeView->setModel(_model);
   connect(ui->actionChoisir,SIGNAL(triggered()),this,SLOT(openDirForTable()));
   connect(ui->button_table,SIGNAL(clicked()),ui->actionChoisir,SIGNAL(triggered()));
-  //todo add intermediate button to redirect the Number of sender / user signal mapping with sender();
 
-  // connect(ui->actionRobot_new_1,SIGNAL(triggered()),this,SLOT(openDirForRobot()));
   connect(ui->actionRobot_new_1,SIGNAL(triggered()),this,SLOT(robotButtonClicked()));
   connect(ui->button_robot1,SIGNAL(clicked()),ui->actionRobot_new_1,SIGNAL(triggered()));
 
@@ -35,12 +33,8 @@ QMainWindow(parent), ui(new Ui::MainWindow)
 
   connect(ui->button_play,SIGNAL(clicked()),this,SLOT(slotPlay()));
   connect(ui->button_pause,SIGNAL(clicked()),this,SLOT(slotPause()));
+  connect(ui->button_stop,SIGNAL(clicked()),this,SLOT(slotStop()));
 
-
-  //Ui_MainWindow::setupUi(this);
-//        QObject::connect(button_robot1, SIGNAL(clicked()), qApp, SLOT(quit()));
-
-  //QObject::connect(button_robot1, SIGNAL(clicked()), this, SLOT(do_sth()));
 }
 
 MainWindow::~MainWindow()
@@ -58,19 +52,7 @@ void MainWindow::robotButtonClicked()
 void MainWindow::addRobot(QStandardItem* item) {
   _model->appendRow(item);
 }
-/*
- * Ancient version
-void MainWindow::animateRobot(qreal x,qreal y){
-    qDebug() << "MainWindow::animateRobot";
-    ui->graphicsView->moveRobot(x,y);
-    ui->graphicsView->moveRobot();
-}
-*/
-/*
-QTimeLine *MainWindow::getTimer()const{
- return   ui->graphicsView->timer;
-}
-*/
+
 void MainWindow::do_sth()
 {
   std::cout<<"signal envoyé"<< std::endl;
@@ -83,6 +65,11 @@ void MainWindow::slotPlay() {
 }
 void MainWindow::slotPause() {
   emit uiPause();
+}
+
+void MainWindow::slotStop(){
+    emit uiPause();
+    emit uiStop();
 }
 
 void MainWindow::wantClose() {
@@ -137,6 +124,8 @@ void MainWindow::setTimestamp(int t) {
         else
           qDebug() << "MainWindow file NULL";
   }
+
+
 
   void MainWindow::newLog(QString msg){
         ui->plainTextEdit->appendPlainText(msg+"\n");
