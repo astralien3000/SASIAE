@@ -2,24 +2,23 @@
 #define __RDS_H__
 
 #include "../physical_calculator/balise.hpp"
-#include "modules.hpp"
-#include <list>
+#include "module.hpp"
+#include <QObject>
+#include <QString>
+#include <QList>
+#include <QVector3D>
 
-using namespace std;
-
-
-class RDS : public Modules {
+class RDS : public Module {
 	Q_OBJECT
 
 public:
-  RDS(Balise *balise);
+  RDS(Balise *balise, QString name = "RDS");
 
 public slots:
-  virtual void balise_add(Balise *balise_to_add);
-  virtual list<btVector3>* get_position();
-  virtual QStandardItem* getData();
+  virtual QList<QVector3D> get_position();
+  virtual QStandardItem* getGuiItem();
   virtual void received(QString message);
-  virtual void simulStep();
+  virtual void update();
 
 
 signals:
@@ -27,9 +26,10 @@ signals:
 
 private:
   int _mode;
-  list<Balise*> *balises;
   Balise* _myBalise;
   QStandardItem* _dataRoot;
+
+  void maj_affichage(QList<QVector3D> pos_list);
 };
 
 

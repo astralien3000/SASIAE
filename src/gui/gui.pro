@@ -30,10 +30,6 @@ LIBPATH += ../HACD/
 
 # Input
 HEADERS += mainwindow.h \
-<<<<<<< HEAD
-=======
-#    item_robot.h \ 
->>>>>>> master
     ../common/object_config.hpp \
     ../common/position_data.hpp \
     posdialog.h

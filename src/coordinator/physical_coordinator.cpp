@@ -12,6 +12,7 @@ struct PhysicalCoordinator::PrivateData {
   PhysicalCalculator* physic;
   double timeStep;
   int maxSubStep;
+  int n;
 };
 
 ////////////////////////////////////////
@@ -29,6 +30,7 @@ PhysicalCoordinator::PhysicalCoordinator(PhysicalCalculator* phy) {
   _data->physic = phy;
 
   _data->timeStep = 1./120.;
+  _data->n = 0;
   _data->maxSubStep = 20;
   connect(
 	  this,
@@ -47,7 +49,7 @@ PhysicalCoordinator::~PhysicalCoordinator() {
 void PhysicalCoordinator::loadTable(const QString& path) {
   qDebug() << "PhysCoor loadTable path="<< path;
   const ObjectConfig::tableConfig * tableConfig=XMLParser::parseTable(path);
-
+  if(tableConfig == NULL) return;
   qDebug()<<"tableConfig : img path ="<< tableConfig->img_path
          << "  mesh_path ="<<tableConfig->mesh.path << " toys=" << tableConfig->toys ;
 
@@ -76,7 +78,7 @@ void PhysicalCoordinator::update(void) {
   //qDebug() << "PhysicalCoordinator emit nextStep";
     //qDebug() << " Running \n";
     _data->physic->nextStep(_data->timeStep, _data->maxSubStep);
-    emit timestamp(_data->physic->getTime());
+    emit timestamp(_data->timeStep*_data->n++*1000);
     emit nextStep();
 }
 

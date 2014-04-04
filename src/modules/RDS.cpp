@@ -1,45 +1,59 @@
 #include "RDS.hpp"
+#include <qmath.h>
 
-
-RDS::RDS(Balise *balise): _myBalise(balise){
-  mode=0;
-	this->balises = new list<Balise*>;
-	_dataRoot = new QStandardItem("RDS");
+RDS::RDS(Balise *balise, QString name): _myBalise(balise){
+  _mode=0;
+	_dataRoot = new QStandardItem(name);
+  maj_affichage(QList<QVector3D>());
 }
 
-void RDS::balise_add(Balise *balise_to_add) {
-	this->balises->push_front(balise_to_add);
-	btVector3 position =balise_to_add->get_position();
-	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("RDS")
-		<< new QStandardItem(QString::number(position.getX() + position.getY() + position.getZ()));
-}
-
-QStandardItem* RDS::getData() {
+QStandardItem* RDS::getGuiItem() {
 	return _dataRoot;
 }
 
-list<btVector3>* RDS::get_position(){
-	list<btVector3> *result = new list<btVector3>;
-	//for (list<Balise*>::const_iterator it = balises->begin(); it != balises->end(); ++it) {
-	for (auto it = balises->begin(); it != balises->end(); ++it) {
-      if(_mode == 0) //mode cartesian
-			  result->push_front((*it)->get_position()-_myBalise->get_position());
-      if(_mode == 1) {
-        //TODO
+QList<QVector3D> RDS::get_position(){
+	QList<QVector3D> result;
+	foreach (Balise* it , Balise::listBalise()) {
+      if(it != _myBalise) {
+        if(_mode == 0) {//mode cartesian
+          PositionData v = it->getPosition()-_myBalise->getPosition();
+			    result.append(v);
+        }
+        if(_mode == 1) {
+          PositionData v = it->getPosition()-_myBalise->getPosition();
+          double d = qSqrt(v.x*v.x+v.z*v.z);
+			    result.append(QVector3D(d, 0 , 2 *qAtan(v.z/(v.x + d))));
+        }
       }
 
-}
+  }
+  maj_affichage(result);
 	return result;
 }
 
+void RDS::maj_affichage(QList<QVector3D> pos_list) {
+  //suppression de l'ancien arbre
+  _dataRoot->removeRows(0,_dataRoot->rowCount());
+  //ajout de ma position
+  PositionData position = _myBalise->getPosition();
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Ma position")
+		<< new QStandardItem(QString::number(position.x) +QString(" ")+ QString::number(position.y)+QString(" ") + QString::number(position.z)));
+	_dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Mode") << new QStandardItem(QString((_mode == 0) ? "cartesien" : "polaire")));
+  foreach(QVector3D vec, pos_list) {
+    _dataRoot->appendRow(QList<QStandardItem*>() << new QStandardItem("Detection")
+      << new QStandardItem(QString::number(vec.x()) +QString(" ")+ QString::number(vec.y())+QString(" ") + QString::number(vec.z())));
+  }
+}
+
 void RDS::update() {
-  list<btVector3>* list_result = this->get_position();
-  Qstring string_result;
-  string_result->append( list_result.length().toString() );
-  for(auto it=list_result->begin();it!=list_result->end(); ++it) {
-    string_result->append( (*it)->getX() + (*it)->getZ() );
+  QList<QVector3D> list_result = this->get_position();
+  QString string_result;
+  string_result.append( QString::number(list_result.length()) );
+  foreach(QVector3D it , list_result) {
+    string_result.append(QString(" ") + QString::number(it.x()) + QString(" ") + QString::number(it.z()) );
   }
   emit(send(string_result));
+
 } //calcul distance et emit(send())
 
 
@@ -51,8 +65,9 @@ void RDS::received(QString message) {
       _mode = 0;
       } else if (list.at(1) == "polar") {
       _mode = 1;
-      } else
+      } else {
         //error
+      }
     } else {
       //also error
     }

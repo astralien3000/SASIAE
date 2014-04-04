@@ -3,6 +3,7 @@
 
 #include "factory.hpp"
 #include <QObject>
+#include "../physical_calculator/world.hpp"
 
 class RDSFactory : public QObject, public Factory {
   Q_OBJECT
@@ -14,6 +15,8 @@ class RDSFactory : public QObject, public Factory {
   virtual Module* buildModule(Robot* robot,
                               const ObjectConfig::moduleConfig* conf);
   virtual void setWorld(World w);
+  private:
+  World _world;
 };
 
 #endif //RDS_FACTORY_HPP

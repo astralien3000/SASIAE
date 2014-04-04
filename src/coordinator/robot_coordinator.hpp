@@ -20,6 +20,9 @@ class RobotCoordinator : public BaseCoordinator {
 
 signals:
   //! \brief Ask to forward a device message
+  void logMessage(QString);
+
+  //! \brief Ask to forward a device message
   void recvDeviceMessage(QString,QString);
 
   //! \brief Ask to forward a GUI message

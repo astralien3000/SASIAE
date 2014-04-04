@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QList>
 #include <QStandardItem>
 #include <btBulletDynamicsCommon.h>
 
@@ -17,10 +18,12 @@ class Balise {
 public:
   Balise(World world, Robot* chassis);
   PositionData getPosition();
+  static QList<Balise*> listBalise();
 
 private:
   Robot* _chassis;
 	Mesh* _sensor_box;
+  static QList<Balise*> _list;
 };
 
 

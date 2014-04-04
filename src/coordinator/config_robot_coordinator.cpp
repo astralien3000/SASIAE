@@ -19,7 +19,7 @@ ConfigRobotCoordinator::ConfigRobotCoordinator(PhysicalCoordinator& phy_cdn, Mod
 bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString& path, PositionData p) {
   qDebug() << "config_robot_coordinator loadRobotConfig path="<< path;
   const ObjectConfig::robotConfig* robot_cfg = XMLParser::parseRobot(path);
-
+  if(robot_cfg == NULL) return false;
 
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh

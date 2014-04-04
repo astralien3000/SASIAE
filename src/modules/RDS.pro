@@ -10,7 +10,7 @@ QT += widgets core
 QMAKE_CXXFLAGS = -std=c++11
 
 HEADERS += ../physical_calculator/mesh.hpp \
-           ../physical_calculator/dist_sensor.hpp \
+           ../physical_calculator/balise.hpp \
            ../physical_calculator/world.hpp \
            ../physical_calculator/position_data_bullet.hpp \
            ../physical_calculator/robot.hpp
@@ -22,7 +22,7 @@ HEADERS += RDS.hpp \
            RDS_factory.hpp
 
 SOURCES += ../physical_calculator/mesh.cpp \
-           ../physical_calculator/dist_sensor.cpp \
+           ../physical_calculator/balise.cpp \
            ../physical_calculator/world.cpp \
            ../physical_calculator/position_data_bullet.cpp \
            ../physical_calculator/robot.cpp
