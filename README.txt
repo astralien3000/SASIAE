@@ -17,3 +17,7 @@ To compile the project:
 To run the project:
 - move to build/
 - execute ./gui
+
+For users using VM :
+- send mail to sasiae@listes.enseirb-matmeca.fr
+

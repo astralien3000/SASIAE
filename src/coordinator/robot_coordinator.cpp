@@ -109,7 +109,7 @@ bool RobotCoordinator::loadRobot(const QString& name, const QString& path) {
   return true;
 }
 
-bool RobotCoordinator::unloadRobot(QString name) {
+bool RobotCoordinator::unloadRobot(const QString &name) {
   QProcess* client = _robots.value(name);
   sendMessage(client, "S");
   client->closeWriteChannel();
@@ -132,4 +132,9 @@ void RobotCoordinator::update(void) {
       qDebug()<< "RobotCoordinator emit nextStep" ;
     emit nextStep();
   }
+}
+
+bool RobotCoordinator::reloadRobot(const QString &name, const QString &path) {
+    unloadRobot(name);
+    loadRobot(name,path);
 }

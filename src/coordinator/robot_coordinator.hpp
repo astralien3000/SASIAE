@@ -51,7 +51,10 @@ public slots:
   bool loadRobot(const QString& name, const QString& path);
 
   //! \brief Delete a robot
-  bool unloadRobot(QString name);
+  bool unloadRobot(const QString &name);
+
+  //! \brief Reload a robot, calls unloadRobot then loadRobot
+  bool reloadRobot(const QString& name, const QString& path);
 
   //! \brief Sync
   void update(void);

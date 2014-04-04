@@ -57,7 +57,7 @@ public slots:
   //! \brief Trigger by Calculator, when a step is finished
   void stepDone();
   //void openTable(const QString& XMLPath);
-  void openRobot(const QString& XMLPath);
+  //void openRobot(const QString& XMLPath);
   //void openRobot(QProcess * proc, const QString& XMLPath, Slot slot);
   
 						  
@@ -67,10 +67,13 @@ public slots:
 private slots:
   //! \brief read the message received from the Client Thread
   void CTReceived();
-  //! \brief read the message received from the Modules
 
-private slots:
+  //! \brief read the message received from the Modules
   void gotoNextStep(); 
+
+  //! \brief restart the PhysicalCoordinator, Ro
+  void restart();
+
 private:
   void sendDeviceMessage(QString name, QString msg, QProcess* p);
   void sendDeviceMessage(QString name, QString msg, QString code);
@@ -91,39 +94,32 @@ private:
    * The line must be a message : 
    * for example : "D TESTER I'm new \n"
    */
-  QString readMessage(QProcess * proc)const;
+  //QString readMessage(QProcess * proc)const;
 
   /*
    * add to _codeInfo a pair
    * (key : codeName, value : processus)
    */
-  bool addToRobotCode(QString name, QProcess * proc);
+  //bool addToRobotCode(QString name, QProcess * proc);
 
   /*
    * add to _moduleFromName a Pair
    * (key: module's name, value : module)
    */
-  bool addModule(QString name, Module * mod);  
+  //bool addModule(QString name, Module * mod);
 
   /*
    * add to _moduleInfo a pair
    * (key : module, value : pair(codeName, moduleName))
    */
-  bool addModuleAndCodeName(Module * key, QString code, QString module );
+  //bool addModuleAndCodeName(Module * key, QString code, QString module );
    
 
 private:
   Coordinator(int argc, char* argv[]);
   static Coordinator* _instance;
   PhysicalCalculator _physic;
-/*
- * INUTILES à PRIORI
-  bool _running;
-  int _sync; 
-  int _codeFactor;
-  double _timeStep;
-  int _maxSubStep;
-*/
+
 };
 
 

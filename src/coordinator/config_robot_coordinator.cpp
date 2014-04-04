@@ -24,7 +24,6 @@ bool ConfigRobotCoordinator::loadRobotConfig(const QString& name, const QString&
   QStandardItem* item = new QStandardItem(name);
   // Loading mesh
   qDebug() << "creation du robot avec nom et mesh ="<< name <<robot_cfg->mesh.path << " poids= "<<robot_cfg->weight;
-  //_robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, PositionData(), name, _phy_cdn.getPhysicalCalculator()->getScene());
  _robot_mesh[name] = new Robot(robot_cfg->mesh,robot_cfg->weight, p, name, robot_cfg->img_path,  _phy_cdn.getPhysicalCalculator()->getScene());
   int i=0;
 
