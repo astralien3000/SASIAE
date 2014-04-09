@@ -1,4 +1,4 @@
-<robot weight="100">
+<robot weight="800">
 	<mesh src="../ressources/stl/robot1.stl" scale="0.1" xOffset="1"/>
 	<img src="../ressources/img/robot.png"/>
 	<microcontrollers>
@@ -8,7 +8,7 @@
 				<location X="10." Y="2.9" Z="0." alpha="0" beta="0" gamma="0"/>
 				<parameters>
 					<parameter name="wheel_radius" type="float" value="3"/>
-					<parameter name="max_torque" type="double" value="10000."/>
+					<parameter name="max_torque" type="double" value="1000."/>
 					<parameter name="gear_ratio" type="double" value="1."/>
 				</parameters>
 			</module>
@@ -23,7 +23,7 @@
 				<location X="-10" Y="2.9" Z="0." alpha="0" beta="0" gamma="0"/>
 				<parameters>
 					<parameter name="wheel_radius" type="float" value="3"/>
-					<parameter name="max_torque" type="double" value="10000."/>
+					<parameter name="max_torque" type="double" value="1000."/>
 					<parameter name="gear_ratio" type="double" value="1."/>
 				</parameters>
 			</module>
@@ -32,6 +32,11 @@
 				<parameters>
 					<parameter name="wheel_radius" type="float" value="3"/>
 					<parameter name="accuracy" type="int" value="2048"/>
+				</parameters>
+			</module>
+      <module name="balise" type="RDS">
+				<location X="0" Y="0" Z="0" alpha="0" beta="0" gamma="0"/>
+				<parameters>
 				</parameters>
 			</module>
     </modules>
