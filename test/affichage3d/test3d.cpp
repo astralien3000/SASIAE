@@ -24,7 +24,7 @@ BasicDemo::~BasicDemo()
 int myargc;
 char** myargv;
 
-	void	BasicDemo::initPhysics() {
+void	BasicDemo::initPhysics() {
     setTexturing(true);
     //setShadows(true);
     setCameraDistance(btScalar(340.));

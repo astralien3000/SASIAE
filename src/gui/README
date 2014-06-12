@@ -1,8 +1,0 @@
-POUR COMPILER ET LANCER : 
-qmake -project
-qmake
-make
-./gui
-
-
-pour transformer le .ui généré par qtdesigner : uic -o ui_mainwindow.h mainwindow.ui
