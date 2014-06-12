@@ -112,29 +112,29 @@ include_directories(
 add_executable(physical_calculator
   src/main.cpp
 
-  src/view_demo.cpp
+  src/node/physical_calculator_node.cpp
 
-  src/bullets3D/DemoApplication.cpp
-  src/bullets3D/GLDebugDrawer.cpp
-  src/bullets3D/GLDebugFont.cpp
-  src/bullets3D/GL_DialogDynamicsWorld.cpp
-  src/bullets3D/GL_DialogWindow.cpp
-  src/bullets3D/GL_ShapeDrawer.cpp
-  src/bullets3D/GL_Simplex1to4.cpp
-  src/bullets3D/GlutDemoApplication.cpp
-  src/bullets3D/GlutStuff.cpp
-  src/bullets3D/RenderTexture.cpp
-  src/bullets3D/stb_image.cpp
+  src/view/view_demo.cpp
+  src/view/bullets3D/DemoApplication.cpp
+  src/view/bullets3D/GLDebugDrawer.cpp
+  src/view/bullets3D/GLDebugFont.cpp
+  src/view/bullets3D/GL_DialogDynamicsWorld.cpp
+  src/view/bullets3D/GL_DialogWindow.cpp
+  src/view/bullets3D/GL_ShapeDrawer.cpp
+  src/view/bullets3D/GL_Simplex1to4.cpp
+  src/view/bullets3D/GlutDemoApplication.cpp
+  src/view/bullets3D/GlutStuff.cpp
+  src/view/bullets3D/RenderTexture.cpp
+  src/view/bullets3D/stb_image.cpp
 
-  src/physical_calculator.cpp
-  src/world.cpp
-  src/mesh.cpp
-  src/stlmesh.cpp
-  src/position_data_bullet.cpp
-  src/common/position_data.cpp
-  src/printable_mobile_object.cpp
-
-  src/stl/STLReader.cpp
+  src/physical_calculator/physical_calculator.cpp
+  src/physical_calculator/world.cpp
+  src/physical_calculator/mesh.cpp
+  src/physical_calculator/stlmesh.cpp
+  src/physical_calculator/position_data_bullet.cpp
+  src/physical_calculator/common/position_data.cpp
+  src/physical_calculator/printable_mobile_object.cpp
+  src/physical_calculator/stl/STLReader.cpp
   )
 
 target_link_libraries(physical_calculator

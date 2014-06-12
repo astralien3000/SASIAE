@@ -5,10 +5,6 @@
 
 #include "printable_mobile_object.hpp"
 #include "world.hpp"
-//#include <aversive.hpp>
-//#include "wheel.hpp"
-//#include "robot.hpp"
-
 
 //! \brief Physic Calculator
 /*!
