@@ -1,0 +1,6 @@
+string     robot
+string     name
+float64[3] position
+float64[3] direction
+---
+string     state

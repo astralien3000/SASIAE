@@ -1,0 +1,6 @@
+string     name
+string     mesh
+float64    mass
+float64[3] position
+---
+string     state
