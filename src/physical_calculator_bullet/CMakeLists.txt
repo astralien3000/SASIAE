@@ -129,6 +129,7 @@ add_executable(physical_calculator
 
   src/physical_calculator/physical_calculator.cpp
   src/physical_calculator/world.cpp
+  src/physical_calculator/robot.cpp
   src/physical_calculator/mesh.cpp
   src/physical_calculator/stlmesh.cpp
   src/physical_calculator/position_data_bullet.cpp

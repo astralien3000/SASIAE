@@ -9,14 +9,14 @@
 union PositionData
 {
   struct{
-	  float x;
-	  float y;
-		float z;
-		float alpha;
-		float beta;
-		float gamma;
-	};
-	float val[6];
+    float x;
+    float y;
+    float z;
+    float alpha;
+    float beta;
+    float gamma;
+  };
+  float val[6];
   inline float& operator[](int index) {
     return val[index];
   }

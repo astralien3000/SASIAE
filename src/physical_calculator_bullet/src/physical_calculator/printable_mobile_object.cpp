@@ -19,68 +19,66 @@ void PrintableMobileObject::update() const {
 
 
 PrintableMobileObject::PrintableMobileObject(const QString name, const STLMesh & mesh) :
-    STLMesh(mesh), _name(name) //to test
-    {
-        qDebug()<< "PMO Constructor : " << name;
-        objects.append(this);
-    //si image est dans tableau, ++, sinon ajouter image dans tableau.
-	QMap<QString,QPair<QPixmap*,int>*>::iterator it = images.find(name);
-    if(it!=images.end()) {//found
-        (*it)->second++;
-        _item = new QGraphicsPixmapItem(*((*it)->first));
-    } else { //add the pixmap in the map !
-        QPixmap *pixmap = new QPixmap(_img_path+name);
-        images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
-        _item = new QGraphicsPixmapItem(*pixmap);
-    }
+    STLMesh(mesh), _name(name) {
+    //     qDebug()<< "PMO Constructor : " << name;
+    //     objects.append(this);
+    // //si image est dans tableau, ++, sinon ajouter image dans tableau.
+    // 	QMap<QString,QPair<QPixmap*,int>*>::iterator it = images.find(name);
+    // if(it!=images.end()) {//found
+    //     (*it)->second++;
+    //     _item = new QGraphicsPixmapItem(*((*it)->first));
+    // } else { //add the pixmap in the map !
+    //     QPixmap *pixmap = new QPixmap(_img_path+name);
+    //     images.insert(name,new QPair<QPixmap*,int>(pixmap,0));
+    //     _item = new QGraphicsPixmapItem(*pixmap);
+    // }
 }
 
 PrintableMobileObject::PrintableMobileObject(const ObjectConfig::meshConfig& cfg,
                                              float mass,
                                              PositionData start_pos,
                                              const QString name,
-                                             const QString img_path):
-STLMesh(cfg,mass,start_pos),_name(name)
-{
-    if(img_path=="") {
-      qDebug()<< "PMO Constructor path="<<  "../ressources/img/ image path=" << name << ".png";
-      // img_path = "../ressources/img/" << name << ".png";
-    }
-    else
-      qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
-    objects.append(this);
-    //si image est dans tableau, ++, sinon ajouter image dans tableau.
-    QMap<QString,QPair<QPixmap*,int>*>::iterator it = images.find(name);
-    if(it!=images.end()) {//found
-        (*it)->second++;
-        _item = new QGraphicsPixmapItem(*((*it)->first));
-    } else { //add the pixmap in the map !
-        QFile img(img_path);
-        if(!img.exists())
-          qDebug() << "img not found with path="<<img_path;
-        else
-          qDebug() << "img found with path="<<img_path;
-        QPixmap *pixmap = new QPixmap(img.fileName());
-        images.insert(name,new QPair<QPixmap*,int>(pixmap,1));
-        _item = new QGraphicsPixmapItem(*pixmap);
-    }
-    QRectF bounds = _item->boundingRect();
-    _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
+                                             const QString img_path)
+  : STLMesh(cfg,mass,start_pos),_name(name) {
+    // if(img_path=="") {
+    //   qDebug()<< "PMO Constructor path="<<  "../ressources/img/ image path=" << name << ".png";
+    //   // img_path = "../ressources/img/" << name << ".png";
+    // }
+    // else
+    //   qDebug()<< "PMO Constructor path="<<cfg.path << " name=" << name << " image path=" << img_path;
+    // objects.append(this);
+    // //si image est dans tableau, ++, sinon ajouter image dans tableau.
+    // QMap<QString,QPair<QPixmap*,int>*>::iterator it = images.find(name);
+    // if(it!=images.end()) {//found
+    //     (*it)->second++;
+    //     _item = new QGraphicsPixmapItem(*((*it)->first));
+    // } else { //add the pixmap in the map !
+    //     QFile img(img_path);
+    //     if(!img.exists())
+    //       qDebug() << "img not found with path="<<img_path;
+    //     else
+    //       qDebug() << "img found with path="<<img_path;
+    //     QPixmap *pixmap = new QPixmap(img.fileName());
+    //     images.insert(name,new QPair<QPixmap*,int>(pixmap,1));
+    //     _item = new QGraphicsPixmapItem(*pixmap);
+    // }
+    // QRectF bounds = _item->boundingRect();
+    // _item->setTransformOriginPoint((bounds.width())/2,(bounds.height())/2);
     update();//_item->setPos(-(bounds.width())/2,-(bounds.height())/2);
 }
 
 PrintableMobileObject::~PrintableMobileObject() {
-    QMap<QString,QPair<QPixmap*,int>*>::iterator  it = images.find(this->_name);
-    if(it!=images.end()) {//found
-        (*it)->second--;
-        if((*it)->second==0) {
-          QPair<QPixmap*,int>* tobedeleted = (images.take(this->_name));
-          delete(tobedeleted);
-      }
-  }
-  delete(_item);
-  int objectPosition = objects.indexOf(this);
-  objects.remove(objectPosition);
+  //   QMap<QString,QPair<QPixmap*,int>*>::iterator  it = images.find(this->_name);
+  //   if(it!=images.end()) {//found
+  //       (*it)->second--;
+  //       if((*it)->second==0) {
+  //         QPair<QPixmap*,int>* tobedeleted = (images.take(this->_name));
+  //         delete(tobedeleted);
+  //     }
+  // }
+  // delete(_item);
+  // int objectPosition = objects.indexOf(this);
+  // objects.remove(objectPosition);
 }
 
 PrintableMobileObject::PrintableMobileObject(const STLMesh & mesh):

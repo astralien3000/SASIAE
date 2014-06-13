@@ -17,7 +17,7 @@ Robot::Robot(const ObjectConfig::meshConfig& cfg, float mass, PositionData start
   setCoordinateSystem(0,1,2);
   _body->setDamping(0.5,0.6);
   _body->setFriction(0.00001);
-  _body->setRollingFriction(1);
+  //_body->setRollingFriction(1);
   btDiscreteDynamicsWorld* w = world;
   w->addVehicle(this);
   _r = this;
@@ -34,7 +34,7 @@ Robot::Robot(const STLMesh & chassis, World world, QString name)
   setCoordinateSystem(0,1,2);
   _body->setDamping(0.5,0.6);
   _body->setFriction(0.00001);
-  _body->setRollingFriction(1);
+  //_body->setRollingFriction(1);
 }
 
 Robot::~Robot() {

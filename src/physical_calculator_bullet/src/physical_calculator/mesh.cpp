@@ -52,6 +52,9 @@ void Mesh::buildRigidBody(btCollisionShape* shape, double mass, PositionData sta
         }
         else
           qDebug() << "Ajout d'un corps sans avoir défini de scene";
+
+	qDebug()<< "1BUG : Mesh buildRigidBody : world="<< _world<< " scene="<<_world.getScene()
+		<< " _body ="<< _body << " Mass=" << Mass << " bodyInertia =" << bodyInertia << " shape" << _shape;
 }
 
 Mesh* Mesh::buildCylinder(unsigned int axis, float high, float r, float mass, PositionData start_pos)
