@@ -1,7 +1,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "physical_object.hpp"
+#include "../physical_object.hpp"
 
 #include <string>
 

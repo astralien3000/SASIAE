@@ -1,6 +1,6 @@
 #include "simple_scene.hpp"
 
-#include "physical_calculator.hpp"
+#include "../physical_calculator.hpp"
 
 #include <btBulletDynamicsCommon.h>
 

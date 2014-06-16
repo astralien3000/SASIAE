@@ -1,12 +1,12 @@
-#include "stlmesh.hpp"
+#include "stl_mesh.hpp"
 
-#include "stl/STLReader.hpp"
+#include "../stl/STLReader.hpp"
 
-#include "HACD/hacdCircularList.h"
-#include "HACD/hacdVector.h"
-#include "HACD/hacdICHull.h"
-#include "HACD/hacdGraph.h"
-#include "HACD/hacdHACD.h"
+#include "../HACD/hacdCircularList.h"
+#include "../HACD/hacdVector.h"
+#include "../HACD/hacdICHull.h"
+#include "../HACD/hacdGraph.h"
+#include "../HACD/hacdHACD.h"
 
 #include <btBulletDynamicsCommon.h>
 

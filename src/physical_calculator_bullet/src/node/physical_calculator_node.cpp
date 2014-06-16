@@ -1,8 +1,8 @@
 #include "physical_calculator_node.hpp"
 
 #include "../physical_calculator/physical_calculator.hpp"
-#include "../physical_calculator/simple_scene.hpp"
-#include "../physical_calculator/scene.hpp"
+#include "../physical_calculator/scene/simple_scene.hpp"
+#include "../physical_calculator/scene/scene.hpp"
 
 static inline std::string namespace_name(std::string name) {
   std::stringstream ss;

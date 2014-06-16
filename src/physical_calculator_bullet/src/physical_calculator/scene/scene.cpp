@@ -1,7 +1,7 @@
 #include "scene.hpp"
 
-#include "stlmesh.hpp"
-#include "physical_calculator.hpp"
+#include "../mesh/stl_mesh.hpp"
+#include "../physical_calculator.hpp"
 
 #include <iostream>
 

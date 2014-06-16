@@ -1,7 +1,7 @@
 #ifndef SIMPLE_SCENE_HPP
 #define SIMPLE_SCENE_HPP
 
-#include "physical_object.hpp"
+#include "../physical_object.hpp"
 
 class SimpleScene : public PhysicalObject {
 public:

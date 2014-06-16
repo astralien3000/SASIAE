@@ -134,14 +134,14 @@ add_executable(physical_calculator
   src/view/bullets3D/stb_image.cpp
 
   src/physical_calculator/physical_calculator.cpp
-  src/physical_calculator/world.cpp
-  src/physical_calculator/scene.cpp
-  src/physical_calculator/simple_scene.cpp
+  #src/physical_calculator/world.cpp
+  src/physical_calculator/scene/scene.cpp
+  src/physical_calculator/scene/simple_scene.cpp
   src/physical_calculator/robot.cpp
-  src/physical_calculator/mesh.cpp
-  src/physical_calculator/stlmesh.cpp
-  src/physical_calculator/position_data_bullet.cpp
-  src/physical_calculator/common/position_data.cpp
+  src/physical_calculator/mesh/mesh.cpp
+  src/physical_calculator/mesh/stl_mesh.cpp
+  #src/physical_calculator/position_data_bullet.cpp
+  #src/physical_calculator/common/position_data.cpp
   #src/physical_calculator/printable_mobile_object.cpp
   src/physical_calculator/stl/STLReader.cpp
 
