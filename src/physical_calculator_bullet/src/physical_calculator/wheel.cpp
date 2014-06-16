@@ -1,4 +1,9 @@
 #include"wheel.hpp"
+
+#include "robot.hpp"
+#include <btBulletDynamicsCommon.h>
+#include <QVector3D>
+
 #include <iostream>
 
 const QString Wheel::xmlRadiusName("wheel_radius");

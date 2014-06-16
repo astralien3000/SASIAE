@@ -1,9 +1,11 @@
 #include "view_demo.hpp"
 
-BasicDemo::BasicDemo(PhysicalCalculator& pc) {
+#include "../physical_calculator/physical_calculator.hpp"
+
+BasicDemo::BasicDemo(void) {
   setTexturing(true);
   setCameraDistance(btScalar(340.));
-  m_dynamicsWorld = pc.getScene();
+  m_dynamicsWorld = MyPhysicalCalculator::getIntance().getWorld();
 }
 
 BasicDemo::~BasicDemo() {

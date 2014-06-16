@@ -1,7 +1,9 @@
 #ifndef WORLD_HPP
 #define WORLD_HPP
 
-#include <btBulletDynamicsCommon.h>
+//#include <btBulletDynamicsCommon.h>
+
+class btDiscreteDynamicsWorld;
 
 class World {
   private:

@@ -1,69 +1,85 @@
 #ifndef PHYSICAL_CALCULATOR_HPP
 #define PHYSICAL_CALCULATOR_HPP
+
+class btDiscreteDynamicsWorld;
+
+class MyPhysicalCalculator {
+
+private:
+    // Private constructor (singleton)
+    MyPhysicalCalculator(void);
+
+    // Thread
+    void run(void);
+
+public:
+
+    // Class Methods
+    static MyPhysicalCalculator& getIntance(void);
+
+    // Methods
+    virtual ~MyPhysicalCalculator(void);
+
+    btDiscreteDynamicsWorld* getWorld(void);
+    double getTime(void);
+
+    void start(void);
+
+    void pause(void);
+    void resume(void);
+
+private:
+    struct PrivateData;
+    PrivateData* _data;
+};
+
+    /////////////////////////////////////////////////////////////////////
+    // TODO : Remove
+    /////////////////////////////////////////////////////////////////////
+
 #include <btBulletDynamicsCommon.h>
 #include <QVector>
 
 #include "printable_mobile_object.hpp"
 #include "world.hpp"
 
-//! \brief Physic Calculator
-/*!
-  The goal of this object is
-  to instanciate a scene with a
-  Physic Engine ( here we use Bullet )
-  and to permit to the Coordinator
-  to create the robots it needs.
-  Finally it simulates the robots' behaviour.
- */
+    class PhysicalCalculator {
+    public:
+        const QVector<const PrintableMobileObject*>& getObjectsList();
+    public:
+        void empty_scene();
 
-class PhysicalCalculator {
-public:
-  const QVector<const PrintableMobileObject*>& getObjectsList();
-public:
-  //! \brief it creates an empty scene
-  void empty_scene();
-  
-  //! \brief it creates an empty scene
-  void simple_scene(btScalar size);
-  
-  //! \brief it returns a DiscreteDynamicsWorld
-  //! which is the scene
-  World getScene();
+        void simple_scene(btScalar size);
 
-  //! it creates a scene with a ground, and 4 walls.
-  void simple_scene_walls(btScalar size);
+        World& getScene();
 
-public:
-  //! it calculates the next step
-  void nextStep(double time=1/80.f, int addedoperations=20);
+        void simple_scene_walls(btScalar size);
 
-public:
-  unsigned long int getTime() const;
-  //void addRobotToScene( Robot * robot, Wheel * md, Wheel *mg, Wheel *ed, Wheel *eg);
-  //Robot * getRobot(btVector3 boxSize, btVector3 position, btScalar mass);
+    public:
+        void nextStep(double time=1/80.f, int addedoperations=20);
 
-  //! \brief Constructor
-  /*!
-   * It initialises a physic calculator, with
-   * the broadphase, the collision configuration, the dispatcher,
-   * the solver and the scene ( world ).
-   */
-  PhysicalCalculator();
-  ~PhysicalCalculator();
+    public:
+        unsigned long int getTime() const;
+
+        PhysicalCalculator();
+        ~PhysicalCalculator();
 
 
-private:
-  //! \brief The init method set the gravity
-  void init();
-  //! \brief it adds a box in the world
-  btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
-  btDiscreteDynamicsWorld* _scene;
-  btBroadphaseInterface* _broadphase;
-  btDefaultCollisionConfiguration* _collisionConfiguration;
-  btCollisionDispatcher* _dispatcher;
-  btSequentialImpulseConstraintSolver* _solver;
-  btClock * _clock;
-};
+    private:
+        //! \brief The init method set the gravity
+        void init();
+
+        //! \brief it adds a box in the world
+        btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
+
+        btDiscreteDynamicsWorld* _scene;
+        World _world;
+        btBroadphaseInterface* _broadphase;
+        btDefaultCollisionConfiguration* _collisionConfiguration;
+        btCollisionDispatcher* _dispatcher;
+        btSequentialImpulseConstraintSolver* _solver;
+        btClock * _clock;
+    };
 
 
 

@@ -1,5 +1,7 @@
 #include "world.hpp"
 
+#include <btBulletDynamicsCommon.h>
+
 World::World(const World &w){
     _world=w._world;
 }

@@ -11,15 +11,10 @@
 #define PlatformDemoApplication GlutDemoApplication
 #endif
 
-#include <btBulletDynamicsCommon.h>
-#include <cstdio>
-
-#include "../physical_calculator/physical_calculator.hpp"
-
 class BasicDemo : public PlatformDemoApplication
 {
 public:
-  BasicDemo(PhysicalCalculator& pc);
+  BasicDemo(void);
   virtual ~BasicDemo();
 
   virtual void initPhysics();

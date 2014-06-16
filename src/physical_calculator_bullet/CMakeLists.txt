@@ -98,10 +98,16 @@ include_directories(
   
   /usr/include/bullet
 
-  /usr/include/qt4
-  /usr/include/qt4/QtCore
-  /usr/include/qt4/QtGui
+  /usr/include/
+  /usr/include/QtCore
+  /usr/include/QtGui
 )
+
+link_directories(
+  src/physical_calculator/HACD
+  )
+
+
 
 ## Declare a cpp library
 # add_library(physical_calculator_bullet
@@ -129,6 +135,8 @@ add_executable(physical_calculator
 
   src/physical_calculator/physical_calculator.cpp
   src/physical_calculator/world.cpp
+  src/physical_calculator/scene.cpp
+  src/physical_calculator/simple_scene.cpp
   src/physical_calculator/robot.cpp
   src/physical_calculator/mesh.cpp
   src/physical_calculator/stlmesh.cpp
@@ -136,6 +144,8 @@ add_executable(physical_calculator
   src/physical_calculator/common/position_data.cpp
   src/physical_calculator/printable_mobile_object.cpp
   src/physical_calculator/stl/STLReader.cpp
+
+  src/physical_calculator/physical_object.cpp
   )
 
 target_link_libraries(physical_calculator
@@ -147,6 +157,7 @@ target_link_libraries(physical_calculator
   -lHACD
 
   -lglut
+  -lGL
   -lGLU
 
   -lQtCore

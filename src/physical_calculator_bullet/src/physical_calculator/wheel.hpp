@@ -1,9 +1,7 @@
 #ifndef WHEEL_HPP
 #define WHEEL_HPP
 
-#include "robot.hpp"
-#include <btBulletDynamicsCommon.h>
-#include <QVector3D>
+class Robot;
 
 class Wheel {
 public: 

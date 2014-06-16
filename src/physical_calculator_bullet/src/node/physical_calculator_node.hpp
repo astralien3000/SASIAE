@@ -12,8 +12,6 @@ class PhysicalCalculator;
 
 class PhysicalCalculatorNode {
 private:
-  PhysicalCalculator* _physical_calculator;
-
   ros::NodeHandle _node;
 
   ros::ServiceServer _create_world_service;
@@ -32,7 +30,7 @@ public:
 		   phy_api::create_wheel::Response&  res);
 
 public:
-  PhysicalCalculatorNode(PhysicalCalculator& pc);
+  PhysicalCalculatorNode(void);
 };
 
 #endif//PHYSICAL_CALCULATOR_NODE_HPP
