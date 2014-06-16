@@ -4,3 +4,8 @@
 *.o
 a.out
 moc_*.cpp
+
+build/
+devel/
+
+*.user
