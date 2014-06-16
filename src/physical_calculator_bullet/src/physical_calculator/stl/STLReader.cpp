@@ -5,6 +5,8 @@
 #include <iostream>
 #include <boost/algorithm/string.hpp>
 
+#include <QString>
+
 static const int _BUFFER_SIZE = 1024;
 
 static double _stof(std::string str) {
@@ -22,15 +24,8 @@ static char _extended_at(const std::string& str, int i) {
 }
 
 static std::string _simplify(std::string str) {
-    for(int i = 0 ; i < str.size() ; i++) {
-        if(str.at(i) == ' ' && _extended_at(str, i-1) == ' ') {
-            str.erase(i, i+1);
-            if(-1 < i) {
-                i--;
-            }
-        }
-    }
-    return str;
+    QString ret(str.c_str());
+    return ret.simplified().toStdString();
 }
 
 std::vector< std::vector<float> > MyStlReader::readStlTextFile(std::string path) {
@@ -96,66 +91,68 @@ std::vector< std::vector<float> > MyStlReader::readStlBinaryFile(std::string pat
 
 
 /////////////////////////////////////////////////////////////////////////////////
-#include <QFile>
-#include <QDebug>
-#include <QStringList>
+//#include <QFile>
+//#include <QDebug>
+//#include <QStringList>
 
-QList<QVector<float> > STLReader::readSTLTextFile(QString path) {
-    QList<QVector<float> > triangles;
-    QFile file(path);
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug()<<"STLReader failed open file" ;
-        return triangles;
-    }
-    while(!file.atEnd()) {
-        QByteArray ba = file.readLine();
-        QStringList lineWord = QString(ba).simplified().split(" ");
-        if(lineWord.at(0) == "outer")
-            triangles.append(QVector<float>());
-        if(lineWord.at(0) == "vertex")
-        {
-            triangles.last().append(lineWord.at(1).toFloat());
-            triangles.last().append(lineWord.at(2).toFloat());
-            triangles.last().append(lineWord.at(3).toFloat());
-        }
+//QList<QVector<float> > STLReader::readSTLTextFile(QString path) {
+//    QList<QVector<float> > triangles;
+//    QFile file(path);
+//    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+//        qDebug()<<"STLReader failed open file" ;
+//        return triangles;
+//    }
+//    while(!file.atEnd()) {
+//        QByteArray ba = file.readLine();
+//        QStringList lineWord = QString(ba).simplified().split(" ");
+//        if(lineWord.at(0) == "outer") {
+//            triangles.append(QVector<float>());
+//            std::cout << std::endl;
+//        }
+//        if(lineWord.at(0) == "vertex")
+//        {
+//            triangles.last().append(lineWord.at(1).toFloat());
+//            triangles.last().append(lineWord.at(2).toFloat());
+//            triangles.last().append(lineWord.at(3).toFloat());
+//        }
 
-    }
-    qDebug() << "STLReader return QListtriangles of size ="<< triangles.size();
-    return triangles;
-}
+//    }
 
-QList<QVector<float> > STLReader::readSTLBinaryFile(QString path) {
-    QList<QVector<float> > triangles;
+//    return triangles;
+//}
 
-    QFile file(path);
+//QList<QVector<float> > STLReader::readSTLBinaryFile(QString path) {
+//    QList<QVector<float> > triangles;
 
-    if(!file.open(QIODevice::ReadOnly))
-        return triangles;
+//    QFile file(path);
 
-    file.seek(0);
-    quint32 triangles_nb=0;
+//    if(!file.open(QIODevice::ReadOnly))
+//        return triangles;
 
-    file.seek(80);
-    QByteArray size = file.read(4);
-    memcpy(&triangles_nb, size.constData(), 4);
+//    file.seek(0);
+//    quint32 triangles_nb=0;
 
-    qDebug() << "nombre de mesh" << triangles_nb;
-    for(quint32 i =0; triangles_nb > i; i++)
-    {
-        file.seek(84+i*50);
+//    file.seek(80);
+//    QByteArray size = file.read(4);
+//    memcpy(&triangles_nb, size.constData(), 4);
 
-        float nxyz[12];
-        QByteArray ba = file.read(50);
-        memcpy(&nxyz, ba.constData(), 48);
+//    qDebug() << "nombre de mesh" << triangles_nb;
+//    for(quint32 i =0; triangles_nb > i; i++)
+//    {
+//        file.seek(84+i*50);
 
-        QVector<float> xyz;
-        for(int j = 0; j< 9;j++) {
-            xyz.append(nxyz[3+j]);
-            qDebug() << j << ba;
-        }
+//        float nxyz[12];
+//        QByteArray ba = file.read(50);
+//        memcpy(&nxyz, ba.constData(), 48);
 
-        triangles.append(xyz);
-    }
+//        QVector<float> xyz;
+//        for(int j = 0; j< 9;j++) {
+//            xyz.append(nxyz[3+j]);
+//            qDebug() << j << ba;
+//        }
 
-    return triangles;
-}
+//        triangles.append(xyz);
+//    }
+
+//    return triangles;
+//}

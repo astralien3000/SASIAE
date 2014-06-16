@@ -1,4 +1,6 @@
 src/physical_calculator_bullet/src/physical_calculator/HACD
 src/physical_calculator_bullet/src/view/bullets3D
 test/affichage3d/bullets3D
-~/include/bullet
+/usr/include/bullet
+/usr/include/qt5
+/usr/include/qt5/QtCore

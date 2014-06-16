@@ -2,6 +2,9 @@
 
 #include "../physical_calculator/physical_calculator.hpp"
 
+#include <btBulletDynamicsCommon.h>
+
+
 BasicDemo::BasicDemo(void) {
   setTexturing(true);
   setCameraDistance(btScalar(340.));

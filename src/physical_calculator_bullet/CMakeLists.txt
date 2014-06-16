@@ -142,7 +142,7 @@ add_executable(physical_calculator
   src/physical_calculator/stlmesh.cpp
   src/physical_calculator/position_data_bullet.cpp
   src/physical_calculator/common/position_data.cpp
-  src/physical_calculator/printable_mobile_object.cpp
+  #src/physical_calculator/printable_mobile_object.cpp
   src/physical_calculator/stl/STLReader.cpp
 
   src/physical_calculator/physical_object.cpp

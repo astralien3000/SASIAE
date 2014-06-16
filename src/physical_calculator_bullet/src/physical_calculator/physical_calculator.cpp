@@ -126,93 +126,93 @@ void MyPhysicalCalculator::run(void) {
 // TODO : Remove
 /////////////////////////////////////////////////////////////////////
 
-#define WALL_HEIGHT 3
+//#define WALL_HEIGHT 3
 
-PhysicalCalculator::PhysicalCalculator()
-    : _world(NULL) {
-    _broadphase = new btDbvtBroadphase();
-    _collisionConfiguration = new btDefaultCollisionConfiguration();
-    _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
-    _solver = new btSequentialImpulseConstraintSolver;
+//PhysicalCalculator::PhysicalCalculator()
+//    : _world(NULL) {
+//    _broadphase = new btDbvtBroadphase();
+//    _collisionConfiguration = new btDefaultCollisionConfiguration();
+//    _dispatcher = new btCollisionDispatcher(_collisionConfiguration);
+//    _solver = new btSequentialImpulseConstraintSolver;
 
-    _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
-    _world = World(_scene);
-    Mesh::setWorld(_world);
+//    _scene = new btDiscreteDynamicsWorld(_dispatcher,_broadphase,_solver,_collisionConfiguration);
+//    _world = World(_scene);
+//    Mesh::setWorld(_world);
 
-    btContactSolverInfo& info = _scene->getSolverInfo();
-    info.m_numIterations = 20;
-    _clock= new btClock();
-    init();
-}
+//    btContactSolverInfo& info = _scene->getSolverInfo();
+//    info.m_numIterations = 20;
+//    _clock= new btClock();
+//    init();
+//}
 
-PhysicalCalculator::~PhysicalCalculator(){
-    delete _scene;
-    delete _clock;
-    delete _solver;
-    delete _dispatcher;
-    delete _collisionConfiguration;
-    delete _broadphase;
-}
+//PhysicalCalculator::~PhysicalCalculator(){
+//    delete _scene;
+//    delete _clock;
+//    delete _solver;
+//    delete _dispatcher;
+//    delete _collisionConfiguration;
+//    delete _broadphase;
+//}
 
-btRigidBody* PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mass){
-    btDiscreteDynamicsWorld * myscene=getScene();
-    btCollisionShape* boxShape = new btBoxShape(size);
-    btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),position));
-    btVector3 boxInertial(0,0,0);
-    boxShape->calculateLocalInertia(mass, boxInertial);
-    btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
-    btRigidBody* newbox = new btRigidBody(boxBodyCI);
-    myscene->addRigidBody(newbox);
-    return newbox;
-}
+//btRigidBody* PhysicalCalculator::addBox(btVector3 size, btVector3 position, btScalar mass){
+//    btDiscreteDynamicsWorld * myscene=getScene();
+//    btCollisionShape* boxShape = new btBoxShape(size);
+//    btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1),position));
+//    btVector3 boxInertial(0,0,0);
+//    boxShape->calculateLocalInertia(mass, boxInertial);
+//    btRigidBody::btRigidBodyConstructionInfo boxBodyCI(mass, boxMotionState, boxShape, boxInertial);
+//    btRigidBody* newbox = new btRigidBody(boxBodyCI);
+//    myscene->addRigidBody(newbox);
+//    return newbox;
+//}
 
-void PhysicalCalculator::empty_scene(){
-    this->init();
-}
+//void PhysicalCalculator::empty_scene(){
+//    this->init();
+//}
 
-World& PhysicalCalculator::getScene(){
-    return _world;
-}
+//World& PhysicalCalculator::getScene(){
+//    return _world;
+//}
 
-void PhysicalCalculator::simple_scene(btScalar size){
-    this->init();
-    btCollisionShape *planeShape;
+//void PhysicalCalculator::simple_scene(btScalar size){
+//    this->init();
+//    btCollisionShape *planeShape;
 
-    planeShape = new btBoxShape(btVector3(size,1,size));
-
-
-    //No movement for the ground
-    btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1), btVector3(0,-1,0)));
-
-    btRigidBody::btRigidBodyConstructionInfo groundBodyCI(0, groundMotionState, planeShape, btVector3(0,0,0));
-
-    btRigidBody* groundBody = new btRigidBody(groundBodyCI);
-    _scene->addRigidBody(groundBody);
-}
+//    planeShape = new btBoxShape(btVector3(size,1,size));
 
 
-void PhysicalCalculator::simple_scene_walls(btScalar size){
-    simple_scene(size);
-    addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,size+2),0);
-    addBox(btVector3(2,WALL_HEIGHT,size),btVector3(size+2,WALL_HEIGHT,0),0);
-    addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,-size-2),0);
-    addBox(btVector3(2,WALL_HEIGHT,size),btVector3(-size-2,WALL_HEIGHT,0),0);
+//    //No movement for the ground
+//    btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1), btVector3(0,-1,0)));
 
-}
+//    btRigidBody::btRigidBodyConstructionInfo groundBodyCI(0, groundMotionState, planeShape, btVector3(0,0,0));
 
-void PhysicalCalculator::nextStep(double time, int addedoperations){
-    _scene->stepSimulation(time,addedoperations);
-}
+//    btRigidBody* groundBody = new btRigidBody(groundBodyCI);
+//    _scene->addRigidBody(groundBody);
+//}
 
-unsigned long int PhysicalCalculator::getTime() const{
-    return _clock->getTimeMilliseconds();
-}
 
-void PhysicalCalculator::init() {
-    _scene->setGravity(btVector3(0,-10,0));
+//void PhysicalCalculator::simple_scene_walls(btScalar size){
+//    simple_scene(size);
+//    addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,size+2),0);
+//    addBox(btVector3(2,WALL_HEIGHT,size),btVector3(size+2,WALL_HEIGHT,0),0);
+//    addBox(btVector3(size,WALL_HEIGHT,2),btVector3(0,WALL_HEIGHT,-size-2),0);
+//    addBox(btVector3(2,WALL_HEIGHT,size),btVector3(-size-2,WALL_HEIGHT,0),0);
 
-}
+//}
 
-const QVector<const PrintableMobileObject*>& PhysicalCalculator::getObjectsList() {
-    return PrintableMobileObject::getObjectsList();
-}
+//void PhysicalCalculator::nextStep(double time, int addedoperations){
+//    _scene->stepSimulation(time,addedoperations);
+//}
+
+//unsigned long int PhysicalCalculator::getTime() const{
+//    return _clock->getTimeMilliseconds();
+//}
+
+//void PhysicalCalculator::init() {
+//    _scene->setGravity(btVector3(0,-10,0));
+
+//}
+
+//const QVector<const PrintableMobileObject*>& PhysicalCalculator::getObjectsList() {
+//    //return PrintableMobileObject::getObjectsList();
+//}

@@ -1,12 +1,27 @@
 #ifndef ROBOT_HPP
 #define ROBOT_HPP
 
+#include <string>
+
+class MyRobot {
+public:
+    MyRobot(std::string name, std::string mesh);
+    virtual ~MyRobot(void);
+
+
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+
 #include <btBulletDynamicsCommon.h>
 #include "printable_mobile_object.hpp"
 #include "world.hpp"
 #include "mesh.hpp"
+#include "common/object_config.hpp"
 
-class Robot :  public PrintableMobileObject, public btRaycastVehicle {
+//class Robot :  public PrintableMobileObject, public btRaycastVehicle {
+class Robot {
 private:
   btRaycastVehicle::btVehicleTuning _tuning;
   static Robot* _r;

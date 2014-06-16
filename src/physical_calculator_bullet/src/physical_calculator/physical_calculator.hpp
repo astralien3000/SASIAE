@@ -37,50 +37,50 @@ private:
     // TODO : Remove
     /////////////////////////////////////////////////////////////////////
 
-#include <btBulletDynamicsCommon.h>
-#include <QVector>
+//#include <btBulletDynamicsCommon.h>
+//#include <QVector>
 
-#include "printable_mobile_object.hpp"
-#include "world.hpp"
+//#include "printable_mobile_object.hpp"
+//#include "world.hpp"
 
-    class PhysicalCalculator {
-    public:
-        const QVector<const PrintableMobileObject*>& getObjectsList();
-    public:
-        void empty_scene();
+//    class PhysicalCalculator {
+//    public:
+//        const QVector<const PrintableMobileObject*>& getObjectsList();
+//    public:
+//        void empty_scene();
 
-        void simple_scene(btScalar size);
+//        void simple_scene(btScalar size);
 
-        World& getScene();
+//        World& getScene();
 
-        void simple_scene_walls(btScalar size);
+//        void simple_scene_walls(btScalar size);
 
-    public:
-        void nextStep(double time=1/80.f, int addedoperations=20);
+//    public:
+//        void nextStep(double time=1/80.f, int addedoperations=20);
 
-    public:
-        unsigned long int getTime() const;
+//    public:
+//        unsigned long int getTime() const;
 
-        PhysicalCalculator();
-        ~PhysicalCalculator();
-
-
-    private:
-        //! \brief The init method set the gravity
-        void init();
-
-        //! \brief it adds a box in the world
-        btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
-
-        btDiscreteDynamicsWorld* _scene;
-        World _world;
-        btBroadphaseInterface* _broadphase;
-        btDefaultCollisionConfiguration* _collisionConfiguration;
-        btCollisionDispatcher* _dispatcher;
-        btSequentialImpulseConstraintSolver* _solver;
-        btClock * _clock;
-    };
+//        PhysicalCalculator();
+//        ~PhysicalCalculator();
 
 
+//    private:
+//        //! \brief The init method set the gravity
+//        void init();
 
-#endif
+//        //! \brief it adds a box in the world
+//        btRigidBody* addBox( btVector3 size, btVector3 position, btScalar mass);
+
+//        btDiscreteDynamicsWorld* _scene;
+//        World _world;
+//        btBroadphaseInterface* _broadphase;
+//        btDefaultCollisionConfiguration* _collisionConfiguration;
+//        btCollisionDispatcher* _dispatcher;
+//        btSequentialImpulseConstraintSolver* _solver;
+//        btClock * _clock;
+//    };
+
+
+
+#endif//PHYSICAL_CALCULATOR_HPP

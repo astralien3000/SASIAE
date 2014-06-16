@@ -11,7 +11,6 @@ SimpleScene::SimpleScene(std::string name, double size)
 
     plane_shape = new btBoxShape(btVector3(size,1,size));
 
-
     //No movement for the ground
     btDefaultMotionState* ground_motion_state = new btDefaultMotionState(btTransform(btQuaternion(0,0,0,1), btVector3(0,-1,0)));
 
