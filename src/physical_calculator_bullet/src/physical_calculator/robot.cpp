@@ -1,6 +1,62 @@
 #include "robot.hpp"
 
+#include "mesh/stl_mesh.hpp"
+#include "physical_calculator.hpp"
 
+#include <btBulletDynamicsCommon.h>
+
+////////////////////////////////////////////////////////////////////////////////
+// Private Data
+////////////////////////////////////////////////////////////////////////////////
+
+struct MyRobot::PrivateData {
+    MyMesh* _mesh;
+    btRigidBody* _body;
+
+    btRaycastVehicle* _vehicle;
+    btRaycastVehicle::btVehicleTuning* _tuning;
+    btDefaultVehicleRaycaster* _raycaster;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+// Methods
+////////////////////////////////////////////////////////////////////////////////
+
+
+MyRobot::MyRobot(std::string name, std::string mesh) {
+    _data = new PrivateData;
+    _data->_mesh = new MyStlMesh(mesh);
+
+    btDefaultMotionState* motion_state =
+            new btDefaultMotionState(
+                btTransform(btQuaternion(0,0,0,1), btVector3(0,100,0))
+                );
+
+    btVector3 body_inertia(0,0,0);
+    _data->_mesh->getShape()->calculateLocalInertia(1, body_inertia);
+
+    btRigidBody::btRigidBodyConstructionInfo body_ci(
+                1,
+                motion_state,
+                _data->_mesh->getShape(),
+                body_inertia
+                );
+
+    _data->_body = new btRigidBody(body_ci);
+    MyPhysicalCalculator::getIntance().getWorld()->addRigidBody(_data->_body);
+
+    _data->_tuning = new btRaycastVehicle::btVehicleTuning;
+    _data->_raycaster = new btDefaultVehicleRaycaster(MyPhysicalCalculator::getIntance().getWorld());
+    _data->_vehicle = new btRaycastVehicle(*(_data->_tuning), _data->_body, _data->_raycaster);
+    MyPhysicalCalculator::getIntance().getWorld()->addVehicle(_data->_vehicle);
+}
+
+MyRobot::~MyRobot(void) {
+    delete _data;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 //Robot* Robot::_r=NULL;
 
 //Robot::Robot(World& world, const ObjectConfig::meshConfig& cfg, float mass, PositionData start_pos)

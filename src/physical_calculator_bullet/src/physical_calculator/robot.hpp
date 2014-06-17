@@ -8,7 +8,9 @@ public:
     MyRobot(std::string name, std::string mesh);
     virtual ~MyRobot(void);
 
-
+private:
+    struct PrivateData;
+    PrivateData* _data;
 };
 
 

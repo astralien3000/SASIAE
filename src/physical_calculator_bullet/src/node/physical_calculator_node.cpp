@@ -1,8 +1,11 @@
 #include "physical_calculator_node.hpp"
 
 #include "../physical_calculator/physical_calculator.hpp"
+
 #include "../physical_calculator/scene/simple_scene.hpp"
 #include "../physical_calculator/scene/scene.hpp"
+
+#include "../physical_calculator/robot.hpp"
 
 static inline std::string namespace_name(std::string name) {
   std::stringstream ss;
@@ -55,7 +58,8 @@ bool PhysicalCalculatorNode::createRobot(phy_api::create_robot::Request& req, ph
 //  Mesh::setWorld(w);
 
 //  Robot* robot = new Robot(w, cfg, 1.0, pos);
-  new Scene("mmieww", req.mesh);
-  
+//  new Scene("mmieww", req.mesh);
+  new MyRobot("mmieww", req.mesh);
+
   return true;
 }

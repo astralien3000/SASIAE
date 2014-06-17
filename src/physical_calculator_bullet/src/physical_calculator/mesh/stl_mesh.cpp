@@ -39,11 +39,11 @@ MyStlMesh::MyStlMesh(std::string path) {
 
     /*Rescale and offset on points*/
     for(int i=0;i<points.size();i++){
-        points[i].X()*=1.0;
+        points[i].X()*=0.1;
         points[i].X()+=0.0;
-        points[i].Y()*=1.0;
+        points[i].Y()*=0.1;
         points[i].Y()+=0.0;
-        points[i].Z()*=1.0;
+        points[i].Z()*=0.1;
         points[i].Z()+=0.0;
     }
 
