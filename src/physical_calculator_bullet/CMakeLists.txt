@@ -98,13 +98,13 @@ include_directories(
   
   /usr/include/bullet
 
-#  /usr/include/
-#  /usr/include/QtCore
-#  /usr/include/QtGui
+  /usr/include/
+  /usr/include/QtCore
+  /usr/include/QtGui
 
-  /usr/include/qt4
-  /usr/include/qt4/QtCore
-  /usr/include/qt4/QtGui
+#  /usr/include/qt4
+#  /usr/include/qt4/QtCore
+#  /usr/include/qt4/QtGui
 )
 
 link_directories(
@@ -141,12 +141,9 @@ add_executable(physical_calculator
   #src/physical_calculator/world.cpp
   src/physical_calculator/scene/scene.cpp
   src/physical_calculator/scene/simple_scene.cpp
-  src/physical_calculator/robot.cpp
+  src/physical_calculator/robot/robot.cpp
   src/physical_calculator/mesh/mesh.cpp
   src/physical_calculator/mesh/stl_mesh.cpp
-  #src/physical_calculator/position_data_bullet.cpp
-  #src/physical_calculator/common/position_data.cpp
-  #src/physical_calculator/printable_mobile_object.cpp
   src/physical_calculator/stl/STLReader.cpp
 
   src/physical_calculator/physical_object.cpp

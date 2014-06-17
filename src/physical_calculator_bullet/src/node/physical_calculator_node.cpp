@@ -5,7 +5,7 @@
 #include "../physical_calculator/scene/simple_scene.hpp"
 #include "../physical_calculator/scene/scene.hpp"
 
-#include "../physical_calculator/robot.hpp"
+#include "../physical_calculator/robot/robot.hpp"
 
 static inline std::string namespace_name(std::string name) {
   std::stringstream ss;
@@ -14,7 +14,7 @@ static inline std::string namespace_name(std::string name) {
 }
 
 PhysicalCalculatorNode::PhysicalCalculatorNode(void)
-  : _node("physical_calculator") {
+  : _node("~") {
 
   _create_world_service = 
     _node.advertiseService("create_world", &PhysicalCalculatorNode::createWorld, this);
@@ -39,27 +39,8 @@ bool PhysicalCalculatorNode::createWorld(phy_api::create_world::Request& req, ph
 bool PhysicalCalculatorNode::createRobot(phy_api::create_robot::Request& req, phy_api::create_robot::Response&  res) {
   res.state = std::string("OK");
   ROS_INFO("Try to create robot : %s", req.mesh.c_str());
-  
-//  PositionData pos;
-//  pos.x = 0.0;
-//  pos.y = 0.0;
-//  pos.z = 0.0;
-//  pos.alpha = 0.0;
-//  pos.beta  = 0.0;
-//  pos.gamma = 0.0;
 
-//  ObjectConfig::meshConfig cfg = {
-//    "/home/astralien3000/SASIAE/ressources/stl/robot1.stl",
-//    0.1,
-//    pos
-//  };
-
-//  World w = _physical_calculator->getScene();
-//  Mesh::setWorld(w);
-
-//  Robot* robot = new Robot(w, cfg, 1.0, pos);
-//  new Scene("mmieww", req.mesh);
-  new MyRobot("mmieww", req.mesh);
+  new MyRobot("mmieww", req.mesh, req.mass, btVector3(req.position[0], req.position[1], req.position[2]));
 
   return true;
 }

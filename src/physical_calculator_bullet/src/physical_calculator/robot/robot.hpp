@@ -3,9 +3,11 @@
 
 #include <string>
 
+#include <btBulletDynamicsCommon.h>
+
 class MyRobot {
 public:
-    MyRobot(std::string name, std::string mesh);
+    MyRobot(std::string name, std::string mesh, double mass, btVector3 position);
     virtual ~MyRobot(void);
 
 private:

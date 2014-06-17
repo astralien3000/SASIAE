@@ -1,7 +1,7 @@
 #include "robot.hpp"
 
-#include "mesh/stl_mesh.hpp"
-#include "physical_calculator.hpp"
+#include "../mesh/stl_mesh.hpp"
+#include "../physical_calculator.hpp"
 
 #include <btBulletDynamicsCommon.h>
 
@@ -23,20 +23,20 @@ struct MyRobot::PrivateData {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-MyRobot::MyRobot(std::string name, std::string mesh) {
+MyRobot::MyRobot(std::string name, std::string mesh, double mass, btVector3 position) {
     _data = new PrivateData;
     _data->_mesh = new MyStlMesh(mesh);
 
     btDefaultMotionState* motion_state =
             new btDefaultMotionState(
-                btTransform(btQuaternion(0,0,0,1), btVector3(0,100,0))
+                btTransform(btQuaternion(0,0,0,1), position)
                 );
 
     btVector3 body_inertia(0,0,0);
-    _data->_mesh->getShape()->calculateLocalInertia(1, body_inertia);
+    _data->_mesh->getShape()->calculateLocalInertia(mass, body_inertia);
 
     btRigidBody::btRigidBodyConstructionInfo body_ci(
-                1,
+                mass,
                 motion_state,
                 _data->_mesh->getShape(),
                 body_inertia

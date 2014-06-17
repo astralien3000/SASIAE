@@ -96,7 +96,7 @@ double MyPhysicalCalculator::getTime(void) {
 
 void MyPhysicalCalculator::start(void) {
     if(!_data->_running) {
-        _data->_world->setGravity(btVector3(0,-9.0,0));
+        _data->_world->setGravity(btVector3(0,-90.0,0));
         _data->_running = true;
     }
 }
@@ -113,16 +113,7 @@ void MyPhysicalCalculator::run(void) {
     while(_data->_keep_going) {
         if(_data->_running) {
             _data->_world->stepSimulation(1.0/60.0, 100);
-
-            // Sleep (boost 46)
-//            boost::this_thread::sleep_for(
-//                        boost::chrono::duration<double>(1.0/60.0)
-//                        );
-
-            // Sleep (older boost)
-            boost::xtime t;
-            t.nsec = (1.0 / 60.0) * 10e9;
-            boost::this_thread::sleep(t);
+            boost::this_thread::sleep(boost::posix_time::milliseconds(1000 / 60));
         }
     }
 }

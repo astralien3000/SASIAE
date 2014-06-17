@@ -1,3 +1,5 @@
+devel/include
+
 src/physical_calculator_bullet/src/physical_calculator/HACD
 src/physical_calculator_bullet/src/view/bullets3D
 test/affichage3d/bullets3D
@@ -8,3 +10,5 @@ test/affichage3d/bullets3D
 
 /usr/include/qt4
 /usr/include/qt4/QtCore
+
+/home/astralien3000/workspace/install_isolated/include
