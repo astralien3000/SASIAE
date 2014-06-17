@@ -50,8 +50,6 @@ Wheel::Wheel(std::string name, MyRobot& robot, btVector3 position, btVector3 dir
     _data->_wheel->m_frictionSlip = 1000;
     _data->_wheel->m_rollInfluence = .7f;
 
-    //_data->_robot->getVehicle()->applyEngineForce(200, _data->_index);
-
     // WARNING: Dirty code to allow wheel render
     if(std::find(robots.begin(), robots.end(), _data->_robot->getVehicle()) == robots.end()) {
         robots.push_back(_data->_robot->getVehicle());
@@ -68,5 +66,9 @@ double Wheel::getRotation(void) {
 
 double Wheel::getTorque(void) {
     return _data->_robot->getVehicle()->getWheelInfo(_data->_index).m_rotation;
+}
+
+void Wheel::setTorque(double value) {
+    _data->_robot->getVehicle()->applyEngineForce(value, _data->_index);
 }
 

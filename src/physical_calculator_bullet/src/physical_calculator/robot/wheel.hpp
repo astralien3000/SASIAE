@@ -16,6 +16,8 @@ public:
     double getRotation(void);
     double getTorque(void);
 
+    void setTorque(double);
+
 private:
     struct PrivateData;
     PrivateData* _data;

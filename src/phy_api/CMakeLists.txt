@@ -54,7 +54,7 @@ add_service_files(
   create_world.srv
   create_robot.srv
   create_wheel.srv
-  create_distance_sensor.srv
+  set_torque.srv
 )
 
 ## Generate actions in the 'action' folder

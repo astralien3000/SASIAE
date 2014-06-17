@@ -123,6 +123,7 @@ add_executable(physical_calculator
   src/main.cpp
 
   src/node/physical_calculator_node.cpp
+  src/node/wheel_node.cpp
 
   src/view/view_demo.cpp
   src/view/bullets3D/DemoApplication.cpp
