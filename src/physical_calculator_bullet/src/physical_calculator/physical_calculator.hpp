@@ -1,7 +1,7 @@
 #ifndef PHYSICAL_CALCULATOR_HPP
 #define PHYSICAL_CALCULATOR_HPP
 
-class btDiscreteDynamicsWorld;
+#include <btBulletDynamicsCommon.h>
 
 class MyPhysicalCalculator {
 
@@ -21,6 +21,7 @@ public:
     virtual ~MyPhysicalCalculator(void);
 
     btDiscreteDynamicsWorld* getWorld(void);
+
     double getTime(void);
 
     void start(void);

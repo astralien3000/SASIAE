@@ -1,14 +1,23 @@
 #ifndef ROBOT_HPP
 #define ROBOT_HPP
 
-#include <string>
+#include "../physical_object.hpp"
 
+#include <string>
 #include <btBulletDynamicsCommon.h>
 
-class MyRobot {
+class Wheel;
+
+class MyRobot : public PhysicalObject {
+    friend class Wheel;
+
 public:
     MyRobot(std::string name, std::string mesh, double mass, btVector3 position);
     virtual ~MyRobot(void);
+
+protected:
+    btRaycastVehicle* getVehicle(void);
+    btRaycastVehicle::btVehicleTuning* getTunning(void);
 
 private:
     struct PrivateData;

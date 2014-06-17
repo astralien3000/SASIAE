@@ -142,6 +142,7 @@ add_executable(physical_calculator
   src/physical_calculator/scene/scene.cpp
   src/physical_calculator/scene/simple_scene.cpp
   src/physical_calculator/robot/robot.cpp
+  src/physical_calculator/robot/wheel.cpp
   src/physical_calculator/mesh/mesh.cpp
   src/physical_calculator/mesh/stl_mesh.cpp
   src/physical_calculator/stl/STLReader.cpp

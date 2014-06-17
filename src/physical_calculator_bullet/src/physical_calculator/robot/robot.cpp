@@ -23,7 +23,9 @@ struct MyRobot::PrivateData {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-MyRobot::MyRobot(std::string name, std::string mesh, double mass, btVector3 position) {
+MyRobot::MyRobot(std::string name, std::string mesh, double mass, btVector3 position)
+    : PhysicalObject(name) {
+
     _data = new PrivateData;
     _data->_mesh = new MyStlMesh(mesh);
 
@@ -55,6 +57,13 @@ MyRobot::~MyRobot(void) {
     delete _data;
 }
 
+btRaycastVehicle* MyRobot::getVehicle(void) {
+    return _data->_vehicle;
+}
+
+btRaycastVehicle::btVehicleTuning* MyRobot::getTunning(void) {
+    return _data->_tuning;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Robot* Robot::_r=NULL;
