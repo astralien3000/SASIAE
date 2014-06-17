@@ -7,6 +7,8 @@
 
 #include <QString>
 
+#define MACRO_OSS_STR(stream) ((std::ostringstream&)(std::ostringstream() << stream)).str()
+
 static const int _BUFFER_SIZE = 1024;
 
 static double _stof(std::string str) {
@@ -28,12 +30,12 @@ static std::string _simplify(std::string str) {
     return ret.simplified().toStdString();
 }
 
-std::vector< std::vector<float> > MyStlReader::readStlTextFile(std::string path) {
+MyStlReader::TriangleList MyStlReader::readStlTextFile(std::string path) throw(std::runtime_error) {
     std::vector< std::vector<float> > ret;
     std::ifstream ifs(path.c_str());
 
     if(!ifs.good()) {
-        std::cerr << "Can't open STL file : " << path << std::endl;
+        throw std::runtime_error(MACRO_OSS_STR("Can't open STL file : " << path));
         return ret;
     }
 
@@ -59,12 +61,12 @@ std::vector< std::vector<float> > MyStlReader::readStlTextFile(std::string path)
     return ret;
 }
 
-std::vector< std::vector<float> > MyStlReader::readStlBinaryFile(std::string path) {
+MyStlReader::TriangleList MyStlReader::readStlBinaryFile(std::string path) throw(std::runtime_error) {
     std::vector< std::vector<float> > ret;
     std::ifstream ifs(path.c_str());
 
     if(!ifs.good()) {
-        // ERROR
+        throw std::runtime_error(MACRO_OSS_STR("Can't open STL file : " << path));
         return ret;
     }
 
@@ -91,35 +93,11 @@ std::vector< std::vector<float> > MyStlReader::readStlBinaryFile(std::string pat
 
 
 /////////////////////////////////////////////////////////////////////////////////
+// Need to keep this until binary stl is tested
+
 //#include <QFile>
 //#include <QDebug>
 //#include <QStringList>
-
-//QList<QVector<float> > STLReader::readSTLTextFile(QString path) {
-//    QList<QVector<float> > triangles;
-//    QFile file(path);
-//    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-//        qDebug()<<"STLReader failed open file" ;
-//        return triangles;
-//    }
-//    while(!file.atEnd()) {
-//        QByteArray ba = file.readLine();
-//        QStringList lineWord = QString(ba).simplified().split(" ");
-//        if(lineWord.at(0) == "outer") {
-//            triangles.append(QVector<float>());
-//            std::cout << std::endl;
-//        }
-//        if(lineWord.at(0) == "vertex")
-//        {
-//            triangles.last().append(lineWord.at(1).toFloat());
-//            triangles.last().append(lineWord.at(2).toFloat());
-//            triangles.last().append(lineWord.at(3).toFloat());
-//        }
-
-//    }
-
-//    return triangles;
-//}
 
 //QList<QVector<float> > STLReader::readSTLBinaryFile(QString path) {
 //    QList<QVector<float> > triangles;

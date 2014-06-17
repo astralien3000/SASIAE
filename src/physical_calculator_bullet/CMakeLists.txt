@@ -98,9 +98,13 @@ include_directories(
   
   /usr/include/bullet
 
-  /usr/include/
-  /usr/include/QtCore
-  /usr/include/QtGui
+#  /usr/include/
+#  /usr/include/QtCore
+#  /usr/include/QtGui
+
+  /usr/include/qt4
+  /usr/include/qt4/QtCore
+  /usr/include/qt4/QtGui
 )
 
 link_directories(

@@ -55,8 +55,7 @@ bool PhysicalCalculatorNode::createRobot(phy_api::create_robot::Request& req, ph
 //  Mesh::setWorld(w);
 
 //  Robot* robot = new Robot(w, cfg, 1.0, pos);
-
-  new Scene("mmieww", "/home/astralien3000/SASIAE/ressources/stl/robot1.stl");
+  new Scene("mmieww", req.mesh);
   
   return true;
 }

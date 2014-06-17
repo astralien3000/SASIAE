@@ -3,23 +3,28 @@
 
 #include <vector>
 #include <string>
+#include <stdexcept>
 
 class MyStlReader {
 public:
-  static std::vector< std::vector<float> > readStlTextFile(std::string path);
-  static std::vector< std::vector<float> > readStlBinaryFile(std::string path);
+    typedef std::vector< std::vector<float> > TriangleList;
+
+    static TriangleList readStlTextFile(std::string path) throw(std::runtime_error);
+    static TriangleList readStlBinaryFile(std::string path) throw(std::runtime_error);
 };
 
 ///////////////////////////////////////////////////////////////
-#include <QString>
-#include <QList>
-#include <QVector>
+// Need to keep this until binary stl is tested
 
-class STLReader {
-public:
-  static QList<QVector<float> > readSTLTextFile(QString path);
-  static QList<QVector<float> > readSTLBinaryFile(QString path);
+//#include <QString>
+//#include <QList>
+//#include <QVector>
 
-};
+//class STLReader {
+//public:
+//    static QList<QVector<float> > readSTLTextFile(QString path);
+//    static QList<QVector<float> > readSTLBinaryFile(QString path);
+
+//};
 
 #endif//STL_READER_HPP

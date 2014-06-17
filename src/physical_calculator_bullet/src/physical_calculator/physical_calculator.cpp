@@ -114,10 +114,15 @@ void MyPhysicalCalculator::run(void) {
         if(_data->_running) {
             _data->_world->stepSimulation(1.0/60.0, 20);
 
-            // Sleep
-            boost::this_thread::sleep_for(
-                        boost::chrono::duration<double>(1.0/60.0)
-                        );
+            // Sleep (boost 46)
+//            boost::this_thread::sleep_for(
+//                        boost::chrono::duration<double>(1.0/60.0)
+//                        );
+
+            // Sleep (older boost)
+            boost::xtime t;
+            t.nsec = (1.0 / 60.0) * 10e9;
+            boost::this_thread::sleep(t);
         }
     }
 }
