@@ -15,10 +15,6 @@ public:
     MyRobot(std::string name, std::string mesh, double mass, btVector3 position);
     virtual ~MyRobot(void);
 
-protected:
-    btRaycastVehicle* getVehicle(void);
-    btRaycastVehicle::btVehicleTuning* getTunning(void);
-
 private:
     struct PrivateData;
     PrivateData* _data;

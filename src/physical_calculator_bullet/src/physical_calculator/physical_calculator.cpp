@@ -112,7 +112,7 @@ void MyPhysicalCalculator::resume(void) {
 void MyPhysicalCalculator::run(void) {
     while(_data->_keep_going) {
         if(_data->_running) {
-            _data->_world->stepSimulation(1.0/60.0, 100);
+            _data->_world->stepSimulation(1.0/60.0, 10);
             boost::this_thread::sleep(boost::posix_time::milliseconds(1000 / 60));
         }
     }

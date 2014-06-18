@@ -1,22 +1,7 @@
-#include "robot.hpp"
+#include "robot_private.hpp"
 
-#include "../mesh/stl_mesh.hpp"
 #include "../physical_calculator.hpp"
 
-#include <btBulletDynamicsCommon.h>
-
-////////////////////////////////////////////////////////////////////////////////
-// Private Data
-////////////////////////////////////////////////////////////////////////////////
-
-struct MyRobot::PrivateData {
-    MyMesh* _mesh;
-    btRigidBody* _body;
-
-    btRaycastVehicle* _vehicle;
-    btRaycastVehicle::btVehicleTuning* _tuning;
-    btDefaultVehicleRaycaster* _raycaster;
-};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methods
@@ -57,13 +42,6 @@ MyRobot::~MyRobot(void) {
     delete _data;
 }
 
-btRaycastVehicle* MyRobot::getVehicle(void) {
-    return _data->_vehicle;
-}
-
-btRaycastVehicle::btVehicleTuning* MyRobot::getTunning(void) {
-    return _data->_tuning;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //Robot* Robot::_r=NULL;

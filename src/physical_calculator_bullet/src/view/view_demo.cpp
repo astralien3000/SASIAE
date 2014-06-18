@@ -12,7 +12,7 @@ std::vector<btRaycastVehicle*> robots;
 
 BasicDemo::BasicDemo(void) {
     setTexturing(true);
-    setCameraDistance(btScalar(340.));
+    setCameraDistance(btScalar(200.));
     m_dynamicsWorld = MyPhysicalCalculator::getIntance().getWorld();
 }
 

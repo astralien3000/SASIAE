@@ -44,8 +44,8 @@ bool PhysicalCalculatorNode::createRobot(phy_api::create_robot::Request& req, ph
     ROS_INFO("Try to create robot : %s", req.mesh.c_str());
 
     MyRobot* bot = new MyRobot("mmieww", req.mesh, req.mass, btVector3(req.position[0], req.position[1], req.position[2]));
-    new WheelNode(new Wheel("w1", *bot, btVector3(-25,1,0), btVector3(0,-1,0), 3.0));
-    new WheelNode(new Wheel("w2", *bot, btVector3(25,1.5,0), btVector3(0,-1,0), 3.0));
+    new WheelNode(new Wheel("w1", *bot, btVector3(-25,3,0), btVector3(0,-1,0), 3.0));
+    new WheelNode(new Wheel("w2", *bot, btVector3(25,3,0), btVector3(0,-1,0), 3.0));
 
     return true;
 }

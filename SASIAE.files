@@ -601,3 +601,6 @@ src/physical_calculator_bullet/src/physical_calculator/robot/wheel.cpp
 src/physical_calculator_bullet/src/node/wheel_node.hpp
 src/phy_api/srv/set_torque.srv
 src/physical_calculator_bullet/src/node/wheel_node.cpp
+src/phy_api/msg/torque.msg
+src/phy_api/msg/rotation.msg
+src/physical_calculator_bullet/src/physical_calculator/robot/robot_private.hpp

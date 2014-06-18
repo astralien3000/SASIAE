@@ -4,6 +4,7 @@
 #include "../physical_object.hpp"
 
 #include <string>
+#include <vector>
 #include <btBulletDynamicsCommon.h>
 
 class MyRobot;
